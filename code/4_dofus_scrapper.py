@@ -17,6 +17,7 @@ import numpy as np
 import keyboard
 from constants import *
 from difflib import SequenceMatcher
+from gdrive_helper import load_dofus_items, save_dofus_items
 
 # Configuration Tesseract-OCR
 pytesseract.pytesseract.tesseract_cmd = TESSERAT_PATH
@@ -338,18 +339,17 @@ class Automator:
         self.items_data = {}  # Cache pour les données JSON
 
     def save_json_data(self, reason: str = ""):
-        """Sauvegarde les données JSON sur le disque."""
+        """Sauvegarde les données JSON sur Google Drive."""
         try:
             if reason:
                 print(f"\n💾 Sauvegarde d'urgence des données ({reason})...")
             else:
                 print("\n💾 Sauvegarde des données...")
-            
-            with open('data/dofus_items.json', 'w', encoding='utf-8') as f:
-                json.dump(self.items_data, f, ensure_ascii=False, indent=2)
-            
+
+            save_dofus_items(self.items_data)
+
             print("✅ Sauvegarde réussie")
-            
+
         except Exception as e:
             print(f"❌ Erreur lors de la sauvegarde : {e}")
 
@@ -771,14 +771,11 @@ class Automator:
             return ressourceResult
 
     def process_all_resources(self) -> None:
-        # Charger le JSON une seule fois au début
+        # Charger le JSON depuis Google Drive
         try:
-            with open('data/dofus_items.json', 'r', encoding='utf-8') as f:
-                self.items_data = json.load(f)
+            print("Chargement des données depuis Google Drive...")
+            self.items_data = load_dofus_items()
             print("✅ JSON chargé avec succès\n")
-        except FileNotFoundError:
-            print("❌ Fichier dofus_items.json non trouvé")
-            return
         except Exception as e:
             print(f"❌ Erreur lors du chargement du JSON: {e}")
             return

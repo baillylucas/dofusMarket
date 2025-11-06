@@ -1,9 +1,10 @@
-import requests 
+import requests
 import json
 from datetime import datetime
 from constants import *
 from pathlib import Path
 import os
+from gdrive_helper import load_dofus_items, save_dofus_items
 
 def get_all_recipes():
     """
@@ -99,12 +100,14 @@ def merge_recipes_and_items():
     
     # Créer le dossier data s'il n'existe pas
     os.makedirs('data', exist_ok=True)
-    
-    # Vérifier si le fichier existe et le charger si c'est le cas
-    existing_data = {}
-    if os.path.exists('data/dofus_items.json'):
-        with open('data/dofus_items.json', 'r', encoding='utf-8') as f:
-            existing_data = json.load(f)
+
+    # Charger le fichier depuis Google Drive
+    print("Chargement des données existantes depuis Google Drive...")
+    try:
+        existing_data = load_dofus_items()
+    except Exception as e:
+        print(f"Aucune donnée existante trouvée: {e}")
+        existing_data = {}
     
     # Récupérer les nouvelles données
     recipes_data = get_all_recipes()
@@ -156,11 +159,11 @@ def merge_recipes_and_items():
     # Retirer les items avec des ingrédients invalides
     for item_id in items_to_remove:
         del final_data[item_id]
-    
-    # Sauvegarder
-    with open('data/dofus_items.json', 'w', encoding='utf-8') as f:
-        json.dump(final_data, f, ensure_ascii=False, indent=2)
-    
+
+    # Sauvegarder sur Google Drive
+    print("Sauvegarde des données sur Google Drive...")
+    save_dofus_items(final_data)
+
     return final_data
 
 if __name__ == "__main__":

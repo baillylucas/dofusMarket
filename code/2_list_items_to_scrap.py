@@ -180,12 +180,13 @@
 #         only_craft=True
 #     )
 
-import requests 
+import requests
 import json
 from datetime import datetime
 from constants import *
 from pathlib import Path
 import os
+from gdrive_helper import load_dofus_items
 
 
 def get_all_required_ingredients(data, item_id, visited=None):
@@ -230,9 +231,9 @@ def create_type_files(json_filename="data/dofus_items.json", levels=None, l_type
         - creatures.txt
         - cosmetiques.txt
         - ames.txt
-    
+
     Args:
-        json_filename (string) : chemin du fichier contenant les items dofus
+        json_filename (string) : chemin du fichier contenant les items dofus (ignoré, utilise Google Drive)
         levels ([int, int]) : niveaux minimum et maximum des items à récupérer
         l_types (list[string]) : liste des types d'items à récupérer
         l_supertypes (list[string]) : liste des supertypes d'items à récupérer
@@ -241,11 +242,11 @@ def create_type_files(json_filename="data/dofus_items.json", levels=None, l_type
 
     Returns:
         files : créer les fichiers consommables, equipements, forgemagies, ressources, creatures, cosmetiques et ames
-    
+
     """
-    # Charger les données JSON
-    with open(json_filename, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+    # Charger les données depuis Google Drive
+    print("Chargement des données depuis Google Drive...")
+    data = load_dofus_items()
 
     if only_craft:
         # 1. Filtrer d'abord les crafts selon les critères

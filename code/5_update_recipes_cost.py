@@ -1,4 +1,5 @@
 import json
+from gdrive_helper import load_dofus_items, save_dofus_items
 
 def get_latest_price_date(item_data: dict) -> str:
     """Retourne la date la plus récente entre prix_hdv et cout_craft."""
@@ -315,13 +316,13 @@ if __name__ == "__main__":
         print("Fichier data/equipements.txt non trouvé, mode debug désactivé")
         debug_items = None
 
-    with open('data/dofus_items.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
+    print("Chargement des données depuis Google Drive...")
+    data = load_dofus_items()
 
     update_crafting_costs(data, debug_items)
 
-    with open('data/dofus_items.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    print("Sauvegarde des données sur Google Drive...")
+    save_dofus_items(data)
     
     if debug_items:
         print("\n=== FICHIER SAUVEGARDÉ ===")

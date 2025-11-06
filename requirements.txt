@@ -1,0 +1,18 @@
+# Core dependencies
+requests
+pyautogui
+pillow
+pytesseract
+opencv-python
+numpy
+keyboard
+pynput
+
+# Google Drive integration
+PyDrive2
+gdown
+
+# Note: Tesseract-OCR must be installed separately on your system
+# Windows: Download from https://github.com/UB-Mannheim/tesseract/wiki
+# Linux: sudo apt-get install tesseract-ocr
+# macOS: brew install tesseract
