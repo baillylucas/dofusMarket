@@ -1,88 +1,117 @@
 import streamlit as st
-import requests
-import json
+import pandas as pd
 from datetime import datetime
-# st.session_state.my_var : données internes à un utilisateur
-# st.cache_date et st.cache_ressource : données partagées entre utilisateurs
+from googleDriveJSON import GoogleDriveJSON
 
-# Configuration de la page
-st.set_page_config(page_title="Mon App", page_icon="🎈")
+# --- CONFIGURATION DE LA PAGE ---
+st.set_page_config(page_title="Objets Dofus - Liste", layout="wide")
 
-# ===== Cache avec bouton de rafraîchissement manuel =====
-@st.cache_data(ttl=3600)
-def load_data_with_manual_refresh(file_id):
-    """Cache de 1h avec possibilité de forcer le rafraîchissement"""
-    url = f'https://drive.google.com/uc?export=download&id={file_id}'
-    response = requests.get(url)
-    response.raise_for_status()
-    return response.json()
+FILE_ID = "1WyWt7GAiJWg7HRJAN1wxY9ivNO9A_0Wu"
 
+@st.cache_data(ttl=600)
+def charger_donnees():
+    drive = GoogleDriveJSON(FILE_ID)
+    data = drive.read()
+    # garder uniquement les clés numériques
+    data = {k: v for k, v in data.items() if str(k).isdigit()}
+    return data
 
-# ID de votre fichier Google Drive
-FILE_ID = '1qO5ZaWX6xJLH70Kih3oO73NKTdUHuRcO'
+def get_latest_entry(dico):
+    if not dico:
+        return None
+    try:
+        return dico[max(dico.keys(), key=lambda k: datetime.fromisoformat(k))]
+    except Exception:
+        return None
 
-# Main page content 
-st.markdown("# Main page 🎈")
-st.sidebar.markdown("# Main page 🎈")
+# --- CHARGEMENT DES DONNÉES ---
+data = charger_donnees()
 
-# Cache avec bouton de rafraîchissement
-st.info("⏱️ Mode : Cache 1h avec bouton de rafraîchissement")
+# --- TRANSFORMATION EN DATAFRAME ---
+rows = []
+for item in data.values():
+    prix = get_latest_entry(item.get("prix_hdv", {})) or {}
+    craft = get_latest_entry(item.get("cout_craft", {})) or {}
+    rows.append({
+        "ID": item.get("id"),
+        "Nom": item.get("name"),
+        "Niveau": item.get("level"),
+        "Prix 1x": prix.get("1"),
+        "Prix 10x": prix.get("10"),
+        "Prix 100x": prix.get("100"),
+        "Coût 1x": craft.get("1"),
+        "Coût 10x": craft.get("10"),
+        "Type": item.get("type"),
+    })
 
-# Bouton pour forcer le rafraîchissement
-col1, col2 = st.columns([3, 1])
-with col2:
-    if st.button("🔄 Rafraîchir", type="primary"):
-        st.cache_data.clear()
-        st.rerun()
+df = pd.DataFrame(rows)
 
-try:
-    data = load_data_with_manual_refresh(FILE_ID)
-    st.success("Données en cache (cliquez sur 'Rafraîchir' pour recharger)")
-except Exception as e:
-    st.error(f"Erreur : {e}")
-    data = None
+# --- BARRE DE RECHERCHE & TRI ---
+st.sidebar.header("🔎 Recherche et tri")
 
-# Afficher les données si chargées avec succès
-if data:
-    # Timestamp du chargement
-    st.caption(f"Dernière mise à jour : {datetime.now().strftime('%H:%M:%S')}")
-    
-    # Afficher les informations utilisateur
-    if 'utilisateur' in data:
-        st.subheader("Informations Utilisateur")
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.write(f"**Nom :** {data['utilisateur']['nom']}")
-            st.write(f"**Prénom :** {data['utilisateur']['prenom']}")
-            st.write(f"**Email :** {data['utilisateur']['email']}")
-        
-        with col2:
-            st.write(f"**Âge :** {data['utilisateur']['age']}")
-            st.write(f"**Actif :** {'✅' if data['utilisateur']['actif'] else '❌'}")
-    
-    # Afficher l'adresse
-    if 'adresse' in data:
-        st.subheader("Adresse")
-        st.write(f"{data['adresse']['rue']}, {data['adresse']['code_postal']} {data['adresse']['ville']}, {data['adresse']['pays']}")
-    
-    # Afficher les compétences
-    if 'competences' in data:
-        st.subheader("Compétences")
-        st.write(", ".join(data['competences']))
-    
-    # Afficher les projets
-    if 'projets' in data:
-        st.subheader("Projets")
-        for projet in data['projets']:
-            with st.expander(f"{projet['nom']} - {projet['statut']}"):
-                st.write(f"**Date de début :** {projet['date_debut']}")
-                st.write(f"**Statut :** {projet['statut']}")
-    
-    # Afficher le JSON brut dans la sidebar
-    with st.sidebar:
-        st.subheader("Données brutes")
-        if st.checkbox("Afficher JSON"):
-            st.json(data)
+recherche = st.sidebar.text_input("Rechercher un objet (nom ou ID)")
+col_tri = st.sidebar.selectbox("Trier par colonne", df.columns, index=1)
+ordre = st.sidebar.radio("Ordre", ["⬆️ Croissant", "⬇️ Décroissant"], horizontal=True)
+
+if recherche:
+    df = df[df["Nom"].str.contains(recherche, case=False, na=False) |
+            df["ID"].astype(str).str.contains(recherche)]
+
+asc = True if ordre == "⬆️ Croissant" else False
+df = df.sort_values(by=col_tri, ascending=asc)
+
+# --- PAGINATION ---
+page_size = st.sidebar.number_input("Résultats par page", 5, 50, 15)
+nb_pages = (len(df) - 1) // page_size + 1
+page_actuelle = st.sidebar.number_input("Page", 1, nb_pages, 1)
+start, end = (page_actuelle - 1) * page_size, page_actuelle * page_size
+
+st.write(f"### Page {page_actuelle}/{nb_pages} — {len(df)} objets au total")
+
+# --- AFFICHAGE PRINCIPAL ---
+st.dataframe(
+    df.iloc[start:end].reset_index(drop=True),
+    use_container_width=True,
+    hide_index=True,
+)
+
+# AFFICHAGE TEST
+st.dataframe(
+    df,
+    use_container_width=True,
+    hide_index=False
+)
+
+# --- CLIQUER POUR VOIR LES DÉTAILS ---
+st.markdown("### 🔍 Détails d'un objet")
+id_select = st.text_input("Entrer l'ID de l'objet à afficher :")
+
+if id_select and id_select in data:
+    item = data[id_select]
+    st.subheader(f"{item['name']} (Niveau {item['level']})")
+    st.write(f"Type : **{item['type']}** — Supertype : **{item['supertype']}**")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("#### 💰 Historique HDV")
+        if item["prix_hdv"]:
+            st.json(item["prix_hdv"])
+        else:
+            st.info("Aucun prix enregistré.")
+
+    with col2:
+        st.markdown("#### ⚒️ Historique Craft")
+        if item["cout_craft"]:
+            st.json(item["cout_craft"])
+        else:
+            st.info("Aucun coût de craft disponible.")
+
+    st.markdown("#### 🧩 Ingrédients")
+    if item.get("ingredients"):
+        for ing in item["ingredients"]:
+            st.write(f"- ID {ing['id']} × {ing['quantity']}")
+    else:
+        st.write("Non craftable.")
 else:
-    st.warning("Impossible de charger les données.")
+    st.info("Saisis un ID d'objet pour afficher les détails.")
