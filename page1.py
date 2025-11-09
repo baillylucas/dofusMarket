@@ -16,7 +16,7 @@
 #     details:first-of-type { border-top: 1px solid #555; }
 #     summary {
 #         display: grid;
-#         grid-template-columns: 3% 3% 7% 20% 8% 12% 12% 8% 13% 13%;
+#         grid-template-columns: 3% 7% 20% 8% 12% 12% 8% 13% 13%;
 #         gap: 8px;
 #         padding: 16px 12px;
 #         cursor: pointer;
@@ -348,7 +348,7 @@
 #     st.checkbox("Tout", key="select_all_checkbox", on_change=master_changed, label_visibility="collapsed")
 
 # with col_header_content:
-#     # Création d'une grille pour les boutons de header
+#     # Création d'une grille pour les boutons de header - AJUSTÉE pour correspondre au summary
 #     header_cols = st.columns([0.03, 0.07, 0.20, 0.08, 0.12, 0.12, 0.08, 0.13, 0.13])
     
 #     with header_cols[0]:
@@ -409,9 +409,6 @@
 #     st.metric("Prix HDV disponibles", sum(1 for item in data.values() if item.get('prix_hdv')))
 # with col_stat4:
 #     st.metric("Coûts craft disponibles", sum(1 for item in data.values() if item.get('cout_craft')))
-
-
-
 
 
 
@@ -675,15 +672,38 @@ with st.sidebar:
     level_range = st.slider("Niveau", 1, max_level, (1, max_level))
 
 # --- Filtrage ---
-rows = [{
-    "id": item.get("id"),
-    "name": item.get("name"),
-    "level": item.get("level"),
-    "supertype": item.get("supertype"),
-    "type": item.get("type"),
-    "is_craft": item.get("is_craft"),
-    "_item_id": item_id
-} for item_id, item in data.items()]
+rows = []
+for item_id, item in data.items():
+    # Extraire les prix pour la quantité sélectionnée
+    prix_dict = get_latest_entry(item.get("prix_hdv", {})) or {}
+    craft_dict = get_latest_entry(item.get("cout_craft", {})) or {}
+    
+    # Convertir les valeurs en float pour le tri (gérer les '-' et None)
+    prix_val = prix_dict.get(str(quantity))
+    craft_val = craft_dict.get(str(quantity))
+    
+    try:
+        prix_numeric = float(prix_val) if prix_val not in [None, '-'] else float('inf')
+    except:
+        prix_numeric = float('inf')
+    
+    try:
+        craft_numeric = float(craft_val) if craft_val not in [None, '-'] else float('inf')
+    except:
+        craft_numeric = float('inf')
+    
+    rows.append({
+        "id": item.get("id"),
+        "name": item.get("name"),
+        "level": item.get("level"),
+        "supertype": item.get("supertype"),
+        "type": item.get("type"),
+        "is_craft": item.get("is_craft"),
+        "prix_hdv": prix_numeric,
+        "cout_craft": craft_numeric,
+        "_item_id": item_id
+    })
+
 df = pd.DataFrame(rows)
 
 if search_term:
@@ -791,10 +811,10 @@ with col_header_content:
         st.button(f"Craft{get_sort_arrow('is_craft')}", key="btn_header_craft", on_click=header_clicked('is_craft'))
     
     with header_cols[7]:
-        st.button(f"Prix HDV", key="btn_header_prix_hdv")
+        st.button(f"Prix HDV{get_sort_arrow('prix_hdv')}", key="btn_header_prix_hdv", on_click=header_clicked('prix_hdv'))
     
     with header_cols[8]:
-        st.button(f"Coût Craft", key="btn_header_cout_craft")
+        st.button(f"Coût Craft{get_sort_arrow('cout_craft')}", key="btn_header_cout_craft", on_click=header_clicked('cout_craft'))
 
 # --- Affichage des items ---
 if len(df_page) > 0:
