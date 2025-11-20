@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
 from datetime import datetime
 from googleDriveJSON import GoogleDriveJSON
@@ -7,8 +7,8 @@ from functools import lru_cache
 # Configuration
 st.set_page_config(layout="wide")
 
-st.markdown("# Page 3")
-st.sidebar.markdown("# Page 3")
+st.markdown("# Prix des items")
+st.sidebar.markdown("# Prix des items")
 
 # --- CSS ---
 st.markdown("""
@@ -120,6 +120,8 @@ if 'quantity' not in st.session_state:
     st.session_state.quantity = 10
 if 'craft_cache' not in st.session_state:
     st.session_state.craft_cache = {}
+if 'scrapper_items' not in st.session_state:
+    st.session_state.scrapper_items = []
 
 # --- Chargement des données ---
 @st.cache_data(ttl=600)
@@ -700,10 +702,27 @@ if len(df_page) > 0:
 else:
     st.info("Aucun résultat ne correspond à vos critères de recherche.")
 
-# --- Statistiques ---
+# --- Statistiques et actions ---
 st.markdown("---")
 if st.session_state.selected_items:
     st.info(f"✓ {len(st.session_state.selected_items)} item(s) sélectionné(s) : {sorted(list(st.session_state.selected_items))}")
+    
+    # Bouton pour ajouter au scrapper
+    col_btn1, col_btn2, col_btn3 = st.columns([2, 3, 3])
+    with col_btn1:
+        if st.button("➕ Ajouter au Scrapper", key="btn_add_scrapper"):
+            # Ajouter les items sélectionnés au scrapper (s'ils n'y sont pas déjà)
+            initial_count = len(st.session_state.scrapper_items)
+            for item_id in st.session_state.selected_items:
+                if item_id not in st.session_state.scrapper_items:
+                    st.session_state.scrapper_items.append(item_id)
+            
+            added_count = len(st.session_state.scrapper_items) - initial_count
+            if added_count > 0:
+                st.success(f"✓ {added_count} item(s) ajouté(s) au scrapper")
+            else:
+                st.info("⚠️ Ces items sont déjà dans le scrapper")
+
 col_stat1, col_stat2, col_stat3, col_stat4 = st.columns(4)
 with col_stat1:
     st.metric("Total items", len(data))
