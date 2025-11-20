@@ -3,6 +3,8 @@
 # from datetime import datetime
 # from googleDriveJSON import GoogleDriveJSON
 # from functools import lru_cache
+# from utils.items_manager import add_items
+# import streamlit as st
 
 # # Configuration
 # st.set_page_config(layout="wide")
@@ -488,29 +490,6 @@
 #     st.toast(f"✅ {len(data)} items chargés avec succès", icon="✅")
 #     st.session_state.notification_shown = True
 
-# col_refresh, col_scrapper, _ = st.columns([1, 1.5, 3.5])
-# with col_refresh:
-#     if st.button("🔄 Rafraîchir"):
-#         st.cache_data.clear()
-#         st.session_state.craft_cache = {}
-#         calculate_optimal_price_cached.cache_clear()
-#         st.rerun()
-# with col_scrapper:
-#     if st.button("➕ Ajouter au Scrapper"):
-#         if st.session_state.selected_items:
-#             initial_count = len(st.session_state.scrapper_items)
-#             for item_id in st.session_state.selected_items:
-#                 if item_id not in st.session_state.scrapper_items:
-#                     st.session_state.scrapper_items.append(item_id)
-            
-#             added_count = len(st.session_state.scrapper_items) - initial_count
-#             if added_count > 0:
-#                 st.toast(f"✓ {added_count} item(s) ajouté(s) au scrapper", icon="✅")
-#             else:
-#                 st.toast("⚠️ Item(s) déjà présent dans le scrapper", icon="ℹ️")
-#         else:
-#             st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
-
 # # --- Sidebar ---
 # with st.sidebar:
 
@@ -605,9 +584,30 @@
 # items_per_page = 20
 # total_pages = max((len(df_display) - 1) // items_per_page + 1, 1)
 
-# # Afficher le compteur d'items et la pagination sur la même ligne
-# col_display, col_page = st.columns([2, 1])
-
+# # Afficher les boutons, le compteur et la pagination sur la même ligne
+# col_refresh, col_scrapper, col_display, col_page = st.columns([0.8, 1.2, 2, 0.8])
+# with col_refresh:
+#     if st.button("🔄 Rafraîchir"):
+#         st.cache_data.clear()
+#         st.session_state.craft_cache = {}
+#         calculate_optimal_price_cached.cache_clear()
+#         st.rerun()
+# with col_scrapper:
+#     if st.button("➕ Ajouter au Scrapper"):
+#         if st.session_state.selected_items:
+#             initial_count = len(st.session_state.scrapper_items)
+#             for item_id in st.session_state.selected_items:
+#                 if item_id not in st.session_state.scrapper_items:
+#                     st.session_state.scrapper_items.append(item_id)
+            
+#             added_count = len(st.session_state.scrapper_items) - initial_count
+#             if added_count > 0:
+#                 add_items(list(item_ids_to_add))
+#                 st.toast(f"✓ {added_count} item(s) ajouté(s) au scrapper", icon="✅")
+#             else:
+#                 st.toast("⚠️ Item(s) déjà présent dans le scrapper", icon="ℹ️")
+#         else:
+#             st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
 # with col_display:
 #     st.markdown(f"<div style='padding-top: 10px;'><b>Affichage : {len(df_display)} / {len(data)} items</b></div>", unsafe_allow_html=True)
 # with col_page:
@@ -737,6 +737,7 @@ import pandas as pd
 from datetime import datetime
 from googleDriveJSON import GoogleDriveJSON
 from functools import lru_cache
+from utils import add_items_to_scrapper
 
 # Configuration
 st.set_page_config(layout="wide")
@@ -1327,12 +1328,9 @@ with col_refresh:
 with col_scrapper:
     if st.button("➕ Ajouter au Scrapper"):
         if st.session_state.selected_items:
-            initial_count = len(st.session_state.scrapper_items)
-            for item_id in st.session_state.selected_items:
-                if item_id not in st.session_state.scrapper_items:
-                    st.session_state.scrapper_items.append(item_id)
+            # Ajouter les items au fichier JSON
+            added_count = add_items_to_scrapper(list(st.session_state.selected_items))
             
-            added_count = len(st.session_state.scrapper_items) - initial_count
             if added_count > 0:
                 st.toast(f"✓ {added_count} item(s) ajouté(s) au scrapper", icon="✅")
             else:
