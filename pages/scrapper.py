@@ -7,7 +7,7 @@ st.set_page_config(layout="wide")
 
 st.markdown("# 🔍 Scrapper")
 
-st.sidebar.markdown("# 🔍 Filtres")
+st.sidebar.markdown("# ⚙️ Filtres")
 
 # --- CSS pour rendre les checkboxes toujours visibles ---
 st.markdown("""
