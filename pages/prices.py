@@ -5,10 +5,15 @@ from googleDriveJSON import GoogleDriveJSON
 from functools import lru_cache
 from utils import add_items_to_scrapper, load_favorite_items, add_items_to_favorites, remove_items_from_favorites
 
+
 # Configuration
 st.set_page_config(layout="wide")
 
 st.markdown("# 📊 Prix des items")
+
+# Afficher une image à partir d'une URL
+st.markdown("L'id de l'image doit se récupérer dans /items ou /recipes : 'iconId'")
+st.image('https://api.dofusdb.fr/img/items/6007.png')
 
 st.sidebar.markdown("# ⚙️ Filtres")
 
@@ -19,7 +24,7 @@ st.markdown("""
     details:first-of-type { border-top: 1px solid #555; }
     summary {
         display: grid;
-        grid-template-columns: 3% 5% 4% 19% 7% 11% 11% 10% 10% 8% 8% 4%;
+        grid-template-columns: 3% 4% 5% 4% 15% 6% 10% 10% 9% 9% 7% 7% 9% 2%;
         gap: 8px;
         padding: 16px 12px;
         cursor: pointer;
@@ -91,7 +96,7 @@ st.markdown("""
     /* Container pour le header */
     .header-container {
         display: grid;
-        grid-template-columns: 3% 5% 4% 19% 7% 11% 11% 10% 10% 8% 8% 4%;
+        grid-template-columns: 3% 4% 5% 4% 15% 6% 10% 10% 9% 9% 7% 7% 9% 2%;
         gap: 8px;
         padding: 16px 12px;
         background-color: rgba(70, 120, 180, 0.5);
@@ -101,11 +106,36 @@ st.markdown("""
         font-family: monospace;
         align-items: center;
     }
+
+    /* Style pour les images */
+    .item-image {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # --- Google Drive ---
 FILE_ID = "1WyWt7GAiJWg7HRJAN1wxY9ivNO9A_0Wu"
+
+# --- Chargement des XP ---
+@st.cache_data
+def load_xp_data():
+    """Charge les données XP depuis le fichier CSV"""
+    try:
+        df_xp = pd.read_csv('data/items_xp.csv', delimiter=';')
+        # Créer un dictionnaire id -> (xp_1, xp_2)
+        xp_dict = {}
+        for _, row in df_xp.iterrows():
+            item_id = int(row['id'])
+            xp_1 = row['xp_1'] if pd.notna(row['xp_1']) else None
+            xp_2 = row['xp_2'] if pd.notna(row['xp_2']) else None
+            xp_dict[item_id] = (xp_1, xp_2)
+        return xp_dict
+    except Exception as e:
+        st.error(f"Erreur lors du chargement des XP : {e}")
+        return {}
 
 # --- Session State defaults ---
 if 'selected_items' not in st.session_state:
@@ -399,13 +429,13 @@ def get_price_history_html(prix_dict, quantity, title):
         return f"<div><div class='section-title'>{title}</div><p style='color: #aaa;'><em>Aucune donnée disponible</em></p></div>"
     return html
 
-def create_item_html(item, data, quantity):
+def create_item_html(item, data, quantity, xp_data):
     prix = get_latest_entry(item.get("prix_hdv", {})) or {}
     prix_val = calculate_optimal_price(prix, quantity)
-    
+
     # Calculer le coût de craft dynamiquement (avec cache)
     is_craftable = item.get('is_craft') and item.get('ingredients')
-    
+
     if is_craftable:
         # Pour l'item principal, is_root=True
         craft_val, craft_method = calculate_craft_cost_recursive(data, item.get('id'), quantity, is_root=True)
@@ -413,28 +443,49 @@ def create_item_html(item, data, quantity):
     else:
         craft_val = None
         craft_display = '<span class="not-craftable">Non Fabriquable</span>'
-    
+
     prix_display = f"{prix_val}" if prix_val is not None else '-'
-    
+
     # Calcul de la rentabilité
     if is_craftable and prix_val is not None and craft_val is not None:
         profit_flat = prix_val - craft_val
         profit_percent = (profit_flat / craft_val * 100) if craft_val > 0 else 0
-        
+
         profit_class = 'profit-positive' if profit_flat > 0 else ('profit-negative' if profit_flat < 0 else 'profit-neutral')
         profit_flat_display = f'<span class="{profit_class}">{profit_flat:+d}</span>'
         profit_percent_display = f'<span class="{profit_class}">{profit_percent:+.1f}%</span>'
     else:
         profit_flat_display = '-'
         profit_percent_display = '-'
-    
+
+    # Calculer XP/10kk
+    item_int_id = item.get('id')
+    xp_per_10kk_display = '-'
+
+    if item_int_id in xp_data:
+        xp_1, xp_2 = xp_data[item_int_id]
+        xp_value = xp_1 if xp_1 is not None else xp_2
+
+        if xp_value is not None:
+            min_cost = None
+            if prix_val is not None and craft_val is not None:
+                min_cost = min(prix_val, craft_val)
+            elif prix_val is not None:
+                min_cost = prix_val
+            elif craft_val is not None:
+                min_cost = craft_val
+
+            if min_cost is not None and min_cost > 0:
+                xp_per_10kk = (xp_value / min_cost) * 10000
+                xp_per_10kk_display = f"{xp_per_10kk:.1f}"
+
     last_maj = item.get('last_maj', 'N/A')
     if last_maj != 'N/A':
-        try: 
+        try:
             last_maj = datetime.fromisoformat(last_maj).strftime('%d/%m/%Y %H:%M')
-        except: 
+        except:
             pass
-    
+
     # Affichage de l'étoile favoris
     favorite_star = '⭐' if item.get('is_favorite', False) else ''
 
@@ -443,6 +494,7 @@ def create_item_html(item, data, quantity):
     <summary>
         <div class="arrow-cell"></div>
         <div class="id-cell">{item.get('id')}</div>
+        <div><img src="https://api.dofusdb.fr/img/items/{item.get('id')}.png" class="item-image" alt="{item.get('name')}"></div>
         <div class="fav-cell">{favorite_star}</div>
         <div class="item-name">{item.get('name')} </div>
         <div class="item-info">{item.get('level')}</div>
@@ -452,6 +504,7 @@ def create_item_html(item, data, quantity):
         <div class="price-value">{craft_display}</div>
         <div class="price-value">{profit_flat_display}</div>
         <div class="price-value">{profit_percent_display}</div>
+        <div class="price-value">{xp_per_10kk_display}</div>
     </summary>
     <div class='details-content'>
         <div class='info-grid'>
@@ -491,6 +544,10 @@ if not data:
 
 # Charger les favoris et ajouter la colonne favoris dans data
 favorite_items = load_favorite_items()
+
+# Charger les données XP
+xp_data = load_xp_data()
+
 for item_id, item in data.items():
     item['is_favorite'] = item.get('id') in favorite_items
 
@@ -553,12 +610,34 @@ for item_id, item in data.items():
         profit_flat = None
         profit_percent = None
     
+    # Calculer XP/10kk
+    item_int_id = item.get('id')
+    xp_per_10kk = None
+
+    if item_int_id in xp_data:
+        xp_1, xp_2 = xp_data[item_int_id]
+        xp_value = xp_1 if xp_1 is not None else xp_2
+
+        if xp_value is not None:
+            # Déterminer le coût minimum
+            min_cost = None
+            if prix_val is not None and craft_val is not None:
+                min_cost = min(prix_val, craft_val)
+            elif prix_val is not None:
+                min_cost = prix_val
+            elif craft_val is not None:
+                min_cost = craft_val
+
+            if min_cost is not None and min_cost > 0:
+                xp_per_10kk = (xp_value / min_cost) * 10000
+
     # Convertir en float pour le tri (None devient inf)
     prix_numeric = float(prix_val) if prix_val is not None else float('inf')
     craft_numeric = float(craft_val) if craft_val is not None else float('inf')
     profit_flat_numeric = float(profit_flat) if profit_flat is not None else float('-inf')
     profit_percent_numeric = float(profit_percent) if profit_percent is not None else float('-inf')
-    
+    xp_per_10kk_numeric = float(xp_per_10kk) if xp_per_10kk is not None else float('-inf')
+
     rows.append({
         "id": item.get("id"),
         "name": item.get("name"),
@@ -571,6 +650,7 @@ for item_id, item in data.items():
         "cout_craft": craft_numeric,
         "profit_flat": profit_flat_numeric,
         "profit_percent": profit_percent_numeric,
+        "xp_per_10kk": xp_per_10kk_numeric,
         "_item_id": item_id
     })
 
@@ -711,40 +791,46 @@ with col_header_check:
 
 with col_header_content:
     # Création d'une grille pour les boutons de header - alignement parfait
-    header_cols = st.columns([0.03, 0.05, 0.04, 0.19, 0.07, 0.11, 0.11, 0.10, 0.10, 0.08, 0.08, 0.04])
-    
+    header_cols = st.columns([0.03, 0.04, 0.05, 0.04, 0.15, 0.06, 0.10, 0.10, 0.09, 0.09, 0.07, 0.07, 0.09, 0.02])
+
     with header_cols[0]:
         st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-    
+
     with header_cols[1]:
         st.button(f"ID{get_sort_arrow('id')}", key="btn_header_id", on_click=header_clicked('id'))
-    
+
     with header_cols[2]:
-        st.button(f"Fav{get_sort_arrow('is_favorite')}", key="btn_header_fav", on_click=header_clicked('is_favorite'))
-    
+        st.markdown("<div style='text-align: center; padding-top: 10px;'><b>Image</b></div>", unsafe_allow_html=True)
+
     with header_cols[3]:
-        st.button(f"Nom{get_sort_arrow('name')}", key="btn_header_nom", on_click=header_clicked('name'))
-    
+        st.button(f"Fav{get_sort_arrow('is_favorite')}", key="btn_header_fav", on_click=header_clicked('is_favorite'))
+
     with header_cols[4]:
-        st.button(f"Niveau{get_sort_arrow('level')}", key="btn_header_niveau", on_click=header_clicked('level'))
-    
+        st.button(f"Nom{get_sort_arrow('name')}", key="btn_header_nom", on_click=header_clicked('name'))
+
     with header_cols[5]:
-        st.button(f"Supertype{get_sort_arrow('supertype')}", key="btn_header_supertype", on_click=header_clicked('supertype'))
-    
+        st.button(f"Niveau{get_sort_arrow('level')}", key="btn_header_niveau", on_click=header_clicked('level'))
+
     with header_cols[6]:
-        st.button(f"Type{get_sort_arrow('type')}", key="btn_header_type", on_click=header_clicked('type'))
-    
+        st.button(f"Supertype{get_sort_arrow('supertype')}", key="btn_header_supertype", on_click=header_clicked('supertype'))
+
     with header_cols[7]:
-        st.button(f"Prix HDV{get_sort_arrow('prix_hdv')}", key="btn_header_prix_hdv", on_click=header_clicked('prix_hdv'))
-    
+        st.button(f"Type{get_sort_arrow('type')}", key="btn_header_type", on_click=header_clicked('type'))
+
     with header_cols[8]:
-        st.button(f"Coût Craft{get_sort_arrow('cout_craft')}", key="btn_header_cout_craft", on_click=header_clicked('cout_craft'))
-    
+        st.button(f"Prix HDV{get_sort_arrow('prix_hdv')}", key="btn_header_prix_hdv", on_click=header_clicked('prix_hdv'))
+
     with header_cols[9]:
-        st.button(f"Rentab. K{get_sort_arrow('profit_flat')}", key="btn_header_profit_flat", on_click=header_clicked('profit_flat'))
-    
+        st.button(f"Coût Craft{get_sort_arrow('cout_craft')}", key="btn_header_cout_craft", on_click=header_clicked('cout_craft'))
+
     with header_cols[10]:
+        st.button(f"Rentab. K{get_sort_arrow('profit_flat')}", key="btn_header_profit_flat", on_click=header_clicked('profit_flat'))
+
+    with header_cols[11]:
         st.button(f"Rentab. %{get_sort_arrow('profit_percent')}", key="btn_header_profit_percent", on_click=header_clicked('profit_percent'))
+
+    with header_cols[12]:
+        st.button(f"XP/10kk{get_sort_arrow('xp_per_10kk')}", key="btn_header_xp_per_10kk", on_click=header_clicked('xp_per_10kk'))
 
 # --- Affichage des items ---
 if len(df_page) > 0:
@@ -760,7 +846,7 @@ if len(df_page) > 0:
             st.checkbox("option technique", key=widget_key, on_change=make_child_changed(widget_key, item_real_id), label_visibility="collapsed")
 
         with col_content:
-            st.markdown(create_item_html(item, data, quantity), unsafe_allow_html=True)
+            st.markdown(create_item_html(item, data, quantity, xp_data), unsafe_allow_html=True)
 else:
     st.info("Aucun résultat ne correspond à vos critères de recherche.")
 

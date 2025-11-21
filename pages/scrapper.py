@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from googleDriveJSON import GoogleDriveJSON
-from utils import load_scrapper_items, remove_items_from_scrapper
+from utils import load_scrapper_items, remove_items_from_scrapper, load_favorite_items
 
 # Configuration
 st.set_page_config(layout="wide")
@@ -73,6 +73,9 @@ if not data:
 # Charger les items du scrapper depuis le fichier JSON
 scrapper_items = load_scrapper_items()
 
+# Charger les favoris
+favorite_items = load_favorite_items()
+
 # --- Affichage du tableau ---
 if scrapper_items:
     # Préparer les données pour le tableau
@@ -81,8 +84,11 @@ if scrapper_items:
         item_id_str = str(item_id)
         if item_id_str in data:
             item = data[item_id_str]
+            is_favorite = item.get('id') in favorite_items
             items_data.append({
                 'id': item.get('id'),
+                'image': f"https://api.dofusdb.fr/img/items/{item.get('id')}.png",
+                'is_favorite': '⭐' if is_favorite else '',
                 'name': item.get('name'),
                 'level': item.get('level'),
                 'type': item.get('type', 'N/A'),
@@ -128,50 +134,58 @@ if scrapper_items:
         st.info(f"**IDs du scrapper ({len(scrapper_items)}):** {', '.join(map(str, scrapper_items))}")
     
     st.markdown(f"**Affichage : {len(df_filtered)} / {len(df)} items**")
-    
-    # Afficher le tableau avec le mode dynamic (checkboxes du header natif)
-    edited_df = st.data_editor(
+
+    # Afficher le tableau avec tri natif
+    event = st.dataframe(
         df_filtered,
         column_config={
-            "id": st.column_config.Column(
+            "id": st.column_config.NumberColumn(
                 "ID",
                 width="small"
             ),
-            "name": st.column_config.Column(
+            "image": st.column_config.ImageColumn(
+                "Image",
+                width="small"
+            ),
+            "is_favorite": st.column_config.TextColumn(
+                "Fav",
+                width="small"
+            ),
+            "name": st.column_config.TextColumn(
                 "Libellé",
                 width="large"
             ),
-            "level": st.column_config.Column(
+            "level": st.column_config.NumberColumn(
                 "Niveau",
                 width="small"
             ),
-            "type": st.column_config.Column(
+            "type": st.column_config.TextColumn(
                 "Type",
                 width="medium"
             ),
-            "supertype": st.column_config.Column(
+            "supertype": st.column_config.TextColumn(
                 "Supertype",
                 width="medium"
             ),
         },
         hide_index=True,
         use_container_width=True,
-        disabled=["id", "name", "level", "type", "supertype"],
-        num_rows="dynamic",
-        key="data_editor_scrapper"
+        selection_mode="multi-row",
+        on_select="rerun",
+        key="dataframe_scrapper"
     )
-    
-    # 🔄 Synchroniser automatiquement : supprimer les items qui ne sont plus dans le tableau
-    remaining_ids = set(edited_df['id'].tolist()) if len(edited_df) > 0 else set()
-    original_ids = set(df_filtered['id'].tolist())
-    deleted_ids = original_ids - remaining_ids
-    
-    # Supprimer automatiquement du fichier JSON
-    if deleted_ids:
-        removed_count = remove_items_from_scrapper(list(deleted_ids))
-        if removed_count > 0:
-            st.toast(f"✓ {removed_count} item(s) supprimé(s) du scrapper", icon="✅")
-            st.rerun()
+
+    # Supprimer les items sélectionnés
+    if st.button("🗑️ Supprimer la sélection", key="btn_delete_selection"):
+        if event.selection and event.selection.rows:
+            selected_indices = event.selection.rows
+            selected_ids = df_filtered.iloc[selected_indices]['id'].tolist()
+            removed_count = remove_items_from_scrapper(selected_ids)
+            if removed_count > 0:
+                st.toast(f"✓ {removed_count} item(s) supprimé(s) du scrapper", icon="✅")
+                st.rerun()
+        else:
+            st.toast("⚠️ Sélectionnez des items à supprimer", icon="⚠️")
 
 else:
     st.info("📭 Le scrapper est vide. Ajoutez des items depuis la page 'Prix des items'")

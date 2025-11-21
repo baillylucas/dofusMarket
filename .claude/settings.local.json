@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python add_id_to_dpln.py:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
