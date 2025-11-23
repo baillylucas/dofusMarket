@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python add_id_to_dpln.py:*)"
+      "Bash(python add_id_to_dpln.py:*)",
+      "Bash(uv run python:*)"
     ],
     "deny": [],
     "ask": []

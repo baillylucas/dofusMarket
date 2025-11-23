@@ -50,12 +50,13 @@ st.markdown("""
 
 # --- Google Drive ---
 FILE_ID = "1WyWt7GAiJWg7HRJAN1wxY9ivNO9A_0Wu"
+SERVICE_ACCOUNT_FILE = "credentials/service_account.json"
 
 # --- Chargement des données ---
 @st.cache_data(ttl=600)
 def charger_donnees():
     try:
-        drive = GoogleDriveJSON(FILE_ID)
+        drive = GoogleDriveJSON(FILE_ID, SERVICE_ACCOUNT_FILE)
         data = drive.read()
         data = {k: v for k, v in data.items() if str(k).isdigit()}
         return data
@@ -87,12 +88,11 @@ if scrapper_items:
             is_favorite = item.get('id') in favorite_items
             items_data.append({
                 'id': item.get('id'),
-                'image': f"https://api.dofusdb.fr/img/items/{item.get('id')}.png",
-                'is_favorite': '⭐' if is_favorite else '',
+                'image': f"https://api.dofusdb.fr/img/items/{item.get('iconId', item.get('id'))}.png",
                 'name': item.get('name'),
                 'level': item.get('level'),
-                'type': item.get('type', 'N/A'),
-                'supertype': item.get('supertype', 'N/A'),
+                'hdv': item.get('hdv', 'N/A'),
+                'is_favorite': '⭐' if is_favorite else '',
             })
     
     df = pd.DataFrame(items_data)
@@ -100,7 +100,7 @@ if scrapper_items:
     # --- Filtres dans la sidebar ---
     with st.sidebar:
         search_name = st.text_input("Rechercher par libellé", "")
-        
+
         all_levels = sorted(df['level'].unique())
         min_level, max_level = st.slider(
             "Niveau",
@@ -108,23 +108,18 @@ if scrapper_items:
             max_value=max(all_levels),
             value=(min(all_levels), max(all_levels))
         )
-        
-        all_types = sorted(df['type'].unique())
-        type_filter = st.multiselect("Type", options=all_types)
-        
-        all_supertypes = sorted(df['supertype'].unique())
-        supertype_filter = st.multiselect("Supertype", options=all_supertypes)
+
+        all_hdv = sorted([hdv for hdv in df['hdv'].unique() if hdv != 'N/A'])
+        hdv_filter = st.multiselect("HDV", options=all_hdv)
     
     # Appliquer les filtres
     df_filtered = df.copy()
     if search_name:
-        df_filtered = df_filtered[df_filtered['name'].str.contains(search_name, case=False, na=False) | 
+        df_filtered = df_filtered[df_filtered['name'].str.contains(search_name, case=False, na=False) |
                                    df_filtered['id'].astype(str).str.contains(search_name)]
     df_filtered = df_filtered[(df_filtered['level'] >= min_level) & (df_filtered['level'] <= max_level)]
-    if type_filter:
-        df_filtered = df_filtered[df_filtered['type'].isin(type_filter)]
-    if supertype_filter:
-        df_filtered = df_filtered[df_filtered['supertype'].isin(supertype_filter)]
+    if hdv_filter:
+        df_filtered = df_filtered[df_filtered['hdv'].isin(hdv_filter)]
     
     # Réinitialiser l'index pour que hide_index fonctionne correctement
     df_filtered = df_filtered.reset_index(drop=True)
@@ -147,10 +142,6 @@ if scrapper_items:
                 "Image",
                 width="small"
             ),
-            "is_favorite": st.column_config.TextColumn(
-                "Fav",
-                width="small"
-            ),
             "name": st.column_config.TextColumn(
                 "Libellé",
                 width="large"
@@ -159,13 +150,13 @@ if scrapper_items:
                 "Niveau",
                 width="small"
             ),
-            "type": st.column_config.TextColumn(
-                "Type",
+            "hdv": st.column_config.TextColumn(
+                "HDV",
                 width="medium"
             ),
-            "supertype": st.column_config.TextColumn(
-                "Supertype",
-                width="medium"
+            "is_favorite": st.column_config.TextColumn(
+                "Fav",
+                width="small"
             ),
         },
         hide_index=True,

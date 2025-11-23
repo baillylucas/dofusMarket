@@ -1,60 +1,116 @@
-import requests
 import json
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseUpload
+from io import BytesIO
 
 class GoogleDriveJSON:
-    def __init__(self, file_id: str, api_key: str = None):
+    def __init__(self, file_id: str, service_account_file: str):
         """
-        Initialise la classe avec l'ID du fichier Google Drive.
-        Si une clé API est fournie, elle permettra l'écriture.
+        Initialise la classe avec l'ID du fichier Google Drive et le fichier Service Account.
+
+        Args:
+            file_id: L'ID du fichier Google Drive
+            service_account_file: Chemin vers le fichier JSON du Service Account
         """
         self.file_id = file_id
-        self.api_key = api_key
-        self.base_download_url = f'https://drive.google.com/uc?export=download&id={file_id}'
-        self.base_api_url = f'https://www.googleapis.com/drive/v3/files/{file_id}'
+        self.service_account_file = service_account_file
+
+        # Configuration des scopes nécessaires
+        # drive.file : fichiers créés par l'app uniquement
+        # drive : accès complet aux fichiers partagés avec le Service Account
+        self.scopes = ['https://www.googleapis.com/auth/drive']
+
+        # Initialiser les credentials
+        self.credentials = service_account.Credentials.from_service_account_file(
+            self.service_account_file,
+            scopes=self.scopes
+        )
+
+        # Créer le service Google Drive
+        self.service = build('drive', 'v3', credentials=self.credentials)
 
     def read(self):
         """
-        Lit le contenu JSON d’un fichier public sur Google Drive.
+        Lit le contenu JSON d'un fichier sur Google Drive via le Service Account.
         Retourne un dictionnaire Python.
         """
-        response = requests.get(self.base_download_url)
-        response.raise_for_status()  # Lève une exception si erreur HTTP
-
         try:
-            data = response.json()
-        except json.JSONDecodeError:
-            raise ValueError("Le contenu du fichier n'est pas un JSON valide.")
-        return data
+            # Télécharger le contenu du fichier
+            request = self.service.files().get_media(fileId=self.file_id)
+            content = request.execute()
+
+            # Convertir en JSON
+            data = json.loads(content.decode('utf-8'))
+            return data
+
+        except Exception as e:
+            raise ValueError(f"Erreur lors de la lecture du fichier : {e}")
 
     def write(self, data: dict):
         """
-        Écrit (met à jour) le contenu JSON du fichier sur Google Drive.
-        ⚠️ Nécessite une clé API ou un token d'accès OAuth.
+        Écrit (met à jour) le contenu JSON du fichier sur Google Drive via le Service Account.
+
+        Args:
+            data: Dictionnaire Python à écrire dans le fichier
         """
-        if not self.api_key:
-            raise PermissionError("Écriture impossible sans clé API ou token d'accès.")
+        try:
+            # Convertir le dictionnaire en JSON
+            json_content = json.dumps(data, ensure_ascii=False, indent=2)
 
-        url = f'https://www.googleapis.com/upload/drive/v3/files/{self.file_id}?uploadType=media&key={self.api_key}'
-        headers = {'Content-Type': 'application/json'}
-        response = requests.patch(url, headers=headers, data=json.dumps(data))
+            # Créer un objet de type fichier en mémoire
+            media = MediaIoBaseUpload(
+                BytesIO(json_content.encode('utf-8')),
+                mimetype='application/json',
+                resumable=True
+            )
 
-        if response.status_code not in (200, 204):
-            raise RuntimeError(f"Erreur lors de l'écriture : {response.status_code} - {response.text}")
+            # Mettre à jour le fichier sur Google Drive
+            self.service.files().update(
+                fileId=self.file_id,
+                media_body=media,
+                fields='id'
+            ).execute()
 
-        print("✅ Données mises à jour avec succès sur Google Drive.")
+            print("OK - Donnees mises a jour avec succes sur Google Drive.")
 
-# --- Exemple d’utilisation ---
+        except Exception as e:
+            raise RuntimeError(f"Erreur lors de l'écriture : {e}")
+
+# --- Exemple d'utilisation ---
 
 if __name__ == "__main__":
-    API_KEY = 'AIzaSyCH-_57w2vrxLEycNV-wI4_2G8AXGrLubI'
-    FILE_ID = '1qO5ZaWX6xJLH70Kih3oO73NKTdUHuRcO'  # Remplace par ton ID
-    drive_json = GoogleDriveJSON(FILE_ID, API_KEY)
+    SERVICE_ACCOUNT_FILE = 'credentials/service_account.json'  # Chemin vers votre fichier Service Account
+    FILE_ID = '1WyWt7GAiJWg7HRJAN1wxY9ivNO9A_0Wu'
+
+    drive_json = GoogleDriveJSON(FILE_ID, SERVICE_ACCOUNT_FILE)
 
     # Lire le fichier
+    print("Lecture du fichier...")
     data = drive_json.read()
-    print(json.dumps(data, indent=2, ensure_ascii=False))
+    print(f"OK - Fichier lu : {len(data)} elements")
 
-    # Exemple : modifier et écrire (si clé API disponible)
-    # drive_json.api_key = "TA_CLE_API"
-    # data['utilisateur']['nom'] = "Jean Dupont"
-    # drive_json.write(data)
+    # Afficher quelques exemples avec HDV
+    print("\nExemples d'items avec HDV:")
+    count = 0
+    for item_id, item_data in data.items():
+        if 'hdv' in item_data and count < 5:
+            print(f"  - {item_data['name']} ({item_data['type']}) -> HDV: {item_data['hdv']}")
+            count += 1
+        if count >= 5:
+            break
+
+    # Compter les items par HDV
+    hdv_counts = {}
+    items_sans_hdv = 0
+    for item_data in data.values():
+        if 'hdv' in item_data:
+            hdv = item_data['hdv']
+            hdv_counts[hdv] = hdv_counts.get(hdv, 0) + 1
+        else:
+            items_sans_hdv += 1
+
+    print("\nRepartition par HDV:")
+    for hdv, count in sorted(hdv_counts.items()):
+        print(f"  {hdv}: {count} items")
+    print(f"  Sans HDV: {items_sans_hdv} items")
