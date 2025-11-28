@@ -1,9 +1,14 @@
-import streamlit as st 
+import streamlit as st
 import pandas as pd
 from datetime import datetime
 from googleDriveJSON import GoogleDriveJSON
 from functools import lru_cache
-from utils import add_items_to_scrapper, load_favorite_items, add_items_to_favorites, remove_items_from_favorites
+from utils import (
+    add_items_to_scrapper, load_favorite_items, add_items_to_favorites, remove_items_from_favorites,
+    get_user_groups, add_items_to_group, remove_items_from_group,
+    get_group_items, get_items_in_groups, ensure_default_group, load_groups_data_cached
+)
+from config import CURRENT_USER
 
 
 # Configuration
@@ -157,6 +162,12 @@ if 'scrapper_items' not in st.session_state:
     st.session_state.scrapper_items = []
 if 'notification_shown' not in st.session_state:
     st.session_state.notification_shown = False
+if 'user_groups' not in st.session_state:
+    st.session_state.user_groups = {}
+if 'selected_group_action' not in st.session_state:
+    st.session_state.selected_group_action = None
+if 'selected_group_filters' not in st.session_state:
+    st.session_state.selected_group_filters = []
 
 # --- Chargement des données ---
 @st.cache_data(ttl=600)
@@ -547,6 +558,14 @@ if not data:
     st.error("❌ Impossible de charger les données")
     st.stop()
 
+# S'assurer que l'utilisateur a un groupe favoris par défaut (seulement au premier chargement)
+if 'default_group_ensured' not in st.session_state:
+    default_group_id = ensure_default_group()
+    st.session_state.default_group_ensured = True
+
+# Toujours charger les groupes de l'utilisateur (cache géré dans get_user_groups)
+st.session_state.user_groups = get_user_groups()
+
 # Charger les favoris et ajouter la colonne favoris dans data
 favorite_items = load_favorite_items()
 
@@ -577,7 +596,24 @@ with st.sidebar:
         st.session_state.quantity = quantity
         # Vider le cache si la quantité change
         st.session_state.craft_cache = {}
-    
+
+    st.markdown("---")
+    st.markdown("### 👥 Groupes")
+
+    # Filtre par groupes
+    group_options = {group_id: f"{group_data['name']} ({group_data['owner']})"
+                     for group_id, group_data in st.session_state.user_groups.items()}
+    selected_group_filters = st.multiselect(
+        "Filtrer par groupe(s)",
+        options=list(group_options.keys()),
+        format_func=lambda x: group_options[x],
+        key="group_filter_multiselect"
+    )
+
+    st.info("💡 Gérez vos groupes dans la page 'Gestion des groupes'")
+
+    st.markdown("---")
+
     search_term = st.text_input("🔍 Rechercher par nom ou ID", "")
     all_supertypes = sorted(set(item.get('supertype', 'N/A') for item in data.values()))
     supertype_filter = st.multiselect("Supertype", options=all_supertypes)
@@ -679,6 +715,10 @@ if favorite_filter:
     df = df[df["is_favorite"]]
 if xp_filter:
     df = df[df["xp"] != float('-inf')]
+# Filtre par groupe(s)
+if selected_group_filters:
+    group_items = get_items_in_groups(selected_group_filters)
+    df = df[df["id"].isin(group_items)]
 df = df[(df["level"] >= level_range[0]) & (df["level"] <= level_range[1])]
 
 # Tri basé sur le session state
@@ -688,61 +728,81 @@ items_per_page = 20
 total_pages = max((len(df_display) - 1) // items_per_page + 1, 1)
 
 # Afficher les boutons, les compteurs et la pagination sur la même ligne
-col_refresh, col_fav_add, col_fav_remove, col_scrapper, col_display, col_page = st.columns([0.7, 0.9, 0.9, 1.1, 2, 0.8])
+col_refresh, col_group_select, col_group_add, col_group_remove, col_scrapper, col_display, col_page = st.columns([0.5, 1.2, 0.6, 0.6, 0.8, 1.8, 0.6])
+
 with col_refresh:
-    if st.button("🔄 Rafraîchir"):
+    if st.button("🔄", help="Rafraîchir"):
         st.cache_data.clear()
         st.session_state.craft_cache = {}
         calculate_optimal_price_cached.cache_clear()
         st.rerun()
-with col_fav_add:
-    if st.button("⭐ Favoris +"):
-        if st.session_state.selected_items:
-            added_count = add_items_to_favorites(list(st.session_state.selected_items))
-            
-            # Mettre à jour la colonne is_favorite dans data
-            for item_id in st.session_state.selected_items:
-                for key, item in data.items():
-                    if item.get('id') == item_id:
-                        item['is_favorite'] = True
-            
+
+with col_group_select:
+    # Sélecteur de groupe pour les actions
+    if st.session_state.user_groups:
+        group_options_action = {gid: gdata['name'] for gid, gdata in st.session_state.user_groups.items()}
+
+        # Initialiser la sélection si elle n'existe pas
+        if 'selected_group_for_action' not in st.session_state:
+            st.session_state.selected_group_for_action = list(group_options_action.keys())[0] if group_options_action else None
+
+        selected_group_action = st.selectbox(
+            "Groupe",
+            options=list(group_options_action.keys()),
+            format_func=lambda x: group_options_action[x],
+            index=list(group_options_action.keys()).index(st.session_state.selected_group_for_action) if st.session_state.selected_group_for_action in group_options_action else 0,
+            key="group_action_select_widget",
+            label_visibility="collapsed",
+            on_change=lambda: st.session_state.update({'selected_group_for_action': st.session_state.group_action_select_widget})
+        )
+    else:
+        selected_group_action = None
+        st.info("Aucun groupe")
+
+with col_group_add:
+    if st.button("➕ Groupe", help="Ajouter au groupe"):
+        if st.session_state.selected_items and selected_group_action:
+            added_count = add_items_to_group(selected_group_action, list(st.session_state.selected_items))
+
             if added_count > 0:
-                st.toast(f"✓ {added_count} item(s) ajouté(s) aux favoris", icon="⭐")
+                st.toast(f"✓ {added_count} item(s) ajouté(s) au groupe", icon="✅")
             else:
-                st.toast("⚠️ Item(s) déjà dans les favoris", icon="ℹ️")
-        else:
+                st.toast("⚠️ Item(s) déjà dans le groupe", icon="ℹ️")
+        elif not st.session_state.selected_items:
             st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
-with col_fav_remove:
-    if st.button("⭐ Favoris -"):
-        if st.session_state.selected_items:
-            removed_count = remove_items_from_favorites(list(st.session_state.selected_items))
-            
-            # Mettre à jour la colonne is_favorite dans data
-            for item_id in st.session_state.selected_items:
-                for key, item in data.items():
-                    if item.get('id') == item_id:
-                        item['is_favorite'] = False
-            
+        else:
+            st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
+
+with col_group_remove:
+    if st.button("➖ Groupe", help="Retirer du groupe"):
+        if st.session_state.selected_items and selected_group_action:
+            removed_count = remove_items_from_group(selected_group_action, list(st.session_state.selected_items))
+
             if removed_count > 0:
-                st.toast(f"✓ {removed_count} item(s) supprimé(s) des favoris", icon="✅")
+                st.toast(f"✓ {removed_count} item(s) retiré(s) du groupe", icon="✅")
             else:
-                st.toast("⚠️ Aucun item à supprimer des favoris", icon="ℹ️")
-        else:
+                st.toast("⚠️ Aucun item à retirer du groupe", icon="ℹ️")
+        elif not st.session_state.selected_items:
             st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+        else:
+            st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
+
 with col_scrapper:
-    if st.button("➕ Scrapper"):
+    if st.button("➕ Scrapper", help="Ajouter au scrapper"):
         if st.session_state.selected_items:
             # Ajouter les items au fichier JSON
             added_count = add_items_to_scrapper(list(st.session_state.selected_items))
-            
+
             if added_count > 0:
                 st.toast(f"✓ {added_count} item(s) ajouté(s) au scrapper", icon="✅")
             else:
                 st.toast("⚠️ Item(s) déjà présent dans le scrapper", icon="ℹ️")
         else:
             st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+
 with col_display:
     st.markdown(f"<div style='padding-top: 10px;'><b>Affichage : {len(df_display)} / {len(data)} items</b></div>", unsafe_allow_html=True)
+
 with col_page:
     current_page = st.number_input(f"Page (1-{total_pages})", 1, total_pages, 1)
 
