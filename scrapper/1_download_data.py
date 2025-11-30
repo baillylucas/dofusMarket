@@ -36,29 +36,59 @@ def determine_hdv(item_type: str) -> str:
     else:
         return None
 
-def get_all_recipes():
+def get_all_jobs():
     """
-    Récupère toutes les recettes du jeu à partir de dofusdb
-    
+    Récupère tous les métiers du jeu à partir de dofusdb
+
     Returns:
-        dict : dictionnaire contenant toutes les recettes du jeu
-    
+        dict : dictionnaire contenant tous les métiers du jeu (clé: id du métier, valeur: nom en français)
+
     """
-    url = "https://api.dofusdb.fr/recipes/"
-    recipes_data = {}
+    url = "https://api.dofusdb.fr/jobs"
+    jobs_data = {}
     skip = 0
-   
+
     while True:
         params = {
            '$limit': 50,
            '$skip': skip
         }
-        
+
+        jobs = requests.get(url, params=params).json()
+
+        if not jobs['data']:
+            break
+
+        for job in jobs['data']:
+            jobs_data[job['id']] = job['name']['fr']
+
+        skip += 50
+
+    return jobs_data
+
+def get_all_recipes():
+    """
+    Récupère toutes les recettes du jeu à partir de dofusdb
+
+    Returns:
+        dict : dictionnaire contenant toutes les recettes du jeu
+
+    """
+    url = "https://api.dofusdb.fr/recipes/"
+    recipes_data = {}
+    skip = 0
+
+    while True:
+        params = {
+           '$limit': 50,
+           '$skip': skip
+        }
+
         recipes = requests.get(url, params=params).json()
-        
+
         if not recipes['data']:
             break
-        
+
         for recipe in recipes['data']:
             ingredients = [
                 {'id': ing_id, 'quantity': qty}
@@ -78,14 +108,18 @@ def get_all_recipes():
                 'ingredients': ingredients
             }
 
+            # Ajouter le jobId si présent
+            if 'jobId' in recipe:
+                recipe_data['jobId'] = recipe['jobId']
+
             # Ajouter l'HDV seulement si trouvé
             if hdv is not None:
                 recipe_data['hdv'] = hdv
 
             recipes_data[recipe['resultId']] = recipe_data
-        
+
         skip += 50
-    
+
     return recipes_data
 
 def get_all_items():
@@ -159,10 +193,20 @@ def merge_recipes_and_items():
     except Exception as e:
         print(f"ATTENTION - Aucune donnee existante trouvee sur Google Drive: {e}")
         print("Creation d'un nouveau fichier...")
-    
+
     # Récupérer les nouvelles données
+    print("Recuperation des metiers...")
+    jobs_data = get_all_jobs()
+    print(f"OK - {len(jobs_data)} metiers charges")
+
+    print("Recuperation des recettes...")
     recipes_data = get_all_recipes()
+    print(f"OK - {len(recipes_data)} recettes chargees")
+
+    print("Recuperation des items...")
     items_data = get_all_items()
+    print(f"OK - {len(items_data)} items charges")
+
     final_data = {}
     
     # 1. Identifier tous les IDs à garder
@@ -178,14 +222,19 @@ def merge_recipes_and_items():
             # Créer le nouvel item
             new_item = items_data[item_id].copy()
             new_item['last_maj'] = current_time
-            
+
             # Si c'est un craft, ajouter les infos de recette
             if item_id in recipes_data:
+                recipe = recipes_data[item_id]
                 new_item.update({
                     'is_craft': True,
-                    'ingredients': recipes_data[item_id]['ingredients']
+                    'ingredients': recipe['ingredients']
                 })
-            
+
+                # Ajouter le nom du métier si disponible
+                if 'jobId' in recipe and recipe['jobId'] in jobs_data:
+                    new_item['job'] = jobs_data[recipe['jobId']]
+
             # Si l'item existait déjà, préserver ses prix
             if str(item_id) in existing_data:
                 old_item = existing_data[str(item_id)]
@@ -195,7 +244,7 @@ def merge_recipes_and_items():
                 # Initialiser les prix pour les nouveaux items
                 new_item['prix_hdv'] = {}
                 new_item['cout_craft'] = {}
-            
+
             final_data[str(item_id)] = new_item  # Convertir en string pour cohérence
     
     # 3. Vérifier les ingrédients invalides

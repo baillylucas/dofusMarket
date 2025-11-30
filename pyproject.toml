@@ -10,7 +10,11 @@ dependencies = [
     "google-auth>=2.43.0",
     "google-auth-httplib2>=0.2.1",
     "google-auth-oauthlib>=1.2.2",
+    "keyboard>=0.13.5",
+    "opencv-python>=4.12.0.88",
     "pandas>=2.3.3",
+    "pyautogui>=0.9.54",
+    "pytesseract>=0.3.13",
     "requests>=2.32.5",
     "streamlit>=1.51.0",
 ]

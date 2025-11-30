@@ -188,6 +188,17 @@ L_TYPES_FORGERON = [
     "Pioche",
     "Lance"
 ]
+L_TYPES_TAILLEUR = [
+    "Cape",
+    "Chapeau"
+]
+
+L_TYPES_CORDONNIER = [
+    "Cape",
+    "Chapeau"
+]
+
+
 
 # --- Créatures --- #
 L_SUPERTYPES_CREATURES = [
