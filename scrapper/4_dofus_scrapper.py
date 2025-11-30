@@ -15,6 +15,9 @@ import numpy as np
 # import win32api
 # import win32con
 import keyboard
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from googleDriveJSON import GoogleDriveJSON
 from constants import *
 from difflib import SequenceMatcher
 
@@ -336,20 +339,20 @@ class Automator:
         self.config = config
         self.processor = ImageProcessor()
         self.items_data = {}  # Cache pour les données JSON
+        self.drive = GoogleDriveJSON(GOOGLE_DRIVE_FILE_ID, GOOGLE_DRIVE_SERVICE_ACCOUNT_FILE)
 
     def save_json_data(self, reason: str = ""):
-        """Sauvegarde les données JSON sur le disque."""
+        """Sauvegarde les données JSON sur Google Drive."""
         try:
             if reason:
                 print(f"\n💾 Sauvegarde d'urgence des données ({reason})...")
             else:
                 print("\n💾 Sauvegarde des données...")
-            
-            with open('data/dofus_items.json', 'w', encoding='utf-8') as f:
-                json.dump(self.items_data, f, ensure_ascii=False, indent=2)
-            
-            print("✅ Sauvegarde réussie")
-            
+
+            self.drive.write(self.items_data)
+
+            print("✅ Sauvegarde réussie sur Google Drive")
+
         except Exception as e:
             print(f"❌ Erreur lors de la sauvegarde : {e}")
 
@@ -668,10 +671,7 @@ class Automator:
         # Passer le niveau à search_item
         self.search_item(item_name, item_level)
         time.sleep(1.5)
-        
-        if (item_name == "Indeprys") :
-            crash = 1/0
-            print(crash)
+
         item_position = self.find_item_position(item_name, is_equipment)
         
         if item_position is None:
@@ -771,16 +771,12 @@ class Automator:
             return ressourceResult
 
     def process_all_resources(self) -> None:
-        # Charger le JSON une seule fois au début
+        # Charger le JSON depuis Google Drive
         try:
-            with open('data/dofus_items.json', 'r', encoding='utf-8') as f:
-                self.items_data = json.load(f)
-            print("✅ JSON chargé avec succès\n")
-        except FileNotFoundError:
-            print("❌ Fichier dofus_items.json non trouvé")
-            return
+            self.items_data = self.drive.read()
+            print("✅ JSON chargé depuis Google Drive avec succès\n")
         except Exception as e:
-            print(f"❌ Erreur lors du chargement du JSON: {e}")
+            print(f"❌ Erreur lors du chargement du JSON depuis Google Drive: {e}")
             return
 
         hdv_count = 0
