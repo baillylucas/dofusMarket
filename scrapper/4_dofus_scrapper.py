@@ -119,7 +119,11 @@ class AutomationConfig:
         self.resources_by_type = self.load_all_resources()
     
     def load_resources(self, filename: str) -> List[str]:
-        """Charge la liste des ressources depuis un fichier texte."""
+        """
+        DEPRECATED: Charge la liste des ressources depuis un fichier texte.
+        Cette fonction est conservée pour compatibilité mais n'est plus utilisée.
+        Utilisez load_all_resources() qui charge depuis le scrapper.
+        """
         resources = []
         try:
             with open(filename, 'r', encoding='utf-8') as file:
@@ -127,27 +131,52 @@ class AutomationConfig:
                     line = line.strip()
                     if line and not line.startswith('#'):
                         resources.append(line)
-            
+
             if not resources:
                 print(f"Attention: Aucune ressource trouvée dans {filename}")
                 return []
             return resources
-            
+
         except Exception as e:
             print(f"Erreur lors de la lecture du fichier {filename}: {e}")
             return []
-    
+
     def load_all_resources(self) -> Dict[str, List[str]]:
-        """Charge les ressources depuis tous les fichiers txt dans le dossier data."""
-        resources_dict = {}
-        
-        for filename in os.listdir("data"):
-            if filename.endswith(".txt"):
-                resources = self.load_resources(f"data/{filename}")
-                if resources:
-                    resources_dict[filename] = resources
-        
-        return resources_dict
+        """
+        Charge les ressources depuis le scrapper (items + ingrédients) organisés par HDV.
+
+        Returns:
+            Dict[str, List[str]]: Format {hdv_name + ".txt": [liste de noms d'items]}
+        """
+        try:
+            from utils import get_scrapper_items_by_hdv
+            from googleDriveJSON import GoogleDriveJSON
+            from constants import GOOGLE_DRIVE_FILE_ID, GOOGLE_DRIVE_SERVICE_ACCOUNT_FILE
+
+            # Charger les données depuis Google Drive
+            drive = GoogleDriveJSON(GOOGLE_DRIVE_FILE_ID, GOOGLE_DRIVE_SERVICE_ACCOUNT_FILE)
+            data = drive.read()
+
+            # Récupérer les items organisés par HDV
+            items_by_hdv = get_scrapper_items_by_hdv(data)
+
+            # Convertir au format attendu par le reste du code (ajouter .txt)
+            resources_dict = {}
+            for hdv_name, items in items_by_hdv.items():
+                filename = f"{hdv_name}.txt"
+                resources_dict[filename] = items
+                print(f"✅ {filename}: {len(items)} items chargés depuis le scrapper")
+
+            if not resources_dict:
+                print("⚠️ Aucun item trouvé dans le scrapper. Vérifiez que des items sont ajoutés.")
+
+            return resources_dict
+
+        except Exception as e:
+            print(f"❌ Erreur lors du chargement des items depuis le scrapper: {e}")
+            import traceback
+            traceback.print_exc()
+            return {}
     
 class ImageProcessor:
     """Classe gérant le traitement des images et la détection de texte."""

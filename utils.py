@@ -29,12 +29,28 @@ def load_scrapper_items():
             return []
     return []
 
+def load_scrapper_ingredients():
+    """Charge la liste des ingrédients automatiques du scrapper depuis le fichier JSON"""
+    ensure_data_dir()
+    if SCRAPPER_FILE.exists():
+        try:
+            with open(SCRAPPER_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                return data.get('ingredients', [])
+        except Exception as e:
+            print(f"Erreur lors du chargement des ingrédients du scrapper: {e}")
+            return []
+    return []
+
 def save_scrapper_items(items_list):
     """Sauvegarde la liste des items du scrapper dans le fichier JSON"""
     ensure_data_dir()
     try:
+        # Charger les ingrédients existants pour ne pas les écraser
+        current_ingredients = load_scrapper_ingredients()
         data = {
-            'items': items_list
+            'items': items_list,
+            'ingredients': current_ingredients
         }
         with open(SCRAPPER_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
@@ -43,33 +59,134 @@ def save_scrapper_items(items_list):
         print(f"Erreur lors de la sauvegarde du fichier scrapper: {e}")
         return False
 
-def add_items_to_scrapper(item_ids):
-    """Ajoute des items à la liste du scrapper"""
-    current_items = load_scrapper_items()
-    
-    # Convertir en ensemble pour éviter les doublons, puis en liste
-    current_set = set(current_items)
-    new_items = set(item_ids)
-    updated_set = current_set.union(new_items)
-    
-    updated_list = sorted(list(updated_set))
-    save_scrapper_items(updated_list)
-    
-    return len(updated_list) - len(current_items)
+def save_scrapper_data(items_list, ingredients_list):
+    """Sauvegarde la liste des items et des ingrédients du scrapper dans le fichier JSON"""
+    ensure_data_dir()
+    try:
+        data = {
+            'items': items_list,
+            'ingredients': ingredients_list
+        }
+        with open(SCRAPPER_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        return True
+    except Exception as e:
+        print(f"Erreur lors de la sauvegarde du fichier scrapper: {e}")
+        return False
 
-def remove_items_from_scrapper(item_ids):
-    """Supprime des items de la liste du scrapper"""
+def get_all_ingredients_recursive(data, item_ids):
+    """
+    Récupère tous les ingrédients nécessaires pour crafter les items spécifiés.
+    Retourne une liste unique d'IDs d'ingrédients (sans les items de départ).
+
+    Args:
+        data: Dictionnaire complet des items depuis Google Drive
+        item_ids: Liste des IDs d'items pour lesquels extraire les ingrédients
+
+    Returns:
+        Liste unique d'IDs d'ingrédients
+    """
+    all_ingredients = set()
+    items_to_process = set(item_ids)
+
+    def extract_ingredients(item_id):
+        """Fonction récursive pour extraire les ingrédients"""
+        item_id_str = str(item_id)
+
+        if item_id_str not in data:
+            return
+
+        item = data[item_id_str]
+
+        # Si l'item est craftable et a des ingrédients
+        if item.get('is_craft') and item.get('ingredients'):
+            for ingredient in item['ingredients']:
+                ing_id = ingredient['id']
+                all_ingredients.add(ing_id)
+                # Récursion pour les sous-ingrédients
+                extract_ingredients(ing_id)
+
+    # Extraire les ingrédients pour chaque item
+    for item_id in items_to_process:
+        extract_ingredients(item_id)
+
+    return sorted(list(all_ingredients))
+
+def add_items_to_scrapper(item_ids, data=None):
+    """
+    Ajoute des items à la liste du scrapper et met à jour automatiquement
+    la liste des ingrédients nécessaires.
+
+    Args:
+        item_ids: Liste des IDs d'items à ajouter
+        data: Dictionnaire complet des items (optionnel, sera chargé si None)
+
+    Returns:
+        Nombre d'items ajoutés
+    """
     current_items = load_scrapper_items()
-    
+    current_ingredients = load_scrapper_ingredients()
+
+    # Convertir en ensemble pour éviter les doublons
+    current_items_set = set(current_items)
+    new_items_set = set(item_ids)
+    updated_items_set = current_items_set.union(new_items_set)
+
+    # Si data est fourni, mettre à jour les ingrédients automatiquement
+    if data is not None:
+        # Extraire tous les ingrédients pour tous les items (anciens + nouveaux)
+        all_items = list(updated_items_set)
+        all_extracted_ingredients = set(get_all_ingredients_recursive(data, all_items))
+
+        # Retirer les items qui sont aussi dans la liste des items choisis
+        ingredients_only = all_extracted_ingredients - updated_items_set
+
+        # Sauvegarder les deux listes
+        updated_items_list = sorted(list(updated_items_set))
+        updated_ingredients_list = sorted(list(ingredients_only))
+        save_scrapper_data(updated_items_list, updated_ingredients_list)
+    else:
+        # Sans data, juste sauvegarder les items
+        updated_items_list = sorted(list(updated_items_set))
+        save_scrapper_items(updated_items_list)
+
+    return len(updated_items_set) - len(current_items_set)
+
+def remove_items_from_scrapper(item_ids, data=None):
+    """
+    Supprime des items de la liste du scrapper et recalcule les ingrédients.
+
+    Args:
+        item_ids: Liste des IDs d'items à supprimer
+        data: Dictionnaire complet des items (optionnel, pour recalculer les ingrédients)
+
+    Returns:
+        Nombre d'items supprimés
+    """
+    current_items = load_scrapper_items()
+
     # Convertir en ensemble pour l'opération de suppression
     current_set = set(current_items)
     items_to_remove = set(item_ids)
     updated_set = current_set - items_to_remove
-    
-    updated_list = sorted(list(updated_set))
-    save_scrapper_items(updated_list)
-    
-    return len(current_items) - len(updated_list)
+
+    # Si data est fourni, recalculer les ingrédients
+    if data is not None and updated_set:
+        all_extracted_ingredients = set(get_all_ingredients_recursive(data, list(updated_set)))
+        ingredients_only = all_extracted_ingredients - updated_set
+
+        updated_items_list = sorted(list(updated_set))
+        updated_ingredients_list = sorted(list(ingredients_only))
+        save_scrapper_data(updated_items_list, updated_ingredients_list)
+    elif data is not None and not updated_set:
+        # Si plus d'items, vider aussi les ingrédients
+        save_scrapper_data([], [])
+    else:
+        # Sans data, juste sauvegarder les items
+        updated_list = sorted(list(updated_set))
+        save_scrapper_items(updated_list)
+
+    return len(current_items) - len(updated_set)
 
 # --- FAVORIS ---
 
@@ -380,3 +497,119 @@ def ensure_default_group(user=None):
         save_groups_data(data)
 
     return favoris_group_id
+
+# --- SCRAPPER - ORGANISATION PAR HDV ---
+
+def get_scrapper_items_by_hdv(data):
+    """
+    Récupère les items et ingrédients du scrapper et les organise par HDV.
+
+    Args:
+        data: Dictionnaire complet des items depuis Google Drive
+
+    Returns:
+        Dict[str, List[str]]: Dictionnaire {nom_hdv: [liste de noms d'items]}
+
+    Exemple:
+        {
+            "ressources": ["Bois de Frêne", "Cuivre"],
+            "equipements": ["Amulette du Bouftou"],
+            ...
+        }
+    """
+    # Charger les items et ingrédients du scrapper
+    scrapper_items = load_scrapper_items()
+    scrapper_ingredients = load_scrapper_ingredients()
+
+    # Combiner les deux listes (liste unique)
+    all_item_ids = list(set(scrapper_items + scrapper_ingredients))
+
+    # Mapper les noms HDV de la BDD vers les noms utilisés dans le scrapper
+    # Support pour les deux formats (avec et sans "Hôtel de vente")
+    hdv_mapping = {
+        "Hôtel de vente de ressources": "ressources",
+        "Hôtel de vente d'équipements": "equipements",
+        "Hôtel de vente de consommables": "consommables",
+        "Hôtel de vente des forgemagies": "forgemagies",
+        "Hôtel de vente de créatures": "creatures",
+        "Hôtel de vente des cosmétiques": "cosmetiques",
+        "Hôtel de vente des âmes": "ames",
+        # Formats courts (sans "Hôtel de vente")
+        "Ressources": "ressources",
+        "Equipements": "equipements",
+        "Consommables": "consommables",
+        "Forgemagies": "forgemagies",
+        "Créatures": "creatures",
+        "Cosmétiques": "cosmetiques",
+        "Âmes": "ames"
+    }
+
+    # Organiser par HDV
+    items_by_hdv = {
+        "ressources": [],
+        "equipements": [],
+        "consommables": [],
+        "forgemagies": [],
+        "creatures": [],
+        "cosmetiques": [],
+        "ames": []
+    }
+
+    for item_id in all_item_ids:
+        item_id_str = str(item_id)
+        if item_id_str in data:
+            item = data[item_id_str]
+            item_name = item.get('name')
+            item_hdv = item.get('hdv', 'N/A')
+
+            # Mapper le nom du HDV
+            if item_hdv in hdv_mapping:
+                hdv_key = hdv_mapping[item_hdv]
+                if item_name and item_name not in items_by_hdv[hdv_key]:
+                    items_by_hdv[hdv_key].append(item_name)
+
+    # Retirer les HDV vides
+    items_by_hdv = {hdv: items for hdv, items in items_by_hdv.items() if items}
+
+    return items_by_hdv
+
+def launch_scrapper():
+    """
+    Lance le script de scrapping en tant que processus séparé.
+
+    Returns:
+        tuple: (success: bool, message: str, process: subprocess.Popen | None)
+    """
+    import subprocess
+    import os
+
+    # Chemin vers le fichier batch de lancement
+    project_root = os.path.dirname(__file__)
+    batch_file = os.path.join(project_root, "launch_scrapper.bat")
+    scrapper_script = os.path.join(project_root, "scrapper", "4_dofus_scrapper.py")
+
+    if not os.path.exists(scrapper_script):
+        return False, f"Script de scrapping non trouvé : {scrapper_script}", None
+
+    if not os.path.exists(batch_file):
+        return False, f"Fichier batch non trouvé : {batch_file}", None
+
+    try:
+        # Lancer le script en subprocess (sans bloquer Streamlit)
+        if os.name == 'nt':  # Windows
+            # Utiliser le fichier batch pour lancer une nouvelle console
+            process = subprocess.Popen(
+                ["cmd.exe", "/c", "start", "cmd.exe", "/k", batch_file],
+                cwd=project_root,
+                shell=False
+            )
+        else:  # Linux/Mac
+            process = subprocess.Popen(
+                ["uv", "run", "python", scrapper_script],
+                cwd=project_root
+            )
+
+        return True, "Script de scrapping lancé avec succès ! Une nouvelle console s'est ouverte.", process
+
+    except Exception as e:
+        return False, f"Erreur lors du lancement du script : {e}", None

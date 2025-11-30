@@ -764,11 +764,11 @@ with col_group_remove:
 with col_scrapper:
     if st.button("➕ Scrapper", help="Ajouter au scrapper"):
         if st.session_state.selected_items:
-            # Ajouter les items au fichier JSON
-            added_count = add_items_to_scrapper(list(st.session_state.selected_items))
+            # Ajouter les items au fichier JSON avec extraction automatique des ingrédients
+            added_count = add_items_to_scrapper(list(st.session_state.selected_items), data=data)
 
             if added_count > 0:
-                st.toast(f"✓ {added_count} item(s) ajouté(s) au scrapper", icon="✅")
+                st.toast(f"✓ {added_count} item(s) ajouté(s) au scrapper (+ ingrédients)", icon="✅")
             else:
                 st.toast("⚠️ Item(s) déjà présent dans le scrapper", icon="ℹ️")
         else:
