@@ -4,9 +4,9 @@ from datetime import datetime
 from googleDriveJSON import GoogleDriveJSON
 from functools import lru_cache
 from utils import (
-    add_items_to_scrapper, load_favorite_items, add_items_to_favorites, remove_items_from_favorites,
+    add_items_to_scrapper,
     get_user_groups, add_items_to_group, remove_items_from_group,
-    get_group_items, get_items_in_groups, ensure_default_group, load_groups_data_cached
+    get_group_items, get_items_in_groups
 )
 from config import CURRENT_USER
 
@@ -29,7 +29,7 @@ st.markdown("""
     details:first-of-type { border-top: 1px solid #555; }
     summary {
         display: grid;
-        grid-template-columns: 2% 3% 3% 13% 4% 10% 11% 8% 8% 8% 8% 8% 8% 3% 2%;
+        grid-template-columns: 2% 3% 3% 13% 4% 10% 11% 8% 8% 8% 8% 8% 8% 2%;
         column-gap: 6px;
         padding: 16px 8px;
         cursor: pointer;
@@ -101,7 +101,7 @@ st.markdown("""
     /* Container pour le header */
     .header-container {
         display: grid;
-        grid-template-columns: 2% 3% 3% 13% 4% 10% 11% 8% 8% 8% 8% 8% 8% 3% 2%;
+        grid-template-columns: 2% 3% 3% 13% 4% 10% 11% 8% 8% 8% 8% 8% 8% 2%;
         column-gap: 6px;
         padding: 16px 8px;
         background-color: rgba(70, 120, 180, 0.5);
@@ -501,9 +501,6 @@ def create_item_html(item, data, quantity, xp_data):
         except:
             pass
 
-    # Affichage de l'étoile favoris
-    favorite_star = '⭐' if item.get('is_favorite', False) else ''
-
     html = f"""
     <details>
     <summary>
@@ -520,7 +517,6 @@ def create_item_html(item, data, quantity, xp_data):
         <div class="price-value">{profit_percent_display}</div>
         <div class="price-value">{xp_display}</div>
         <div class="price-value">{xp_per_10kk_display}</div>
-        <div class="fav-cell">{favorite_star}</div>
     </summary>
     <div class='details-content'>
         <div class='info-grid'>
@@ -558,22 +554,11 @@ if not data:
     st.error("❌ Impossible de charger les données")
     st.stop()
 
-# S'assurer que l'utilisateur a un groupe favoris par défaut (seulement au premier chargement)
-if 'default_group_ensured' not in st.session_state:
-    default_group_id = ensure_default_group()
-    st.session_state.default_group_ensured = True
-
 # Toujours charger les groupes de l'utilisateur (cache géré dans get_user_groups)
 st.session_state.user_groups = get_user_groups()
 
-# Charger les favoris et ajouter la colonne favoris dans data
-favorite_items = load_favorite_items()
-
 # Charger les données XP
 xp_data = load_xp_data()
-
-for item_id, item in data.items():
-    item['is_favorite'] = item.get('id') in favorite_items
 
 if not st.session_state.notification_shown:
     st.toast(f"✅ {len(data)} items chargés avec succès", icon="✅")
@@ -597,9 +582,6 @@ with st.sidebar:
         # Vider le cache si la quantité change
         st.session_state.craft_cache = {}
 
-    st.markdown("---")
-    st.markdown("### 👥 Groupes")
-
     # Filtre par groupes
     group_options = {group_id: f"{group_data['name']} ({group_data['owner']})"
                      for group_id, group_data in st.session_state.user_groups.items()}
@@ -610,17 +592,12 @@ with st.sidebar:
         key="group_filter_multiselect"
     )
 
-    st.info("💡 Gérez vos groupes dans la page 'Gestion des groupes'")
-
-    st.markdown("---")
-
     search_term = st.text_input("🔍 Rechercher par nom ou ID", "")
     all_supertypes = sorted(set(item.get('supertype', 'N/A') for item in data.values()))
     supertype_filter = st.multiselect("Supertype", options=all_supertypes)
     all_types = sorted(set(item.get('type', 'N/A') for item in data.values()))
     type_filter = st.multiselect("Type", options=all_types)
     craft_filter = st.radio("Type d'item", ["Tous", "Craftables uniquement", "Non craftables"])
-    favorite_filter = st.checkbox("🌟 Afficher uniquement les favoris")
     xp_filter = st.checkbox("📚 XP connu uniquement")
     max_level = max((item.get('level', 0) for item in data.values()), default=200)
     level_range = st.slider("Niveau", 1, max_level, (1, max_level))
@@ -689,7 +666,6 @@ for item_id, item in data.items():
         "supertype": item.get("supertype"),
         "type": item.get("type"),
         "is_craft": item.get("is_craft"),
-        "is_favorite": item.get("is_favorite", False),
         "prix_hdv": prix_numeric,
         "cout_craft": craft_numeric,
         "profit_flat": profit_flat_numeric,
@@ -711,8 +687,6 @@ if craft_filter == "Craftables uniquement":
     df = df[df["is_craft"]]
 elif craft_filter == "Non craftables":
     df = df[~df["is_craft"]]
-if favorite_filter:
-    df = df[df["is_favorite"]]
 if xp_filter:
     df = df[df["xp"] != float('-inf')]
 # Filtre par groupe(s)
@@ -862,8 +836,7 @@ with col_header_check:
 
 with col_header_content:
     # Création d'une grille pour les boutons de header - alignement parfait
-    # header_cols = st.columns([0.02, 0.03, 0.03, 0.14, 0.03, 0.11, 0.11, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.03, 0.02])
-    header_cols = st.columns([0.02, 0.03, 0.04, 0.13, 0.05, 0.10, 0.11, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.03, 0.02])
+    header_cols = st.columns([0.02, 0.03, 0.04, 0.13, 0.05, 0.10, 0.11, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.02])
 
     with header_cols[0]:
         st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
@@ -903,9 +876,6 @@ with col_header_content:
 
     with header_cols[12]:
         st.button(f"XP/10kk{get_sort_arrow('xp_per_10kk')}", key="btn_header_xp_per_10kk", on_click=header_clicked('xp_per_10kk'))
-
-    with header_cols[13]:
-        st.button(f"Fav{get_sort_arrow('is_favorite')}", key="btn_header_fav", on_click=header_clicked('is_favorite'))
 
 # --- Affichage des items ---
 if len(df_page) > 0:

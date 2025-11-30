@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from googleDriveJSON import GoogleDriveJSON
-from utils import load_scrapper_items, remove_items_from_scrapper, load_favorite_items
+from utils import load_scrapper_items, remove_items_from_scrapper
 
 # Configuration
 st.set_page_config(layout="wide")
@@ -74,9 +74,6 @@ if not data:
 # Charger les items du scrapper depuis le fichier JSON
 scrapper_items = load_scrapper_items()
 
-# Charger les favoris
-favorite_items = load_favorite_items()
-
 # --- Affichage du tableau ---
 if scrapper_items:
     # Préparer les données pour le tableau
@@ -85,14 +82,12 @@ if scrapper_items:
         item_id_str = str(item_id)
         if item_id_str in data:
             item = data[item_id_str]
-            is_favorite = item.get('id') in favorite_items
             items_data.append({
                 'id': item.get('id'),
                 'image': f"https://api.dofusdb.fr/img/items/{item.get('iconId', item.get('id'))}.png",
                 'name': item.get('name'),
                 'level': item.get('level'),
                 'hdv': item.get('hdv', 'N/A'),
-                'is_favorite': '⭐' if is_favorite else '',
             })
     
     df = pd.DataFrame(items_data)
@@ -153,10 +148,6 @@ if scrapper_items:
             "hdv": st.column_config.TextColumn(
                 "HDV",
                 width="medium"
-            ),
-            "is_favorite": st.column_config.TextColumn(
-                "Fav",
-                width="small"
             ),
         },
         hide_index=True,
