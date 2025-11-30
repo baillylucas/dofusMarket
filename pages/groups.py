@@ -10,6 +10,12 @@ st.set_page_config(layout="wide")
 
 st.markdown("# 👥 Gestion des Groupes")
 
+# Afficher les toasts en attente
+if 'toast_message' in st.session_state:
+    st.toast(st.session_state.toast_message, icon=st.session_state.toast_icon)
+    del st.session_state.toast_message
+    del st.session_state.toast_icon
+
 # Charger les groupes de l'utilisateur
 user_groups = get_user_groups()
 
@@ -22,10 +28,8 @@ with col2:
 with col3:
     st.metric("Total", len(user_groups))
 
-st.markdown("---")
-
 # Section Créer un nouveau groupe
-st.markdown("## ➕ Créer un nouveau groupe")
+st.markdown("### ➕ Créer un nouveau groupe")
 
 with st.form("create_group_form"):
     new_group_name = st.text_input("Nom du groupe", key="form_new_group_name")
@@ -34,21 +38,24 @@ with st.form("create_group_form"):
 
     if submit_create:
         if new_group_name:
-            group_id = create_group(new_group_name, [])
-            if group_id:
-                # Invalider le cache
-                st.cache_data.clear()
-                st.success(f"✓ Groupe '{new_group_name}' créé avec succès")
-                st.rerun()
+            # Vérifier si un groupe avec ce nom existe déjà pour l'utilisateur
+            existing_group_id = f"{CURRENT_USER}_{new_group_name}"
+            groups_data = load_groups_data()
+
+            if existing_group_id in groups_data.get('groups', {}):
+                st.toast(f"⚠ Un groupe nommé '{new_group_name}' existe déjà", icon="⚠️")
             else:
-                st.error("✗ Erreur lors de la création du groupe")
+                group_id = create_group(new_group_name, [])
+                if group_id:
+                    # Invalider le cache
+                    st.cache_data.clear()
+                    st.session_state.toast_message = f"✓ Groupe '{new_group_name}' créé avec succès"
+                    st.session_state.toast_icon = "✅"
+                    st.rerun()
+                else:
+                    st.toast("✗ Erreur lors de la création du groupe", icon="❌")
         else:
-            st.warning("⚠ Veuillez entrer un nom de groupe")
-
-st.markdown("---")
-
-# Section Liste des groupes avec dataframe éditable
-st.markdown("## 📋 Tous mes groupes")
+            st.toast("⚠ Veuillez entrer un nom de groupe", icon="⚠️")
 
 if user_groups:
     # Récupérer la liste de tous les utilisateurs
@@ -61,6 +68,7 @@ if user_groups:
 
     for group_id, group_data in user_groups.items():
         row = {
+            '☑️': False,  # Colonne de sélection
             'ID': group_id,
             'Nom': group_data['name'],
             'Propriétaire': group_data['owner'],
@@ -83,7 +91,7 @@ if user_groups:
 
     # Configuration des colonnes pour les groupes éditables
     column_config_editable = {
-        "ID": st.column_config.TextColumn("ID", width="small", disabled=True),
+        "☑️": st.column_config.CheckboxColumn("☑️", width="small"),
         "Nom": st.column_config.TextColumn("Nom", width="medium"),
         "Items": st.column_config.NumberColumn("Items", width="small", disabled=True),
         "Créé le": st.column_config.TextColumn("Créé le", width="small", disabled=True),
@@ -91,12 +99,12 @@ if user_groups:
 
     # Configuration des colonnes pour les groupes non éditables
     column_config_readonly = {
-        "ID": st.column_config.TextColumn("ID", width="small"),
+        "☑️": st.column_config.CheckboxColumn("☑️", width="small"),
         "Nom": st.column_config.TextColumn("Nom", width="medium"),
-        "Propriétaire": st.column_config.TextColumn("Propriétaire", width="small"),
         "Items": st.column_config.NumberColumn("Items", width="small"),
-        "Partagé avec": st.column_config.TextColumn("Partagé avec", width="medium"),
         "Créé le": st.column_config.TextColumn("Créé le", width="small"),
+        "Propriétaire": st.column_config.TextColumn("Propriétaire", width="small"),
+        "Partagé avec": st.column_config.TextColumn("Partagé avec", width="medium"),
     }
 
     # Ajouter la configuration pour les colonnes booléennes de partage (uniquement pour les groupes éditables)
@@ -110,13 +118,12 @@ if user_groups:
     # Afficher d'abord les groupes éditables
     if editable_groups_list:
         st.markdown("### ✏️ Mes groupes")
-        st.info("💡 Vous pouvez éditer directement le nom et les partages de vos groupes ci-dessous.")
 
         df_editable = pd.DataFrame(editable_groups_list)
 
         with st.form("edit_groups_form"):
-            # Sélectionner uniquement les colonnes à afficher (sans Propriétaire)
-            columns_editable = ['ID', 'Nom', 'Items', 'Créé le'] + [f'Partagé - {user}' for user in all_users]
+            # Sélectionner uniquement les colonnes à afficher (sans ID et Propriétaire)
+            columns_editable = ['☑️', 'Nom', 'Items', 'Créé le'] + [f'Partagé - {user}' for user in all_users]
             df_editable_filtered = df_editable[columns_editable]
 
             edited_df = st.data_editor(
@@ -124,18 +131,19 @@ if user_groups:
                 use_container_width=True,
                 hide_index=True,
                 column_config=column_config_editable,
-                disabled=["ID", "Items", "Créé le"],
+                disabled=["Items", "Créé le"],
                 num_rows="fixed",
                 key="groups_editor"
             )
 
-            col_save, col_cancel = st.columns([1, 1])
+            # Boutons alignés à droite
+            col_spacer, col_save, col_delete = st.columns([2, 1, 1])
 
             with col_save:
-                submit_save = st.form_submit_button("✓ Sauvegarder toutes les modifications", use_container_width=True, type="primary")
+                submit_save = st.form_submit_button("✓ Sauvegarder", use_container_width=True, type="primary")
 
-            with col_cancel:
-                submit_cancel = st.form_submit_button("✗ Annuler les modifications", use_container_width=True)
+            with col_delete:
+                submit_delete = st.form_submit_button("🗑️ Supprimer", use_container_width=True, type="secondary")
 
             if submit_save:
                 # Parcourir les modifications
@@ -143,7 +151,8 @@ if user_groups:
                 error_count = 0
 
                 for idx in range(len(df_editable_filtered)):
-                    group_id = df_editable_filtered.iloc[idx]['ID']
+                    # Récupérer l'ID depuis le dataframe original
+                    group_id = df_editable.iloc[idx]['ID']
 
                     # Vérifier si le nom a changé
                     old_name = df_editable_filtered.iloc[idx]['Nom']
@@ -178,66 +187,103 @@ if user_groups:
                 st.cache_data.clear()
 
                 if success_count > 0:
-                    st.success(f"✓ {success_count} groupe(s) modifié(s) avec succès")
+                    st.session_state.toast_message = f"✓ {success_count} groupe(s) modifié(s) avec succès"
+                    st.session_state.toast_icon = "✅"
                     st.rerun()
-                if error_count > 0:
-                    st.error(f"✗ Erreur lors de la modification de {error_count} groupe(s)")
+                elif error_count > 0:
+                    st.toast(f"✗ Erreur lors de la modification de {error_count} groupe(s)", icon="❌")
 
-            if submit_cancel:
-                st.rerun()
+            if submit_delete:
+                # Récupérer les groupes sélectionnés
+                selected_groups = []
+                for idx in range(len(edited_df)):
+                    if edited_df.iloc[idx]['☑️']:
+                        # Récupérer l'ID depuis le dataframe original
+                        group_id = df_editable.iloc[idx]['ID']
+                        group_name = edited_df.iloc[idx]['Nom']
+                        # Vérifier qu'on en est propriétaire
+                        group_data = user_groups.get(group_id)
+                        if group_data and group_data['owner'] == CURRENT_USER:
+                            selected_groups.append((group_id, group_name))
+
+                if selected_groups:
+                    # Supprimer les groupes sélectionnés
+                    success_count = 0
+                    for group_id, group_name in selected_groups:
+                        if delete_group(group_id):
+                            success_count += 1
+
+                    st.cache_data.clear()
+                    if success_count > 0:
+                        st.session_state.toast_message = f"✓ {success_count} groupe(s) supprimé(s) avec succès"
+                        st.session_state.toast_icon = "✅"
+                        st.rerun()
+                    else:
+                        st.toast("⚠ Aucun élément supprimé", icon="⚠️")
+                else:
+                    st.toast("⚠ Aucun groupe sélectionné", icon="⚠️")
 
     # Afficher ensuite les groupes en lecture seule
     if readonly_groups_list:
-        st.markdown("---")
         st.markdown("### 👁️ Partagés avec moi")
-        st.info("🔒 Ces groupes ne peuvent pas être modifiés car ils appartiennent à d'autres utilisateurs.")
 
         df_readonly = pd.DataFrame(readonly_groups_list)
 
-        # Sélectionner uniquement les colonnes sans les colonnes booléennes
-        columns_to_display = ['ID', 'Nom', 'Propriétaire', 'Items', 'Partagé avec', 'Créé le']
+        # Sélectionner et réordonner les colonnes : sélection, Nom, Items, Créé le, Propriétaire, Partagé avec
+        columns_to_display = ['☑️', 'Nom', 'Items', 'Créé le', 'Propriétaire', 'Partagé avec']
         df_readonly_filtered = df_readonly[columns_to_display]
 
-        st.dataframe(
-            df_readonly_filtered,
-            use_container_width=True,
-            hide_index=True,
-            column_config=column_config_readonly
-        )
+        with st.form("readonly_groups_form"):
+            edited_readonly_df = st.data_editor(
+                df_readonly_filtered,
+                use_container_width=True,
+                hide_index=True,
+                column_config=column_config_readonly,
+                disabled=["Nom", "Items", "Créé le", "Propriétaire", "Partagé avec"],
+                num_rows="fixed",
+                key="readonly_groups_editor"
+            )
 
-    st.markdown("---")
+            # Bouton aligné à droite
+            col_spacer_leave, col_leave = st.columns([3, 1])
 
-    # Section pour supprimer un groupe
-    st.markdown("## 🗑️ Supprimer un groupe")
+            with col_leave:
+                submit_leave = st.form_submit_button("🚪 Quitter", use_container_width=True, type="secondary")
 
-    # Sélectionner un groupe à supprimer (uniquement les groupes éditables non par défaut)
-    deletable_groups = {
-        gid: gdata for gid, gdata in user_groups.items()
-        if gdata['owner'] == CURRENT_USER and not gdata.get('is_default', False)
-    }
+            if submit_leave:
+                # Récupérer les groupes sélectionnés
+                selected_groups = []
+                for idx in range(len(edited_readonly_df)):
+                    if edited_readonly_df.iloc[idx]['☑️']:
+                        # Récupérer l'ID depuis le dataframe original
+                        group_id = df_readonly.iloc[idx]['ID']
+                        group_name = edited_readonly_df.iloc[idx]['Nom']
+                        selected_groups.append((group_id, group_name))
 
-    if deletable_groups:
-        selected_group_id = st.selectbox(
-            "Sélectionner un groupe à supprimer",
-            options=list(deletable_groups.keys()),
-            format_func=lambda x: deletable_groups[x]['name'],
-            key="selected_group_for_delete"
-        )
+                if selected_groups:
+                    # Retirer l'utilisateur de la liste shared_with
+                    success_count = 0
+                    groups_data = load_groups_data()
 
-        selected_group = deletable_groups[selected_group_id]
+                    for group_id, group_name in selected_groups:
+                        if group_id in groups_data['groups']:
+                            shared_with = groups_data['groups'][group_id].get('shared_with', [])
+                            if CURRENT_USER in shared_with:
+                                shared_with.remove(CURRENT_USER)
+                                groups_data['groups'][group_id]['shared_with'] = shared_with
+                                success_count += 1
 
-        st.warning(f"⚠️ Vous êtes sur le point de supprimer le groupe **{selected_group['name']}** qui contient **{len(selected_group.get('items', []))}** item(s).")
-
-        if st.button("🗑️ Confirmer la suppression", use_container_width=True, type="secondary"):
-            if delete_group(selected_group_id):
-                # Invalider le cache
-                st.cache_data.clear()
-                st.success("✓ Groupe supprimé avec succès")
-                st.rerun()
-            else:
-                st.error("✗ Erreur lors de la suppression")
-    else:
-        st.info("Vous n'avez aucun groupe supprimable. Les groupes par défaut ne peuvent pas être supprimés.")
+                    if success_count > 0 and save_groups_data(groups_data):
+                        st.cache_data.clear()
+                        st.session_state.toast_message = f"✓ Vous avez quitté {success_count} groupe(s) avec succès"
+                        st.session_state.toast_icon = "✅"
+                        st.rerun()
+                    elif success_count > 0:
+                        st.toast("✗ Erreur lors de la mise à jour des groupes", icon="❌")
+                    else:
+                        st.toast("✗ Aucun groupe quitté", icon="⚠️")
+                else:
+                    st.toast("⚠ Aucun groupe sélectionné", icon="⚠️")
 
 else:
     st.info("Aucun groupe trouvé. Créez votre premier groupe ci-dessus.")

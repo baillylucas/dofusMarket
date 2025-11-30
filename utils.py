@@ -218,7 +218,11 @@ def create_group(name, shared_with=None, user=None):
     data = load_groups_data()
 
     # Générer un ID unique pour le groupe
-    group_id = f"{name}_{user}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    group_id = f"{user}_{name}"
+
+    # Vérifier si un groupe avec cet ID existe déjà
+    if group_id in data['groups']:
+        return None  # Le groupe existe déjà
 
     # Créer le groupe
     new_group = {
@@ -238,7 +242,7 @@ def create_group(name, shared_with=None, user=None):
     return None
 
 def delete_group(group_id, user=None):
-    """Supprime un groupe (uniquement si l'utilisateur est le propriétaire et que ce n'est pas un groupe par défaut)"""
+    """Supprime un groupe (uniquement si l'utilisateur est le propriétaire)"""
     if user is None:
         user = CURRENT_USER
 
@@ -250,8 +254,8 @@ def delete_group(group_id, user=None):
 
     group = groups[group_id]
 
-    # Vérifier que l'utilisateur est le propriétaire et que ce n'est pas un groupe par défaut
-    if group['owner'] != user or group.get('is_default', False):
+    # Vérifier que l'utilisateur est le propriétaire
+    if group['owner'] != user:
         return False
 
     del data['groups'][group_id]
