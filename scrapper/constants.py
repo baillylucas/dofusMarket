@@ -179,14 +179,16 @@ L_TYPES_EQUIPEMENTS = [
     "Fers de Percepteur", "Bannière de Percepteur",
 ]
 L_TYPES_FORGERON = [
-    "Épée",
     "Dague",
+    "Épée",
+    "Faux",
+    "Hache",
+    "Lance",
     "Marteau",
     "Pelle",
-    "Hache",
-    "Faux",
     "Pioche",
-    "Lance"
+    
+    
 ]
 L_TYPES_TAILLEUR = [
     "Cape",
@@ -194,8 +196,8 @@ L_TYPES_TAILLEUR = [
 ]
 
 L_TYPES_CORDONNIER = [
-    "Cape",
-    "Chapeau"
+    "Bottes",
+    "Ceinture"
 ]
 
 

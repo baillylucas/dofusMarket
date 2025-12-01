@@ -16,10 +16,6 @@ st.set_page_config(layout="wide")
 
 st.markdown("# 📊 Prix des items")
 
-# Afficher une image à partir d'une URL
-st.markdown("L'id de l'image doit se récupérer dans /items ou /recipes : 'iconId'")
-st.image('https://api.dofusdb.fr/img/items/6007.png')
-
 st.sidebar.markdown("# ⚙️ Filtres")
 
 # --- CSS ---

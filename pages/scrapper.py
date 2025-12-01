@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from googleDriveJSON import GoogleDriveJSON
-from utils import load_scrapper_items, load_scrapper_ingredients, remove_items_from_scrapper
+from utils import load_scrapper_items, load_scrapper_ingredients, remove_items_from_scrapper, remove_ingredients_from_scrapper
 
 # Configuration
 st.set_page_config(layout="wide")
@@ -185,13 +185,18 @@ if scrapper_items or scrapper_ingredients:
 
         if not df.empty:
             all_levels_items = sorted(df['level'].unique())
-            min_level_items, max_level_items = st.slider(
-                "Niveau (items)",
-                min_value=min(all_levels_items),
-                max_value=max(all_levels_items),
-                value=(min(all_levels_items), max(all_levels_items)),
-                key="level_items"
-            )
+            if len(all_levels_items) > 1:
+                min_level_items, max_level_items = st.slider(
+                    "Niveau (items)",
+                    min_value=min(all_levels_items),
+                    max_value=max(all_levels_items),
+                    value=(min(all_levels_items), max(all_levels_items)),
+                    key="level_items"
+                )
+            else:
+                # Si un seul niveau, pas de slider
+                min_level_items = max_level_items = all_levels_items[0]
+                st.info(f"Niveau unique : {all_levels_items[0]}")
 
             all_hdv_items = sorted([hdv for hdv in df['hdv'].unique() if hdv != 'N/A'])
             hdv_filter_items = st.multiselect("HDV (items)", options=all_hdv_items, key="hdv_items")
@@ -292,13 +297,18 @@ if scrapper_items or scrapper_ingredients:
 
             if not df_ingredients.empty:
                 all_levels_ing = sorted(df_ingredients['level'].unique())
-                min_level_ing, max_level_ing = st.slider(
-                    "Niveau (ingrédients)",
-                    min_value=min(all_levels_ing),
-                    max_value=max(all_levels_ing),
-                    value=(min(all_levels_ing), max(all_levels_ing)),
-                    key="level_ingredients"
-                )
+                if len(all_levels_ing) > 1:
+                    min_level_ing, max_level_ing = st.slider(
+                        "Niveau (ingrédients)",
+                        min_value=min(all_levels_ing),
+                        max_value=max(all_levels_ing),
+                        value=(min(all_levels_ing), max(all_levels_ing)),
+                        key="level_ingredients"
+                    )
+                else:
+                    # Si un seul niveau, pas de slider
+                    min_level_ing = max_level_ing = all_levels_ing[0]
+                    st.info(f"Niveau unique : {all_levels_ing[0]}")
 
                 all_hdv_ing = sorted([hdv for hdv in df_ingredients['hdv'].unique() if hdv != 'N/A'])
                 hdv_filter_ing = st.multiselect("HDV (ingrédients)", options=all_hdv_ing, key="hdv_ingredients")
@@ -352,8 +362,22 @@ if scrapper_items or scrapper_ingredients:
             },
             hide_index=True,
             use_container_width=True,
+            selection_mode="multi-row",
+            on_select="rerun",
             key="dataframe_scrapper_ingredients"
         )
+
+        # Supprimer les ingrédients sélectionnés
+        if st.button("🗑️ Supprimer la sélection", key="btn_delete_ingredients"):
+            if event_ingredients.selection and event_ingredients.selection.rows:
+                selected_indices = event_ingredients.selection.rows
+                selected_ids = df_ingredients_filtered.iloc[selected_indices]['id'].tolist()
+                removed_count = remove_ingredients_from_scrapper(selected_ids)
+                if removed_count > 0:
+                    st.toast(f"✓ {removed_count} ingrédient(s) supprimé(s) du scrapper", icon="✅")
+                    st.rerun()
+            else:
+                st.toast("⚠️ Sélectionnez des ingrédients à supprimer", icon="⚠️")
     else:
         st.info("📭 Aucun ingrédient requis (aucun item craftable sélectionné)")
 

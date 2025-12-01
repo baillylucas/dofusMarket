@@ -15,6 +15,9 @@ env/
 ENV/
 .venv
 
+# UV
+.python-version
+
 # IDE
 .vscode/
 .idea/
@@ -22,3 +25,11 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary files
+screenshoots_tmp/
+nul
+test
+test_checkbox.py
+test_console.py
+*.bat

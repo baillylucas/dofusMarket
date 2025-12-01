@@ -188,6 +188,30 @@ def remove_items_from_scrapper(item_ids, data=None):
 
     return len(current_items) - len(updated_set)
 
+def remove_ingredients_from_scrapper(ingredient_ids):
+    """
+    Supprime des ingrédients de la liste du scrapper sans toucher aux items.
+
+    Args:
+        ingredient_ids: Liste des IDs d'ingrédients à supprimer
+
+    Returns:
+        Nombre d'ingrédients supprimés
+    """
+    current_items = load_scrapper_items()
+    current_ingredients = load_scrapper_ingredients()
+
+    # Convertir en ensemble pour l'opération de suppression
+    current_ing_set = set(current_ingredients)
+    ing_to_remove = set(ingredient_ids)
+    updated_ing_set = current_ing_set - ing_to_remove
+
+    # Sauvegarder sans modifier les items
+    updated_ingredients_list = sorted(list(updated_ing_set))
+    save_scrapper_data(current_items, updated_ingredients_list)
+
+    return len(current_ingredients) - len(updated_ing_set)
+
 # --- FAVORIS ---
 
 def load_favorite_items():

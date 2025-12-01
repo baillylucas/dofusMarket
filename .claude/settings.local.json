@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(python add_id_to_dpln.py:*)",
-      "Bash(uv run python:*)"
+      "Bash(uv run python:*)",
+      "Bash(cat:*)",
+      "Bash(nul)",
+      "Bash(python -c:*)",
+      "Bash(python test_ingredients.py:*)",
+      "Bash(del \"c:\\GITHUB\\dofusMarket\\test_ingredients.py\")"
     ],
     "deny": [],
     "ask": []
