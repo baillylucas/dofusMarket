@@ -8,6 +8,9 @@ credentials/
 .env
 .env.*
 
+# Configuration utilisateur
+user_config.py
+
 # ===========================
 # Claude Code
 # ===========================

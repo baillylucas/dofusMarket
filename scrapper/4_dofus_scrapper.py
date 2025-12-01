@@ -185,53 +185,66 @@ class ImageProcessor:
     def __init__(self):
         """Initialise le processeur d'image avec un compteur d'images."""
         self.screenshot_counter = 0
+        self.current_item_id = None  # ID de l'item en cours de traitement
+        self.current_quantity = None  # Quantité en cours de capture
 
-    def take_screenshot(self, zone: Rectangle) -> str:
-        """Capture une zone de l'écran et sauvegarde l'image."""
+    def take_screenshot(self, zone: Rectangle, custom_name: Optional[str] = None) -> str:
+        """
+        Capture une zone de l'écran et sauvegarde l'image.
+
+        Args:
+            zone: Zone de l'écran à capturer
+            custom_name: Nom personnalisé pour le fichier (ex: "12345_x10")
+        """
         screenshot = ImageGrab.grab(bbox=(
             zone.top_left[0],
             zone.top_left[1],
             zone.bottom_right[0],
             zone.bottom_right[1]
         ))
-        
+
         # Convertir PIL Image en array numpy
         screenshot_array = np.array(screenshot)
-        
+
         # Convertir en niveaux de gris avec OpenCV
         screenshot_cv = cv2.cvtColor(screenshot_array, cv2.COLOR_RGB2GRAY)
-        
+
         # Analyser la distribution des valeurs pour ajuster le seuil
         # (optionnel - pour debug)
         # print(f"Luminosité min: {screenshot_cv.min()}, max: {screenshot_cv.max()}, moyenne: {screenshot_cv.mean():.1f}")
-        
+
         # Appliquer un seuil pour ne garder que le texte très clair (texte principal)
         # Ajustez la valeur 180 selon vos tests (entre 150-200 généralement)
         threshold_value = 190
         _, binary_mask = cv2.threshold(screenshot_cv, threshold_value, 255, cv2.THRESH_BINARY)
-        
+
         # Créer une image avec fond uniforme
         background_gray = 41  # Couleur grise du fond #292C4D en niveaux de gris
         result = np.full_like(screenshot_cv, background_gray)
-        
+
         # Copier uniquement les pixels clairs (texte principal)
         result[binary_mask == 255] = screenshot_cv[binary_mask == 255]
-        
+
         # Convertir de retour en PIL Image
         screenshot = Image.fromarray(result)
-        
+
         # Preprocessing supplémentaire pour améliorer l'OCR
         # Améliorer le contraste
         enhancer = ImageEnhance.Contrast(screenshot)
         screenshot = enhancer.enhance(2.0)
-        
+
         # Améliorer la netteté
         enhancer = ImageEnhance.Sharpness(screenshot)
         screenshot = enhancer.enhance(2.0)
-        
-        filename = f"{FOLDER_IMAGE_PATH}/test_{self.screenshot_counter}.png"
+
+        # Utiliser le nom personnalisé si fourni, sinon utiliser le compteur
+        if custom_name:
+            filename = f"{FOLDER_IMAGE_PATH}/{custom_name}.png"
+        else:
+            filename = f"{FOLDER_IMAGE_PATH}/test_{self.screenshot_counter}.png"
+            self.screenshot_counter += 1
+
         screenshot.save(filename)
-        self.screenshot_counter += 1
         return filename
     
     @staticmethod
@@ -606,12 +619,17 @@ class Automator:
         
         return text
 
-    def find_item_position(self, target_name: str, is_equipment: bool = False) -> Optional[int]:
+    def find_item_position(self, target_name: str, item_id: Optional[str] = None, is_equipment: bool = False) -> Optional[int]:
         """
         Cherche la position de l'item dans la liste de l'HDV.
         Retourne le nombre d'itérations nécessaires (0-11) ou None si non trouvé.
-        Si aucune correspondance exacte, retourne la position de l'item avec 
+        Si aucune correspondance exacte, retourne la position de l'item avec
         la plus haute similarité (minimum 80%).
+
+        Args:
+            target_name: Nom de l'item à chercher
+            item_id: ID de l'item (pour le nommage des screenshots)
+            is_equipment: True si c'est un équipement
         """
         target_name = self.clean_item_name(target_name)
 
@@ -619,46 +637,48 @@ class Automator:
             COORDINATES_RESSOURCE_NAME_TOP_LEFT,
             COORDINATES_RESSOURCE_NAME_BOTTOM_RIGHT
         )
-        
+
         best_match_position = None
         best_similarity = 0.0
-        
+
         for i in range(8):  # Maximum 8 tentatives
             current_name_zone = Rectangle(
                 (name_zone.top_left[0], name_zone.top_left[1] + i * 73),
                 (name_zone.bottom_right[0], name_zone.bottom_right[1] + i * 73)
             )
-            
-            screenshot_path = self.processor.take_screenshot(current_name_zone)
-            
+
+            # Nom du screenshot avec ID et position
+            screenshot_name = f"{item_id}_position_{i}" if item_id else None
+            screenshot_path = self.processor.take_screenshot(current_name_zone, custom_name=screenshot_name)
+
             text = pytesseract.image_to_string(
                 Image.open(screenshot_path),
                 config=r'--oem 3 --psm 6',
                 lang='fra'
             ).strip()
-            
+
             # Nettoyage du texte
             text = self.clean_item_name(text)
-            
+
             # Correspondance exacte
             if text == target_name:
                 return i
-            
+
             # Calculer la similarité
             similarity = SequenceMatcher(None, target_name.lower(), text.lower()).ratio()
-            
+
             # print(f"Position {i}: '{text}' vs '{target_name}' - Similarité: {similarity*100:.1f}%")
-            
+
             # Suivre le meilleur match
             if similarity > best_similarity:
                 best_similarity = similarity
                 best_match_position = i
-        
+
         # Si le meilleur match atteint au moins 80%, le retourner
         if best_similarity >= 0.80:
             # print(f"Meilleure correspondance trouvée à la position {best_match_position} avec {best_similarity*100:.1f}% de similarité")
             return best_match_position
-        
+
         # print(f"Aucune correspondance suffisante trouvée (meilleur: {best_similarity*100:.1f}%)")
         return None
 
@@ -693,25 +713,39 @@ class Automator:
         
         return similarity >= 0.90
 
-    def process_item(self, item_name: str, is_equipment: bool = False, item_level: Optional[int] = None) -> Optional[ResourceResult]:
-        """Traite un item et retourne ses prix. Lève une exception en cas d'erreur."""
+    def process_item(self, item_name: str, item_id: Optional[str] = None, is_equipment: bool = False, item_level: Optional[int] = None) -> Optional[ResourceResult]:
+        """
+        Traite un item et retourne ses prix. Lève une exception en cas d'erreur.
+
+        Args:
+            item_name: Nom de l'item à traiter
+            item_id: ID de l'item (pour le nommage des screenshots)
+            is_equipment: True si c'est un équipement
+            item_level: Niveau de l'item pour le filtrage
+        """
         self.clear_search()
         time.sleep(0.1)
-        
+
         # Passer le niveau à search_item
         self.search_item(item_name, item_level)
         time.sleep(1.5)
 
-        item_position = self.find_item_position(item_name, is_equipment)
-        
+        item_position = self.find_item_position(item_name, item_id=item_id, is_equipment=is_equipment)
+
         if item_position is None:
-            print(f"Item {item_name} non trouvé dans la liste")
+            if item_id:
+                print(f"Item {item_name} (ID: {item_id}) non trouvé dans la liste")
+            else:
+                print(f"Item {item_name} non trouvé dans la liste")
             # Réinitialiser les filtres avant de retourner None
             if len(item_name) <= 3 and item_level is not None:
                 self.reset_level_filters()
             return None
         else:
-            print(f"Item {item_name} trouvé à la position : {item_position}")
+            if item_id:
+                print(f"Item {item_name} (ID: {item_id}) trouvé à la position : {item_position}")
+            else:
+                print(f"Item {item_name} trouvé à la position : {item_position}")
 
         # Si l'item n'est pas en première position, ajuster les coordonnées
         if item_position > 0:
@@ -731,7 +765,7 @@ class Automator:
         if is_equipment:
             # Détecter si c'est une panoplie
             panoplie = self.is_panoplie(item_position)
-            
+
             if panoplie:
                 screenshot_zone = Rectangle(
                     (COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT[0],
@@ -746,25 +780,34 @@ class Automator:
                     (COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[0],
                     COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[1])
                 )
-            
-            screenshot_path = self.processor.take_screenshot(screenshot_zone)
+
+            # Nom du screenshot avec ID et quantité
+            screenshot_name = f"{item_id}_x1" if item_id else None
+            screenshot_path = self.processor.take_screenshot(screenshot_zone, custom_name=screenshot_name)
             price = self.processor.detect_single_price(screenshot_path)
-            
+
             # Réinitialiser les filtres avant de retourner le résultat
             if len(item_name) <= 3 and item_level is not None:
                 self.reset_level_filters()
-            
+
             if price:
                 ressourceResult = ResourceResult(name=item_name, prices=[PriceInfo(quantity=1, price=price)])
-                print(f"{ressourceResult}\n")
+                if item_id:
+                    print(f"{ressourceResult} (ID: {item_id})\n")
+                else:
+                    print(f"{ressourceResult}\n")
                 return ressourceResult
-            print(f"{item_name} is None\n")
+            if item_id:
+                print(f"{item_name} (ID: {item_id}) is None\n")
+            else:
+                print(f"{item_name} is None\n")
             return None
         
         # Traitement pour les ressources (non-équipements)
         else:
             detected_prices = []
-            
+            expected_quantities = [1, 10, 100, 1000]
+
             # Récupérer les 4 prix aux positions 0, 1, 2, 3
             for position in range(4):
                 screenshot_zone = Rectangle(
@@ -773,31 +816,35 @@ class Automator:
                     (COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[0],
                     COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[1] + position * 40)
                 )
-                
-                screenshot_path = self.processor.take_screenshot(screenshot_zone)
+
+                # Nom du screenshot avec ID et quantité
+                screenshot_name = f"{item_id}_x{expected_quantities[position]}" if item_id else None
+                screenshot_path = self.processor.take_screenshot(screenshot_zone, custom_name=screenshot_name)
                 price = self.processor.detect_single_price(screenshot_path)
-                
+
                 if price:
                     detected_prices.append(price)
                 else:
                     detected_prices.append(None)
-            
+
             # Réinitialiser les filtres avant de créer le résultat
             if len(item_name) <= 3 and item_level is not None:
                 self.reset_level_filters()
-            
+
             # Créer la liste finale de 4 PriceInfo avec les quantités attendues
-            expected_quantities = [1, 10, 100, 1000]
             final_prices = []
-            
+
             for i, expected_qty in enumerate(expected_quantities):
                 if i < len(detected_prices) and detected_prices[i] is not None:
                     final_prices.append(PriceInfo(quantity=expected_qty, price=detected_prices[i]))
                 else:
                     final_prices.append(PriceInfo(quantity=expected_qty, price=None))
-            
+
             ressourceResult = ResourceResult(name=item_name, prices=final_prices)
-            print(f"{ressourceResult}\n")
+            if item_id:
+                print(f"{ressourceResult} (ID: {item_id})\n")
+            else:
+                print(f"{ressourceResult}\n")
             return ressourceResult
 
     def process_all_resources(self) -> None:
@@ -832,15 +879,17 @@ class Automator:
                 for resource in resources:
                     resource_count += 1
                     print(f"[{resource_count}/{len(resources)}] Traitement de : {resource}")
-                    
-                    # Récupérer le niveau de l'item
+
+                    # Récupérer l'ID et le niveau de l'item
+                    item_id = None
                     item_level = None
-                    for item_id, item_data in self.items_data.items():
+                    for current_id, item_data in self.items_data.items():
                         if item_data['name'] == resource:
+                            item_id = current_id
                             item_level = item_data.get('level', None)
                             break
-                    
-                    result = self.process_item(resource, is_equipment=is_equipment, item_level=item_level)
+
+                    result = self.process_item(resource, item_id=item_id, is_equipment=is_equipment, item_level=item_level)
                     
                     if result and result.prices:
                         # Mettre à jour les données en mémoire
