@@ -70,13 +70,31 @@ COORDINATES_SCREENSHOT_ZONE_BOTTOM_RIGHT = (403, 361)
 COORDINATES_SCREENSHOT_ZONE_PRICE_ONLY_TOP_LEFT = (264, 346)
 COORDINATES_SCREENSHOT_ZONE_PRICE_ONLY_BOTTOM_RIGHT = (402, 380)
 
+# Coordonnées de la zone de la quantité (x1, x10, x100, x1000) dans l'HDV
+# Il existe 3 cas différents selon le type d'HDV et le contexte
+
+# Cas 1: HDV classiques (ressources, consommables, etc.) - va avec COORDINATES_SCREENSHOT_ZONE_PRICE_ONLY_*
+# TODO: À calibrer selon votre résolution
+COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT = (0, 0)  # À REMPLIR
+COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT = (0, 0)  # À REMPLIR
+
 # Coordonnée de l'indication "panoplie" dans l'hdv equipement
 COORDINATES_LABEL_PANOPLIE_TOP_LEFT = (210, 278)
 COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT = (283, 304)
 
+# Cas 2: HDV équipement HORS panoplie - va avec COORDINATES_PRICE_ONLY_*
+# TODO: À calibrer selon votre résolution
+COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT = (0, 0)  # À REMPLIR
+COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT = (0, 0)  # À REMPLIR
+
 # Coordonnée de la zone de screen (uniquement le prix) pour les équipements ne faisant pas partie d'une panoplie, dans l'HDV equipement
 COORDINATES_PRICE_ONLY_TOP_LEFT = (263, 326)
 COORDINATES_PRICE_ONLY_BOTTOM_RIGHT = (401, 361)
+
+# Cas 3: HDV équipement SI l'item est une panoplie - va avec COORDINATES_PRICE_ONLY_FOR_PANOPLIE_*
+# TODO: À calibrer selon votre résolution
+COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT = (0, 0)  # À REMPLIR
+COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT = (0, 0)  # À REMPLIR
 
 # Coordonnée de la zone de screen (uniquement le prix) pour les équipements faisant partie d'une panoplie, dans l'HDV equipement
 COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT = (266, 347)

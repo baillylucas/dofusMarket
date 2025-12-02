@@ -213,9 +213,6 @@ test
 test_*.py
 *_test.py
 
-# Batch files
-*.bat
-
 # ===========================
 # Project-specific
 # ===========================

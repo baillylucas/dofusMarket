@@ -283,6 +283,47 @@ class ImageProcessor:
             pass
         return None
 
+    def detect_quantity(self, zone: Rectangle, item_id: Optional[int] = None, position: int = 0) -> Optional[int]:
+        """
+        Capture et détecte la quantité dans une zone spécifique de l'écran.
+        Valide que la quantité est dans [1, 10, 100, 1000].
+
+        Args:
+            zone: Zone de l'écran à capturer
+            item_id: ID de l'item pour nommer le screenshot
+            position: Position dans la liste (0-3)
+
+        Returns:
+            La quantité détectée si elle est valide (1, 10, 100, 1000), None sinon
+        """
+        # Générer le nom du screenshot
+        custom_name = f"{item_id}_quantity_pos_{position}" if item_id else f"quantity_pos_{position}"
+
+        # Capturer la zone de quantité
+        screenshot_path = self.take_screenshot(zone, custom_name=custom_name)
+
+        # Utiliser pytesseract pour détecter le texte
+        text = pytesseract.image_to_string(
+            Image.open(screenshot_path),
+            config=r'--oem 3 --psm 6',
+            lang='fra'
+        )
+
+        # Nettoyer le texte détecté
+        text = text.strip().replace(" ", "").lower()
+
+        # Extraire la quantité (format attendu: "x1", "x10", "x100", "x1000")
+        quantity = self.clean_quantity(text)
+
+        # Valider que la quantité est dans les valeurs acceptables
+        VALID_QUANTITIES = {1, 10, 100, 1000}
+
+        if quantity in VALID_QUANTITIES:
+            return quantity
+        else:
+            print(f"    ⚠️  Quantité invalide détectée: '{text}' -> {quantity} (attendu: 1, 10, 100 ou 1000)")
+            return None
+
     @staticmethod
     def clean_price(price_str: str) -> Optional[int]:
         """Nettoie et convertit le prix en entier en supprimant tous les caractères non numériques."""
@@ -766,23 +807,46 @@ class Automator:
             # Détecter si c'est une panoplie
             panoplie = self.is_panoplie(item_position)
 
+            # Choisir les bonnes coordonnées selon panoplie ou non
             if panoplie:
-                screenshot_zone = Rectangle(
-                    (COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT[0],
-                    COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT[1]),
-                    (COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT[0],
-                    COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT[1])
-                )
+                quantity_coords_top_left = COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT
+                quantity_coords_bottom_right = COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT
+                price_coords_top_left = COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT
+                price_coords_bottom_right = COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT
             else:
-                screenshot_zone = Rectangle(
-                    (COORDINATES_PRICE_ONLY_TOP_LEFT[0],
-                    COORDINATES_PRICE_ONLY_TOP_LEFT[1]),
-                    (COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[0],
-                    COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[1])
-                )
+                quantity_coords_top_left = COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT
+                quantity_coords_bottom_right = COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT
+                price_coords_top_left = COORDINATES_PRICE_ONLY_TOP_LEFT
+                price_coords_bottom_right = COORDINATES_PRICE_ONLY_BOTTOM_RIGHT
 
-            # Nom du screenshot avec ID et quantité
-            screenshot_name = f"{item_id}_x1" if item_id else None
+            # 1. Valider la quantité (doit être x1 pour les équipements)
+            quantity_zone = Rectangle(
+                quantity_coords_top_left,
+                quantity_coords_bottom_right
+            )
+
+            detected_quantity = self.processor.detect_quantity(quantity_zone, item_id=item_id, position=0)
+
+            # Si la quantité n'est pas x1, c'est anormal pour un équipement
+            if detected_quantity is None or detected_quantity != 1:
+                if item_id:
+                    print(f"⚠️  Quantité invalide pour équipement {item_name} (ID: {item_id}): attendu x1, détecté: {detected_quantity}")
+                else:
+                    print(f"⚠️  Quantité invalide pour équipement {item_name}: attendu x1, détecté: {detected_quantity}")
+
+                # Réinitialiser les filtres avant de retourner None
+                if len(item_name) <= 3 and item_level is not None:
+                    self.reset_level_filters()
+                return None
+
+            # 2. Capturer le prix
+            screenshot_zone = Rectangle(
+                price_coords_top_left,
+                price_coords_bottom_right
+            )
+
+            # Nom du screenshot avec ID et quantité détectée
+            screenshot_name = f"{item_id}_x{detected_quantity}" if item_id else None
             screenshot_path = self.processor.take_screenshot(screenshot_zone, custom_name=screenshot_name)
             price = self.processor.detect_single_price(screenshot_path)
 
@@ -791,7 +855,7 @@ class Automator:
                 self.reset_level_filters()
 
             if price:
-                ressourceResult = ResourceResult(name=item_name, prices=[PriceInfo(quantity=1, price=price)])
+                ressourceResult = ResourceResult(name=item_name, prices=[PriceInfo(quantity=detected_quantity, price=price)])
                 if item_id:
                     print(f"{ressourceResult} (ID: {item_id})\n")
                 else:
@@ -805,39 +869,68 @@ class Automator:
         
         # Traitement pour les ressources (non-équipements)
         else:
-            detected_prices = []
-            expected_quantities = [1, 10, 100, 1000]
+            detected_data = []  # Liste de tuples (quantity, price)
 
-            # Récupérer les 4 prix aux positions 0, 1, 2, 3
+            # Récupérer les prix aux positions 0, 1, 2, 3 en validant d'abord les quantités
             for position in range(4):
-                screenshot_zone = Rectangle(
+                # 1. D'abord, capturer et valider la quantité
+                # Utiliser les coordonnées pour ressources (HDV classiques)
+                quantity_zone = Rectangle(
+                    (COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT[0],
+                    COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT[1] + position * 40),
+                    (COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT[0],
+                    COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT[1] + position * 40)
+                )
+
+                detected_quantity = self.processor.detect_quantity(quantity_zone, item_id=item_id, position=position)
+
+                # Si la quantité n'est pas valide, on arrête le scrapping de cet item
+                # et on passe au prochain item en sauvegardant ce qu'on a déjà capturé
+                if detected_quantity is None:
+                    if item_id:
+                        print(f"    ⚠️  Quantité invalide détectée à la position {position} pour l'item {item_name} (ID: {item_id})")
+                        print(f"    ⏭️  Arrêt du scrapping de cet item, passage au suivant")
+                    else:
+                        print(f"    ⚠️  Quantité invalide détectée à la position {position} pour l'item {item_name}")
+                        print(f"    ⏭️  Arrêt du scrapping de cet item, passage au suivant")
+                    break  # Sortir de la boucle for et passer à la suite
+
+                # 2. Si la quantité est valide, capturer le prix
+                price_zone = Rectangle(
                     (COORDINATES_PRICE_ONLY_TOP_LEFT[0],
                     COORDINATES_PRICE_ONLY_TOP_LEFT[1] + position * 40),
                     (COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[0],
                     COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[1] + position * 40)
                 )
 
-                # Nom du screenshot avec ID et quantité
-                screenshot_name = f"{item_id}_x{expected_quantities[position]}" if item_id else None
-                screenshot_path = self.processor.take_screenshot(screenshot_zone, custom_name=screenshot_name)
+                # Nom du screenshot avec ID et quantité détectée
+                screenshot_name = f"{item_id}_x{detected_quantity}" if item_id else None
+                screenshot_path = self.processor.take_screenshot(price_zone, custom_name=screenshot_name)
                 price = self.processor.detect_single_price(screenshot_path)
 
-                if price:
-                    detected_prices.append(price)
-                else:
-                    detected_prices.append(None)
+                # Stocker la quantité détectée et le prix associé
+                detected_data.append((detected_quantity, price))
 
             # Réinitialiser les filtres avant de créer le résultat
             if len(item_name) <= 3 and item_level is not None:
                 self.reset_level_filters()
 
-            # Créer la liste finale de 4 PriceInfo avec les quantités attendues
+            # Créer la liste finale avec les quantités et prix détectés
+            # Toujours retourner 4 PriceInfo avec les quantités attendues
+            expected_quantities = [1, 10, 100, 1000]
             final_prices = []
 
-            for i, expected_qty in enumerate(expected_quantities):
-                if i < len(detected_prices) and detected_prices[i] is not None:
-                    final_prices.append(PriceInfo(quantity=expected_qty, price=detected_prices[i]))
-                else:
+            for expected_qty in expected_quantities:
+                # Chercher si cette quantité a été détectée
+                found = False
+                for detected_qty, detected_price in detected_data:
+                    if detected_qty == expected_qty:
+                        final_prices.append(PriceInfo(quantity=expected_qty, price=detected_price))
+                        found = True
+                        break
+
+                # Si la quantité n'a pas été trouvée, ajouter None
+                if not found:
                     final_prices.append(PriceInfo(quantity=expected_qty, price=None))
 
             ressourceResult = ResourceResult(name=item_name, prices=final_prices)
