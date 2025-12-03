@@ -808,18 +808,19 @@ class Automator:
 
         if item_position is None:
             if item_id:
-                print(f"Item {item_name} (ID: {item_id}) non trouvé dans la liste")
+                print(f"❌ {item_name} (ID: {item_id}) - Non trouvé")
             else:
-                print(f"Item {item_name} non trouvé dans la liste")
+                print(f"❌ {item_name} - Non trouvé")
             # Réinitialiser les filtres avant de retourner None
             if len(item_name) <= 3 and item_level is not None:
                 self.reset_level_filters()
             return None
+
+        # Afficher le nom, l'ID et la position sur une seule ligne
+        if item_id:
+            print(f"✓ {item_name} (ID: {item_id}, pos: {item_position})")
         else:
-            if item_id:
-                print(f"Item {item_name} (ID: {item_id}) trouvé à la position : {item_position}")
-            else:
-                print(f"Item {item_name} trouvé à la position : {item_position}")
+            print(f"✓ {item_name} (pos: {item_position})")
 
         # Si l'item n'est pas en première position, ajuster les coordonnées
         if item_position > 0:
