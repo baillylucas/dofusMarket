@@ -731,7 +731,7 @@ class Automator:
     def is_panoplie(self, item_position: int) -> bool:
         """
         Détecte si l'item sélectionné est une panoplie en analysant le label.
-        Retourne True si le texte détecté correspond à "Panoplie" à au moins 90%.
+        Retourne True si du texte (peu importe lequel) est détecté, False si vide.
         """
         label_zone = Rectangle(
             (COORDINATES_LABEL_PANOPLIE_TOP_LEFT[0],
@@ -750,14 +750,11 @@ class Automator:
 
         # Nettoyer le texte détecté
         text = self.clean_item_name(text)
-        target = self.clean_item_name("Panoplie")
 
-        # Calculer la similarité
-        similarity = SequenceMatcher(None, text, target).ratio()
+        # print(f"Détection panoplie: texte détecté = '{text}' -> {'Panoplie' if text else 'Pas panoplie'}")
 
-        # print(f"Détection panoplie: '{text}' vs '{target}' - Similarité: {similarity*100:.1f}%")
-
-        return similarity >= 0.90
+        # Si du texte est détecté (non vide), c'est une panoplie
+        return bool(text)
 
     def is_prix_label_present(self) -> bool:
         """
