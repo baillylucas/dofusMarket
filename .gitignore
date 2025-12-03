@@ -11,6 +11,9 @@ credentials/
 # Configuration utilisateur
 user_config.py
 
+# Données de scrapping
+data/items_scrap.json
+
 # ===========================
 # Claude Code
 # ===========================

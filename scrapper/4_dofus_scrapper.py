@@ -188,13 +188,14 @@ class ImageProcessor:
         self.current_item_id = None  # ID de l'item en cours de traitement
         self.current_quantity = None  # Quantité en cours de capture
 
-    def take_screenshot(self, zone: Rectangle, custom_name: Optional[str] = None) -> str:
+    def take_screenshot(self, zone: Rectangle, custom_name: Optional[str] = None, apply_threshold: bool = False) -> str:
         """
         Capture une zone de l'écran et sauvegarde l'image.
 
         Args:
             zone: Zone de l'écran à capturer
             custom_name: Nom personnalisé pour le fichier (ex: "12345_x10")
+            apply_threshold: Si True, applique un seuillage pour ne garder que le texte très clair (pour les libellés)
         """
         screenshot = ImageGrab.grab(bbox=(
             zone.top_left[0],
@@ -213,20 +214,25 @@ class ImageProcessor:
         # (optionnel - pour debug)
         # print(f"Luminosité min: {screenshot_cv.min()}, max: {screenshot_cv.max()}, moyenne: {screenshot_cv.mean():.1f}")
 
-        # Appliquer un seuil pour ne garder que le texte très clair (texte principal)
-        # Ajustez la valeur 180 selon vos tests (entre 150-200 généralement)
-        threshold_value = 190
-        _, binary_mask = cv2.threshold(screenshot_cv, threshold_value, 255, cv2.THRESH_BINARY)
+        # Appliquer un seuil UNIQUEMENT si demandé (pour les libellés "Prix", "Panoplie", etc.)
+        if apply_threshold:
+            # Appliquer un seuil pour ne garder que le texte très clair (texte principal)
+            # Ajustez la valeur 190 selon vos tests (entre 150-200 généralement)
+            threshold_value = 190
+            _, binary_mask = cv2.threshold(screenshot_cv, threshold_value, 255, cv2.THRESH_BINARY)
 
-        # Créer une image avec fond uniforme
-        background_gray = 41  # Couleur grise du fond #292C4D en niveaux de gris
-        result = np.full_like(screenshot_cv, background_gray)
+            # Créer une image avec fond uniforme
+            background_gray = 41  # Couleur grise du fond #292C4D en niveaux de gris
+            result = np.full_like(screenshot_cv, background_gray)
 
-        # Copier uniquement les pixels clairs (texte principal)
-        result[binary_mask == 255] = screenshot_cv[binary_mask == 255]
+            # Copier uniquement les pixels clairs (texte principal)
+            result[binary_mask == 255] = screenshot_cv[binary_mask == 255]
 
-        # Convertir de retour en PIL Image
-        screenshot = Image.fromarray(result)
+            # Convertir de retour en PIL Image
+            screenshot = Image.fromarray(result)
+        else:
+            # Pas de seuillage, convertir directement en PIL Image
+            screenshot = Image.fromarray(screenshot_cv)
 
         # Preprocessing supplémentaire pour améliorer l'OCR
         # Améliorer le contraste
@@ -321,7 +327,6 @@ class ImageProcessor:
         if quantity in VALID_QUANTITIES:
             return quantity
         else:
-            print(f"    ⚠️  Quantité invalide détectée: '{text}' -> {quantity} (attendu: 1, 10, 100 ou 1000)")
             return None
 
     @staticmethod
@@ -690,7 +695,7 @@ class Automator:
 
             # Nom du screenshot avec ID et position
             screenshot_name = f"{item_id}_position_{i}" if item_id else None
-            screenshot_path = self.processor.take_screenshot(current_name_zone, custom_name=screenshot_name)
+            screenshot_path = self.processor.take_screenshot(current_name_zone, custom_name=screenshot_name, apply_threshold=True)
 
             text = pytesseract.image_to_string(
                 Image.open(screenshot_path),
@@ -734,24 +739,55 @@ class Automator:
             (COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT[0],
             COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT[1])
         )
-        
+
         screenshot_path = self.processor.take_screenshot(label_zone)
-        
+
         text = pytesseract.image_to_string(
             Image.open(screenshot_path),
             config=r'--oem 3 --psm 6',
             lang='fra'
         ).strip()
-        
+
         # Nettoyer le texte détecté
         text = self.clean_item_name(text)
         target = self.clean_item_name("Panoplie")
-        
+
         # Calculer la similarité
         similarity = SequenceMatcher(None, text, target).ratio()
-        
+
         # print(f"Détection panoplie: '{text}' vs '{target}' - Similarité: {similarity*100:.1f}%")
-        
+
+        return similarity >= 0.90
+
+    def is_prix_label_present(self) -> bool:
+        """
+        Détecte si le libellé "Prix" est présent dans l'HDV ressources.
+        Retourne True si le texte détecté correspond à "Prix" à au moins 90%.
+        """
+        label_zone = Rectangle(
+            (COORDINATES_LABEL_PRIX_TOP_LEFT[0],
+            COORDINATES_LABEL_PRIX_TOP_LEFT[1]),
+            (COORDINATES_LABEL_PRIX_BOTTOM_RIGHT[0],
+            COORDINATES_LABEL_PRIX_BOTTOM_RIGHT[1])
+        )
+
+        screenshot_path = self.processor.take_screenshot(label_zone)
+
+        text = pytesseract.image_to_string(
+            Image.open(screenshot_path),
+            config=r'--oem 3 --psm 6',
+            lang='fra'
+        ).strip()
+
+        # Nettoyer le texte détecté
+        text = self.clean_item_name(text)
+        target = self.clean_item_name("Prix")
+
+        # Calculer la similarité
+        similarity = SequenceMatcher(None, text, target).ratio()
+
+        # print(f"Détection Prix: '{text}' vs '{target}' - Similarité: {similarity*100:.1f}%")
+
         return similarity >= 0.90
 
     def process_item(self, item_name: str, item_id: Optional[str] = None, is_equipment: bool = False, item_level: Optional[int] = None) -> Optional[ResourceResult]:
@@ -871,15 +907,29 @@ class Automator:
         else:
             detected_data = []  # Liste de tuples (quantity, price)
 
+            # Détecter si le libellé "Prix" est présent pour choisir les bonnes coordonnées
+            prix_label_present = self.is_prix_label_present()
+
+            # Choisir les coordonnées selon la présence du libellé "Prix"
+            if prix_label_present:
+                quantity_coords_top_left = COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT
+                quantity_coords_bottom_right = COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT
+                price_coords_top_left = COORDINATES_PRICE_ONLY_TOP_LEFT
+                price_coords_bottom_right = COORDINATES_PRICE_ONLY_BOTTOM_RIGHT
+            else:
+                quantity_coords_top_left = COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT
+                quantity_coords_bottom_right = COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT
+                price_coords_top_left = COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT
+                price_coords_bottom_right = COORDINATES_PRICE_ONLY_NO_PRIX_BOTTOM_RIGHT
+
             # Récupérer les prix aux positions 0, 1, 2, 3 en validant d'abord les quantités
             for position in range(4):
                 # 1. D'abord, capturer et valider la quantité
-                # Utiliser les coordonnées pour ressources (HDV classiques)
                 quantity_zone = Rectangle(
-                    (COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT[0],
-                    COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT[1] + position * 40),
-                    (COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT[0],
-                    COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT[1] + position * 40)
+                    (quantity_coords_top_left[0],
+                    quantity_coords_top_left[1] + position * 40),
+                    (quantity_coords_bottom_right[0],
+                    quantity_coords_bottom_right[1] + position * 40)
                 )
 
                 detected_quantity = self.processor.detect_quantity(quantity_zone, item_id=item_id, position=position)
@@ -887,20 +937,14 @@ class Automator:
                 # Si la quantité n'est pas valide, on arrête le scrapping de cet item
                 # et on passe au prochain item en sauvegardant ce qu'on a déjà capturé
                 if detected_quantity is None:
-                    if item_id:
-                        print(f"    ⚠️  Quantité invalide détectée à la position {position} pour l'item {item_name} (ID: {item_id})")
-                        print(f"    ⏭️  Arrêt du scrapping de cet item, passage au suivant")
-                    else:
-                        print(f"    ⚠️  Quantité invalide détectée à la position {position} pour l'item {item_name}")
-                        print(f"    ⏭️  Arrêt du scrapping de cet item, passage au suivant")
                     break  # Sortir de la boucle for et passer à la suite
 
                 # 2. Si la quantité est valide, capturer le prix
                 price_zone = Rectangle(
-                    (COORDINATES_PRICE_ONLY_TOP_LEFT[0],
-                    COORDINATES_PRICE_ONLY_TOP_LEFT[1] + position * 40),
-                    (COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[0],
-                    COORDINATES_PRICE_ONLY_BOTTOM_RIGHT[1] + position * 40)
+                    (price_coords_top_left[0],
+                    price_coords_top_left[1] + position * 40),
+                    (price_coords_bottom_right[0],
+                    price_coords_bottom_right[1] + position * 40)
                 )
 
                 # Nom du screenshot avec ID et quantité détectée
@@ -910,6 +954,14 @@ class Automator:
 
                 # Stocker la quantité détectée et le prix associé
                 detected_data.append((detected_quantity, price))
+
+            # Afficher les quantités détectées
+            if detected_data:
+                quantities_str = ", ".join([f"x{qty}" for qty, _ in detected_data])
+                if item_id:
+                    print(f"    Quantités détectées : {quantities_str} (ID: {item_id})")
+                else:
+                    print(f"    Quantités détectées : {quantities_str}")
 
             # Réinitialiser les filtres avant de créer le résultat
             if len(item_name) <= 3 and item_level is not None:
