@@ -151,7 +151,7 @@ if 'sort_column' not in st.session_state:
 if 'sort_ascending' not in st.session_state:
     st.session_state.sort_ascending = True
 if 'quantity' not in st.session_state:
-    st.session_state.quantity = 10
+    st.session_state.quantity = 1
 if 'craft_cache' not in st.session_state:
     st.session_state.craft_cache = {}
 if 'scrapper_items' not in st.session_state:
@@ -593,6 +593,8 @@ with st.sidebar:
     supertype_filter = st.multiselect("Supertype", options=all_supertypes)
     all_types = sorted(set(item.get('type', 'N/A') for item in data.values()))
     type_filter = st.multiselect("Type", options=all_types)
+    all_jobs = sorted(set(item.get('job') for item in data.values() if item.get('job')))
+    job_filter = st.multiselect("Métier", options=all_jobs)
     craft_filter = st.radio("Type d'item", ["Tous", "Craftables uniquement", "Non craftables"])
     xp_filter = st.checkbox("📚 XP connu uniquement")
     max_level = max((item.get('level', 0) for item in data.values()), default=200)
@@ -661,6 +663,7 @@ for item_id, item in data.items():
         "level": item.get("level"),
         "supertype": item.get("supertype"),
         "type": item.get("type"),
+        "job": item.get("job"),
         "is_craft": item.get("is_craft"),
         "prix_hdv": prix_numeric,
         "cout_craft": craft_numeric,
@@ -679,6 +682,8 @@ if supertype_filter:
     df = df[df["supertype"].isin(supertype_filter)]
 if type_filter:
     df = df[df["type"].isin(type_filter)]
+if job_filter:
+    df = df[df["job"].isin(job_filter)]
 if craft_filter == "Craftables uniquement":
     df = df[df["is_craft"]]
 elif craft_filter == "Non craftables":
