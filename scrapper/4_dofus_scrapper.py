@@ -54,6 +54,7 @@ class HdvInfo:
     map_coords: Tuple[int, int]
     building_zone: Rectangle
     type_name: str
+    entry_zone: Optional[Rectangle] = None
 
 
 class HdvManager:
@@ -96,26 +97,30 @@ class HdvManager:
                 "cosmetiques.txt",
                 COORDINATES_MAP_HDV_COSMETIQUES,
                 Rectangle(COORDINATES_HDV_COSMETIQUES_TOP_LEFT, COORDINATES_HDV_COSMETIQUES_BOTTOM_RIGHT),
-                "cosmetiques"
+                "cosmetiques",
+                Rectangle(COORDINATES_ENTRY_COSMETIQUES_TOP_LEFT, COORDINATES_ENTRY_COSMETIQUES_BOTTOM_RIGHT)
             ),
             "ames.txt": HdvInfo(
                 "ames.txt",
                 COORDINATES_MAP_HDV_AMES,
                 Rectangle(COORDINATES_HDV_AMES_TOP_LEFT, COORDINATES_HDV_AMES_BOTTOM_RIGHT),
-                "ames"
+                "ames",
+                Rectangle(COORDINATES_ENTRY_AMES_TOP_LEFT, COORDINATES_ENTRY_AMES_BOTTOM_RIGHT)
             )
         }
 
 class AutomationConfig:
     """Configuration de l'automatisation contenant les zones d'écran et les ressources à analyser."""
-    
+
     def __init__(self):
+        # Coordonnées par défaut (pour HDV Ressources, Consommables, etc.)
         self.search_box = Rectangle(COORDINATES_SEARCH_BOX_TOP_LEFT, COORDINATES_SEARCH_BOX_BOTTOM_RIGHT)
+        self.search_box_equipement = Rectangle(COORDINATES_SEARCH_BOX_EQUIPEMENT_TOP_LEFT, COORDINATES_SEARCH_BOX_EQUIPEMENT_BOTTOM_RIGHT)
+
         self.resource_item = Rectangle(COORDINATES_RESOURCE_ITEM_TOP_LEFT, COORDINATES_RESOURCE_ITEM_BOTTOM_RIGHT)
-        self.screenshot_zone = Rectangle(COORDINATES_SCREENSHOT_ZONE_TOP_LEFT, COORDINATES_SCREENSHOT_ZONE_BOTTOM_RIGHT)
         self.coords_zone = Rectangle(COORDINATES_COORDS_TOP_LEFT, COORDINATES_COORDS_BOTTOM_RIGHT)
         self.chat_zone = Rectangle(COORDINATES_CHAT_TOP_LEFT, COORDINATES_CHAT_BOTTOM_RIGHT)
-        
+
         self.hdv_manager = HdvManager()
         self.resources_by_type = self.load_all_resources()
     
@@ -477,14 +482,19 @@ class Automator:
             
         raise ValueError(f"Format de coordonnées non reconnu dans le texte: '{text}'")
 
-    def travel_to_hdv(self, hdv_info: HdvInfo) -> None:
-        """Se déplace vers l'HDV spécifié."""
+    def travel_to_hdv(self, hdv_info: HdvInfo) -> bool:
+        """
+        Se déplace vers l'HDV spécifié.
+
+        Returns:
+            bool: True si le travel a réussi, False sinon
+        """
         target_pos = hdv_info.map_coords
 
         # Focus sur le chat
         self.smooth_move_and_click(self.config.chat_zone)
         time.sleep(0.5)
-        
+
         # Écrire la commande
         command = f"/travel {target_pos[0]},{target_pos[1]}"
         pyautogui.write(command)
@@ -492,14 +502,20 @@ class Automator:
 
         # Envoyer enter
         keyboard.press_and_release('enter')
-        time.sleep(1)  # Attendre que le dialogue de confirmation apparaisse
-        
-        # Cliquer sur le bouton de confirmation
-        confirm_zone = Rectangle(COORDINATES_CONFIRM_TOP_LEFT, COORDINATES_CONFIRM_BOTTOM_RIGHT)
-        self.smooth_move_and_click(confirm_zone)
+        time.sleep(1)  # Attendre que le dialogue apparaisse
 
-        time.sleep(20)
-                   
+        # Cliquer sur le bouton de confirmation
+        print("Clic sur le bouton de confirmation du travel...")
+        confirm_zone = Rectangle(COORDINATES_CONFIRM_POST_TRAVEL_TOP_LEFT, COORDINATES_CONFIRM_POST_TRAVEL_BOTTOM_RIGHT)
+        self.smooth_move_and_click(confirm_zone)
+        time.sleep(20)  # Attendre la téléportation
+
+        # Si un point d'entrée est défini (pour cosmétiques et âmes), cliquer dessus d'abord
+        if hdv_info.entry_zone is not None:
+            print(f"Clic sur l'entrée de l'HDV {hdv_info.type_name}...")
+            self.smooth_move_and_click(hdv_info.entry_zone)
+            time.sleep(10)  # Attendre 10 secondes après le clic d'entrée
+
         # D'abord déplacer la souris vers le bâtiment
         start_x, start_y = pyautogui.position()
         end_x = random.randint(hdv_info.building_zone.top_left[0], hdv_info.building_zone.bottom_right[0])
@@ -539,6 +555,8 @@ class Automator:
         pyautogui.mouseUp()
         time.sleep(1)
 
+        return True  # Travel réussi
+
     def smooth_move_and_click(self, rect: Rectangle, nb_click: int = 1) -> None:
         start_x, start_y = pyautogui.position()
         end_x = random.randint(rect.top_left[0], rect.bottom_right[0])
@@ -577,34 +595,41 @@ class Automator:
                 time.sleep(random.uniform(0.05, 0.15))
             pyautogui.click()
 
-    def search_item(self, item_name: str, item_level: Optional[int] = None) -> None:
+    def search_item(self, item_name: str, item_level: Optional[int] = None, use_equipment_coords: bool = False) -> None:
         # Si le nom est court (≤ 3 caractères) et qu'on a un niveau, appliquer le filtre
         if len(item_name) <= 3 and item_level is not None:
             # Cliquer sur le champ de niveau minimum
             min_level_zone = Rectangle(COORDINATES_INPUT_MIN_LVL_TOP_LEFT, COORDINATES_INPUT_MIN_LVL_BOTTOM_RIGHT)
             self.smooth_move_and_click(min_level_zone)
             time.sleep(0.2)
-            
+
             # Écrire le niveau
             keyboard.write(str(item_level))
             time.sleep(0.2)
-            
+
             # Cliquer sur le champ de niveau maximum
             max_level_zone = Rectangle(COORDINATES_INPUT_MAX_LVL_TOP_LEFT, COORDINATES_INPUT_MAX_LVL_BOTTOM_RIGHT)
             self.smooth_move_and_click(max_level_zone)
             time.sleep(0.2)
-            
+
             # Écrire le niveau
             keyboard.write(str(item_level))
             time.sleep(0.2)
-        
+
+        # Choisir les bonnes coordonnées selon le type d'HDV
+        if use_equipment_coords:
+            cancel_zone = Rectangle(COORDINATES_CANCEL_SEARCH_EQUIPEMENT_TOP_LEFT, COORDINATES_CANCEL_SEARCH_EQUIPEMENT_BOTTOM_RIGHT)
+            search_box = self.config.search_box_equipement
+        else:
+            cancel_zone = Rectangle(COORDINATES_CANCEL_SEARCH_TOP_LEFT, COORDINATES_CANCEL_SEARCH_BOTTOM_RIGHT)
+            search_box = self.config.search_box
+
         # Cliquer sur le bouton d'annulation de recherche
-        cancel_zone = Rectangle(COORDINATES_CANCEL_SEARCH_TOP_LEFT, COORDINATES_CANCEL_SEARCH_BOTTOM_RIGHT)
         self.smooth_move_and_click(cancel_zone)
         time.sleep(0.2)
 
         # Cliquer sur la boîte de recherche et écrire le nom de l'item
-        self.smooth_move_and_click(self.config.search_box)
+        self.smooth_move_and_click(search_box)
         keyboard.write(item_name)
 
     def reset_level_filters(self) -> None:
@@ -689,8 +714,8 @@ class Automator:
 
         for i in range(8):  # Maximum 8 tentatives
             current_name_zone = Rectangle(
-                (name_zone.top_left[0], name_zone.top_left[1] + i * 73),
-                (name_zone.bottom_right[0], name_zone.bottom_right[1] + i * 73)
+                (name_zone.top_left[0], name_zone.top_left[1] + i * ITEM_HEIGHT),
+                (name_zone.bottom_right[0], name_zone.bottom_right[1] + i * ITEM_HEIGHT)
             )
 
             # Nom du screenshot avec ID et position
@@ -787,7 +812,7 @@ class Automator:
 
         return similarity >= 0.90
 
-    def process_item(self, item_name: str, item_id: Optional[str] = None, is_equipment: bool = False, item_level: Optional[int] = None) -> Optional[ResourceResult]:
+    def process_item(self, item_name: str, item_id: Optional[str] = None, is_equipment: bool = False, item_level: Optional[int] = None, use_equipment_coords: bool = False) -> Optional[ResourceResult]:
         """
         Traite un item et retourne ses prix. Lève une exception en cas d'erreur.
 
@@ -796,12 +821,13 @@ class Automator:
             item_id: ID de l'item (pour le nommage des screenshots)
             is_equipment: True si c'est un équipement
             item_level: Niveau de l'item pour le filtrage
+            use_equipment_coords: True pour utiliser les coordonnées HDV équipements/cosmétiques
         """
         self.clear_search()
         time.sleep(0.1)
 
-        # Passer le niveau à search_item
-        self.search_item(item_name, item_level)
+        # Passer le niveau et les coordonnées à search_item
+        self.search_item(item_name, item_level, use_equipment_coords)
         time.sleep(1.5)
 
         item_position = self.find_item_position(item_name, item_id=item_id, is_equipment=is_equipment)
@@ -825,10 +851,10 @@ class Automator:
         # Si l'item n'est pas en première position, ajuster les coordonnées
         if item_position > 0:
             adjusted_resource_zone = Rectangle(
-                (self.config.resource_item.top_left[0], 
-                self.config.resource_item.top_left[1] + item_position * 73),
-                (self.config.resource_item.bottom_right[0], 
-                self.config.resource_item.bottom_right[1] + item_position * 73)
+                (self.config.resource_item.top_left[0],
+                self.config.resource_item.top_left[1] + item_position * ITEM_HEIGHT),
+                (self.config.resource_item.bottom_right[0],
+                self.config.resource_item.bottom_right[1] + item_position * ITEM_HEIGHT)
             )
             self.smooth_move_and_click(adjusted_resource_zone, nb_click=1)
         else:
@@ -925,9 +951,9 @@ class Automator:
                 # 1. D'abord, capturer et valider la quantité
                 quantity_zone = Rectangle(
                     (quantity_coords_top_left[0],
-                    quantity_coords_top_left[1] + position * 40),
+                    quantity_coords_top_left[1] + position * PRICE_LINE_HEIGHT),
                     (quantity_coords_bottom_right[0],
-                    quantity_coords_bottom_right[1] + position * 40)
+                    quantity_coords_bottom_right[1] + position * PRICE_LINE_HEIGHT)
                 )
 
                 detected_quantity = self.processor.detect_quantity(quantity_zone, item_id=item_id, position=position)
@@ -940,9 +966,9 @@ class Automator:
                 # 2. Si la quantité est valide, capturer le prix
                 price_zone = Rectangle(
                     (price_coords_top_left[0],
-                    price_coords_top_left[1] + position * 40),
+                    price_coords_top_left[1] + position * PRICE_LINE_HEIGHT),
                     (price_coords_bottom_right[0],
-                    price_coords_bottom_right[1] + position * 40)
+                    price_coords_bottom_right[1] + position * PRICE_LINE_HEIGHT)
                 )
 
                 # Nom du screenshot avec ID et quantité détectée
@@ -1011,12 +1037,18 @@ class Automator:
                 hdv_count += 1
                 hdv_info = self.config.hdv_manager.hdvs[filename]
                 is_equipment = (filename == "equipements.txt")
-                
+                # Pour les coordonnées de search box et cancel, équipements et cosmétiques utilisent les mêmes
+                use_equipment_coords = (filename in ["equipements.txt", "cosmetiques.txt"])
+
                 print(f"{'='*60}")
                 print(f"📍 HDV {hdv_count}/{total_hdvs} : {hdv_info.type_name}")
                 print(f"{'='*60}\n")
-                
-                self.travel_to_hdv(hdv_info)
+
+                # Tenter le travel vers l'HDV
+                travel_success = self.travel_to_hdv(hdv_info)
+                if not travel_success:
+                    print(f"⚠️  Impossible de voyager vers l'HDV {hdv_info.type_name}. Passage à l'HDV suivant.\n")
+                    continue
 
                 resource_count = 0
                 for resource in resources:
@@ -1032,7 +1064,7 @@ class Automator:
                             item_level = item_data.get('level', None)
                             break
 
-                    result = self.process_item(resource, item_id=item_id, is_equipment=is_equipment, item_level=item_level)
+                    result = self.process_item(resource, item_id=item_id, is_equipment=is_equipment, item_level=item_level, use_equipment_coords=use_equipment_coords)
                     
                     if result and result.prices:
                         # Mettre à jour les données en mémoire

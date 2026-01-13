@@ -54,6 +54,7 @@ st.markdown("""
     .recipe-table td, .history-table td { background-color: rgba(50, 50, 60, 0.5); padding: 8px; border: 1px solid #666; color: #ddd; }
     .section-title { color: #fff; font-weight: bold; margin: 15px 0 10px 0; }
     .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .price-grid-single { display: grid; grid-template-columns: 1fr; gap: 20px; }
     hr { border: none; border-top: 1px solid #666; margin: 20px 0; }
     .craft-yes { color: #5eff5e; }
     .craft-no { color: #ff5e5e; }
@@ -413,25 +414,47 @@ def get_recipe_html(data, item, quantity):
 def get_price_history_html(prix_dict, quantity, title):
     if not prix_dict:
         return f"<div><div class='section-title'>{title}</div><p style='color: #aaa;'><em>Aucun historique disponible</em></p></div>"
-    
-    html = f"<div><div class='section-title'>{title}</div><table class='history-table'><tr><th>Date</th><th>Prix (x{quantity})</th></tr>"
-    
+
+    # Créer l'en-tête avec les 5 colonnes de quantités
+    html = f"<div><div class='section-title'>{title}</div><table class='history-table'>"
+    html += f"<tr><th>Date</th><th>x1</th><th>x10</th><th>x100</th><th>x1000</th><th>x{quantity}</th></tr>"
+
     try:
         sorted_dates = sorted(prix_dict.keys(), key=lambda k: datetime.fromisoformat(k), reverse=True)[:5]
     except:
         sorted_dates = sorted(prix_dict.keys(), reverse=True)[:5]
-    
+
     has_data = False
     for date in sorted_dates:
-        price = calculate_optimal_price(prix_dict[date], quantity)
-        if price is not None:
+        # Récupérer les prix directs depuis le dictionnaire (pas de calcul optimal)
+        prices_for_date = prix_dict[date]
+
+        # Extraire les valeurs directes (ou None si absentes)
+        price_x1 = prices_for_date.get("1", None) if prices_for_date.get("1", -1) not in [None, -1] else None
+        price_x10 = prices_for_date.get("10", None) if prices_for_date.get("10", -1) not in [None, -1] else None
+        price_x100 = prices_for_date.get("100", None) if prices_for_date.get("100", -1) not in [None, -1] else None
+        price_x1000 = prices_for_date.get("1000", None) if prices_for_date.get("1000", -1) not in [None, -1] else None
+
+        # Pour xQuantité, utiliser calculate_optimal_price
+        price_quantity = calculate_optimal_price(prices_for_date, quantity)
+
+        # Afficher la ligne si au moins un prix existe
+        if any(p is not None for p in [price_x1, price_x10, price_x100, price_x1000, price_quantity]):
             has_data = True
             try:
                 date_formatted = datetime.fromisoformat(date).strftime('%d/%m/%Y %H:%M')
             except:
                 date_formatted = date
-            html += f"<tr><td>{date_formatted}</td><td>{price} K</td></tr>"
-    
+
+            # Formater les prix (- si None)
+            p1 = f"{int(price_x1)} K" if price_x1 is not None else "-"
+            p10 = f"{int(price_x10)} K" if price_x10 is not None else "-"
+            p100 = f"{int(price_x100)} K" if price_x100 is not None else "-"
+            p1000 = f"{int(price_x1000)} K" if price_x1000 is not None else "-"
+            pq = f"{price_quantity} K" if price_quantity is not None else "-"
+
+            html += f"<tr><td>{date_formatted}</td><td>{p1}</td><td>{p10}</td><td>{p100}</td><td>{p1000}</td><td>{pq}</td></tr>"
+
     html += "</table></div>"
     if not has_data:
         return f"<div><div class='section-title'>{title}</div><p style='color: #aaa;'><em>Aucune donnée disponible</em></p></div>"
@@ -476,7 +499,9 @@ def create_item_html(item, data, quantity, xp_data):
         xp_value = xp_1 if xp_1 is not None else xp_2
 
         if xp_value is not None:
-            xp_display = f"{xp_value:.2f}"
+            # Multiplier l'XP par la quantité
+            total_xp = xp_value * quantity
+            xp_display = f"{total_xp:.2f}"
 
             min_cost = None
             if prix_val is not None and craft_val is not None:
@@ -487,7 +512,7 @@ def create_item_html(item, data, quantity, xp_data):
                 min_cost = craft_val
 
             if min_cost is not None and min_cost > 0:
-                xp_per_10kk = (xp_value / min_cost) * 10000
+                xp_per_10kk = (total_xp / min_cost) * 10000
                 xp_per_10kk_display = f"{xp_per_10kk:.1f}"
 
     last_maj = item.get('last_maj', 'N/A')
@@ -535,11 +560,11 @@ def create_item_html(item, data, quantity, xp_data):
     """
     if item.get('is_craft') and item.get('ingredients'):
         html += get_recipe_html(data, item, quantity) + "<hr>"
-    html += f"""
-        <div class='price-grid'>
-            {get_price_history_html(item.get('prix_hdv', {}), quantity, f"📊 Prix HDV (x{quantity})")}
-        </div>
-    </div></details>"""
+
+    # Pour les objets non craftables, utiliser une seule colonne
+    grid_class = 'price-grid' if item.get('is_craft') and item.get('ingredients') else 'price-grid-single'
+    price_history = get_price_history_html(item.get('prix_hdv', {}), quantity, "📊 Prix HDV")
+    html += f"""<div class='{grid_class}'>{price_history}</div></div></details>"""
     return html
 
 # --- PAGE ---
@@ -634,9 +659,12 @@ for item_id, item in data.items():
 
     if item_int_id in xp_data:
         xp_1, xp_2 = xp_data[item_int_id]
-        xp_value = xp_1 if xp_1 is not None else xp_2
+        xp_value_single = xp_1 if xp_1 is not None else xp_2
 
-        if xp_value is not None:
+        if xp_value_single is not None:
+            # Multiplier l'XP par la quantité
+            xp_value = xp_value_single * quantity
+
             # Déterminer le coût minimum
             min_cost = None
             if prix_val is not None and craft_val is not None:
