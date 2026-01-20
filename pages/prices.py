@@ -9,6 +9,7 @@ from utils import (
     get_group_items, get_items_in_groups
 )
 from config import CURRENT_USER
+import time
 
 
 # Configuration
@@ -191,41 +192,86 @@ def calculate_optimal_price_cached(prices_tuple, target_quantity):
     """
     Version cachée de calculate_optimal_price.
     prices_tuple est un tuple de tuples ((qty, price), ...) pour être hashable.
+
+    Compare les prix FLAT (non divisés) de toutes les quantités disponibles.
+    Limite: On peut acheter jusqu'à 25 fois la même quantité.
+    Si aucune combinaison valide n'existe (toutes dépassent 25 achats),
+    on utilise la plus grande quantité disponible.
     """
+    MAX_PURCHASES = 25
+
     if not prices_tuple:
         return None
-    
+
     available_quantities = dict(prices_tuple)
-    
+
     if not available_quantities:
         return None
-    
-    # Si la quantité exacte existe
-    if target_quantity in available_quantities:
-        return int(round(available_quantities[target_quantity]))
-    
-    # Trier les quantités disponibles
-    sorted_quantities = sorted(available_quantities.keys())
-    
-    # Programmation dynamique pour trouver le prix optimal
-    dp = [float('inf')] * (target_quantity + 1)
-    dp[0] = 0
-    
-    for i in range(1, target_quantity + 1):
-        # Option 1: Utiliser les quantités inférieures ou égales à i
-        for qty, price in available_quantities.items():
-            if qty <= i:
-                dp[i] = min(dp[i], dp[i - qty] + price)
-        
-        # Option 2: Acheter directement une quantité supérieure à i
-        for qty, price in available_quantities.items():
-            if qty > i:
-                dp[i] = min(dp[i], price)
-    
-    if dp[target_quantity] == float('inf'):
+
+    # Trouver le prix flat minimal parmi toutes les quantités qui couvrent target_quantity
+    min_flat_price = float('inf')
+
+    # Option 1: Comparer les prix flat des quantités >= target_quantity
+    for qty, price in available_quantities.items():
+        if qty >= target_quantity:
+            min_flat_price = min(min_flat_price, price)
+
+    # Option 2: Calculer le prix par achat multiple de chaque quantité (limité à 25 fois)
+    for qty, price in available_quantities.items():
+        if qty > 0:
+            # Calculer combien de fois on doit acheter cette quantité
+            times_needed = (target_quantity + qty - 1) // qty  # Arrondi supérieur
+
+            if times_needed <= MAX_PURCHASES:
+                # On peut acheter jusqu'à 25 fois
+                total_price = times_needed * price
+                min_flat_price = min(min_flat_price, total_price)
+
+    # Option 3: Générer uniquement les combinaisons valides (≤25 achats par quantité)
+    # Trier les quantités par ordre décroissant (x1000, x100, x10, x1)
+    sorted_qtys = sorted([(qty, price) for qty, price in available_quantities.items()], reverse=True)
+
+    # Générer toutes les combinaisons valides en partant des grosses quantités
+    def generate_combinations(remaining, index):
+        """Génère toutes les combinaisons valides pour atteindre 'remaining'"""
+        if remaining == 0:
+            yield []
+            return
+
+        if index >= len(sorted_qtys):
+            return
+
+        qty, price = sorted_qtys[index]
+
+        # Tester d'acheter 0 à min(25, remaining//qty) fois cette quantité
+        max_buy = min(MAX_PURCHASES, remaining // qty) if qty > 0 else 0
+
+        for count in range(max_buy + 1):
+            # Essayer avec 'count' achats de cette quantité
+            for sub_combo in generate_combinations(remaining - count * qty, index + 1):
+                yield [(qty, price, count)] + sub_combo
+
+    # Calculer le coût de chaque combinaison et garder le minimum
+    for combo in generate_combinations(target_quantity, 0):
+        # Calculer le coût total de cette combinaison
+        total_cost = sum(count * price for qty, price, count in combo)
+        min_flat_price = min(min_flat_price, total_cost)
+
+    # Fallback: Si aucune solution trouvée (min_flat_price == inf),
+    # utiliser la plus grande quantité disponible
+    if min_flat_price == float('inf'):
+        # Trouver la plus grande quantité
+        max_qty = max(available_quantities.keys())
+        max_qty_price = available_quantities[max_qty]
+
+        # Calculer combien on doit en acheter (même si > 25)
+        times_needed = (target_quantity + max_qty - 1) // max_qty
+        min_flat_price = times_needed * max_qty_price
+
+    if min_flat_price == float('inf'):
         return None
-    
-    return int(round(dp[target_quantity]))
+
+    return int(round(min_flat_price))
 
 def calculate_optimal_price(prices_dict, target_quantity):
     """

@@ -562,9 +562,10 @@ def get_scrapper_items_by_hdv(data):
         "Ressources": "ressources",
         "Equipements": "equipements",
         "Consommables": "consommables",
-        "Forgemagies": "forgemagies",
-        "Créatures": "creatures",
-        "Cosmétiques": "cosmetiques",
+        "Forgemagie": "forgemagies",  # Sans "s" (retourné par determine_hdv)
+        "Forgemagies": "forgemagies",  # Avec "s" (au cas où)
+        "Creatures": "creatures",
+        "Cosmetiques": "cosmetiques",
         "Âmes": "ames"
     }
 
