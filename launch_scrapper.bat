@@ -7,7 +7,7 @@ echo Chargement des donnees...
 echo.
 
 cd /d "%~dp0"
-uv run python scrapper\4_dofus_scrapper.py
+uv run python scrapper\5_dofus_scrapper.py %*
 
 echo.
 echo ============================================================

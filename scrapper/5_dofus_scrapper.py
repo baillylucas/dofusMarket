@@ -186,12 +186,13 @@ class AutomationConfig:
     
 class ImageProcessor:
     """Classe gérant le traitement des images et la détection de texte."""
-    
-    def __init__(self):
+
+    def __init__(self, debug: bool = False):
         """Initialise le processeur d'image avec un compteur d'images."""
         self.screenshot_counter = 0
         self.current_item_id = None  # ID de l'item en cours de traitement
         self.current_quantity = None  # Quantité en cours de capture
+        self.debug = debug  # Mode debug pour screenshots élargis
 
     def take_screenshot(self, zone: Rectangle, custom_name: Optional[str] = None, apply_threshold: bool = False) -> str:
         """
@@ -256,6 +257,29 @@ class ImageProcessor:
             self.screenshot_counter += 1
 
         screenshot.save(filename)
+
+        # Si mode debug activé, prendre un deuxième screenshot élargi
+        if self.debug:
+            # Élargir la zone de 50 pixels de chaque côté
+            debug_zone_top_left = (zone.top_left[0] - 50, zone.top_left[1] - 50)
+            debug_zone_bottom_right = (zone.bottom_right[0] + 50, zone.bottom_right[1] + 50)
+
+            # Capturer la zone élargie
+            debug_screenshot = ImageGrab.grab(bbox=(
+                debug_zone_top_left[0],
+                debug_zone_top_left[1],
+                debug_zone_bottom_right[0],
+                debug_zone_bottom_right[1]
+            ))
+
+            # Sauvegarder avec le suffixe _debug
+            if custom_name:
+                debug_filename = f"{FOLDER_IMAGE_PATH}/{custom_name}_debug.png"
+            else:
+                debug_filename = f"{FOLDER_IMAGE_PATH}/test_{self.screenshot_counter - 1}_debug.png"
+
+            debug_screenshot.save(debug_filename)
+
         return filename
     
     @staticmethod
@@ -429,11 +453,12 @@ class ImageProcessor:
         return ImageProcessor.process_detected_text(texts)
 
 class Automator:
-    def __init__(self, config: AutomationConfig):
+    def __init__(self, config: AutomationConfig, debug: bool = False):
         self.config = config
-        self.processor = ImageProcessor()
+        self.processor = ImageProcessor(debug=debug)
         self.items_data = {}  # Cache pour les données JSON
         self.drive = GoogleDriveJSON(GOOGLE_DRIVE_FILE_ID, GOOGLE_DRIVE_SERVICE_ACCOUNT_FILE)
+        self.debug = debug
 
     def save_json_data(self, reason: str = ""):
         """Sauvegarde les données JSON sur Google Drive."""
@@ -1105,12 +1130,22 @@ class Automator:
             self.save_json_data("fin du programme")
 
 def main():
+    import argparse
+
+    # Parser les arguments CLI
+    parser = argparse.ArgumentParser(description="Scrapper Dofus HDV")
+    parser.add_argument("--debug", action="store_true", help="Active le mode debug avec screenshots élargis")
+    args = parser.parse_args()
+
+    if args.debug:
+        print("🔧 Mode DEBUG activé - Screenshots élargis seront générés")
+
     if not os.path.exists(FOLDER_IMAGE_PATH):
         os.makedirs(FOLDER_IMAGE_PATH)
 
     config = AutomationConfig()
-    automator = Automator(config)
-    
+    automator = Automator(config, debug=args.debug)
+
     print(f"⏳ Le programme commencera dans {TIME_BEFORE_SCRAPING} secondes...")
     time.sleep(TIME_BEFORE_SCRAPING)
     

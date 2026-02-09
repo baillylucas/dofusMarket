@@ -1,2169 +1,2178 @@
-id;libelle;xp_1;xp_2
-274;Pièce du Puzzle de la Griffe;1.090125;1.0
-276;Pièce du Trésor du Badoul;1.090125;1.0
-286;Levure de Boulanger;0.1092;
-287;Graine de Sésame;0.032925;
-288;Graine de Tournesol;0.0537;
-289;Blé;0.0225;
-290;Champignon;0.42345;
-291;Poils de Mulounoké;1.01205;0.5
-292;Testicules de Cocholou;6.03225;8.0
-300;Graine de Pavot;0.067125;
-301;Plume de Tofu;0.132;
-302;Tambour de Gobaladée;0.15435;
-303;Bois de Frêne;0.0225;
-304;Cuir de Scélérat Strubien;0.083175;0.125
-305;Dent de Wabbit;0.193875;
-306;Fleur de Pissenlit Diabolique;0.054525;
-307;Ailes de Moskito;0.067125;
-308;Coquille de Dragoeuf Calcaire;0.508725;
-309;Pétale de Rose Démoniaque;0.050775;
-310;Os de Chafer;0.0384;
-311;Eau Potable;0.035025;
-312;Fer;0.0225;
-313;Or;0.164925;
-315;Diamant;2.5614;
-316;Émeraude;4.509;
-350;Argent;0.1275;
-360;Oreilles du Tiwabbit;1.1718;
-361;Cawotte;0.6846;
-362;Peau de Larve Bleue;0.056175;
-363;Peau de Larve Orange;0.056175;
-364;Peau de Larve Verte;0.056175;
-365;Patte d'Arakne;0.067125;
-366;Bec du Tofu;0.04395;0.066666667
-368;Gelée à la Fraise;0.22875;
-369;Gelée à la Menthe;0.213;
-370;Gelée Bleuet Royale;1.67115;
-371;Sourcil de Moskito;0.545325;
-372;Bandeau du Black Tiwabbit;0.204375;
-373;Intestin d'Araknosé;0.04395;0.066666667
-374;Langue d'Épouvanteur;0.0537;
-375;Dent de Tofu Mutant;0.132;
-376;Aile du Tofu Maléfique;0.07635;
-377;Épine du Champ Champ;0.067125;
-378;Sporme du Champ Champ;0.6717;
-379;Pince de Crabe;0.204375;
-380;Menthe Sauvage;0.074925;
-381;Fraise;0.321975;
-382;Longue-vue de Gob-Trotteur;0.15435;
-383;Corne de Boufton;0.0747;
-384;Laine de Bouftou;0.056475;
-385;Bave de Bouftou;0.03075;
-387;Défense du Sanglier;0.076125;
-388;Poils d'Arakne Malade;0.04395;
-389;Huile de Tournesol Sauvage;0.806025;
-390;Huile de Noix;2.586375;
-391;Noix de Cajou;0.120825;0.015384615
-392;Noix de Pécan;0.22395;0.047619048
-393;Gland;0.083175;
-394;Noisette;0.07455;
-395;Trèfle à 5 feuilles;0.0525;
-396;Huile de Palme;1.839675;
-397;Huile de Koode;3.75105;
-399;Huile de Sésame;0.4944;
-400;Orge;0.037425;
-401;Houblon;0.074925;
-405;Malt;0.1275;
-406;Estomac de Wo Wabbit;1.784625;
-407;Pic de Prespic;0.083175;
-408;Dentier du Chafer d'Élite;1.2201;
-409;Poils de Barbe du Bwork Mage;0.185625;0.019607843
-410;Livre du Bwork Mage;1.11;0.333333333
-411;Bec du Kwak de Glace;0.190275;
-412;Bec du Kwak de Flamme;0.190275;
-413;Bec du Kwak de Vent;0.190275;
-414;Plume du Kwak de Glace;0.190275;
-415;Plume du Kwak de Flamme;0.190275;
-416;Plume du Kwak de Vent;0.190275;
-417;Boue du Boo;0.086925;
-418;Poils de Barbe du Grand Pa Wabbit;0.2964;
-419;Oreille du Grand Pa Wabbit;0.2964;
-420;Ficelle en Lin;0.135;0.005181347
-421;Ortie;0.0225;
-423;Lin;0.09;
-424;Fibre criminelle;2.515125;
-425;Chanvre;0.149925;
-426;Fibre de Chanvre;6.9432;2.0
-428;Sauge;0.037425;
-429;Miséricorde du Chafer d'Élite;0.204375;
-430;Os Invisible du Chafer Invisible;0.511725;
-431;Pierre du Craqueleur;0.3252;0.142857143
-432;Côtes du Rib;0.13695;
-433;Fémur du Chafer Archer;1.2201;
-435;Racine d'Abraknyde;0.22695;0.032258065
-438;Queue du Mulou;0.84075;0.25
-439;Canine de Mergranlou;1.01205;0.5
-440;Griffe de Muloubard;1.01205;0.5
-441;Cuivre;0.037425;
-442;Bronze;0.0525;
-443;Kobalte;0.074925;
-444;Étain;0.112425;
-445;Manganèse;0.09;
-446;Bauxite;0.149925;
-447;Charbon;0.466275;0.1
-448;Silex;0.5157;0.142857143
-449;Bois d'Ébène;0.149925;
-450;Pierre de Granit;0.606375;0.81
-460;Bois de Chêne;0.074925;
-461;Bois d'If;0.112425;
-463;Ambre;0.2511;0.033333333
-464;Ambre d'Abraknyde;1.7268;0.25
-465;Cristal;6.70875;
-466;Saphir;6.3078;
-467;Rubis;4.3122;
-470;Bois d'Orme;0.1875;
-471;Bois d'Érable;0.09;
-472;Bois de Charme;0.164925;
-473;Bois de Châtaignier;0.037425;
-474;Bois de Merisier;0.1275;
-476;Bois de Noyer;0.0525;
-479;Ivoire;0.458625;0.045454545
-480;Minerai Étrange;1.813125;
-485;Slip en cuir du Chafer Lancier;0.204375;
-486;Cuir de Gargrouille;0.132;
-519;Poudre de Perlinpainpain;0.037725;
-532;Seigle;0.112425;
-533;Avoine;0.0525;
-543;Pierre de Diamant;0.452325;
-544;Pierre d'Émeraude;0.663825;
-545;Pierre de Cristal;1.374;
-546;Pierre de Saphir;1.92735;
-547;Pierre de Rubis;1.2621;
-593;Orchidée Freyesque;0.09;
-594;Edelweiss;0.112425;
-598;Greuvette;0.03;
-600;Kralamoure;0.105;
-602;Requin Marteau-Faucille;0.157425;
-603;Poisson-Chaton;0.0525;
-641;Coton Ancestral;0.32115;
-642;Cocon de Ver à Soie;0.797925;
-643;Fil de Soie;0.33435;
-646;Poils de Black Tiwabbit;1.2201;
-648;Aile de Bourdard;0.2964;
-649;Poils de Wo Wabbit;1.784625;
-650;Duvet de Bourdard;1.775325;
-651;Étoffe du Mulou;5.622675;2.0
-652;Étoffe du Sanglier;0.456375;
-653;Étoffe d'Écurouille;0.498825;
-654;Étoffe du Wabbit;1.320975;
-746;Ebonite;1.6875;
-747;Aluminite;0.899925;
-748;Magnésite;2.812425;
-749;Bakélélite;3.824925;
-750;Kouartz;4.949925;
-752;Sang de Vampire;0.08565;
-756;Slip en Cuir Moulant du Garglyphe;0.797925;
-757;Gelée Bleuet;0.2001;
-792;Muqueuse de Moumoule;1.2201;
-838;Manuel du Directeur Grunob;0.820275;
-840;Poils du Minotoror;6.1401;4.0
-842;Coquille de Dragoeuf Argile;0.470925;
-843;Coquille de Dragoeuf Charbon;0.470925;
-880;Laine de Bouftou Royal;2.78655;
-881;Laine de Ramane Strubien;0.07275;0.111111111
-882;Laine du Chef de Guerre Bouftou;0.0933;
-883;Cuir de Boostache Prépubère;0.132;
-884;Cuir de Bouftou Noir;0.078;
-885;Laine de Boufton Noir;0.081825;
-886;Cuir de Bouftou Royal;0.46455;
-887;Cuir de Ouassingue;0.132;0.1
-901;Cuir du Cochon de Lait;0.124125;
-929;Kristalite;39.1281;16.0
-961;Morceau de clef du Matin Pewlant;12.812475;
-962;Morceau de clef du Midi Wayonnant;12.812475;
-963;Morceau de clef du Soiw Woulant;12.812475;
-965;Pierre de Dopeul;3.084525;
-997;Noix de Kokoko;1.3992;1.0
-998;Caleçon Mignon du Pirate;0.826875;0.5
-1002;Tronc de Kokoko;0.234375;0.166666667
-1018;Kole;4.909575;4.0
-1129;Coquille de Dragoeuf Ardoise;0.470925;
-1141;Plume du Kwak de Terre;0.190275;
-1142;Bec du Kwak de Terre;0.190275;
-1333;Potion d'Étincelle;8.876775;
-1335;Potion de Crachin;8.876775;
-1337;Potion de Courant d'Air;8.876775;
-1338;Potion de Secousse;8.876775;
-1340;Potion d'Éboulement;7.74825;
-1341;Potion d'Averse;7.74825;
-1342;Potion de Rafale;7.74825;
-1343;Potion de Flambée;7.74825;
-1345;Potion d'Incendie;39.082725;
-1346;Potion de Tsunami;39.082725;
-1347;Potion d'Ouragan;39.082725;
-1348;Potion de Séisme;43.3314;
-1455;Ailes de Scarafeuille Bleu;0.1602;
-1456;Ailes de Scarafeuille Blanc;0.1602;
-1457;Ailes de Scarafeuille Rouge;0.1602;
-1458;Ailes de Scarafeuille Vert;0.1602;
-1461;Poison cinglant;6.2718;
-1462;Liquide vampiresque;0.41145;
-1463;Fiole à élément;1.740075;
-1519;Rune Fo;0.074925;0.090909091
-1521;Rune Sa;0.675;0.5
-1522;Rune Ine;0.074925;0.090909091
-1523;Rune Vi;0.074925;0.090909091
-1524;Rune Age;0.074925;0.090909091
-1525;Rune Cha;0.074925;0.090909091
-1526;Métaria rouge;1.427325;
-1527;Métaria bleue;1.427325;
-1528;Métaria jaune;1.427325;
-1529;Métaria verte;1.427325;
-1531;Métaria Triame bleue;1.201575;
-1532;Métaria Triame verte;1.201575;
-1533;Métaria Triame rouge;1.201575;
-1534;Métaria Triame jaune;1.201575;
-1535;Métaria Mage rouge;7.4685;
-1536;Métaria Mage bleue;7.4685;
-1537;Métaria Mage verte;7.4685;
-1538;Métaria Mage jaune;8.31825;
-1545;Rune Pa Fo;0.337425;0.25
-1546;Rune Pa Sa;3.0375;1.0
-1547;Rune Pa Ine;0.337425;0.25
-1548;Rune Pa Vi;0.337425;0.25
-1549;Rune Pa Age;0.337425;0.25
-1550;Rune Pa Cha;0.337425;0.25
-1551;Rune Ra Fo;1.012425;1.0
-1552;Rune Ra Sa;9.1125;4.0
-1553;Rune Ra Ine;1.012425;1.0
-1554;Rune Ra Vi;1.012425;1.0
-1555;Rune Ra Age;1.012425;1.0
-1556;Rune Ra Cha;1.012425;1.0
-1557;Rune Ga Pa;750.0;500.0
-1558;Rune Ga Pme;607.5;405.0
-1568;Clef de la Cour du Bouftou Royal;1.5846;
-1569;Clef du Donjon des Forgerons;2.649375;
-1570;Clef du Donjon des Squelettes;3.177225;
-1610;Roue de Tivelo;0.759225;0.5
-1611;Bourgeon de Pirolienne;0.759225;0.5
-1612;Racine d'Abraknyde Sombre;0.633075;0.5
-1613;Écaille de Chef Crocodaille;0.469725;
-1614;Bombe de Graboule;0.759225;0.5
-1652;Patte d'Arakne Majeure;0.2283;
-1660;Ambre d'Abraknyde Sombre;0.463875;
-1663;Écaille de Crocodaille;0.204375;
-1664;Dent de Crocodaille;0.204375;
-1671;Avoine Magique;4.5978;6.0
-1672;Poils de Darit;0.498825;
-1673;Patte d'Arakne Magique;0.6717;
-1674;Champignon Luidegît;0.3267;
-1675;Os Surprise du Chafer Fantassin;0.4854;
-1676;Osier Enchanté;4.5978;
-1678;Noix de Grokoko Traumatisée;0.234375;0.166666667
-1679;Pierre de Crystaloboule;0.35745;0.25
-1680;Corne Brûlée du Minotoror;36.663375;47.0
-1681;Peau Égrotante;0.265725;0.5
-1682;Écorce de Liroye Merline;3.83385;5.0
-1683;Sac à Patates Clair;1.050675;0.5
-1684;Sac à Patates Sombre;1.050675;0.5
-1686;Teinture Magique de Rougeur;5.173125;
-1687;Teinture Magique Verdâtre;3.9354;
-1688;Teinture Magique Bleutée;1.985625;
-1689;Teinture Magique Orange;2.21115;
-1690;Poils du Milimulou;0.083175;
-1691;Faux Visage de Choudini;4.1346;2.0
-1692;Teinture Magique Sombre;2.015175;
-1694;Laine du Trooll Furieux;9.822225;
-1696;Étoffe de Choudini;25.03875;22.0
-1736;Citron;0.01875;
-1750;Poisson Pané;0.067425;
-1754;Poisson Igloo;6.749925;
-1757;Crabe Sourimi;0.045;
-1759;Crabe Sourimi Exotique;4.5;
-1762;Poisson-Tigre;5.249925;
-1770;Bout de Blop Coco;0.08685;
-1771;Souris verte;0.303;
-1773;Bout de Blop Reinette;0.08685;
-1775;Bout de Blop Griotte;0.08685;
-1777;Bout de Blop Indigo;0.08685;
-1779;Bar Rikain;0.164925;
-1782;Goujon;0.0225;
-1784;Raie Bleue;0.142425;
-1786;Greuvette Horreur;3.0;
-1788;Raie de Farle;14.249925;
-1790;Goujon Kiye;2.25;
-1792;Bar Iton;16.5;
-1794;Carpe d'Iem;0.074925;
-1796;Carpette des sables;7.5;
-1799;Kralamoure Unique;10.499925;
-1801;Perche;0.1275;
-1803;Chaton-Perche;12.75;
-1805;Sardine Brillante;0.082425;
-1807;Sardine Sombre;8.25;
-1844;Truite;0.037425;
-1846;Truite Ancestrale;3.75;
-1847;Brochet;0.09;
-1849;Brochet Tupe-Halett;9.0;
-1853;Requin Marché-Libre;15.749925;
-1889;Plume de Crowneille;0.42345;0.333333333
-1890;Poil de Vétauran;0.4335;
-1891;Peau de serpentin;0.2964;
-1894;Poil de Gliglitch;3.40875;
-1974;Feuille de Salace;0.0441;
-1984;Cendres Éternelles;0.0321;
-2012;Sang de Scorbute;;0.0
-2018;Blé d'Or;2.25;
-2021;Houblon Brillant;7.5;
-2026;Lin Tempête;9.0;
-2029;Seigle Résistant;11.25;
-2032;Orge en Sucre;3.75;
-2035;Chanvre Euphorique;15.0;
-2036;Avoine Aurifère;5.249925;
-2059;Corbac Mort;6.75825;
-2060;Patte de Corbac;1.122675;
-2150;Graine de Scorbute;0.42345;
-2179;Dent de Dragodinde;0.42345;0.5
-2241;Gelée Menthe Royale;1.67115;
-2242;Gelée Fraise Royale;1.67115;
-2247;Plume de Tofu Royal;12.994125;
-2249;Dent de Garglyphe;0.132;
-2250;Bois de Tronknyde;0.15465;0.058823529
-2251;Méga Pierre du Craqueleur;2.447325;0.5
-2252;Dent en Or de Craqueleur;1.939725;
-2253;Fleur de Gloutovore;0.820275;0.5
-2254;Feuille de Fourbasse;0.820275;0.5
-2259;Pic de Lance de Gobet;0.15435;
-2264;Canine de Gobelin;0.3327;
-2266;Lait de Cochon de Lait;1.0956;
-2268;Scalp de Bwork Archer;1.0368;0.333333333
-2271;Cuir Violet de Mégabwork;4.5978;
-2273;Tissu Pourpre;0.759225;
-2274;Bougie du Mineur Sombre;0.572025;0.25
-2275;Cuir de Porkass;0.204375;
-2277;Linceul;1.2201;
-2278;Tissu Invisible;0.511725;
-2279;Canine Vampiresque;0.087375;
-2280;Paille Vampiresque;1.090125;
-2281;Tissu de Graboule;4.5978;
-2282;Touffe de Cheveux Blancs;1.2201;
-2285;Tissu Sombre;0.797925;
-2286;Bandelettes;0.759225;0.5
-2287;Concombre;2.25;
-2288;Patte de Wabbit;0.219;
-2294;Viscères de Scarafeuille;0.9795;
-2295;Fragment d'Épée Reptilienne;2.515125;
-2297;Flèche du Chafer Archer;0.204375;
-2299;Mèche Rebelle d'Hell Mina;17.968725;
-2300;Fragment d'Os;1.324725;
-2301;Moustache de Kolérat;0.42345;0.333333333
-2302;Langue d'Étoile;1.2201;
-2303;Carapace vide de Crabe;1.2201;
-2304;Fragment de Pierre Polie;0.41205;0.076923077
-2305;Fragment de Pierre Pointue;0.407325;0.142857143
-2316;Couteau de Roukouto;0.759225;0.5
-2318;Feuille de Rose Obscure;0.43065;
-2320;Collier Cassé de Macien;2.515125;3.0
-2321;Babines de Macien;0.42345;0.333333333
-2322;Crocs de Rats;0.083175;0.125
-2323;Colonne Vertébrale;0.7344;
-2330;Capsule Explosive;0.190425;0.028571429
-2336;Crâne de Chafer;0.797925;
-2357;Bois d'Oliviolet;0.105;
-2358;Bois de Bombu;0.082425;
-2436;Gelée Citron;0.212025;
-2437;Gelée Citron Royale;1.67115;
-2448;Cervelle de Bouftou des Cavernes;31.68255;8.0
-2451;Patte d'Arakne des Égouts;0.498825;
-2454;Estomac de Tofu Ventripotent;0.797925;
-2455;Sang de Bouftou;0.361275;
-2463;Dent de Kwoan;0.797925;
-2464;Queue de Boostache Prépubère;0.797925;
-2466;Langue de Gargrouille;0.797925;
-2467;Rondelles de Milirat Strubien;0.498825;1.0
-2468;Estomac de Ouassingue;0.797925;1.0
-2479;Fléau de Robot Fléau;1.794075;
-2480;Slip en cuir de Porkass;1.2201;
-2481;Chaîne de Robot Fléau;0.2964;
-2482;Charnière Cassée;0.303;
-2483;Bidule inutile;1.832625;
-2484;Trident Cassé;0.204375;
-2486;Coque Endommagée;0.2964;
-2488;Viscères de Scorbute;2.4609;3.0
-2496;Queue de Rat d'Hyoactif;0.2964;0.2
-2497;Oreille de Guerrier Mental;0.2964;0.142857143
-2500;Kolérat Mort;2.515125;3.0
-2502;Papatte de Croc Gland;0.41205;0.25
-2504;Langue de Craquelope;2.112525;1.0
-2505;Baballe;1.046775;
-2506;Grelot;1.803525;
-2507;Peau de Larve Champêtre;1.8228;
-2508;Venin de Serpentin;1.784625;
-2509;Dent de Larve Champêtre;0.303;
-2510;Estomac de Gliglidoudur;19.2948;
-2511;Cuir de Gliglibido;3.2724;
-2512;Queue de Sanglier des Plaines;1.125;
-2513;Étoffe de Gliglidoudur;3.2724;
-2514;Sabot de Gliglicérin;19.47855;
-2515;Groin de Sanglier des Plaines;0.186375;
-2516;Défense de Gliglicérin;3.2724;
-2527;Clakoss;30.210975;
-2528;Ongle de Kanigrou;0.470925;
-2539;Substrat de Buisson;3.037425;
-2540;Substrat de Futaie;4.049925;
-2543;Substrat de Fascine;10.2375;
-2549;Boîte de Vétauran;0.34005;
-2550;Étoffe de Foufayteur;2.54325;
-2551;Oreille de Foufayteur;0.42345;
-2554;Côtes de Porkass;1.2201;
-2555;Courroie en cuir;1.784625;
-2558;Blop Mort;1.035675;
-2559;Crinière de Troollaraj;1.660275;
-2560;Épaulière de Troolligark;9.822225;
-2561;Bracelet de Force de Trooll;9.822225;
-2562;Slip de Troollaraj;9.822225;
-2563;Peau de Larve Jaune;0.056175;
-2564;Sourcils de Tronknyde;0.919725;0.5
-2565;Rondelle de Bois;0.797925;
-2566;Tranche Magique de Krambwork;4.5978;
-2571;Patte de Tofukaz;0.132;
-2572;Estomac de Tofukaz;0.797925;
-2574;Crinière de Scélérat Strubien;0.4365;1.0
-2575;Scalp de Mulounoké;6.03225;8.0
-2576;Scalp de Milimulou;0.49995;
-2577;Scalp du Meulou;4.101525;
-2584;Main de Boo;0.42345;
-2586;Aile de Dragodinde Rousse Sauvage;2.54325;
-2588;Aile de Dragodinde;2.150625;0.5
-2599;Pic de Dragodinde;0.3597;0.142857143
-2602;Plume de Domoizelle;0.820275;0.5
-2605;Plume de Dostrogo;0.820275;
-2607;Trukikol Mort;0.820275;0.5
-2609;Carapace Verte;0.234375;0.166666667
-2610;Carapace Rouge;0.234375;0.166666667
-2611;Carapace Jaune;0.234375;0.166666667
-2613;Carapace Bleue;0.234375;0.166666667
-2617;Tranche de Nodkoko;0.234375;0.166666667
-2618;Kokopaille;0.2277;0.083333333
-2619;Lait de Tortue;1.3992;1.0
-2620;Rhum de Qualité;0.826875;0.5
-2621;Barbe du Chouque;4.1346;2.0
-2622;Boulet de Canondorf;0.826875;0.5
-2623;Bwak Squelettique;25.03875;22.0
-2624;Feuille de Tikoko;0.234375;0.166666667
-2625;Poupée Vaudou Eth;0.3342;0.25
-2626;Poupée Vaudou Jav;0.3342;0.25
-2627;Poupée Vaudou Sarbak;0.3342;0.25
-2628;Poupée Vaudou Ark;0.3342;0.25
-2632;Glouto Rhum;0.820275;0.5
-2642;Mâchoire de Rib;0.80445;
-2645;Groin de Dragon Cochon;4.101525;2.0
-2646;Slip en cuir de Cochon de Lait;1.353075;
-2647;Oreille de Médibwork;0.759225;
-2648;Griffes de Kwak;0.190275;
-2649;Ver de Terre;1.136175;
-2650;Ver d'Eau;1.136175;
-2651;Ver de Feu;1.136175;
-2652;Ver d'Air;1.136175;
-2653;Arakne Majeure Morte;1.486125;
-2654;Eau de Kwapa;13.578;
-2656;Os rongé de Gobichon;0.15435;
-2659;Pétale de Tournesol Sauvage;0.056175;
-2661;Feuille de Tournesol Sauvage;0.33435;
-2662;Bave de Rose Démoniaque;0.302625;
-2663;Engrais;0.325425;
-2664;Os de Crocodaille;1.308;
-2665;Herbe Folle;0.32115;
-2669;Chauve-souris;0.790125;
-2674;Bonnet de Gobaliste;0.15435;
-2675;Plume de Tofu Maléfique;0.57945;
-2676;Noeul Mort;0.40635;
-2805;Testicules Magiques de Muloubard;6.03225;8.0
-2806;Testicules Magiques du Meulou;24.54795;29.0
-3001;Épaulière de Bwork;0.2457;
-3002;Botte trouée de Mégabwork;0.759225;
-3208;Slip de Bwork Archer;0.171975;0.035714286
-3209;Scalp de Bizarbwork;4.5978;
-6457;Kriptonite;6.8625;
-6458;Kobalite;8.325;
-6475;Casque Cassé du Chafer;0.590925;
-6476;Griffe de Robionicle;0.303;
-6478;Makroute Déchiqueté;1.2201;
-6479;Ours Déchiqueté;1.2201;
-6480;Osier Sombre;2.2038;
-6488;Racine du Chêne Mou;8.663775;7.0
-6490;Ambre du Chêne Mou;52.198725;76.0
-6736;Bourgeon de Fourbasse;0.820275;0.5
-6738;Crâne de Chef Crocodaille;2.83455;
-6739;Peau de Roukouto;4.5978;6.0
-6740;Peau de Tivelo;4.5978;6.0
-6842;Pétale de Rose Obscure;0.0714;
-6843;Gant de Sherpoa;0.083175;
-6844;Oreille de Douzdoa;0.083175;0.066666667
-6845;Casque de Martoa;0.083175;
-6884;Clef de la Grotte du Bworker;49.0698;
-6897;Plume de Piou Bleu;0.04395;0.001199041
-6898;Plume de Piou Violet;0.044475;0.001199041
-6899;Plume de Piou Vert;0.04395;0.001298701
-6900;Plume de Piou Rouge;0.045825;0.001298701
-6902;Plume de Piou Jaune;0.044475;0.001199041
-6903;Plume de Piou Rose;0.044775;0.001199041
-6904;Protection usagée du Bworker;;0.0
-7013;Bois de Bambou;0.12;
-7014;Bois de Bambou Sacré;0.195;
-7016;Bois de Bambou Sombre;0.18;
-7017;Sarbacane en Bambou;2.25;
-7018;Riz;0.112425;
-7023;Pierre d'Aigue-Marine;5.25;
-7024;Pierre de Topaze;1.570275;
-7025;Pierre d'Agathe;3.4347;
-7026;Aigue-Marine;79.27575;
-7027;Topaze;24.080325;
-7028;Agathe;15.98205;
-7030;Peau de Krambwork;0.759225;
-7032;Silicate;0.112425;
-7033;Dolomite;0.1875;
-7035;Pyrute;10.856175;
-7036;Rutile;10.799925;
-7059;Graine de Pandouille;0.1275;
-7222;Artefact Pandawushu Eau;0.747075;0.0
-7223;Artefact Pandawushu Vent;0.852375;
-7224;Artefact Pandawushu Roc;0.9096;
-7225;Artefact Pandawushu Feu;0.455775;0.0
-7259;Poterie cassée de Lolojiki;2.25;
-7269;Pollen de Bulbiflore;1.389675;
-7270;Langue de Grenufar;1.389675;
-7271;Épine de Bulbuisson;1.389675;
-7272;Pistil de Floristile;1.389675;
-7274;Katana de Kwamouraï;2.25;
-7275;Masque de Shinibaru;2.25;
-7276;Baguette de Tétonuki;2.25;
-7277;Lunettes de Parashukouï;2.25;
-7278;Poing rocheux d'Ishigro Pake;2.25;
-7290;Tige de Bambouto;1.389675;
-7291;Nectar de l'Orient;8.3796;
-7292;Poils de Boumbardier;2.79165;
-7293;Poils de Founamboul;2.79165;
-7294;Poils de Pétartifoux;2.79165;
-7298;Peau de Rouquette;2.79165;
-7299;Peau de Crachefoux;2.79165;
-7300;Tête de lance de Fangshu;2.79165;
-7301;Étoffe de Kurookin;2.79165;
-7304;Étoffe de Firefoux;16.976325;
-7305;Poils magiques de Tanuki;13.4814;
-7306;Pelage aérodynamique;16.976325;
-7308;Salopette Kwapa;2.25;
-7309;Clef du Dojo du vent;27.645225;
-7310;Clef de la Vallée de la Dame des eaux;18.79875;
-7311;Clef de l'Atelier du Tanukouï San;20.840175;
-7312;Clef de la Fabrique de foux d'artifice;22.149975;
-7343;Bracelet de Ino-Naru;2.79165;
-7379;Fleur d'Onabu-Geisha;4.44885;
-7381;Kaokurimono;5.8026;
-7383;Yokayu;34.027725;
-7384;Étoffe de Samouraï fantôme;26.8887;
-7385;Braises bleutées;29.01315;
-7386;Testicules du Tanukouï San;11.25;60.0
-7393;Moustache du Shogun Tofugawa;22.24425;
-7404;Os de Jiangshi-Nobi;4.44885;
-7405;Plastron de Tambouraï;4.44885;
-7406;Épaulière de Kabushido;4.44885;
-7407;Croissant de Tsukinochi;4.44885;
-7408;Kapokaza;5.8026;
-7410;Lanterne usée;5.8026;
-7411;Masque brisé;5.8026;
-7433;Rune Cri;7.5;5.0
-7434;Rune So;7.5;5.0
-7436;Rune Pui;0.299925;0.333333333
-7437;Rune Do Ren;1.875;1.0
-7438;Rune Po;195.0;130.0
-7442;Rune Invo;67.5;45.0
-7443;Rune Pod;0.074925;0.090909091
-7444;Rune Pa Pod;0.337425;0.25
-7445;Rune Ra Pod;1.012425;1.0
-7446;Rune Do Pi;1.875;
-7447;Rune Per Pi;0.299925;
-7448;Rune Ini;0.074925;0.090909091
-7449;Rune Pa Ini;0.337425;0.25
-7450;Rune Ra Ini;1.012425;1.0
-7451;Rune Prospe;0.675;0.5
-7452;Rune Ré Feu;0.299925;0.333333333
-7453;Rune Ré Air;0.299925;0.333333333
-7454;Rune Ré Eau;0.299925;0.333333333
-7455;Rune Ré Terre;0.299925;0.333333333
-7456;Rune Ré Neutre;0.299925;0.333333333
-7457;Rune Ré Per Feu;3.75;3.0
-7458;Rune Ré Per Air;3.75;3.0
-7459;Rune Ré Per Terre;3.75;3.0
-7460;Rune Ré Per Neutre;3.75;3.0
-7508;Rune de Signature;1.484925;1.0
-7509;Première partie de la clef du labyrinthe du Dragon Cochon;1.6764;
-7510;Deuxième partie de la clef du labyrinthe du Dragon Cochon;4.89735;
-7511;Clef du labyrinthe du Dragon Cochon;15.050925;
-7557;Clef du Domaine Ancestral;7.445025;
-7560;Rune Ré Per Eau;3.75;3.0
-7652;Potion de Souvenir;1.237425;
-7904;Fleur de Kaliptus;0.150525;0.02
-7905;Laine du Boufcoul;0.506025;0.333333333
-7906;Corne du Boufcoul;1.01205;0.333333333
-7908;Clef de la Caverne du Koulosse;8.408925;
-7918;Clef du Donjon des Tofus;2.0523;
-7924;Clef du Labyrinthe du Minotoror;18.915975;
-7925;Bois de Kaliptus;0.157425;
-7926;Clef de la Bibliothèque du Maître Corbac;9.42165;
-7927;Clef des Pitons Rocheux des Craqueleurs;5.2227;
-8001;Bandelette du Guerrier Koalak;7.915425;5.0
-8002;Étoffe de Dok Alako;0.53355;0.2
-8050;Peau de Koalak Immature;2.354475;2.0
-8052;Peau de Maître Koalak;1.632525;1.0
-8053;Peau de Chevaucheur Koalak;8.323875;11.0
-8054;Peau de Drakoalak;0.9462;1.0
-8055;Os de Mama Koalak;5.72055;8.0
-8056;Fémur de Koalak Farouche;8.74995;12.0
-8057;Tibia de Koalak Fossoyeur;1.333575;1.0
-8058;Cubitus de Momie Koalak;1.528575;1.0
-8059;Poils de Koalak Griotte;4.3458;1.0
-8060;Poils de Koalak Coco;4.3458;1.0
-8061;Poils de Koalak Reinette;4.3458;1.0
-8062;Poils de Koalak Indigo;4.3458;1.0
-8064;Boomerang du Koalak Sanguin;8.323875;11.0
-8065;Poils de Barbe de Dragodinde;2.515125;3.0
-8066;Poils de Barbe du Warko Violet;9.194475;13.0
-8073;Clef du Repaire de Skeunk;15.651525;
-8075;Boomerang du Dok Alako;3.238425;1.0
-8076;Boomerang du Maître Koalak;9.65835;13.0
-8077;Boomerang du Warko Marron;3.65235;2.0
-8082;Étoffe du Fauchalak;9.65835;13.0
-8083;Os de Pékeualak;0.726525;1.0
-8084;Peau de Piralak;4.3458;1.0
-8085;Poils de Koalak Forestier;0.726525;1.0
-8086;Coiffe déchiquetée de Drakoalak;5.72055;8.0
-8102;Pierre du Craqueleur Légendaire;1.965975;
-8135;Clef du Donjon des Bworks;2.528475;
-8137;Viscères du Scarabosse Doré;4.270575;
-8139;Clef du Donjon des Scarafeuilles;2.221275;
-8141;Ailes du Scarafeuille Noir;0.16605;
-8142;Clef Secrète du Tofulailler Royal;14.14455;
-8143;Clef des Champs;1.2228;
-8156;Clef de la Tanière du Meulou;9.190575;
-8157;Pétale Magique du Tournesol Affamé;1.7541;
-8158;Plume Graisseuse du Tofu Ventripotent;0.1791;
-8161;Ailes du Scarabosse Doré;0.709425;
-8249;Plume de Buveur;0.379575;
-8250;Poil de Renarbo;1.0866;
-8252;Plume de Corbac Apprivoisé;1.0671;
-8307;Clef de la salle du Minotot;12.78225;
-8308;Carapace de Scaratos;1.100175;1.0
-8309;Plume du Serpiplume;1.4883;0.333333333
-8311;Poil de Gamino;1.322925;0.5
-8312;Peau de Minoskito;1.248075;0.333333333
-8314;Peau de Kraméléhon;0.790725;0.5
-8315;Peau de Mandrine;1.248075;0.333333333
-8320;Clef de l'antre du Dragon Cochon;24.286125;
-8321;Poil de Capsaaloocke;1.0053;
-8322;Poil de Troolléolé;1.688175;
-8323;Cuir de Déminoboule;1.11225;0.5
-8324;Cuir de Capsaaloocke;6.04215;
-8326;Bandelette du Mominotor;1.11225;1.0
-8327;Corne de Déminoboule;6.6417;8.0
-8328;Corne de Mominotor;6.6417;12.0
-8329;Clef de la mine de Sakaï;61.958775;
-8342;Clef de l'Antre de Crocabulia;11.1126;
-8343;Clef de l'Épreuve de Draegnerys;5.188575;
-8344;Akaslip d'Akakwa;2.25;
-8345;Corne de Dragoss Protéiforme;6.03225;
-8346;Corne de Dragoss Calcaire;6.03225;
-8347;Lame brisée de Lichangoro;2.79165;
-8348;Coquille de Dragoss Charbon;6.03225;
-8349;Coquille de Dragoss Ardoise;6.03225;
-8350;Coquille de Dragoss Protéiforme;1.01205;
-8351;Coquille de Dragoss Argile;6.03225;
-8352;Écaille de Dragoss Charbon;1.01205;
-8353;Écaille de Dragoss Ardoise;1.01205;
-8354;Écaille de Dragoss Calcaire;1.01205;
-8355;Écaille de Dragoss Argile;1.01205;
-8356;Peau de Dragueuse;1.373925;
-8357;Corne de Gliglibido;19.856775;
-8358;Croc de Dragoeuf Protecteur;7.953675;
-8359;Aile de Draguaindrop;8.18475;
-8360;Peau de Draguaindrop;1.373925;
-8361;Corne de Dragacé;1.373925;
-8362;Peau de Dragnarok;1.373925;
-8363;Corne de Dragmatique;1.227975;
-8364;Lanière en cuir de Gliglitch;20.249925;
-8365;Corne brisée de Crocabulia;36.663375;
-8367;Peau de Crocabulia;6.1401;
-8381;Queue Magique de Founoroshi;13.958325;
-8383;Peau de Moon;4.101525;2.0
-8384;Étoffe Magique de Moon;24.54795;29.0
-8385;Peau de Shin Larve;1.171875;
-8386;Dent de Shin Larve;6.996225;
-8387;Plume Vibrante du Tofu Royal;36.663375;
-8388;Peau de Bworkette;1.0416;0.5
-8389;Poil de Bworkette;6.2361;6.0
-8390;Peau de Cochon de Farle;4.722525;1.55
-8391;Peau de Don Dorgan;4.959;0.93
-8392;Peau de Don Duss Ang;4.644825;0.82
-8393;Poil de Dragon Cochon;24.54795;29.0
-8394;Méga Pierre du Craqueleur Légendaire;11.7459;12.0
-8396;Mojo de Mergranlou;6.03225;8.0
-8397;Poil du Wa Wabbit;1.67115;
-8398;Étoffe du Wa Wabbit;10.06215;
-8400;Piques à cheveux de Shihan;13.958325;
-8401;Écharpe de Hanshi;13.958325;
-8402;Pierre du Koulosse;24.54795;29.0
-8403;Tresse du Koulosse;4.101525;3.0
-8404;Peau de Skeunk;53.315775;48.0
-8405;Poil de Skeunk;9.012075;5.0
-8408;Sabot du Minotot;134.44365;120.0
-8436;Clef de la Clairière du Chêne Mou;17.357625;
-8437;Clef du Château Ensablé;1.305825;
-8438;Clef de la Sousouricière du Rat Noir;12.0657;
-8439;Clef du Garde-manger du Rat Blanc;10.075725;
-8476;Première clef du Donjon de Sphincter;4.3125;
-8477;Deuxième clef du Donjon de Sphincter;4.3125;
-8481;Poil de Rat d'Égoutant;0.3342;0.166666667
-8482;Peau de Rat;1.984125;1.0
-8482;Peau de Rat;1.984125;1.0
-8483;Peau de Ramane d'Égoutant;0.278475;0.142857143
-8484;Duvet de Tofoune;0.797925;
-8485;Crinière de Rat Noir;8.008425;
-8486;Crinière de Rat Blanc;5.494125;
-8487;Étoffe de Sphincter Cell;106.745025;96.0
-8490;Fémur de Sphincter Cell;17.968725;10.0
-8495;Bourgeon d'Abraknyde Ancestral;25.03875;22.0
-8496;Racine d'Abraknyde Ancestral;4.1346;2.0
-8545;Clef de la Crypte de Kardorim;0.39405;
-8557;Plume de Batofu;0.77205;
-8570;Poil de Rat Bontarien;6.721125;
-8571;Poil de Rat Brâkmarien;8.286675;2.0
-8680;Écaille poisseuse;0.380475;
-8681;Peau de Raul Mops;1.2201;
-8682;Peau de Mob l'Éponge;0.293475;
-8729;Corail usé;1.136175;1.0
-8730;Coccyx du Corailleur;0.190275;0.142857143
-8731;Corail Magistral;6.996225;6.0
-8732;Corail Kouraçao;1.0455;1.0
-8733;Corail Malibout;1.0455;1.0
-8734;Corail Passaoh;1.0455;1.0
-8735;Corail Morito;1.0455;1.0
-8737;Boule polie;6.614475;8.0
-8738;Sacrum magistral;1.171875;0.5
-8739;Humérus du Sparo;2.301975;3.0
-8740;Chicot du Flib;0.3702;0.25
-8741;Bec du Kido;6.96675;9.0
-8744;Pince de Crustorail;0.17325;0.125
-8745;Pétale Kouraçao;1.090125;1.0
-8746;Pétale Malibout;1.090125;1.0
-8747;Pétale Passaoh;1.090125;1.0
-8748;Pétale Morito;1.090125;1.0
-8749;Bulbe Kouraçao;0.18345;0.142857143
-8750;Bulbe Malibout;0.18345;0.142857143
-8751;Bulbe Passaoh;0.18345;0.142857143
-8752;Bulbe Morito;0.18345;0.142857143
-8753;Crinière fleurie;6.788775;9.0
-8754;Barbe inexistante du Barbroussa;2.3805;3.0
-8755;Touffe rousse du Flib;2.2254;3.0
-8756;Duvet du Kilibriss;1.248075;1.0
-8757;Maillot de corps de Barbroussa;0.4008;0.25
-8758;Morceau de caleçon de Gourlo;2.354625;1.0
-8760;Foulard du Sparo;0.38085;0.25
-8762;Fragment de cerveau poli;1.202625;0.5
-8763;Moustache du Mufafah;1.125;0.5
-8765;Bâton du Kilibriss;7.523925;10.0
-8766;Plume de fesse du Kido;1.146525;0.5
-8767;Aile du Bitouf des Plaines;1.2252;0.5
-8769;Coco du Bitouf des Plaines;7.33425;9.0
-8771;Écorce de Floribonde;15.9588;21.0
-8772;Écorce de Brouture;15.22515;20.0
-8773;Écorce de Nerbe;14.87055;20.0
-8774;Écorce de Fécorce;15.587775;20.0
-8775;Écorce de Chiendent;14.523825;20.0
-8776;Coco du Bitouf Sombre;16.3383;
-8777;Pistil du Tynril;13.958325;7.0
-8778;Étamine de Floribonde;2.700675;2.0
-8779;Carpelle de Brouture;2.526225;2.0
-8780;Sépale de Nerbe;2.4894;2.0
-8781;Calice de Fécorce;2.563275;2.0
-8782;Bractée de Chiendent;2.452875;2.0
-8783;Amygdales du Bitouf Sombre;2.73975;
-8784;Talon d'achille de l'Abrakleur sombre;16.7265;22.0
-8785;Graine de l'Abrakleur sombre;2.779125;2.0
-8786;Tresse du Poolay;23.185425;15.0
-8787;Cloaque du Poolay;3.9204;1.0
-8788;Croupion du Bitouf aérien;4.023375;1.0
-8789;Chaussette du Kimbo;134.44365;120.0
-8790;Rembourrage de Meupette;3.701175;2.0
-8791;Étoffe de Meupette;22.168875;29.0
-8792;Coco du Bitouf aérien;24.31725;16.0
-8793;Coquille du Kaskargo;25.5084;17.0
-8797;Souche de l'Abrakleur clair;4.434975;3.0
-8798;Queue emplumée du Rasboul Majeur;41.88825;37.0
-8800;Étoffe Zoth;9.9264;1.0
-8801;Étoffe de Ouassingue;0.183375;0.045454545
-8802;Tibia du Guerrier Zoth;11.7384;8.0
-8803;Rotule du Disciple Zoth;11.175;7.0
-8804;Braguette du Maître Zoth;12.361725;8.0
-8805;Mouchoir de la Gamine Zoth;11.449725;
-8806;Écusson du Sergent Zoth;12.042;8.0
-8807;Jus de Ouassingue;1.0002;
-8808;Étoffe du Roissingue;12.16125;4.0
-8809;Culotte à l'envers du Roissingue;145.935;48.0
-8810;Tourbe séchée de Tourbassingue;7.915425;5.0
-8811;Faux menton du Bourbassingue;6.96675;4.0
-8812;Encre du Kralamoure géant;208.619475;281.0
-8813;Ventouse du Kralamoure géant;34.517025;28.0
-8832;Bave du Kaskargo;4.324275;1.0
-8916;Ambre du Tynril;84.8817;76.0
-8917;Clef de la Grotte Hesque;2.687325;
-8971;Clef de l'Arche d'Otomaï;1.0125;
-8972;Clef du Goulet du Rasboul;2.3625;
-8975;Clef du Laboratoire du Tynril;3.76875;
-8977;Clef de la Canopée du Kimbo;4.89375;
-8995;Étoffe de Gourlo le Terrible;13.9848;
-9247;Clef du Temple du Grand Ougah;49.53435;
-9248;Clef du Clos des Blops;2.771325;
-9249;Morceau de clef Griotte;1.293675;
-9250;Morceau de clef Reinette;1.293675;
-9251;Morceau de clef Coco;1.293675;
-9252;Morceau de clef Indigo;1.293675;
-9254;Clef de l'antre du Blop Multicolore;7.762425;
-9263;Écorce de Champaknyde;39.270675;53.0
-9267;Trompe de la Tromperelle;41.56155;56.0
-9269;Langue de Champodonte;41.56155;
-9278;Lamelle de Champbis;41.56155;56.0
-9279;Bave de Champ à Gnons;41.56155;28.0
-9280;Épine d'Ougah;36.286725;19.0
-9281;Fragment d'Ougalurette;217.20945;195.0
-9381;Fleur de Gloutoblop;0.319725;
-9382;Fleur de Blopignon;0.24165;
-9383;Racine de Tronkoblop;0.22665;
-9384;Fleur de Blop Griotte Royal;8.715975;
-9385;Fleur de Blop Coco Royal;8.715975;
-9386;Fleur de Blop Indigo Royal;8.715975;
-9387;Fleur de Blop Reinette Royal;8.715975;
-9388;Feuille de Blop Royal;1.450425;
-9389;Feuille de Blop Multicolore Royal;9.477975;
-9391;Fleur de Blop Multicolore Royal;56.594475;
-9401;Peau du Bworker;217.20945;195.0
-9571;Weischelcreme Torte;13.689675;
-9935;Corde d'escalade;16.15485;
-9940;Nacre brute;1.22265;0.5
-9941;Nacre;6.02775;
-9949;Pâte à Tra Khben;9.9072;
-9950;Pierre de souillure bleue impure;1.05045;
-9951;Pierre de souillure jaune impure;1.08615;
-9952;Pierre de souillure verte impure;1.089075;
-9969;Salace de poissons empoisonnée;43.094775;
-9973;Extrémité du Grattoir;29.479125;
-9975;Manche du Grattoir;56.996025;
-9976;Grattoir à dos inachevé;87.129975;
-9979;Philtre de Longévité;24.119925;
-9981;Farine Humée;4.652925;
-9999;Copie de la clef du repaire des bandits;4.3068;
-10019;Seau de Pinces à Linge;79.81875;
-10030;Tissu de Rapiéçage;69.395025;
-10031;Teinture Orange Sanguine;30.12915;
-10064;Teinture Magique Ténébreuse;5.1039;
-10070;Tonneau en Bombu;14.962425;
-10204;Potion de Sésanabolisant;114.559725;
-10272;Masque à Zag;315.7704;
-10284;Viscères de Tanuki;5.039025;
-10314;Sang du Kido;0.40125;
-10613;Rune Pa Do Pi;8.4375;
-10615;Rune Pa Per Pi;1.349925;
-10616;Rune Ra Per Pi;4.049925;
-10618;Rune Pa Pui;1.349925;
-10619;Rune Ra Pui;4.049925;2.0
-10662;Rune Pa Prospe;3.0375;1.0
-10831;Bananagrume;11.7156;
-10835;Cachet du bizut;0.0939;
-10970;Sueur de dragodinde;0.148275;0.1
-11102;Perce-Neige;0.2025;
-11106;Poisskaille;0.2025;
-11107;Bois de Tremble;0.2025;
-11109;Frostiz;0.2025;
-11110;Obsidienne;0.2025;
-11117;Laine de Boufmouth;1.30965;1.0
-11118;Clavicule de Boufmouth;7.886625;11.0
-11119;Oreille de Bouftonmouth;1.01205;1.0
-11120;Cuir de Bouftonmouth;6.11325;8.0
-11122;Corne de Boufmouth de guerre;1.57785;1.0
-11135;Queue du Boufmouth légendaire;10.993875;15.0
-11136;Laine de Boufmouth légendaire;1.803;2.0
-11174;Clef de la serre du Royalmouth;14.488875;
-11175;Clef Mansot;20.8533;
-11176;Clef du Grolandais violent;33.4374;
-11177;Clef de l'hypogée de l'Obsidiantre;36.104325;
-11178;Clef de la Tanière Givrefoux;50.446425;
-11179;Clef de l'Antre du Korriandre;51.33885;
-11180;Clef des cavernes du Kolosso;85.19895;
-11181;Clef de l'Antichambre des Gloursons;84.719025;
-11219;Queue du Royalmouth;57.69915;56.0
-11221;Laine du Royalmouth;9.753;6.0
-11222;Bec du Timansot;9.747825;13.0
-11223;Plume du Timansot;1.608375;1.0
-11224;Aile de Mansobèse;11.35665;16.0
-11225;Peau de Mansobèse;1.862475;2.0
-11226;Huile de Mamansot;12.920625;18.0
-11227;Duvet de Mamansot;2.15955;2.0
-11228;Arête géante du Shamansot;14.309175;20.0
-11229;Poil de barbe du Shamansot;2.41665;2.0
-11230;Queue du Fu Mansot;2.700675;2.0
-11231;Oreille du Fu Mansot;16.2543;22.0
-11232;Plume du Mansot Royal;14.947875;10.0
-11238;Queue d'Écumouth;1.608375;1.0
-11239;Gland de l'Écumouth;9.747825;13.0
-11240;Dent de Smilomouth;11.449725;12.0
-11241;Poils de Smilomouth;1.926675;
-11242;Défense du Sanglacier;12.391125;17.0
-11243;Cuir du Sanglacier;2.085075;2.0
-11247;Oreille percée du Fricochère;2.41665;2.0
-11248;Oreille de Kaniglou;2.700675;2.0
-11249;Étoffe de Kaniglou;16.40625;23.0
-11250;Poil de Chachachovage;0.782925;0.5
-11251;Sternum de Chachachovage;4.67235;3.0
-11252;Patte de Rat Bougri;5.913675;3.0
-11253;Étoffe de Rat Bougri;0.992175;0.5
-11254;Pince de Crabe Hijacob;0.454275;0.333333333
-11256;Bec de Gélikan;5.07075;3.0
-11257;Plume de Gélikan;0.848625;0.5
-11279;Scie à glace;65.81085;
-11280;Plaque d'acier;14.868675;
-11281;Masque de protection;77.8302;
-11282;Gants de protection;163.483125;
-11309;Pince du Fancrôme;3.363225;3.0
-11310;Corde du Fancrôme;19.97985;27.0
-11311;Bouée de Fantomalamère;19.97985;27.0
-11312;Queue de Fantomalamère;3.363225;3.0
-11313;Huile de Fantimonier;21.348975;29.0
-11314;Coquille de Fantimonier;3.5937;3.0
-11315;Mât de Fantômat;3.5937;3.0
-11316;Dent de Fantômat;28.371675;16.0
-11317;Coquille de Harpirate;22.764525;31.0
-11318;Écaille de Harpirate;3.831975;3.0
-11319;Étoffe de Vigie Pirate;4.3794;4.0
-11321;Poil de Ben le Ripate;21.66015;12.0
-11322;Scapula de Ben le Ripate;128.674125;116.0
-11323;Pierre d'Atomystique;6.12495;5.0
-11324;Téphra d'Atomystique;33.40905;46.0
-11325;Résidu de Solfataré;4.725825;4.0
-11326;Ulna de Solfataré;28.562775;39.0
-11329;Pierre de Fumrirolle;6.12495;5.0
-11330;Artefact de Fumrirolle;33.40905;46.0
-11331;Pierre de Mofette;6.8658;6.0
-11332;Tuf de Mofette;9.42795;8.0
-11333;Scorie d'Obsidiantre;29.59515;16.0
-11334;Vertèbre d'Obsidiantre;178.87185;161.0
-11335;Patte de Soryo Givrefoux;40.190925;18.0
-11336;Oreille de Soryo Givrefoux;6.853575;2.0
-11337;Cuir de Maho Givrefoux;42.36105;23.0
-11338;Laine de Maho Givrefoux;7.223625;2.0
-11339;Laine de Yokaï Givrefoux;7.603575;2.0
-11340;Crâne de Yokaï Givrefoux;44.589075;20.0
-11341;Laine de Tengu Givrefoux;29.01315;15.0
-11342;Cuir de Tengu Givrefoux;170.13885;153.0
-11475;Eau calme;0.34095;0.006666667
-11497;Huile de Frostiz;0.91125;
-11499;Frostiz soufflé;20.25;
-11500;Poisskaille Givré;20.25;
-11501;Étoile des Neiges;20.25;
-11517;Eclat temporel;281.249925;254.0
-11519;Oreille de Gobosteur;8.22495;3.0
-11522;Fragment de pépite de Sakaï;56.128725;9.0
-11525;Péroné du Marôdeur;9.202425;8.0
-11527;Peau d'Ouilleur;9.104175;4.0
-11530;Pierre du Courtilieur;10.231425;9.0
-11637;Rune Fui;1.875;1.0
-11638;Rune Pa Fui;8.4375;4.0
-11639;Rune Tac;1.875;1.0
-11640;Rune Pa Tac;8.4375;4.0
-11641;Rune Ré Pa;3.75;3.0
-11642;Rune Pa Ré Pa;16.875;8.0
-11643;Rune Ré Pme;3.75;3.0
-11644;Rune Pa Ré Pme;16.875;8.0
-11645;Rune Ret Pa;3.75;3.0
-11646;Rune Pa Ret Pa;16.875;8.0
-11647;Rune Ret Pme;3.75;3.0
-11648;Rune Pa Ret Pme;16.875;8.0
-11649;Rune Do Pou;1.875;1.0
-11650;Rune Pa Do Pou;8.4375;4.0
-11651;Rune Ré Pou;0.299925;0.333333333
-11652;Rune Pa Ré Pou;1.349925;1.0
-11653;Rune Do Cri;1.875;1.0
-11654;Rune Pa Do Cri;8.4375;4.0
-11655;Rune Ré Cri;0.299925;0.333333333
-11656;Rune Pa Ré Cri;1.349925;1.0
-11657;Rune Do Terre;1.875;1.0
-11658;Rune Pa Do Terre;8.4375;4.0
-11659;Rune Do Feu;1.875;1.0
-11660;Rune Pa Do Feu;8.4375;4.0
-11661;Rune Do Eau;1.875;1.0
-11662;Rune Pa Do Eau;8.4375;4.0
-11663;Rune Do Air;1.875;1.0
-11664;Rune Pa Do Air;8.4375;4.0
-11665;Rune Do Neutre;1.875;1.0
-11666;Rune Pa Do Neutre;8.4375;4.0
-11695;Carniflore;1.67115;0.5
-11696;Cagoule du Kanniboul Ebil;10.06215;8.0
-11701;Jus d'Écumouth pressé;20.910675;
-11795;Racine de synthèse;750.0;
-11798;Clef du Village Kanniboul;4.255425;
-11799;Clef de la Maison Fantôme;1.89135;
-11814;Moustache de Boostache;4.665225;
-11815;Boostoplasme;0.77205;
-11880;Malléole de Yomi Givrefoux;6.49335;2.0
-11882;Queue de Yomi Givrefoux;38.0787;17.0
-11883;Condyle de Fuji Givrefoux;281.249925;254.0
-11884;Cuir de Fuji Givrefoux;45.75;25.0
-11885;Lamelle de Dramanite;7.2573;6.0
-11887;Oreille de Fistulor;43.441875;47.0
-11888;Volve de Fistulor;7.2573;6.0
-11889;Pédoncule de Fongeur;43.441875;47.0
-11890;Volve de Fongeur;7.2573;6.0
-11891;Écorce d'Abrazif;7.2573;6.0
-11892;Racine d'Abrazif;43.441875;47.0
-11893;Lamelle de Mérulette;7.2573;6.0
-11894;Pédoncule de Mérulette;43.441875;47.0
-11895;Patte de Korriandre;36.286725;20.0
-11920;Oreille de Fleuro;8.812425;7.0
-11921;Queue de Wolvero;8.22495;7.0
-11922;Manubrium de Wolvero;50.5635;69.0
-11923;Griffe de Blérauve;9.15;8.0
-11924;Poil de Blérauve;56.249925;76.0
-11925;Étoffe de Croleur;56.249925;76.0
-11926;Oreille de Croleur;9.15;8.0
-11927;Molaire de Blérice;9.15;8.0
-11928;Oreille de Blérice;56.249925;76.0
-11929;Queue de Blérom;56.249925;76.0
-11930;Omoplate de Blérom;9.15;8.0
-11931;Griffe de Kolosso;45.75;25.0
-11932;Étoffe de Kolosso;281.249925;254.0
-11933;Vomer d'Apériglours;50.5635;34.0
-11934;Oreille d'Apériglours;8.22495;3.0
-11935;Iris de Boulglours;56.249925;38.0
-11936;Poils de Boulglours;9.15;4.0
-11937;Laine de Glouragan;56.249925;76.0
-11938;Cuir de Glouragan;9.15;8.0
-11939;Incisive de Glourmand;9.15;8.0
-11940;Étoffe de Glourmand;56.249925;76.0
-11941;Aile de Gloursaya;56.249925;38.0
-11942;Antenne de Gloursaya;9.15;4.0
-11943;Queue de Glourséleste;45.75;25.0
-11944;Hamatum de Glourséleste;281.249925;254.0
-11945;Queue de Meliglours;9.15;8.0
-11946;Calcanéus de Meliglours;56.249925;76.0
-11948;Cornée de Kami Givrefoux;42.36105;57.0
-11949;Incisive de Kami Givrefoux;7.223625;6.0
-12001;Larme de Givrefoux;37.803525;2.0
-12015;Bec du Kwakwa;9.561525;
-12016;Plume du Kwakwa;1.60155;
-12017;Clef du Nid du Kwakwa;2.671725;
-12073;Clef du Laboratoire de Brumen Tinctorias;5.1675;
-12075;Fiole de fumée de Nelween;13.9848;12.0
-12076;Duvet de Nelween;2.354625;1.0
-12150;Clef du Donjon de Nowel;2.918175;
-12151;Clef de la Caverne de Nowel;121.2048;
-12152;Clef de la Maison du Papa Nowel;377.59785;
-12351;Clef du Repaire de Sphincter Cell;47.158725;
-12374;Poignée du Gorgouille;21.85065;43.0
-12375;Fragment du Gorgouille;3.645825;4.0
-12428;Boue Juvénile;0.100425;0.125
-12429;Boue Novice;0.5889;0.5
-12430;Boue Mature;2.239575;2.0
-12431;Boue Vénérable;8.978325;8.0
-12432;Poudre Juvénile;0.08265;0.125
-12433;Poudre Novice;0.5889;0.5
-12434;Poudre Mature;2.748525;2.0
-12435;Poudre Vénérable;8.978325;8.0
-12436;Cendres Juvéniles;0.08265;0.125
-12437;Cendres Novices;0.71775;0.5
-12438;Cendres Matures;2.239575;2.0
-12439;Cendres Vénérables;8.978325;8.0
-12440;Flaque Juvénile;0.08265;0.125
-12441;Flaque Novice;0.5889;0.5
-12442;Flaque Mature;2.239575;2.0
-12443;Flaque Vénérable;8.978325;8.0
-12444;Fumée Juvénile;0.08265;0.125
-12445;Fumée Novice;0.5889;0.5
-12446;Fumée Mature;2.239575;2.0
-12447;Fumée Vénérable;8.978325;8.0
-12450;Coquille de Krokille;27.485775;18.0
-12451;Croc de Krokille;116.71875;78.0
-12467;Épine Dorsale de Grozilla;17.968725;10.0
-12468;Bézoard Ardent de Grozilla;106.745025;96.0
-12728;Ardonite;12.76875;
-12733;Substrat de Forêt;31.6125;
-12734;Potion d'altération;4.8477;
-12735;Clef de la Bambusaie de Damadrya;12.2757;
-12737;Galet cramoisi;18.75;13.0
-12738;Galet rutilant;187.5;125.0
-12740;Galet brasillant;1875.0;1250.0
-12743;Potion minérale;2.696775;
-12744;Substrat de Bosquet;12.206175;
-12745;Substrat de Bocage;2.925;
-12970;Paquet Cadeau du Minotoboule de Nowel;6.141975;
-13096;Fémur du Chafer Ronin;0.966225;
-13097;Mâchoire du Chafer Draugr;0.22485;
-13098;Casque du Chafer Primitif;0.167325;
-13140;Serrure du Coffre des Forgerons;1.0416;1.0
-13154;Poudre glaciale;45.75;25.0
-13157;Ongle du Bworker;36.286725;19.0
-13164;Sphénoïde du Kimbo;22.24425;12.0
-13165;Duvet du Maître Corbac;5.944125;
-13167;Plume du Rasboul Majeur;5.790375;3.0
-13168;Ethmoïde du Minotot;22.24425;12.0
-13196;Cuir synthétique;750.0;
-13333;Clef du Potager d'Halouine;6.7557;
-13334;Chicots d'Halouine;32.59515;
-13335;Rouflaquettes d'Halouine;5.4687;
-13336;Graines de Citwouille Maudites;0.393675;
-13338;Enfumoir Zoth;1.686975;0.5
-13339;Sceau Royal Contrefait;0.18345;0.25
-13340;Pustule de Rat Sio;1.0053;
-13341;Patte de la Gardienne des Égouts;4.3794;2.0
-13342;Tatouage de Mauvais Garçon;0.204375;0.25
-13365;Galet Saisonnier;18.75;13.0
-13366;Galet Lunaire;93.75;63.0
-13367;Galet Solaire;468.75;313.0
-13487;Serviette de Plage;0.0537;
-13488;Aile de Dragodinde Dorée;0.493875;0.5
-13489;Miroir de Dopeul;0.16035;
-13490;Bave de Ouassingue;1.08255;0.333333333
-13491;Relique Familiale;0.204375;
-13492;Short de Capoei Rat;1.0053;
-13494;Nageoire de Compétition;0.072225;
-13495;Crâne d'Aventurier;1.632525;1.0
-13496;Bandeau de Nakunbra;0.826875;0.5
-13497;Ruban d'Uchiwang;2.79165;
-13498;Dent de Bourbassingue;1.146525;0.333333333
-13499;Jouet de Gamine Zoth;1.8651;0.5
-13500;Dent de Larve Émeraude;0.211575;
-13502;Fluide Glacial;0.072225;
-13503;Calumet Zoth;2.41665;0.5
-13504;Corne de Gamino;1.322925;1.0
-13505;Bourse Suspecte;0.182025;0.076923077
-13528;Bourgeon d'Abraknyde Sombre Irascible;1.4829;1.0
-13529;Feuille de Branche Soignante;1.6848;2.0
-13593;Peau de Larve Saphir;1.1718;
-13594;Peau de Larve Émeraude;1.269825;
-13595;Peau de Larve Rubis;1.37355;
-13596;Peau de Larve Dorée;1.4832;
-13697;Poils de Guerrier Koalak;1.333575;1.0
-13698;Houpette de Koalak Sanguin;1.38225;1.0
-13699;Foulard de Koalak Farouche;1.476525;1.0
-13700;Couche usagée de Warko Violet;1.528575;1.0
-13702;Dédicace de Skeunk pour Émeraude;1.728075;1.0
-13703;Épingle à Cheveux de Saphira;1.728075;1.0
-13704;Touffe de Poils de Rubise;1.728075;1.0
-13705;Boomerang Abîmé de Diamantine;1.728075;1.0
-13706;Journal Intime d'Émeraude;11.1378;10.0
-13707;Shampooing au Kaliptus de Saphira;11.1378;10.0
-13709;Place de Concert de Diamantine;11.1378;10.0
-13713;Dent de Larve Saphir;0.19725;
-13714;Dent de Larve Rubis;0.226575;
-13715;Dent de Larve Dorée;0.24735;
-13716;Bec de Vilain Petit Tofu;0.9984;
-13717;Houpette de Vilain Petit Tofu;6.014025;
-13718;Cendres de Tofutoflamme;1.11225;
-13719;Plumeau de Tofuzmo;1.100175;
-13720;Braise de Tofutoflamme;6.6417;
-13721;Croupion de Tofuzmo;6.606975;
-13722;Plume de Tofubine;1.13115;
-13724;Patte de Tofu Dodu;1.18875;
-13725;Aile Atrophiée de Tofu Dodu;7.135875;
-13726;Conque Marine;0.072225;
-13727;Crème à bronzer;0.072225;
-13728;Paupière d'Étoile;0.204375;
-13729;Papier Charbon;0.166875;
-13730;Graine de la Discorde;0.15525;0.125
-13731;Pierre Médicinale;0.53355;0.2
-13732;Vieille Ventouse de Kralamoure;1.333575;0.5
-13733;Boulier Zoth;2.19315;0.5
-13736;Furoncle de la Mama Bwork;6.788775;5.0
-13737;String en Cuir de la Mama Bwork;40.63725;54.0
-13738;Bandeau troué de Feu;6.8658;5.0
-13739;Caleçon Rouge;41.098125;55.0
-13740;Bandeau troué de Terre;6.8658;5.0
-13741;Caleçon Brun;41.098125;55.0
-13742;Bandeau troué d'Eau;6.8658;5.0
-13743;Caleçon Bleu;41.098125;55.0
-13744;Bandeau troué d'Air;6.8658;5.0
-13745;Caleçon Blanc;41.098125;55.0
-13746;Boulon de Cybwork;7.1781;5.0
-13747;Caleçon de Cybwork;42.9678;58.0
-13914;Culotte de Harrogant;75.9375;68.0
-13915;Cuir de Grodruche;12.65625;9.0
-13916;Étoffe de Grodruche;75.9375;92.0
-13917;Cervelle de Peunch;75.9375;92.0
-13918;Cuir de Peunch;12.65625;9.0
-13919;Cuir d'Empaillé;12.65625;9.0
-13921;Cuir de Cuirboule;12.65625;9.0
-13922;Dent de Cuirboule;75.9375;92.0
-13923;Moustache de Klime;63.28125;34.0
-13924;Scalp de Klime;379.6875;338.0
-13925;Sang de Ventrublion;12.65625;9.0
-13926;Molaire de Ventrublion;75.9375;92.0
-13927;Incisive de Stalak;12.65625;9.0
-13928;Ethmoïde de Stalak;75.9375;92.0
-13929;Sang de Karkanik;12.65625;9.0
-13930;Malleus de Karkanik;75.9375;92.0
-13931;Incus de Verglasseur;12.65625;9.0
-13932;Cervelle de Verglasseur;75.9375;92.0
-13933;Stapes de Frimar;12.65625;9.0
-13934;Moustache de Frimar;75.9375;92.0
-13935;Poil d'aisselle de Missiz Frizz;63.28125;34.0
-13936;Culotte de Missiz Frizz;379.6875;338.0
-13937;Bave de Nessil;12.65625;9.0
-13938;Molaire de Nessil;75.9375;92.0
-13939;Canine de Krakal;12.65625;9.0
-13940;Crinière de Krakal;75.9375;92.0
-13941;Plume de Dodox;12.65625;9.0
-13942;Bec de Dodox;75.9375;92.0
-13943;Patte de Termystique;12.65625;9.0
-13944;Carapace de Termystique;75.9375;92.0
-13945;Bractée de Drosérâle;12.65625;
-13946;Sépale de Drosérâle;75.9375;92.0
-13947;Broderie de Nileza;63.28125;
-13948;Braguette de Nileza;379.6875;338.0
-13949;Canine de Kanimate;12.65625;9.0
-13950;Griffe de Kanimate;75.9375;92.0
-13971;Maxillaire de Brikoglours;12.65625;9.0
-13972;Queue de Brikoglours;75.9375;92.0
-13973;Bec de Mansordide;12.65625;9.0
-13974;Sternum de Mansordide;75.9375;92.0
-13975;Astragale de Mécanofoux;12.65625;9.0
-13976;Oreille de Mécanofoux;75.9375;92.0
-13977;Volve de Mérulor;12.65625;9.0
-13978;Pédoncule de Mérulor;75.9375;92.0
-13980;Cuir Onique;450.0;300.0
-13981;Alliage Ivre;562.5;375.0
-13982;Laine de Sylargh;63.28125;34.0
-13983;Incisive de Sylargh;379.6875;338.0
-13984;Plume de Granduk;12.65625;9.0
-13985;Bec de Granduk;75.9375;92.0
-13986;Griffe de Strigide;12.65625;9.0
-13987;Bec de Strigide;75.9375;92.0
-13989;Plume de Cycloïde;75.9375;92.0
-13990;Aile de Sinistrofu;12.65625;9.0
-13991;Queue de Sinistrofu;75.9375;92.0
-13992;Aile de Nocturlabe;12.65625;9.0
-13993;Pic du Nocturlabe;75.9375;92.0
-13994;Scapula du Comte Harebourg;63.28125;34.0
-13995;Bandelette du Comte Harebourg;379.6875;338.0
-14043;Clef de la Forgefroide de Missiz Frizz;80.7975;
-14044;Clef du Transporteur de Sylargh;80.7975;
-14045;Clef des Salons privés de Klime;80.7975;
-14046;Clef du Laboratoire de Nileza;80.7975;
-14047;Clef du Donjon du Comte Harebourg;80.7975;
-14141;Racine cristalline;300.0;200.0
-14142;Boulon neuf;300.0;200.0
-14143;Fermeture éclair;300.0;200.0
-14144;Mycoses gelées;300.0;200.0
-14263;Écaille de Grozilla;4.6875;2.0
-14264;Fausse dent de Grozilla;27.573525;25.0
-14265;Écaille de Grasmera;5.4687;2.0
-14266;Poche de charbon de Grasmera;32.59515;22.0
-14267;Pointe osseuse de Grasmera;63.28125;34.0
-14268;Poche de magma de Grasmera;372.242625;338.0
-14278;Chaînes Brisées;0.1953;0.166666667
-14279;Pierre Précieuse Zoth;1.9893;0.5
-14280;Pic de Dragodinde Dorée;0.493875;0.5
-14282;Boules de Kanniboul;2.0124;1.0
-14284;Flamme Spectrale;0.369075;
-14457;Patte de Black Wabbit;0.239325;
-14458;Queue de Black Wabbit;1.524675;
-14459;Moustaches de Tiwabbit;0.19725;
-14460;Branche de Tiwabbit Kiafin;0.186375;
-14462;Os de Wabbit Squelette;0.2556;
-14463;Crâne de Wabbit Squelette;1.54035;
-14464;Clef du Château du Wa Wabbit;59.906175;
-14465;Clef du Terrier du Wa Wabbit;8.74875;
-14466;Bandeau de Black Wabbit Squelette;0.278475;
-14467;Osselet de Black Wabbit Squelette;1.6593;
-14468;Barbe du Wa Wobot;18.9144;
-14469;Estomac de Black Wo Wabbit;3.78285;
-14470;Poil de Wobot Kiafin;3.78285;
-14471;Casque de Wobot;3.78285;
-14472;Bâton de Blanc Pa Wabbit;3.78285;
-14473;Boulon Wabbit;0.63105;
-14474;Sang de Wabbit Garou;10.663125;
-14475;Feuille de Cawotman;10.663125;
-14476;Oreilles de Wabbit Fluo;10.663125;
-14477;Dents de Wabbit Vampire;10.663125;
-14479;Cawotte Transgénique;1.8024;
-14490;Lunettes de Tiwobot;3.78285;
-14509;Oreille de Bouledogre;5.569575;8.0
-14510;Patte de Bouledogre;0.927225;1.0
-14511;Élastique de Gobvious;5.72055;8.0
-14512;Plume de Gobvious;0.9462;1.0
-14513;Échasse de Molette;5.87475;
-14514;Dent de Molette;0.992175;1.0
-14515;Corne de Rhinoféroce;6.03225;8.0
-14516;Oreille de Rhinoféroce;1.01205;1.0
-14517;Slip troué de Dramak;32.59515;29.0
-14518;Chaussette trouée de Dramak;5.4687;3.0
-14560;Clef du Théâtre de Dramak;9.191625;
-14635;Pépite;0.75;1.25
-14645;Essence du Tournesol Affamé;10.5249;
-14646;Essence de Mob l'Éponge;1.76085;
-14647;Essence du Bouftou Royal;6.9675;
-14648;Essence du Scarabosse Doré;19.17615;
-14649;Essence de Batofu;4.6323;
-14650;Essence de Boostache;11.63025;
-14652;Essence de la Bworkette;15.6042;
-14653;Essence des Forgerons;6.249975;
-14654;Essence de la Shin Larve;24.556875;
-14655;Essence du Corailleur Magistral;28.02;
-14656;Essence de Damadrya;41.69115;
-14657;Essence du Wa Wabbit;25.120425;
-14658;Essence du Blop Royal;60.9987;
-14659;Essence de la Gelée Royale;10.027125;
-14660;Essence de Nelween;35.1051;
-14661;Essence de Gourlo le Terrible;56.0823;
-14662;Essence du Craqueleur Légendaire;29.415;
-14663;Essence de Nagate;64.889475;
-14664;Essence du Wa Wobot;113.486775;
-14665;Essence de l'Abraknyde Ancestral;114.777975;
-14666;Essence du Dragon Cochon;208.719375;
-14667;Essence du Koulosse;61.431375;
-14668;Essence du Meulou;208.719375;
-14669;Essence de Moon;86.04075;
-14670;Essence de Dramak;81.705225;
-14671;Essence du Rasboul Majeur;202.098675;
-14672;Essence du Maître Corbac;156.457425;
-14673;Essence du Rat Blanc;32.96505;
-14674;Essence du Rat Noir;48.050775;
-14675;Essence du Blop Multicolore Royal;141.759825;
-14676;Essence du Minotoror;293.6616;
-14677;Essence du Royalmouth;145.066875;
-14678;Essence de Shihan et Hanshi;167.499975;
-14679;Essence du Tofu Royal;248.72325;
-14680;Essence de Crocabulia;146.8308;
-14681;Essence de Skeunk;134.0463;
-14682;Essence de Tanukouï San;67.5;
-14683;Essence de Founoroshi;83.74995;
-14684;Essence du Chêne Mou;260.5617;
-14685;Essence du Tynril;549.46785;
-14686;Essence du Mansot Royal;208.3002;
-14687;Essence de Ben le Ripate;322.9722;
-14688;Essence de Sphincter Cell;483.555075;
-14689;Essence du Kimbo;670.262775;
-14690;Essence du Minotot;1141.793475;
-14691;Essence de l'Obsidiantre;445.878825;
-14692;Essence du Tengu Givrefoux;429.28725;
-14693;Essence du Korriandre;543.53475;
-14694;Essence du Kralamoure Géant;520.031475;
-14695;Essence du Bworker;543.53475;
-14696;Essence d'Ougah;761.255325;
-14697;Essence du Kolosso;696.374925;
-14698;Essence de Fuji Givrefoux;923.19615;
-14699;Essence de Grolloum;696.374925;
-14700;Essence du Glourséleste;696.374925;
-14701;Essence de Missiz Frizz;949.21875;
-14702;Essence de Sylargh;949.21875;
-14703;Essence de Klime;949.21875;
-14704;Essence de Nileza;949.21875;
-14705;Essence du Comte Harebourg;949.21875;
-14706;Essence de Merkator;949.21875;
-14720;Essence du Kwakwa;23.9517;
-14774;Essence du Kanniboul Ebil;25.120425;
-14795;Pile Steamer;12.65625;
-14817;Pince de Krabouilleur;75.9375;51.0
-14819;Carapace de Krabouilleur;12.65625;5.0
-14822;Pic de Pikoleur;12.65625;5.0
-14823;Huile de Pikoleur;75.9375;51.0
-14859;Sang de Harpo;12.65625;10.0
-14860;Cuir d'Eskoglyphe;12.65625;3.0
-14861;Broderie d'Eskoglyphe;75.9375;34.0
-14862;Barbe du Cyclophandre;12.65625;5.0
-14863;Chaussette du Cyclophandre;75.9375;51.0
-14864;Barbe de Merkator;63.28125;34.0
-14868;Vieille Tête de Marteau;750.0;
-14870;Clef de l'Aquadôme de Merkator;80.7975;
-14921;Étoffe Mystérieuse;75.0;
-14922;Masque du Vide;10.557675;9.0
-14923;Masque de la Vengeance;10.557675;9.0
-14924;Masque de la Violence;10.557675;9.0
-14925;Masque de la Vivacité;10.557675;9.0
-14926;Masque du Vice;10.557675;9.0
-14927;Symbole des Obscuranti;62.197875;44.0
-14928;Corne d'Ombre;45.75;38.0
-14935;Clef de la Pyramide d'Ombre;72.143625;
-14936;Insigne des Justiciers;750.0;
-14944;Sueur Froide de Fantôme;0.204375;
-14945;Vieille Partition;0.204375;
-14946;Cuir de Porsalu;0.8112;0.96
-14950;Langue de Kraméléhon;9.51315;
-14951;Corne de Scaratos;6.606975;12.0
-14952;Pierre de Serpiplume;9.00225;8.0
-14975;Essence d'Ombre;274.5;
-14977;Bitte d'amarrage;750.0;
-15039;Poils de Kanigroula;22.24425;
-15040;Queue de Kanigroula;134.44365;
-15041;Tignasse de Kanihilan;4.233375;
-15042;Peau de Kanihilan;25.586475;
-15043;Cheveux d'Alhyène;4.233375;
-15044;Frimousse d'Alhyène;25.586475;
-15045;Griffe de Félygiène;4.1277;
-15046;Canine de Félygiène;24.411225;
-15047;Chaîne de Panthègros;4.1277;
-15048;Boule de Panthègros;24.411225;
-15049;Oreille de Kaniblou;4.18035;
-15050;Étoffe de Kaniblou;24.9915;
-15051;Crinière d'Orfélin;4.18035;
-15052;Boucle d'Orfélin;24.9915;
-15065;Paire de boules de Haute Truche;11.25;
-15067;Patte de Gruche;1.9893;
-15068;Aile de Gruche;11.919375;
-15069;Croupion de Truchmuche;1.957875;
-15070;Langue de Truchmuche;11.634975;
-15071;Plume de Truchideur;1.862475;
-15072;Morpion de Truchideur;11.35665;
-15074;Glandes de Truchtine;11.0844;
-15075;Duvet de Truchon;1.803;
-15076;Bec de Truchon;10.817925;
-15093;Clef de la Grotte de Kanigroula;30.8643;
-15095;Essence de Kanigroula;335.13135;
-15162;Clef de la Volière de la Haute Truche;18.467925;
-15164;Broderie de Malléfisk;5.4687;4.0
-15165;Corde de Boursoin;1.093725;1.0
-15166;Langue de Mimikado;1.093725;1.0
-15167;Antenne de Trésantène;1.093725;1.0
-15168;Corne de Berserkoffre;1.093725;1.0
-15169;Moustache précieuse;1.093725;1.0
-15170;Défense du Phossile;17.968725;14.0
-15171;Griffe de Phorrêveur;3.5937;3.0
-15172;Peau de Métaphorreur;3.5937;3.0
-15173;Corne de Père Phorreur;3.5937;3.0
-15175;Queue de Mère Veilleuse;3.5937;3.0
-15176;Joyau de la couronne du roi Nidas;63.28125;51.0
-15177;Corne de Kamasterisk;13.4007;
-15178;Sourcil de Barbétoal;12.65625;5.0
-15179;Dent de Lévitrof;12.65625;5.0
-15180;Morceau de clef de Paspartou;12.65625;5.0
-15181;Boule en or de Piloztère;12.65625;10.0
-15182;Kamatrix;18.6342;2.0
-15219;Trame Dimensionnelle;56.25;
-15263;Rose des sables;;1.25
-15272;Essence du Roi Nidas;379.6875;
-15273;Essence de Malléfisk;32.812425;
-15274;Essence du Phossile;107.8125;
-15278;Clef de la Fabrique de Malléfisk;9.599925;
-15279;Clef de la Galerie du Phossile;28.425;
-15280;Clef du Palais du roi Nidas;79.484175;
-15362;Essence de la Haute Truche;168.6105;
-15444;Tête de mort;15.915;2.0
-15445;Broderie de la Reine des Voleurs;63.28125;51.0
-15446;Piège désamorcé de Mâchassin;12.65625;5.0
-15447;Mèche de bombe de Terristocrate;13.4007;5.0
-15448;Chouchou de Doublure;13.4007;5.0
-15449;Épaulière de Bourôliste;12.65625;
-15450;Crâne magique de Magouille;12.65625;10.0
-15451;Sang du Toxoliath;36.286725;29.0
-15452;Patte de Scoliopode;7.2573;6.0
-15453;Aile de Puceronde;7.2573;6.0
-15454;Pince de Lucrane;7.959675;6.0
-15455;Venin d'Éperfide;7.959675;6.0
-15456;Dard de Morfrelon;7.2573;6.0
-15458;Foulard de Milimaître;2.25;2.0
-15459;Sacoche de Kartouche;2.46225;2.0
-15460;Os de Sramouraï;2.25;2.0
-15461;Bandelette de Tromblion;2.25;2.0
-15462;Slip d'Elsoummo;2.25;2.0
-15475;Clef du Trône de la Cour Sombre;82.727175;
-15476;Clef de la Cave du Toxoliath;54.088575;
-15477;Clef du Ring du Capitaine Ekarlatte;19.780875;
-15478;Culotte de Frakacia;22.5;
-15485;Sporme de Dremoan;562.5;
-15531;Crochet rouillé;54.375;
-15533;Rossignol;83.536575;
-15551;Bouteille de Gein;750.0;
-15685;Patte de Tabacille;12.65625;7.0
-15686;Antenne de Bacterrib;12.65625;7.0
-15687;Coquille de Virustine;12.65625;7.0
-15688;Peau de Pataugerme;2.712;2.0
-15689;Noyau de Protozorreur;63.28125;34.0
-15690;Clef du Ventre de la Baleine;80.7975;
-15691;Sel de Baleine;75.9375;34.0
-15702;Essence du Capitaine Ekarlatte;67.5;
-15703;Essence du Toxoliath;217.720575;
-15704;Essence de la Reine des Voleurs;379.6875;
-15705;Essence du Protozorreur;379.6875;
-15715;Aile de Vortex;63.28125;51.0
-15716;Serre d'Ikargn;15.1875;12.0
-15717;Corne de Méjaire;15.1875;12.0
-15719;Griffe de Buboxor;15.1875;12.0
-15720;Plume de Brabuzar;12.65625;10.0
-15721;Corne de XLII;29.01315;23.0
-15722;Dent de Trezz;6.96315;6.0
-15723;Peau de Vindeux;6.96315;6.0
-15724;Pagne de Trantroa;6.96315;6.0
-15725;Barbe de Seith;6.96315;6.0
-15726;Touffe de cheveux de Soissanth;5.8026;5.0
-15727;Pixel de Fraktale;9.012075;7.0
-15728;Pixel de Gromorso;2.16285;2.0
-15729;Pixel de Farfacette;2.16285;2.0
-15730;Pixel de Brikablak;2.16285;2.0
-15731;Pixel d'Éklatleth;2.16285;2.0
-15732;Pixel de Segmantid;1.8024;1.0
-15733;Sablier miniature;20.764125;3.0
-15734;Essence de Vortex;379.6875;
-15735;Essence de XLII;174.0789;
-15736;Essence de Fraktale;54.072525;
-15793;Gland de Fouduglen;11.25;
-15806;Clef du Mégalithe de Fraktale;18.7149;
-15807;Clef de l'Horologium de XLII;49.2039;
-15991;Clef de la Cache de Kankreblath;2.0523;
-16001;Antennes de Vilinsekt;0.132;
-16002;Patte de Kankreblath;0.77205;
-16008;Batterie rechargeable de l'Hyperscampe;750.0;
-16009;Élixir de Brumen;75.0;
-16148;Poil d'Abrakne;0.204375;0.083333333
-16150;Racine d'Abraknyde Vénérable;0.6468;0.5
-16151;Écorce d'Abraknyde Vénérable;3.9204;
-16152;Masque Brisé d'Araknotron;0.694575;0.5
-16153;Arakne Écrabouillée;4.15485;
-16154;Écorce d'Abrakne Sombre;0.779175;0.5
-16155;Toile d'Abrakne Sombre;4.655625;6.0
-16156;Ambre d'Abraknyde Sombre Irascible;8.93835;18.0
-16157;Masque Cassé d'Araknotron Irascible;1.5;1.0
-16158;Arakne Irascible Écrasée;8.98755;19.0
-16159;Patte d'Abrakne Irascible;1.590975;2.0
-16160;Mandibule d'Abrakne Irascible;9.585825;20.0
-16161;Doigt de Branche Invocatrice;1.6848;2.0
-16165;Lamelle de Champa Bleu;0.1515;
-16166;Lamelle de Champa Marron;0.1515;
-16167;Lamelle de Champa Rouge;0.1515;
-16168;Lamelle de Champa Vert;0.1515;
-16179;Clef de l'Antre de la Reine Nyée;7.77285;
-16180;Soie Baveuse;4.1346;
-16181;Globule de Nyée;25.03875;
-16207;Sceau Sylvestre;322.5;
-16208;Fragment de Rubis Fertile;375.0;
-16211;Bourgeon explosif de Damadrya;6.948525;
-16212;Substrat de Fourré;23.9625;
-16215;Glande d'Arak-haï;0.759225;
-16216;Chélicères d'Arapex;4.5978;
-16217;Laine de Dardalaine;4.5978;
-16218;Dent de Gargantûl;4.5978;
-16219;Fil de Néfileuse;4.5978;
-16285;Essence de Kankreblath;4.6323;
-16286;Essence de la Reine Nyée;62.365875;
-16378;Ortie Roïde;2.25;
-16379;Sauge Divine au Rhum;3.75;
-16380;Trèfle Agare;5.249925;
-16381;Menthe Religieuse;7.5;
-16382;Orchidée de Génie;9.0;
-16383;Edelweiss Marguerite;11.25;
-16384;Pandouille de Trois;12.75;
-16385;Ginseng;0.149925;
-16386;Ginsengoku;15.0;
-16387;Belladone;0.164925;
-16388;Belladonzelle;16.5;
-16389;Mandragore;0.1875;
-16390;Mandragorgonzola;18.75;
-16419;Potion des Ancêtres;5.2875;
-16420;Potion de Glandage;7.7625;
-16440;Ferrite;0.54;
-16452;Riz Cola;11.25;
-16453;Malt Husse;12.75;
-16454;Maïs;0.164925;
-16455;Maïssého;16.5;
-16456;Millet;0.1875;
-16457;Millet Zime;18.75;
-16458;Substrat de Forêt primaire;38.924925;
-16459;Substrat de Forêt vierge;49.95;
-16460;Substrat de Sylve;54.45;
-16461;Anguille;0.112425;
-16462;Anguille Souroche;11.25;
-16463;Dorade Grise;0.12;
-16464;Daurade Royale;12.0;
-16465;Lotte;0.149925;
-16466;Glotte;15.0;
-16467;Morue;0.18;
-16468;Morue Barbue;18.0;
-16469;Tanche;0.1875;
-16470;Tanche Hantée;18.75;
-16471;Espadon;0.195;
-16472;Espadon Quichotte;228.75;
-16487;Bois Vermoulu;0.6717;
-16488;Bois de Noisetier;0.142425;
-16489;Planche Agglomérée;0.3375;
-16490;Planche Contreplaquée;0.899925;
-16491;Planche à Griller;1.6875;
-16492;Planche de Surf;2.812425;
-16493;Planche à Repasser;4.5;
-16494;Planche de Toilette;6.581175;
-16495;Planche à Pâtisserie;9.16875;
-16496;Planche de Gravure;10.96875;
-16497;Planche à Pain;14.624925;
-16498;Planche à Dessin;18.45;
-16499;Planche de Salut;20.7;
-16511;Laine Céleste;0.032625;
-16512;Plume Chimérique;0.0318;
-16513;Pétale Diaphane;0.032025;
-16515;Queue de Chapardam;0.0333;
-16518;Feu Intérieur;0.0318;
-16522;Peau de Gloot;0.032175;
-16524;Relique d'Incarnam;0.033975;
-16525;Crâne de Kardorim;0.197325;
-16526;Tête de Marteau en Jade;11.25;
-16663;Viande Intangible;0.0321;
-16909;Sève de Frêne;2.25;
-16910;Sève de Châtaignier;3.75;
-16911;Sève de Noyer;5.249925;
-16912;Sève de Chêne;7.5;
-16913;Sève de Bombu;8.25;
-16914;Sève d'Érable;9.0;
-16915;Sève d'Oliviolet;10.499925;
-16916;Sève d'If;11.25;
-16917;Sève de Bambou;12.0;
-16918;Sève de Merisier;12.75;
-16919;Sève de Noisetier;14.249925;
-16920;Sève d'Ébène;15.0;
-16921;Sève de Kaliptus;15.749925;
-16922;Sève de Charme;16.5;
-16923;Sève de Bambou Sombre;18.0;
-16924;Sève d'Orme;18.75;
-16925;Sève de Bambou Sacré;19.499925;
-16926;Sève de Tremble;20.25;
-17037;Essence de Kardorim;1.184175;
-17060;Potion de Vieillesse;4.387425;
-17065;Poupée Vaudou Tam;0.3342;0.25
-17075;Canif Rouillé;0.826875;0.5
-17112;Clef de l'Arbre de Moon;8.2968;
-17113;Clef du Bateau du Chouque;8.156475;
-17114;Poils de Zatoïshwan;412.5;
-17115;Scalp d'Anatak;465.0;
-17116;Épaulière Massive du K.O.;600.0;
-17117;Pied de Voldelor;750.0;
-17118;Peau du Grand Kongoku;750.0;
-17123;Viande Hachée;0.03945;
-17124;Viande Faisandée;0.062025;
-17125;Bidoche Faisandée;6.092025;
-17126;Viande Frelatée;0.09945;
-17127;Bidoche Frelatée;9.905625;
-17128;Viande Minérale;0.156975;
-17129;Bidoche Minérale;3.6234;
-17130;Viande Tendre;0.232425;
-17131;Bidoche Tendre;23.340225;
-17132;Viande Ladre;0.334425;
-17133;Bidoche Ladre;33.56985;
-17134;Viande Avariée;0.479925;
-17135;Bidoche Avariée;46.658925;
-17136;Viande Sanguinolente;0.62565;
-17137;Bidoche Sanguinolente;63.109725;
-17138;Viande Rassie;0.826875;
-17139;Bidoche Rassie;83.549175;
-17140;Viande Exsudative;1.07895;
-17141;Bidoche Exsudative;21.754125;
-17142;Viande Séchée;1.3842;
-17143;Bidoche Séchée;39.755925;
-17144;Viande Saignante;1.787625;
-17145;Bidoche Saignante;177.945825;
-17146;Viande Persillée;2.25345;
-17147;Bidoche Persillée;226.0827;
-17148;Viande Macérée;2.839725;
-17149;Bidoche Macérée;283.364625;
-17150;Viande de Brousse;3.696375;
-17151;Bidoche de Brousse;356.40495;
-17152;Viande Fraîche;4.56345;
-17153;Bidoche Fraîche;89.793525;
-17154;Viande Maigre;6.279075;
-17155;Bidoche Maigre;597.884925;
-17156;Viande Gâtée;7.2573;
-17157;Bidoche Gâtée;725.735175;
-17158;Viande Noire;9.580725;
-17159;Bidoche Noire;940.06845;
-17160;Viande Goûtue;12.75225;
-17161;Bidoche Goûtue;1181.15985;
-17272;Orbe régénérant mineur;11.25;
-17273;Orbe régénérant;112.5;
-17274;Orbe régénérant majeur;337.5;
-17275;Orbe régénérant magistral;562.5;
-17414;Essence du Chouque;62.365875;
-17421;Bidoche Intangible;19.736775;
-17442;Pointes de Knout;114.286425;
-17443;Manche de Knout;73.124925;
-17444;Lanières de knout;115.76535;
-17563;Clef du Miausolée du Pounicheur;13.5132;
-17564;Clef du Plateau de Ush;34.118175;
-17567;Biscuit de chance;19.8291;3.0
-17609;Patte de Pupuce;1.389675;1.0
-17611;Palpe de Pikbul;1.389675;1.0
-17612;Peau de Gériatique;1.389675;1.0
-17613;Épine de Grath;1.389675;1.0
-17614;Glande du Pounicheur;6.948525;6.0
-17615;Queue de Chasquatch;4.44885;4.0
-17616;Poil de Chacrebleu;4.44885;4.0
-17617;Collier de Chakichan;4.44885;4.0
-17618;Oreille de Chargus;4.44885;4.0
-17619;Dent de Chakaroze;4.44885;2.0
-17620;Moustache de Ush;22.24425;18.0
-17621;Pique du Soldat;12.65625;10.0
-17622;Plume du Cavalier;12.65625;10.0
-17623;Gilet du Valet;12.65625;10.0
-17624;Ceinture de la Dame;12.65625;5.0
-17625;Sceau du Roi Joueur;12.65625;10.0
-17736;Essence de Ush;133.465875;
-17737;Essence du Pounicheur;41.69115;
-17772;Clef du caveau du Roi Léorictus;94.35075;
-17777;Clef du caveau du Prince Djamal;31.05705;
-17780;Fleur de Korriandre;6.168675;
-17781;Dissolvant Phosphorescent;78.5895;
-17785;Clef du Temple Maudit;24.948525;
-17850;Jus de poisson abominable;49.75875;
-17851;Jus de poisson asphyxiant;118.04865;
-17852;Jus de poisson pestilentiel;503.193825;
-17853;Jus de poisson méphitique;671.001225;
-17864;Ambre gris;120.0;
-17865;Marque des grands fonds;480.0;
-17866;Steamopompe;480.0;
-17867;Hélice en laiton;480.0;
-17868;Plombs de plongée;480.0;
-17869;Filtre à frousse;480.0;
-17870;Socle en coquillage;480.0;
-17963;Sceau des fondateurs;4310.1564;720.0
-17964;Volant hydraulique;3730.781475;576.0
-17965;Accélérateur de propulsion;4419.227925;720.0
-17966;Lest anti-tourbillon;3848.615475;584.0
-17967;Attrape-peur;4310.1564;720.0
-17968;Statuette de Snedon;3730.781475;579.0
-17970;Bave de Mol Usk;12.65625;3.0
-17971;Pince de Crabe Yoloniste;12.65625;3.0
-17972;Écaille de Gambaf;12.65625;3.0
-17973;Queue de Mantaze;12.65625;5.0
-17974;Parasite Aquatique;75.9375;23.0
-17975;Lanterne de Tourthon;13.20645;3.0
-17976;Poil de Meno;63.28125;34.0
-17977;Encre de Poulpée;12.65625;3.0
-17978;Trident de Tryde;13.560225;3.0
-17979;Moustache de Rilur;12.65625;5.0
-17980;Épine de Diondin;12.65625;10.0
-17981;Peau de Trithon;83.793075;24.0
-17982;Dentier de Dantinéa;63.28125;34.0
-17983;Tentacule de Grofond;12.65625;3.0
-17984;Tentacule de N'Yalg;12.65625;3.0
-17985;Patte de Li-Fo;12.65625;5.0
-17987;Flûte de Klûtiste;12.65625;10.0
-17988;Pierre Angulaire;75.9375;24.0
-17989;Aile de Larve de Koutoulou;63.28125;34.0
-17990;Dent de Tilamproie;12.65625;10.0
-17991;Bois d'Aquajou;7.5;
-17992;Salikrone;7.5;
-17993;Quisnoa;7.5;
-17994;Patelle;7.5;
-17995;Écume de mer;7.5;
-18066;Clef du Vaisseau du Capitaine Meno;281.953125;
-18067;Clef du Palais de Dantinéa;284.1345;
-18068;Clef du Temple de Koutoulou;281.953125;
-18198;Gâtrool;1.688175;
-18209;Gratrooll;1.688175;
-18318;Soie chatoyante;;0.0
-18348;Flûte de Mastodonte;1.35;
-18357;Jus de Cacterre;13.4814;9.0
-18358;Maraca de Lévito;2.25;2.0
-18359;Parchemin de Cactana;2.25;2.0
-18361;Fleur de Cactiflore;2.25;2.0
-18362;Moustaches de Cactoblongo;2.25;2.0
-18363;String de Pampactus;2.25;2.0
-18364;Étoile d'Or d'El Piko;67.407;60.0
-18366;Sable Fin;3.855;3.0
-18367;Boule de Boulépique;0.6468;1.0
-18368;Écailles d'Ouroboulos;0.6468;1.0
-18369;Queue de Scordion Bleu;0.6468;1.0
-18370;Queue de Fennex;0.6468;1.0
-18371;Carapace du Mantiscore;3.155475;2.0
-18383;Picot d'El Piko;11.25;6.0
-18421;Clef du Cimetière des mastodontes;6.55755;
-18422;Clef de la Caverne d'El Piko;20.840175;
-18537;Fragment de Chakanoubis;12.65625;10.0
-18538;Dent de Bandleth;12.65625;10.0
-18539;Grenat de Momistik;12.65625;10.0
-18540;Paupière Dorée de Rykaon;12.65625;10.0
-18541;Oreille de Griffotep;12.65625;10.0
-18542;Cheveux de Tal Kasha;63.28125;34.0
-18543;Scarabée Chrysonéfritin;75.9375;47.0
-18544;Clef de la Chambre de Tal Kasha;80.7975;
-18552;Clef du Boyau du Père Ver;42.116775;
-18562;Dent de Cycloporth;5.8026;2.0
-18563;Langue de Morsquale;6.12495;2.0
-18564;Patte de Masticroc;5.8026;2.0
-18565;Peau de Trémorse;5.8026;2.0
-18566;Pic de Pikténia;5.8026;5.0
-18567;Carapace de Ver des Sables;35.6691;14.0
-18719;Rune Do Per Mé;1.875;1.0
-18720;Rune Do Per Di;1.875;1.0
-18721;Rune Do Per Ar;1.875;1.0
-18722;Rune Do Per So;1.875;1.0
-18723;Rune Ré Per Mé;1.875;1.0
-18724;Rune Ré Per Di;1.875;1.0
-18729;Sang de Viandargh;9.15;8.0
-18730;Queue de Chevrotine;9.15;8.0
-18731;Bave de Brokouillon;9.15;8.0
-18732;Os de Nemroz;9.15;8.0
-18733;Flèche de Crâmbo;9.15;8.0
-18734;Poils du Comte Razof;45.75;25.0
-18735;Bouteille de Bouchonnois;56.249925;35.0
-18736;Clef du Camp du Comte Razof;63.6975;
-18741;Coffre de Pièges à Chasseur;2.39355;
-18742;Breuvage Musculaire;3.80265;
-18743;Implants Rustiques;25.227375;
-19041;Clef du Chapiteau des Magik Riktus;7.36785;
-19049;Clef du Manoir des Katrepat;80.7975;
-19068;Pic d'Anerice;63.28125;33.0
-19069;Ongle de Goulafre;12.65625;10.0
-19070;Aile de Kérigoule;12.65625;10.0
-19072;Poils de Goultime;12.65625;10.0
-19073;Nez de Pipisteuse;12.65625;10.0
-19074;Goulobule rouge;75.9375;46.0
-19216;Clef du Belvédère d'Ilyzaelle;80.7975;
-19232;Pince de Crâme;12.65625;9.0
-19233;Brûlâme encapsulé;75.9375;43.0
-19234;Cendres de Chause;12.65625;9.0
-19235;Fragment d'Ectorche;12.65625;9.0
-19236;Restes d'Esprigné;12.65625;9.0
-19237;Plume d'Ilyzaelle;63.28125;34.0
-19337;Rune Pa So;33.75;5.0
-19338;Rune Pa Ré Air;1.349925;0.333333333
-19339;Rune Pa Ré Eau;1.349925;0.333333333
-19340;Rune Pa Ré Feu;1.349925;0.333333333
-19341;Rune Pa Ré Neutre;1.349925;0.333333333
-19342;Rune Pa Ré Terre;1.349925;0.333333333
-19399;Dent de Klémort;12.65625;10.0
-19400;Vertèbre de Trépavois;12.65625;10.0
-19401;Langue de Hacharné;13.80675;10.0
-19402;Grenade de Moribombe;12.65625;10.0
-19404;Cervelle de Solar;47.214975;33.0
-19405;Sang de Calciné;55.413825;46.0
-19406;Chair de Zombruth;12.65625;10.0
-19407;Pointe de Lance de Tournoyé;12.65625;10.0
-19408;Protection de Funespadon;12.65625;10.0
-19409;Aquarakne de Crânonier;12.65625;10.0
-19410;Bout d'Armure de Macrab;12.65625;10.0
-19411;Queue de Bethel Akarna;63.28125;34.0
-19412;Coquille de Submergé;75.9375;47.0
-19514;Clef de la Tour de Solar;82.523325;
-19515;Clef de la Tour de Bethel;345.9375;
-19905;Essence du Mantiscore;47.3046;
-19906;Essence de Bethel Akarna;379.6875;
-19907;Essence de Solar;283.290075;
-19908;Essence de Meno;379.6875;
-19909;Essence d'Ilyzaelle;379.6875;
-19910;Essence de Dantinéa;379.6875;
-19911;Essence de la Larve de Koutoulou;379.6875;
-19912;Essence d'Anerice la Shushess;379.6875;
-19913;Essence du Comte Razof;274.5;
-19914;Essence de Dazak Martegel;379.6875;
-19915;Essence d'El Piko;168.6105;
-19916;Essence de Tal Kasha;379.6875;
-19921;Essence de Choudini;24.807675;
-19938;Essence du Père Ver;174.0789;
-19963;Clef de la Brasserie du roi Dazak;80.7975;
-19968;Chope de Bière;75.9375;43.0
-19969;Épaulière de Dazak Martegel;63.28125;
-19970;Armure de Tanklume;12.65625;9.0
-19971;Fronde de Boufbos;12.65625;9.0
-19972;Poils de barbe de Barbélier;12.65625;9.0
-19973;Jambière de Kasrok;12.65625;9.0
-19974;Dent de Vatenbière;12.65625;9.0
-20452;Andésite;3.0;
-20492;Rune Ta Ine;1.012425;
-20556;Rune Pata Ine;1.012425;
-20557;Rune Rata Ine;1.012425;
-20558;Rune Ta Fo;1.012425;
-20559;Rune Pata Fo;1.012425;
-20560;Rune Rata Fo;1.012425;
-20561;Rune Ta Age;1.012425;
-20562;Rune Pata Age;1.012425;
-20563;Rune Rata Age;1.012425;
-20564;Rune Ta Cha;1.012425;
-20565;Rune Pata Cha;1.012425;
-20566;Rune Rata Cha;1.012425;
-20567;Rune Ta Vi;1.012425;
-20568;Rune Pata Vi;1.012425;
-20569;Rune Rata Vi;1.012425;
-20570;Rune Ta Ini;1.012425;
-20571;Rune Pata Ini;1.012425;
-20572;Rune Rata Ini;1.012425;
-20573;Rune Ta Pod;1.012425;
-20574;Rune Pata Pod;1.012425;
-20575;Rune Rata Pod;1.012425;
-20576;Rune Ta Pui;4.049925;
-20577;Rune Pata Pui;4.049925;
-20578;Rune Rata Pui;4.049925;
-20579;Rune Ta Ré Pou;1.349925;
-20580;Rune Pata Ré Pou;1.349925;
-20581;Rune Ta Ré Cri;1.349925;
-20582;Rune Pata Ré Cri;1.349925;
-20583;Rune Ta Do Pou;8.4375;
-20584;Rune Pata Do Pou;8.4375;
-20585;Rune Ta Do Cri;8.4375;
-20586;Rune Pata Do Cri;8.4375;
-20596;Rune Ta Do Terre;8.4375;
-20597;Rune Pata Do Terre;8.4375;
-20598;Rune Rata Do Terre;8.4375;
-20599;Rune Ta Do Feu;8.4375;
-20600;Rune Pata Do Feu;8.4375;
-20601;Rune Rata Do Feu;8.4375;
-20602;Rune Ta Do Eau;8.4375;
-20603;Rune Pata Do Eau;8.4375;
-20604;Rune Rata Do Eau;8.4375;
-20605;Rune Ta Do Air;8.4375;
-20606;Rune Pata Do Air;8.4375;
-20607;Rune Rata Do Air;8.4375;
-20608;Rune Ta Do Neutre;8.4375;
-20609;Rune Pata Do Neutre;8.4375;
-20610;Rune Rata Do Neutre;8.4375;
-20611;Rune Ta Ré Per Di;2.8125;
-20612;Rune Ta Ré Per Mé;2.8125;
-20613;Rune Ta Do Per So;2.8125;
-20614;Rune Ta Do Per Ar;2.8125;
-20615;Rune Ta Do Per Di;2.8125;
-20616;Rune Ta Do Per Mé;2.8125;
-20617;Rune Ta Fui;8.4375;
-20618;Rune Pata Fui;8.4375;
-20619;Rune Rata Fui;8.4375;
-20620;Rune Ta Tac;8.4375;
-20621;Rune Pata Tac;8.4375;
-20622;Rune Rata Tac;8.4375;
-20623;Rune Ta Ré Pa;16.875;
-20624;Rune Pata Ré Pa;16.875;
-20625;Rune Rata Ré Pa;16.875;
-20626;Rune Ta Ré Pme;16.875;
-20627;Rune Pata Ré Pme;16.875;
-20628;Rune Rata Ré Pme;16.875;
-20629;Rune Ta Ret Pa;16.875;
-20630;Rune Pata Ret Pa;16.875;
-20631;Rune Rata Ret Pa;16.875;
-20632;Rune Ta Ret Pme;16.875;
-20633;Rune Pata Ret Pme;16.875;
-20634;Rune Rata Ret Pme;16.875;
-20635;Rune Ta Ré Per Terre;5.625;
-20636;Rune Ta Ré Per Feu;5.625;
-20637;Rune Ta Ré Per Eau;5.625;
-20638;Rune Ta Ré Per Air;5.625;
-20639;Rune Ta Ré Per Neutre;5.625;
-20640;Rune Ta Cri;11.25;
-20641;Rune Pata Cri;11.25;
-20642;Rune Ta So;33.75;
-20643;Rune Pata So;33.75;
-20644;Rune Rata So;33.75;
-20648;Légende de Brumaire;675.0;
-20649;Légende de Brâm Barbe-Monde;1065.0;
-20650;Légende de Crocobur;1462.5;
-20651;Légende du Trompe-la-Mort;1860.0;
-20652;Légende de Dame Jhessica;2250.0;
-20653;Légende de Mille Lieues;2647.5;
-20654;Légende de Dodge;3045.0;
-20655;Légende de Fallanster;3435.0;
-20656;Légende du Cul Botté;3832.5;
-20657;Légende du Destin;4230.0;
-20658;Légende de Rykke Errel;4620.0;
-20659;Légende de Buhorado;5017.5;
-20660;Légende de Jahash Jurgen;5415.0;
-20661;Légende de Ganymède;5812.5;
-20680;Cire de Gligli Améliorée;0.45675;
-20814;Patte de Twakeuf;0.2445;
-20815;Éclat du Mawabouaino;1.67115;
-20817;Tendon de Waccro;0.287325;
-20818;Emballage Suspect;0.26115;
-20819;Dent de Waddict;0.2697;
-20820;Pompon Brunâtre;1.6767;
-20908;Mèche de Pralicienne;12.65625;
-20909;Peau de Torréfactueur;12.65625;
-20910;Chaudron de Températurge;12.65625;
-20911;Toque de Cabosseur;12.65625;
-20912;Diadème de Chocoligarque;12.65625;
-20913;Broderie de la Prêtresse de Kao;63.28125;
-20914;Éclat Kao brisé;75.9375;
-20918;Clef de la Fonderie des Waddicts;3.85665;
-20919;Clef de la Croquanterie;20.840175;
-20920;Clef du Temple du dieu Kao;214.5825;
-20940;Oreille de Kakoalak;2.25;
-20941;Pépite croquée;13.4814;
-20942;Estomac de Mansocolat;2.25;
-20943;Pelage chocolaté;2.25;
-20944;Enrobage de Chocoskargo;2.25;
-20945;Bec de Kwakao;2.25;
-20961;Relique de Bébémoth;2761.363725;
-20968;Reflet de Bébémoth;5431.5768;
-20969;Cristal temporel;5550.468975;
-20970;Cristal intemporel;5550.468825;
-20972;Nanogrine;1575.70305;
-21012;Boucle temporelle;253.125;
-21013;Boucle intemporelle;253.125;
-21205;Binocles du Grand Chronomaître;12862.17315;
-21207;Écaille de Torkélonia;63.28125;
-21208;Langue de Kashkaille;12.65625;
-21209;Bandeau de Voapah;12.65625;
-21210;Poupée de Caïguille;12.65625;
-21211;Pagne d'Alashasss;12.65625;
-21212;Canine de Cronnibal;12.65625;
-21216;Clef du Sanctuaire de Torkélonia;345.9375;
-21217;Essence de Torkélonia;379.6875;
-21249;Clef du Repaire du Kharnozor;38.7249;
-21256;Griffe de Dragoeuf Albâtre;2.7969;
-21263;Peau de Dragoeuf Albâtre;0.470925;
-21264;Étoffe de Draegnerys;2.354625;
-21268;Dent du Kharnozor;5.4687;
-21271;Cheveux de Draegnerys;13.9848;
-21513;Essence de Draegnerys;35.1051;
-21514;Essence du Kharnozor;81.705225;
-21515;Essence de Corruption;368.52015;
-21682;Peinture Jaune;4.281975;
-21683;Peinture Rouge;4.281975;
-21684;Peinture Bleue;4.281975;
-21685;Peinture Orange;4.281975;
-21686;Peinture Verte;4.281975;
-21687;Peinture Violette;4.281975;
-21689;Peinture Noire;4.281975;
-22028;Clef des Fers de la Tyrannie;80.7975;
-22046;Plume de Misère;56.25;
-22047;Épaulière de Ferrailleur;12.65625;
-22048;Langue de Krèvladal;12.65625;
-22049;Côtes de Désosseur;12.65625;
-22050;Capuche de Skentu;12.65625;
-22052;Terre Stérile;77.55315;
-22128;Essence de Guerre;337.5;
-22129;Essence de Misère;337.5;
-22130;Essence de Servitude;337.5;
-22147;Clef du Trône de Sang;80.7975;
-22148;Clef de l'Arbre de Mort;80.7975;
-22149;Clef de la Sentence de la Balance;80.7975;
-22203;Germes corrompus;78.005775;
-22204;Corne de Corruption;61.419975;
-22207;Langue de Pistilangue;12.65625;
-22208;Peau pourrie de Dolid;12.65625;
-22210;Patte de Nheur'Gueule;12.65625;
-22211;Tentacule de Tentaclaque;12.65625;
-22212;Pétale de Gangredogue;12.65625;
-22216;Bois de pagaie usée;12.65625;
-22217;Capuche d'Armécréante;12.65625;
-22218;Baguette Rythmique;12.65625;
-22219;Verrou de Servitude;56.25;
-22222;Collier d'esclave;77.55315;
-22223;Boulet lesté;12.65625;
-22224;Manche de Fouet;12.65625;
-22246;Bonnet de Guerre;56.25;
-22247;Étoffe sanglante;12.65625;
-22248;Sang coagulé;12.65625;
-22249;Canine tranchante;12.65625;
-22250;Fragment d'armure;12.65625;
-22251;Linothorax;12.65625;
-22253;Lame tranchante;77.55315;
-22401;Clef de la Tempête de l'Eliocalypse;80.7975;
-22415;Légende de Misère;5017.5;
-22416;Légende de Guerre;5017.5;
-22417;Légende de Servitude;5017.5;
-22418;Légende de Corruption;5017.5;
-23311;Artefact Pandawushu Bois;0.516225;
-23480;Huile de Riz;1.687425;
-23591;Clef de la Demeure des Esprits;41.63325;
-23592;Pierre de Sélénite;3.45;
-23630;Clef de la Tombe du Shogun Tofugawa;32.633175;
-23693;Huile de Pichon;1.856175;
-23694;Concassé de brume;26.693175;
-23824;Tulipe en papier;7.5;
-23825;Pichon d'encre;7.5;
-23950;Clef de la Mémoire d'Orukam;161.7942;
-23951;Clef du Souvenir d'Imagiro;157.800225;
-23957;Pétale de Papier;154.3059;
-23958;Poing-virgule d'Imushin;25.362825;
-23959;Carapace circonflexe d'Imorok;22.5;
-23960;Guillemets d'Imiyama;22.5;
-23961;Cédille d'Imetsu;22.5;
-23962;Apostrophe d'Imafugo;22.5;
-23963;Diacritique du Roi Imagami;108.4821;
-23965;Pétale d'encre;153.7542;
-23966;Poing-virgule de Shinlam;22.700175;
-23967;Carapace circonflexe de Rokoram;22.5;
-23968;Guillemets de Mabram;22.5;
-23969;Cédille de Tsunam;22.5;
-23970;Apostrophe de Fugokam;22.5;
-23971;Diacritique de la Reine Amirukam;108.4821;
-24133;Essence du Shogun Tofugawa;133.465875;
-24134;Essence de Koumiho;174.0789;
-24135;Essence du Roi Imagami;650.892825;
-24136;Essence de la Reine Amirukam;650.892825;
-24144;Substrat Astral;225.0;
-25176;Spalière de Krâradia;15.1875;
-25177;Diadème de Belilith;15.1875;
-25178;Scalp de Bwariok;15.1875;
-25179;Groin de Porkzebuth;15.1875;
-25180;Aile d'Eninferno;15.1875;
-25181;Sceptre brisé de Kabahal;63.28125;
-25182;Appendice Démoniaque;89.3382;
-25252;Clef du Rituel de Kabahal;164.0925;
-25318;Essence de Kabahal;379.6875;
-25756;Crâne magique de Rate Atinée;1.439025;
-25757;Tuyau Rouillé de Rate Iboisée;1.439025;
-25758;Lance-Pierre de Scélée Rate;1.107375;
-25759;Lance de Chika Rat;1.107375;
-25760;Vieux Bouquin de Rat Li;1.439025;
-25761;Ouvrage magique d'Aloevée Rate;1.107375;
-25762;Oreille de Rat Plapla;1.439025;
-25767;Collier de Chak Rat;1.107375;
-26031;Mâchoire de Brutasmodan;12.65625;
-26032;Langue de Diabélial;12.65625;
-26033;Corne de Typhomet;12.65625;
-26034;Tentacule de Démoloch;12.65625;
-26035;Épaule de Maléphisto;12.65625;
-26036;Pic de Ravageur;75.9375;
-26037;Masque cauchemardesque de l'Éternel Conflit;63.28125;
-26039;Clef de la Bataille de l'Aurore Pourpre;148.905;
-26041;Essence de l'Éternel Conflit;379.6875;
-26316;Pétale de Malter;21.348975;
-26317;Pousse de Malzerb;3.5937;
-26318;Bolas de Maltrio;3.5937;
-26319;Pic de Malépik;3.5937;
-26320;Porte-bonheur de Malalfa;3.5937;
-26321;Corne de Malbois;3.5937;
-26333;Clef du Tertre du long sommeil;27.03;
-26345;Gravure de Tsunami;41.84265;
-26347;Gravure de Séisme;46.091325;
-26348;Gravure d'Incendie;41.84265;
-26349;Gravure d'Ouragan;41.84265;
-26351;Gravure d'Averse;7.695675;
-26352;Gravure d'Éboulement;7.695675;
-26353;Gravure d'Étincelle;8.0367;
-26354;Gravure de Courant d'Air;8.0367;
-26355;Gravure de Crachin;8.0367;
-26356;Gravure de Flambée;7.695675;
-26357;Gravure de Rafale;7.695675;
-26358;Gravure de Secousse;8.0367;
-26680;Clef de l'Akadémie des Gobs;2.8164;
-26803;Essence d'Hell Mina;107.8125;
-26804;Essence du Directeur Grunob;4.921875;
-26870;Fragment d'anomalie;3.7968;
-27362;Pom de Pin;1.441275;
-27363;Fourrure de Timongouste;0.28005;
-27364;Plume de Thomondor;0.234375;
-27365;Corne de Buffalourd;0.234375;
-27366;Griffe de Grolours;0.234375;
-27367;Croc de Trankilou;0.234375;
-27368;La cambriole pour les Nuls;1.171875;
-27372;Essence de Rakoopeur;7.03125;
-27374;Clef du Refuge sylvestre;5.580225;
-27375;Bois de Pin;0.0525;
-27397;Liane de Soldalia;12.65625;
-27398;Mousse de Caméliache;12.65625;
-27399;Épine d'Armuguet;12.65625;
-27400;Poing de Coquelicogne;12.65625;
-27401;Casque de Statulipe;12.65625;
-27402;Rouge à lèvres de Belladone;63.28125;
-27403;Fleur des protecteurs;75.9375;
-27404;Clef de la Chambre des maléfices;148.905;
-27405;Essence de Belladone;379.6875;
-27413;Eau Ferrugineuse;0.86325;
-27433;Poils de barbe de Marteau-Aigri;56.249925;
-27434;Armure de Blindur;9.15;
-27435;Bave de Marthos;9.15;
-27436;Mèche de Serpyn;9.15;
-27437;Fronde de Boufronde;9.15;
-27438;Élastique de barbe de Sanglirok;9.15;
-27439;Cloche de Barbéryl Clochecuivre;45.75;
-27440;Clef du Bastion des Marteaux-Aigris;60.37875;
-27451;Essence de Barbéryl Clochecuivre;274.5;
-27517;Cire de Cire Momore;75.9375;
-27714;Fleur de Cendrepierre;210.560625;
-27748;Ronce ephedryenne;0.1878;
-28268;Farine de contrebande;27.562425;
-28269;Coffre-forge;19.124925;
-28270;Brochette de Laikteur;12.898425;
-28277;Grizite;32.067375;
-28432;Nékinéko;;393.0
-29444;Galet rayonnant;937.5;
-29683;Rune Ra Ré Pou;4.049925;
-29684;Rune Ra Do Pou;25.3125;
+id;libelle;xp_1;xp_2;last_update
+274;Pièce du Puzzle de la Griffe;1.090125;1.0;2025-01-01 00:00
+276;Pièce du Trésor du Badoul;1.090125;1.0;2025-01-01 00:00
+286;Levure de Boulanger;0.1092;;2025-01-01 00:00
+287;Graine de Sésame;0.032925;;2025-01-01 00:00
+288;Graine de Tournesol;0.0537;;2025-01-01 00:00
+289;Blé;0.0225;;2025-01-01 00:00
+290;Champignon;0.42345;;2025-01-01 00:00
+291;Poils de Mulounoké;1.01205;0.5;2025-01-01 00:00
+292;Testicules de Cocholou;6.03225;8.0;2025-01-01 00:00
+300;Graine de Pavot;0.067125;;2025-01-01 00:00
+301;Plume de Tofu;0.132;;2025-01-01 00:00
+302;Tambour de Gobaladée;0.15435;;2025-01-01 00:00
+303;Bois de Frêne;0.0225;;2025-01-01 00:00
+304;Cuir de Scélérat Strubien;0.083175;0.125;2025-01-01 00:00
+305;Dent de Wabbit;0.193875;;2025-01-01 00:00
+306;Fleur de Pissenlit Diabolique;0.054525;;2025-01-01 00:00
+307;Ailes de Moskito;0.067125;;2025-01-01 00:00
+308;Coquille de Dragoeuf Calcaire;0.508725;;2025-01-01 00:00
+309;Pétale de Rose Démoniaque;0.050775;;2025-01-01 00:00
+310;Os de Chafer;0.0384;;2025-01-01 00:00
+311;Eau Potable;0.035025;;2025-01-01 00:00
+312;Fer;0.0225;;2025-01-01 00:00
+313;Or;0.164925;;2025-01-01 00:00
+315;Diamant;2.5614;;2025-01-01 00:00
+316;Émeraude;4.509;;2025-01-01 00:00
+350;Argent;0.1275;;2025-01-01 00:00
+360;Oreilles du Tiwabbit;1.1718;;2025-01-01 00:00
+361;Cawotte;0.6846;;2025-01-01 00:00
+362;Peau de Larve Bleue;0.056175;;2025-01-01 00:00
+363;Peau de Larve Orange;0.056175;;2025-01-01 00:00
+364;Peau de Larve Verte;0.056175;;2025-01-01 00:00
+365;Patte d'Arakne;0.067125;;2025-01-01 00:00
+366;Bec du Tofu;0.04395;0.066666667;2025-01-01 00:00
+368;Gelée à la Fraise;0.22875;;2025-01-01 00:00
+369;Gelée à la Menthe;0.213;;2025-01-01 00:00
+370;Gelée Bleuet Royale;1.67115;;2025-01-01 00:00
+371;Sourcil de Moskito;0.545325;;2025-01-01 00:00
+372;Bandeau du Black Tiwabbit;0.204375;;2025-01-01 00:00
+373;Intestin d'Araknosé;0.04395;0.066666667;2025-01-01 00:00
+374;Langue d'Épouvanteur;0.0537;;2025-01-01 00:00
+375;Dent de Tofu Mutant;0.132;;2025-01-01 00:00
+376;Aile du Tofu Maléfique;0.07635;;2025-01-01 00:00
+377;Épine du Champ Champ;0.067125;;2025-01-01 00:00
+378;Sporme du Champ Champ;0.6717;;2025-01-01 00:00
+379;Pince de Crabe;0.204375;;2025-01-01 00:00
+380;Menthe Sauvage;0.074925;;2025-01-01 00:00
+381;Fraise;0.321975;;2025-01-01 00:00
+382;Longue-vue de Gob-Trotteur;0.15435;;2025-01-01 00:00
+383;Corne de Boufton;0.0747;;2025-01-01 00:00
+384;Laine de Bouftou;0.056475;;2025-01-01 00:00
+385;Bave de Bouftou;0.03075;;2025-01-01 00:00
+387;Défense du Sanglier;0.076125;;2025-01-01 00:00
+388;Poils d'Arakne Malade;0.04395;;2025-01-01 00:00
+389;Huile de Tournesol Sauvage;0.806025;;2025-01-01 00:00
+390;Huile de Noix;2.586375;;2025-01-01 00:00
+391;Noix de Cajou;0.120825;0.015384615;2025-01-01 00:00
+392;Noix de Pécan;0.22395;0.047619048;2025-01-01 00:00
+393;Gland;0.083175;;2025-01-01 00:00
+394;Noisette;0.07455;;2025-01-01 00:00
+395;Trèfle à 5 feuilles;0.0525;;2025-01-01 00:00
+396;Huile de Palme;1.839675;;2025-01-01 00:00
+397;Huile de Koode;3.75105;;2025-01-01 00:00
+399;Huile de Sésame;0.4944;;2025-01-01 00:00
+400;Orge;0.037425;;2025-01-01 00:00
+401;Houblon;0.074925;;2025-01-01 00:00
+405;Malt;0.1275;;2025-01-01 00:00
+406;Estomac de Wo Wabbit;1.784625;;2025-01-01 00:00
+407;Pic de Prespic;0.083175;;2025-01-01 00:00
+408;Dentier du Chafer d'Élite;1.2201;;2025-01-01 00:00
+409;Poils de Barbe du Bwork Mage;0.185625;0.019607843;2025-01-01 00:00
+410;Livre du Bwork Mage;1.11;0.333333333;2025-01-01 00:00
+411;Bec du Kwak de Glace;0.190275;;2025-01-01 00:00
+412;Bec du Kwak de Flamme;0.190275;;2025-01-01 00:00
+413;Bec du Kwak de Vent;0.190275;;2025-01-01 00:00
+414;Plume du Kwak de Glace;0.190275;;2025-01-01 00:00
+415;Plume du Kwak de Flamme;0.190275;;2025-01-01 00:00
+416;Plume du Kwak de Vent;0.190275;;2025-01-01 00:00
+417;Boue du Boo;0.086925;;2025-01-01 00:00
+418;Poils de Barbe du Grand Pa Wabbit;0.2964;;2025-01-01 00:00
+419;Oreille du Grand Pa Wabbit;0.2964;;2025-01-01 00:00
+420;Ficelle en Lin;0.135;0.005181347;2025-01-01 00:00
+421;Ortie;0.0225;;2025-01-01 00:00
+423;Lin;0.09;;2025-01-01 00:00
+424;Fibre criminelle;2.515125;;2025-01-01 00:00
+425;Chanvre;0.149925;;2025-01-01 00:00
+426;Fibre de Chanvre;6.9432;2.0;2025-01-01 00:00
+428;Sauge;0.037425;;2025-01-01 00:00
+429;Miséricorde du Chafer d'Élite;0.204375;;2025-01-01 00:00
+430;Os Invisible du Chafer Invisible;0.511725;;2025-01-01 00:00
+431;Pierre du Craqueleur;0.3252;0.142857143;2025-01-01 00:00
+432;Côtes du Rib;0.13695;;2025-01-01 00:00
+433;Fémur du Chafer Archer;1.2201;;2025-01-01 00:00
+435;Racine d'Abraknyde;0.22695;0.032258065;2025-01-01 00:00
+438;Queue du Mulou;0.84075;0.25;2025-01-01 00:00
+439;Canine de Mergranlou;1.01205;0.5;2025-01-01 00:00
+440;Griffe de Muloubard;1.01205;0.5;2025-01-01 00:00
+441;Cuivre;0.037425;;2025-01-01 00:00
+442;Bronze;0.0525;;2025-01-01 00:00
+443;Kobalte;0.074925;;2025-01-01 00:00
+444;Étain;0.112425;;2025-01-01 00:00
+445;Manganèse;0.09;;2025-01-01 00:00
+446;Bauxite;0.149925;;2025-01-01 00:00
+447;Charbon;0.466275;0.1;2025-01-01 00:00
+448;Silex;0.5157;0.142857143;2025-01-01 00:00
+449;Bois d'Ébène;0.149925;;2025-01-01 00:00
+450;Pierre de Granit;0.606375;0.81;2025-01-01 00:00
+460;Bois de Chêne;0.074925;;2025-01-01 00:00
+461;Bois d'If;0.112425;;2025-01-01 00:00
+463;Ambre;0.2511;0.033333333;2025-01-01 00:00
+464;Ambre d'Abraknyde;1.7268;0.25;2025-01-01 00:00
+465;Cristal;6.70875;;2025-01-01 00:00
+466;Saphir;6.3078;;2025-01-01 00:00
+467;Rubis;4.3122;;2025-01-01 00:00
+470;Bois d'Orme;0.1875;;2025-01-01 00:00
+471;Bois d'Érable;0.09;;2025-01-01 00:00
+472;Bois de Charme;0.164925;;2025-01-01 00:00
+473;Bois de Châtaignier;0.037425;;2025-01-01 00:00
+474;Bois de Merisier;0.1275;;2025-01-01 00:00
+476;Bois de Noyer;0.0525;;2025-01-01 00:00
+479;Ivoire;0.458625;0.045454545;2025-01-01 00:00
+480;Minerai Étrange;1.813125;;2025-01-01 00:00
+485;Slip en cuir du Chafer Lancier;0.204375;;2025-01-01 00:00
+486;Cuir de Gargrouille;0.132;;2025-01-01 00:00
+519;Poudre de Perlinpainpain;0.037725;;2025-01-01 00:00
+532;Seigle;0.112425;;2025-01-01 00:00
+533;Avoine;0.0525;;2025-01-01 00:00
+543;Pierre de Diamant;0.452325;;2025-01-01 00:00
+544;Pierre d'Émeraude;0.663825;;2025-01-01 00:00
+545;Pierre de Cristal;1.374;;2025-01-01 00:00
+546;Pierre de Saphir;1.92735;;2025-01-01 00:00
+547;Pierre de Rubis;1.2621;;2025-01-01 00:00
+593;Orchidée Freyesque;0.09;;2025-01-01 00:00
+594;Edelweiss;0.112425;;2025-01-01 00:00
+598;Greuvette;0.03;;2025-01-01 00:00
+600;Kralamoure;0.105;;2025-01-01 00:00
+602;Requin Marteau-Faucille;0.157425;;2025-01-01 00:00
+603;Poisson-Chaton;0.0525;;2025-01-01 00:00
+641;Coton Ancestral;0.32115;;2025-01-01 00:00
+642;Cocon de Ver à Soie;0.797925;;2025-01-01 00:00
+643;Fil de Soie;0.33435;;2025-01-01 00:00
+646;Poils de Black Tiwabbit;1.2201;;2025-01-01 00:00
+648;Aile de Bourdard;0.2964;;2025-01-01 00:00
+649;Poils de Wo Wabbit;1.784625;;2025-01-01 00:00
+650;Duvet de Bourdard;1.775325;;2025-01-01 00:00
+651;Étoffe du Mulou;5.622675;2.0;2025-01-01 00:00
+652;Étoffe du Sanglier;0.456375;;2025-01-01 00:00
+653;Étoffe d'Écurouille;0.498825;;2025-01-01 00:00
+654;Étoffe du Wabbit;1.320975;;2025-01-01 00:00
+746;Ebonite;1.6875;;2025-01-01 00:00
+747;Aluminite;0.899925;;2025-01-01 00:00
+748;Magnésite;2.812425;;2025-01-01 00:00
+749;Bakélélite;3.824925;;2025-01-01 00:00
+750;Kouartz;4.949925;;2025-01-01 00:00
+752;Sang de Vampire;0.08565;;2025-01-01 00:00
+756;Slip en Cuir Moulant du Garglyphe;0.797925;;2025-01-01 00:00
+757;Gelée Bleuet;0.2001;;2025-01-01 00:00
+792;Muqueuse de Moumoule;1.2201;;2025-01-01 00:00
+838;Manuel du Directeur Grunob;0.820275;;2025-01-01 00:00
+840;Poils du Minotoror;6.1401;4.0;2025-01-01 00:00
+842;Coquille de Dragoeuf Argile;0.470925;;2025-01-01 00:00
+843;Coquille de Dragoeuf Charbon;0.470925;;2025-01-01 00:00
+880;Laine de Bouftou Royal;2.78655;;2025-01-01 00:00
+881;Laine de Ramane Strubien;0.07275;0.111111111;2025-01-01 00:00
+882;Laine du Chef de Guerre Bouftou;0.0933;;2025-01-01 00:00
+883;Cuir de Boostache Prépubère;0.132;;2025-01-01 00:00
+884;Cuir de Bouftou Noir;0.078;;2025-01-01 00:00
+885;Laine de Boufton Noir;0.081825;;2025-01-01 00:00
+886;Cuir de Bouftou Royal;0.46455;;2025-01-01 00:00
+887;Cuir de Ouassingue;0.132;0.1;2025-01-01 00:00
+901;Cuir du Cochon de Lait;0.124125;;2025-01-01 00:00
+929;Kristalite;39.1281;16.0;2025-01-01 00:00
+961;Morceau de clef du Matin Pewlant;12.812475;;2025-01-01 00:00
+962;Morceau de clef du Midi Wayonnant;12.812475;;2025-01-01 00:00
+963;Morceau de clef du Soiw Woulant;12.812475;;2025-01-01 00:00
+965;Pierre de Dopeul;3.084525;;2025-01-01 00:00
+997;Noix de Kokoko;1.3992;1.0;2025-01-01 00:00
+998;Caleçon Mignon du Pirate;0.826875;0.5;2025-01-01 00:00
+1002;Tronc de Kokoko;0.234375;0.166666667;2025-01-01 00:00
+1018;Kole;4.909575;4.0;2025-01-01 00:00
+1129;Coquille de Dragoeuf Ardoise;0.470925;;2025-01-01 00:00
+1141;Plume du Kwak de Terre;0.190275;;2025-01-01 00:00
+1142;Bec du Kwak de Terre;0.190275;;2025-01-01 00:00
+1333;Potion d'Étincelle;8.876775;;2025-01-01 00:00
+1335;Potion de Crachin;8.876775;;2025-01-01 00:00
+1337;Potion de Courant d'Air;8.876775;;2025-01-01 00:00
+1338;Potion de Secousse;8.876775;;2025-01-01 00:00
+1340;Potion d'Éboulement;7.74825;;2025-01-01 00:00
+1341;Potion d'Averse;7.74825;;2025-01-01 00:00
+1342;Potion de Rafale;7.74825;;2025-01-01 00:00
+1343;Potion de Flambée;7.74825;;2025-01-01 00:00
+1345;Potion d'Incendie;39.082725;;2025-01-01 00:00
+1346;Potion de Tsunami;39.082725;;2025-01-01 00:00
+1347;Potion d'Ouragan;39.082725;;2025-01-01 00:00
+1348;Potion de Séisme;43.3314;;2025-01-01 00:00
+1455;Ailes de Scarafeuille Bleu;0.1602;;2025-01-01 00:00
+1456;Ailes de Scarafeuille Blanc;0.1602;;2025-01-01 00:00
+1457;Ailes de Scarafeuille Rouge;0.1602;;2025-01-01 00:00
+1458;Ailes de Scarafeuille Vert;0.1602;;2025-01-01 00:00
+1461;Poison cinglant;6.2718;;2025-01-01 00:00
+1462;Liquide vampiresque;0.41145;;2025-01-01 00:00
+1463;Fiole à élément;1.740075;;2025-01-01 00:00
+1519;Rune Fo;0.074925;0.090909091;2025-01-01 00:00
+1521;Rune Sa;0.675;0.5;2025-01-01 00:00
+1522;Rune Ine;0.074925;0.090909091;2025-01-01 00:00
+1523;Rune Vi;0.074925;0.090909091;2025-01-01 00:00
+1524;Rune Age;0.074925;0.090909091;2025-01-01 00:00
+1525;Rune Cha;0.074925;0.090909091;2025-01-01 00:00
+1526;Métaria rouge;1.427325;;2025-01-01 00:00
+1527;Métaria bleue;1.427325;;2025-01-01 00:00
+1528;Métaria jaune;1.427325;;2025-01-01 00:00
+1529;Métaria verte;1.427325;;2025-01-01 00:00
+1531;Métaria Triame bleue;1.201575;;2025-01-01 00:00
+1532;Métaria Triame verte;1.201575;;2025-01-01 00:00
+1533;Métaria Triame rouge;1.201575;;2025-01-01 00:00
+1534;Métaria Triame jaune;1.201575;;2025-01-01 00:00
+1535;Métaria Mage rouge;7.4685;;2025-01-01 00:00
+1536;Métaria Mage bleue;7.4685;;2025-01-01 00:00
+1537;Métaria Mage verte;7.4685;;2025-01-01 00:00
+1538;Métaria Mage jaune;8.31825;;2025-01-01 00:00
+1545;Rune Pa Fo;0.337425;0.25;2025-01-01 00:00
+1546;Rune Pa Sa;3.0375;1.0;2025-01-01 00:00
+1547;Rune Pa Ine;0.337425;0.25;2025-01-01 00:00
+1548;Rune Pa Vi;0.337425;0.25;2025-01-01 00:00
+1549;Rune Pa Age;0.337425;0.25;2025-01-01 00:00
+1550;Rune Pa Cha;0.337425;0.25;2025-01-01 00:00
+1551;Rune Ra Fo;1.012425;1.0;2025-01-01 00:00
+1552;Rune Ra Sa;9.1125;4.0;2025-01-01 00:00
+1553;Rune Ra Ine;1.012425;1.0;2025-01-01 00:00
+1554;Rune Ra Vi;1.012425;1.0;2025-01-01 00:00
+1555;Rune Ra Age;1.012425;1.0;2025-01-01 00:00
+1556;Rune Ra Cha;1.012425;1.0;2025-01-01 00:00
+1557;Rune Ga Pa;500.0;500.0;2026-02-03 23:50
+1558;Rune Ga Pme;405.0;405.0;2026-02-03 23:50
+1568;Clef de la Cour du Bouftou Royal;1.5846;;2025-01-01 00:00
+1569;Clef du Donjon des Forgerons;2.649375;;2025-01-01 00:00
+1570;Clef du Donjon des Squelettes;3.177225;;2025-01-01 00:00
+1610;Roue de Tivelo;0.759225;0.5;2025-01-01 00:00
+1611;Bourgeon de Pirolienne;0.759225;0.5;2025-01-01 00:00
+1612;Racine d'Abraknyde Sombre;0.633075;0.5;2025-01-01 00:00
+1613;Écaille de Chef Crocodaille;0.469725;;2025-01-01 00:00
+1614;Bombe de Graboule;0.759225;0.5;2025-01-01 00:00
+1652;Patte d'Arakne Majeure;0.2283;;2025-01-01 00:00
+1660;Ambre d'Abraknyde Sombre;0.463875;;2025-01-01 00:00
+1663;Écaille de Crocodaille;0.204375;;2025-01-01 00:00
+1664;Dent de Crocodaille;0.204375;;2025-01-01 00:00
+1671;Avoine Magique;4.5978;6.0;2025-01-01 00:00
+1672;Poils de Darit;0.498825;;2025-01-01 00:00
+1673;Patte d'Arakne Magique;0.6717;;2025-01-01 00:00
+1674;Champignon Luidegît;0.3267;;2025-01-01 00:00
+1675;Os Surprise du Chafer Fantassin;0.4854;;2025-01-01 00:00
+1676;Osier Enchanté;4.5978;;2025-01-01 00:00
+1678;Noix de Grokoko Traumatisée;0.234375;0.166666667;2025-01-01 00:00
+1679;Pierre de Crystaloboule;0.35745;0.25;2025-01-01 00:00
+1680;Corne Brûlée du Minotoror;36.663375;47.0;2025-01-01 00:00
+1681;Peau Égrotante;0.265725;0.5;2025-01-01 00:00
+1682;Écorce de Liroye Merline;3.83385;5.0;2025-01-01 00:00
+1683;Sac à Patates Clair;1.050675;0.5;2025-01-01 00:00
+1684;Sac à Patates Sombre;1.050675;0.5;2025-01-01 00:00
+1686;Teinture Magique de Rougeur;5.173125;;2025-01-01 00:00
+1687;Teinture Magique Verdâtre;3.9354;;2025-01-01 00:00
+1688;Teinture Magique Bleutée;1.985625;;2025-01-01 00:00
+1689;Teinture Magique Orange;2.21115;;2025-01-01 00:00
+1690;Poils du Milimulou;0.083175;;2025-01-01 00:00
+1691;Faux Visage de Choudini;4.1346;2.0;2025-01-01 00:00
+1692;Teinture Magique Sombre;2.015175;;2025-01-01 00:00
+1694;Laine du Trooll Furieux;9.822225;;2025-01-01 00:00
+1696;Étoffe de Choudini;25.03875;22.0;2025-01-01 00:00
+1736;Citron;0.01875;;2025-01-01 00:00
+1750;Poisson Pané;0.067425;;2025-01-01 00:00
+1754;Poisson Igloo;6.749925;;2025-01-01 00:00
+1757;Crabe Sourimi;0.045;;2025-01-01 00:00
+1759;Crabe Sourimi Exotique;4.5;;2025-01-01 00:00
+1762;Poisson-Tigre;5.249925;;2025-01-01 00:00
+1770;Bout de Blop Coco;0.08685;;2025-01-01 00:00
+1771;Souris verte;0.303;;2025-01-01 00:00
+1773;Bout de Blop Reinette;0.08685;;2025-01-01 00:00
+1775;Bout de Blop Griotte;0.08685;;2025-01-01 00:00
+1777;Bout de Blop Indigo;0.08685;;2025-01-01 00:00
+1779;Bar Rikain;0.164925;;2025-01-01 00:00
+1782;Goujon;0.0225;;2025-01-01 00:00
+1784;Raie Bleue;0.142425;;2025-01-01 00:00
+1786;Greuvette Horreur;3.0;;2025-01-01 00:00
+1788;Raie de Farle;14.249925;;2025-01-01 00:00
+1790;Goujon Kiye;2.25;;2025-01-01 00:00
+1792;Bar Iton;16.5;;2025-01-01 00:00
+1794;Carpe d'Iem;0.074925;;2025-01-01 00:00
+1796;Carpette des sables;7.5;;2025-01-01 00:00
+1799;Kralamoure Unique;10.499925;;2025-01-01 00:00
+1801;Perche;0.1275;;2025-01-01 00:00
+1803;Chaton-Perche;12.75;;2025-01-01 00:00
+1805;Sardine Brillante;0.082425;;2025-01-01 00:00
+1807;Sardine Sombre;8.25;;2025-01-01 00:00
+1844;Truite;0.037425;;2025-01-01 00:00
+1846;Truite Ancestrale;3.75;;2025-01-01 00:00
+1847;Brochet;0.09;;2025-01-01 00:00
+1849;Brochet Tupe-Halett;9.0;;2025-01-01 00:00
+1853;Requin Marché-Libre;15.749925;;2025-01-01 00:00
+1889;Plume de Crowneille;0.42345;0.333333333;2025-01-01 00:00
+1890;Poil de Vétauran;0.4335;;2025-01-01 00:00
+1891;Peau de serpentin;0.2964;;2025-01-01 00:00
+1894;Poil de Gliglitch;3.40875;;2025-01-01 00:00
+1974;Feuille de Salace;0.0441;;2025-01-01 00:00
+1984;Cendres Éternelles;0.0321;;2025-01-01 00:00
+2012;Sang de Scorbute;;0.0;2025-01-01 00:00
+2018;Blé d'Or;2.25;;2025-01-01 00:00
+2021;Houblon Brillant;7.5;;2025-01-01 00:00
+2026;Lin Tempête;9.0;;2025-01-01 00:00
+2029;Seigle Résistant;11.25;;2025-01-01 00:00
+2032;Orge en Sucre;3.75;;2025-01-01 00:00
+2035;Chanvre Euphorique;15.0;;2025-01-01 00:00
+2036;Avoine Aurifère;5.249925;;2025-01-01 00:00
+2059;Corbac Mort;6.75825;;2025-01-01 00:00
+2060;Patte de Corbac;1.122675;;2025-01-01 00:00
+2150;Graine de Scorbute;0.42345;;2025-01-01 00:00
+2179;Dent de Dragodinde;0.42345;0.5;2025-01-01 00:00
+2241;Gelée Menthe Royale;1.67115;;2025-01-01 00:00
+2242;Gelée Fraise Royale;1.67115;;2025-01-01 00:00
+2247;Plume de Tofu Royal;12.994125;;2025-01-01 00:00
+2249;Dent de Garglyphe;0.132;;2025-01-01 00:00
+2250;Bois de Tronknyde;0.15465;0.058823529;2025-01-01 00:00
+2251;Méga Pierre du Craqueleur;2.447325;0.5;2025-01-01 00:00
+2252;Dent en Or de Craqueleur;1.939725;;2025-01-01 00:00
+2253;Fleur de Gloutovore;0.820275;0.5;2025-01-01 00:00
+2254;Feuille de Fourbasse;0.820275;0.5;2025-01-01 00:00
+2259;Pic de Lance de Gobet;0.15435;;2025-01-01 00:00
+2264;Canine de Gobelin;0.3327;;2025-01-01 00:00
+2266;Lait de Cochon de Lait;1.0956;;2025-01-01 00:00
+2268;Scalp de Bwork Archer;1.0368;0.333333333;2025-01-01 00:00
+2271;Cuir Violet de Mégabwork;4.5978;;2025-01-01 00:00
+2273;Tissu Pourpre;0.759225;;2025-01-01 00:00
+2274;Bougie du Mineur Sombre;0.572025;0.25;2025-01-01 00:00
+2275;Cuir de Porkass;0.204375;;2025-01-01 00:00
+2277;Linceul;1.2201;;2025-01-01 00:00
+2278;Tissu Invisible;0.511725;;2025-01-01 00:00
+2279;Canine Vampiresque;0.087375;;2025-01-01 00:00
+2280;Paille Vampiresque;1.090125;;2025-01-01 00:00
+2281;Tissu de Graboule;4.5978;;2025-01-01 00:00
+2282;Touffe de Cheveux Blancs;1.2201;;2025-01-01 00:00
+2285;Tissu Sombre;0.797925;;2025-01-01 00:00
+2286;Bandelettes;0.759225;0.5;2025-01-01 00:00
+2287;Concombre;2.25;;2025-01-01 00:00
+2288;Patte de Wabbit;0.219;;2025-01-01 00:00
+2294;Viscères de Scarafeuille;0.9795;;2025-01-01 00:00
+2295;Fragment d'Épée Reptilienne;2.515125;;2025-01-01 00:00
+2297;Flèche du Chafer Archer;0.204375;;2025-01-01 00:00
+2299;Mèche Rebelle d'Hell Mina;17.968725;;2025-01-01 00:00
+2300;Fragment d'Os;1.324725;;2025-01-01 00:00
+2301;Moustache de Kolérat;0.42345;0.333333333;2025-01-01 00:00
+2302;Langue d'Étoile;1.2201;;2025-01-01 00:00
+2303;Carapace vide de Crabe;1.2201;;2025-01-01 00:00
+2304;Fragment de Pierre Polie;0.41205;0.076923077;2025-01-01 00:00
+2305;Fragment de Pierre Pointue;0.407325;0.142857143;2025-01-01 00:00
+2316;Couteau de Roukouto;0.759225;0.5;2025-01-01 00:00
+2318;Feuille de Rose Obscure;0.43065;;2025-01-01 00:00
+2320;Collier Cassé de Macien;2.515125;3.0;2025-01-01 00:00
+2321;Babines de Macien;0.42345;0.333333333;2025-01-01 00:00
+2322;Crocs de Rats;0.083175;0.125;2025-01-01 00:00
+2323;Colonne Vertébrale;0.7344;;2025-01-01 00:00
+2330;Capsule Explosive;0.190425;0.028571429;2025-01-01 00:00
+2336;Crâne de Chafer;0.797925;;2025-01-01 00:00
+2357;Bois d'Oliviolet;0.105;;2025-01-01 00:00
+2358;Bois de Bombu;0.082425;;2025-01-01 00:00
+2436;Gelée Citron;0.212025;;2025-01-01 00:00
+2437;Gelée Citron Royale;1.67115;;2025-01-01 00:00
+2448;Cervelle de Bouftou des Cavernes;31.68255;8.0;2025-01-01 00:00
+2451;Patte d'Arakne des Égouts;0.498825;;2025-01-01 00:00
+2454;Estomac de Tofu Ventripotent;0.797925;;2025-01-01 00:00
+2455;Sang de Bouftou;0.361275;;2025-01-01 00:00
+2463;Dent de Kwoan;0.797925;;2025-01-01 00:00
+2464;Queue de Boostache Prépubère;0.797925;;2025-01-01 00:00
+2466;Langue de Gargrouille;0.797925;;2025-01-01 00:00
+2467;Rondelles de Milirat Strubien;0.498825;1.0;2025-01-01 00:00
+2468;Estomac de Ouassingue;0.797925;1.0;2025-01-01 00:00
+2479;Fléau de Robot Fléau;1.794075;;2025-01-01 00:00
+2480;Slip en cuir de Porkass;1.2201;;2025-01-01 00:00
+2481;Chaîne de Robot Fléau;0.2964;;2025-01-01 00:00
+2482;Charnière Cassée;0.303;;2025-01-01 00:00
+2483;Bidule inutile;1.832625;;2025-01-01 00:00
+2484;Trident Cassé;0.204375;;2025-01-01 00:00
+2486;Coque Endommagée;0.2964;;2025-01-01 00:00
+2488;Viscères de Scorbute;2.4609;3.0;2025-01-01 00:00
+2496;Queue de Rat d'Hyoactif;0.2964;0.2;2025-01-01 00:00
+2497;Oreille de Guerrier Mental;0.2964;0.142857143;2025-01-01 00:00
+2500;Kolérat Mort;2.515125;3.0;2025-01-01 00:00
+2502;Papatte de Croc Gland;0.41205;0.25;2025-01-01 00:00
+2504;Langue de Craquelope;2.112525;1.0;2025-01-01 00:00
+2505;Baballe;1.046775;;2025-01-01 00:00
+2506;Grelot;1.803525;;2025-01-01 00:00
+2507;Peau de Larve Champêtre;1.8228;;2025-01-01 00:00
+2508;Venin de Serpentin;1.784625;;2025-01-01 00:00
+2509;Dent de Larve Champêtre;0.303;;2025-01-01 00:00
+2510;Estomac de Gliglidoudur;19.2948;;2025-01-01 00:00
+2511;Cuir de Gliglibido;3.2724;;2025-01-01 00:00
+2512;Queue de Sanglier des Plaines;1.125;;2025-01-01 00:00
+2513;Étoffe de Gliglidoudur;3.2724;;2025-01-01 00:00
+2514;Sabot de Gliglicérin;19.47855;;2025-01-01 00:00
+2515;Groin de Sanglier des Plaines;0.186375;;2025-01-01 00:00
+2516;Défense de Gliglicérin;3.2724;;2025-01-01 00:00
+2527;Clakoss;30.210975;;2025-01-01 00:00
+2528;Ongle de Kanigrou;0.470925;;2025-01-01 00:00
+2539;Substrat de Buisson;3.037425;;2025-01-01 00:00
+2540;Substrat de Futaie;4.049925;;2025-01-01 00:00
+2543;Substrat de Fascine;10.2375;;2025-01-01 00:00
+2549;Boîte de Vétauran;0.34005;;2025-01-01 00:00
+2550;Étoffe de Foufayteur;2.54325;;2025-01-01 00:00
+2551;Oreille de Foufayteur;0.42345;;2025-01-01 00:00
+2554;Côtes de Porkass;1.2201;;2025-01-01 00:00
+2555;Courroie en cuir;1.784625;;2025-01-01 00:00
+2558;Blop Mort;1.035675;;2025-01-01 00:00
+2559;Crinière de Troollaraj;1.660275;;2025-01-01 00:00
+2560;Épaulière de Troolligark;9.822225;;2025-01-01 00:00
+2561;Bracelet de Force de Trooll;9.822225;;2025-01-01 00:00
+2562;Slip de Troollaraj;9.822225;;2025-01-01 00:00
+2563;Peau de Larve Jaune;0.056175;;2025-01-01 00:00
+2564;Sourcils de Tronknyde;0.919725;0.5;2025-01-01 00:00
+2565;Rondelle de Bois;0.797925;;2025-01-01 00:00
+2566;Tranche Magique de Krambwork;4.5978;;2025-01-01 00:00
+2571;Patte de Tofukaz;0.132;;2025-01-01 00:00
+2572;Estomac de Tofukaz;0.797925;;2025-01-01 00:00
+2574;Crinière de Scélérat Strubien;0.4365;1.0;2025-01-01 00:00
+2575;Scalp de Mulounoké;6.03225;8.0;2025-01-01 00:00
+2576;Scalp de Milimulou;0.49995;;2025-01-01 00:00
+2577;Scalp du Meulou;4.101525;;2025-01-01 00:00
+2584;Main de Boo;0.42345;;2025-01-01 00:00
+2586;Aile de Dragodinde Rousse Sauvage;2.54325;;2025-01-01 00:00
+2588;Aile de Dragodinde;2.150625;0.5;2025-01-01 00:00
+2599;Pic de Dragodinde;0.3597;0.142857143;2025-01-01 00:00
+2602;Plume de Domoizelle;0.820275;0.5;2025-01-01 00:00
+2605;Plume de Dostrogo;0.820275;;2025-01-01 00:00
+2607;Trukikol Mort;0.820275;0.5;2025-01-01 00:00
+2609;Carapace Verte;0.234375;0.166666667;2025-01-01 00:00
+2610;Carapace Rouge;0.234375;0.166666667;2025-01-01 00:00
+2611;Carapace Jaune;0.234375;0.166666667;2025-01-01 00:00
+2613;Carapace Bleue;0.234375;0.166666667;2025-01-01 00:00
+2617;Tranche de Nodkoko;0.234375;0.166666667;2025-01-01 00:00
+2618;Kokopaille;0.2277;0.083333333;2025-01-01 00:00
+2619;Lait de Tortue;1.3992;1.0;2025-01-01 00:00
+2620;Rhum de Qualité;0.826875;0.5;2025-01-01 00:00
+2621;Barbe du Chouque;4.1346;2.0;2025-01-01 00:00
+2622;Boulet de Canondorf;0.826875;0.5;2025-01-01 00:00
+2623;Bwak Squelettique;25.03875;22.0;2025-01-01 00:00
+2624;Feuille de Tikoko;0.234375;0.166666667;2025-01-01 00:00
+2625;Poupée Vaudou Eth;0.3342;0.25;2025-01-01 00:00
+2626;Poupée Vaudou Jav;0.3342;0.25;2025-01-01 00:00
+2627;Poupée Vaudou Sarbak;0.3342;0.25;2025-01-01 00:00
+2628;Poupée Vaudou Ark;0.3342;0.25;2025-01-01 00:00
+2632;Glouto Rhum;0.820275;0.5;2025-01-01 00:00
+2642;Mâchoire de Rib;0.80445;;2025-01-01 00:00
+2645;Groin de Dragon Cochon;4.101525;2.0;2025-01-01 00:00
+2646;Slip en cuir de Cochon de Lait;1.353075;;2025-01-01 00:00
+2647;Oreille de Médibwork;0.759225;;2025-01-01 00:00
+2648;Griffes de Kwak;0.190275;;2025-01-01 00:00
+2649;Ver de Terre;1.136175;;2025-01-01 00:00
+2650;Ver d'Eau;1.136175;;2025-01-01 00:00
+2651;Ver de Feu;1.136175;;2025-01-01 00:00
+2652;Ver d'Air;1.136175;;2025-01-01 00:00
+2653;Arakne Majeure Morte;1.486125;;2025-01-01 00:00
+2654;Eau de Kwapa;13.578;;2025-01-01 00:00
+2656;Os rongé de Gobichon;0.15435;;2025-01-01 00:00
+2659;Pétale de Tournesol Sauvage;0.056175;;2025-01-01 00:00
+2661;Feuille de Tournesol Sauvage;0.33435;;2025-01-01 00:00
+2662;Bave de Rose Démoniaque;0.302625;;2025-01-01 00:00
+2663;Engrais;0.325425;;2025-01-01 00:00
+2664;Os de Crocodaille;1.308;;2025-01-01 00:00
+2665;Herbe Folle;0.32115;;2025-01-01 00:00
+2669;Chauve-souris;0.790125;;2025-01-01 00:00
+2674;Bonnet de Gobaliste;0.15435;;2025-01-01 00:00
+2675;Plume de Tofu Maléfique;0.57945;;2025-01-01 00:00
+2676;Noeul Mort;0.40635;;2025-01-01 00:00
+2805;Testicules Magiques de Muloubard;6.03225;8.0;2025-01-01 00:00
+2806;Testicules Magiques du Meulou;24.54795;29.0;2025-01-01 00:00
+3001;Épaulière de Bwork;0.2457;;2025-01-01 00:00
+3002;Botte trouée de Mégabwork;0.759225;;2025-01-01 00:00
+3208;Slip de Bwork Archer;0.171975;0.035714286;2025-01-01 00:00
+3209;Scalp de Bizarbwork;4.5978;;2025-01-01 00:00
+6457;Kriptonite;6.8625;;2025-01-01 00:00
+6458;Kobalite;8.325;;2025-01-01 00:00
+6475;Casque Cassé du Chafer;0.590925;;2025-01-01 00:00
+6476;Griffe de Robionicle;0.303;;2025-01-01 00:00
+6478;Makroute Déchiqueté;1.2201;;2025-01-01 00:00
+6479;Ours Déchiqueté;1.2201;;2025-01-01 00:00
+6480;Osier Sombre;2.2038;;2025-01-01 00:00
+6488;Racine du Chêne Mou;8.663775;7.0;2025-01-01 00:00
+6490;Ambre du Chêne Mou;52.198725;76.0;2025-01-01 00:00
+6736;Bourgeon de Fourbasse;0.820275;0.5;2025-01-01 00:00
+6738;Crâne de Chef Crocodaille;2.83455;;2025-01-01 00:00
+6739;Peau de Roukouto;4.5978;6.0;2025-01-01 00:00
+6740;Peau de Tivelo;4.5978;6.0;2025-01-01 00:00
+6842;Pétale de Rose Obscure;0.0714;;2025-01-01 00:00
+6843;Gant de Sherpoa;0.083175;;2025-01-01 00:00
+6844;Oreille de Douzdoa;0.083175;0.066666667;2025-01-01 00:00
+6845;Casque de Martoa;0.083175;;2025-01-01 00:00
+6884;Clef de la Grotte du Bworker;49.0698;;2025-01-01 00:00
+6897;Plume de Piou Bleu;0.04395;0.001199041;2025-01-01 00:00
+6898;Plume de Piou Violet;0.044475;0.001199041;2025-01-01 00:00
+6899;Plume de Piou Vert;0.04395;0.001298701;2025-01-01 00:00
+6900;Plume de Piou Rouge;0.045825;0.001298701;2025-01-01 00:00
+6902;Plume de Piou Jaune;0.044475;0.001199041;2025-01-01 00:00
+6903;Plume de Piou Rose;0.044775;0.001199041;2025-01-01 00:00
+6904;Protection usagée du Bworker;;0.0;2025-01-01 00:00
+7013;Bois de Bambou;0.12;;2025-01-01 00:00
+7014;Bois de Bambou Sacré;0.195;;2025-01-01 00:00
+7016;Bois de Bambou Sombre;0.18;;2025-01-01 00:00
+7017;Sarbacane en Bambou;2.25;;2025-01-01 00:00
+7018;Riz;0.112425;;2025-01-01 00:00
+7023;Pierre d'Aigue-Marine;5.25;;2025-01-01 00:00
+7024;Pierre de Topaze;1.570275;;2025-01-01 00:00
+7025;Pierre d'Agathe;3.4347;;2025-01-01 00:00
+7026;Aigue-Marine;79.27575;;2025-01-01 00:00
+7027;Topaze;24.080325;;2025-01-01 00:00
+7028;Agathe;15.98205;;2025-01-01 00:00
+7030;Peau de Krambwork;0.759225;;2025-01-01 00:00
+7032;Silicate;0.112425;;2025-01-01 00:00
+7033;Dolomite;0.1875;;2025-01-01 00:00
+7035;Pyrute;10.856175;;2025-01-01 00:00
+7036;Rutile;10.799925;;2025-01-01 00:00
+7059;Graine de Pandouille;0.1275;;2025-01-01 00:00
+7222;Artefact Pandawushu Eau;0.747075;0.0;2025-01-01 00:00
+7223;Artefact Pandawushu Vent;0.852375;;2025-01-01 00:00
+7224;Artefact Pandawushu Roc;0.9096;;2025-01-01 00:00
+7225;Artefact Pandawushu Feu;0.455775;0.0;2025-01-01 00:00
+7259;Poterie cassée de Lolojiki;2.25;;2025-01-01 00:00
+7269;Pollen de Bulbiflore;1.389675;;2025-01-01 00:00
+7270;Langue de Grenufar;1.389675;;2025-01-01 00:00
+7271;Épine de Bulbuisson;1.389675;;2025-01-01 00:00
+7272;Pistil de Floristile;1.389675;;2025-01-01 00:00
+7274;Katana de Kwamouraï;2.25;;2025-01-01 00:00
+7275;Masque de Shinibaru;2.25;;2025-01-01 00:00
+7276;Baguette de Tétonuki;2.25;;2025-01-01 00:00
+7277;Lunettes de Parashukouï;2.25;;2025-01-01 00:00
+7278;Poing rocheux d'Ishigro Pake;2.25;;2025-01-01 00:00
+7290;Tige de Bambouto;1.389675;;2025-01-01 00:00
+7291;Nectar de l'Orient;8.3796;;2025-01-01 00:00
+7292;Poils de Boumbardier;2.79165;;2025-01-01 00:00
+7293;Poils de Founamboul;2.79165;;2025-01-01 00:00
+7294;Poils de Pétartifoux;2.79165;;2025-01-01 00:00
+7298;Peau de Rouquette;2.79165;;2025-01-01 00:00
+7299;Peau de Crachefoux;2.79165;;2025-01-01 00:00
+7300;Tête de lance de Fangshu;2.79165;;2025-01-01 00:00
+7301;Étoffe de Kurookin;2.79165;;2025-01-01 00:00
+7304;Étoffe de Firefoux;16.976325;;2025-01-01 00:00
+7305;Poils magiques de Tanuki;13.4814;;2025-01-01 00:00
+7306;Pelage aérodynamique;16.976325;;2025-01-01 00:00
+7308;Salopette Kwapa;2.25;;2025-01-01 00:00
+7309;Clef du Dojo du vent;27.645225;;2025-01-01 00:00
+7310;Clef de la Vallée de la Dame des eaux;18.79875;;2025-01-01 00:00
+7311;Clef de l'Atelier du Tanukouï San;20.840175;;2025-01-01 00:00
+7312;Clef de la Fabrique de foux d'artifice;22.149975;;2025-01-01 00:00
+7343;Bracelet de Ino-Naru;2.79165;;2025-01-01 00:00
+7379;Fleur d'Onabu-Geisha;4.44885;;2025-01-01 00:00
+7381;Kaokurimono;5.8026;;2025-01-01 00:00
+7383;Yokayu;34.027725;;2025-01-01 00:00
+7384;Étoffe de Samouraï fantôme;26.8887;;2025-01-01 00:00
+7385;Braises bleutées;29.01315;;2025-01-01 00:00
+7386;Testicules du Tanukouï San;11.25;60.0;2025-01-01 00:00
+7393;Moustache du Shogun Tofugawa;22.24425;;2025-01-01 00:00
+7404;Os de Jiangshi-Nobi;4.44885;;2025-01-01 00:00
+7405;Plastron de Tambouraï;4.44885;;2025-01-01 00:00
+7406;Épaulière de Kabushido;4.44885;;2025-01-01 00:00
+7407;Croissant de Tsukinochi;4.44885;;2025-01-01 00:00
+7408;Kapokaza;5.8026;;2025-01-01 00:00
+7410;Lanterne usée;5.8026;;2025-01-01 00:00
+7411;Masque brisé;5.8026;;2025-01-01 00:00
+7433;Rune Cri;7.5;5.0;2025-01-01 00:00
+7434;Rune So;7.5;5.0;2025-01-01 00:00
+7436;Rune Pui;0.299925;0.333333333;2025-01-01 00:00
+7437;Rune Do Ren;1.875;1.0;2025-01-01 00:00
+7438;Rune Po;130.0;130.0;2026-02-03 23:50
+7442;Rune Invo;45.0;45.0;2026-02-03 23:50
+7443;Rune Pod;0.074925;0.090909091;2025-01-01 00:00
+7444;Rune Pa Pod;0.337425;0.25;2025-01-01 00:00
+7445;Rune Ra Pod;1.012425;1.0;2025-01-01 00:00
+7446;Rune Do Pi;1.875;;2025-01-01 00:00
+7447;Rune Per Pi;0.299925;;2025-01-01 00:00
+7448;Rune Ini;0.074925;0.090909091;2025-01-01 00:00
+7449;Rune Pa Ini;0.337425;0.25;2025-01-01 00:00
+7450;Rune Ra Ini;1.012425;1.0;2025-01-01 00:00
+7451;Rune Prospe;0.675;0.5;2025-01-01 00:00
+7452;Rune Ré Feu;0.299925;0.333333333;2025-01-01 00:00
+7453;Rune Ré Air;0.299925;0.333333333;2025-01-01 00:00
+7454;Rune Ré Eau;0.299925;0.333333333;2025-01-01 00:00
+7455;Rune Ré Terre;0.299925;0.333333333;2025-01-01 00:00
+7456;Rune Ré Neutre;0.299925;0.333333333;2025-01-01 00:00
+7457;Rune Ré Per Feu;3.75;3.0;2025-01-01 00:00
+7458;Rune Ré Per Air;3.75;3.0;2025-01-01 00:00
+7459;Rune Ré Per Terre;3.75;3.0;2025-01-01 00:00
+7460;Rune Ré Per Neutre;3.75;3.0;2025-01-01 00:00
+7508;Rune de Signature;1.484925;1.0;2025-01-01 00:00
+7509;Première partie de la clef du labyrinthe du Dragon Cochon;1.6764;;2025-01-01 00:00
+7510;Deuxième partie de la clef du labyrinthe du Dragon Cochon;4.89735;;2025-01-01 00:00
+7511;Clef du labyrinthe du Dragon Cochon;15.050925;;2025-01-01 00:00
+7557;Clef du Domaine Ancestral;7.445025;;2025-01-01 00:00
+7560;Rune Ré Per Eau;3.75;3.0;2025-01-01 00:00
+7652;Potion de Souvenir;1.237425;;2025-01-01 00:00
+7904;Fleur de Kaliptus;0.150525;0.02;2025-01-01 00:00
+7905;Laine du Boufcoul;0.506025;0.333333333;2025-01-01 00:00
+7906;Corne du Boufcoul;1.01205;0.333333333;2025-01-01 00:00
+7908;Clef de la Caverne du Koulosse;8.408925;;2025-01-01 00:00
+7918;Clef du Donjon des Tofus;2.0523;;2025-01-01 00:00
+7924;Clef du Labyrinthe du Minotoror;18.915975;;2025-01-01 00:00
+7925;Bois de Kaliptus;0.157425;;2025-01-01 00:00
+7926;Clef de la Bibliothèque du Maître Corbac;9.42165;;2025-01-01 00:00
+7927;Clef des Pitons Rocheux des Craqueleurs;5.2227;;2025-01-01 00:00
+8001;Bandelette du Guerrier Koalak;7.915425;5.0;2025-01-01 00:00
+8002;Étoffe de Dok Alako;0.53355;0.2;2025-01-01 00:00
+8050;Peau de Koalak Immature;2.354475;2.0;2025-01-01 00:00
+8052;Peau de Maître Koalak;1.632525;1.0;2025-01-01 00:00
+8053;Peau de Chevaucheur Koalak;8.323875;11.0;2025-01-01 00:00
+8054;Peau de Drakoalak;0.9462;1.0;2025-01-01 00:00
+8055;Os de Mama Koalak;5.72055;8.0;2025-01-01 00:00
+8056;Fémur de Koalak Farouche;8.74995;12.0;2025-01-01 00:00
+8057;Tibia de Koalak Fossoyeur;1.333575;1.0;2025-01-01 00:00
+8058;Cubitus de Momie Koalak;1.528575;1.0;2025-01-01 00:00
+8059;Poils de Koalak Griotte;4.3458;1.0;2025-01-01 00:00
+8060;Poils de Koalak Coco;4.3458;1.0;2025-01-01 00:00
+8061;Poils de Koalak Reinette;4.3458;1.0;2025-01-01 00:00
+8062;Poils de Koalak Indigo;4.3458;1.0;2025-01-01 00:00
+8064;Boomerang du Koalak Sanguin;8.323875;11.0;2025-01-01 00:00
+8065;Poils de Barbe de Dragodinde;2.515125;3.0;2025-01-01 00:00
+8066;Poils de Barbe du Warko Violet;9.194475;13.0;2025-01-01 00:00
+8073;Clef du Repaire de Skeunk;15.651525;;2025-01-01 00:00
+8075;Boomerang du Dok Alako;3.238425;1.0;2025-01-01 00:00
+8076;Boomerang du Maître Koalak;9.65835;13.0;2025-01-01 00:00
+8077;Boomerang du Warko Marron;3.65235;2.0;2025-01-01 00:00
+8082;Étoffe du Fauchalak;9.65835;13.0;2025-01-01 00:00
+8083;Os de Pékeualak;0.726525;1.0;2025-01-01 00:00
+8084;Peau de Piralak;4.3458;1.0;2025-01-01 00:00
+8085;Poils de Koalak Forestier;0.726525;1.0;2025-01-01 00:00
+8086;Coiffe déchiquetée de Drakoalak;5.72055;8.0;2025-01-01 00:00
+8102;Pierre du Craqueleur Légendaire;1.965975;;2025-01-01 00:00
+8135;Clef du Donjon des Bworks;2.528475;;2025-01-01 00:00
+8137;Viscères du Scarabosse Doré;4.270575;;2025-01-01 00:00
+8139;Clef du Donjon des Scarafeuilles;2.221275;;2025-01-01 00:00
+8141;Ailes du Scarafeuille Noir;0.16605;;2025-01-01 00:00
+8142;Clef Secrète du Tofulailler Royal;14.14455;;2025-01-01 00:00
+8143;Clef des Champs;1.2228;;2025-01-01 00:00
+8156;Clef de la Tanière du Meulou;9.190575;;2025-01-01 00:00
+8157;Pétale Magique du Tournesol Affamé;1.7541;;2025-01-01 00:00
+8158;Plume Graisseuse du Tofu Ventripotent;0.1791;;2025-01-01 00:00
+8161;Ailes du Scarabosse Doré;0.709425;;2025-01-01 00:00
+8249;Plume de Buveur;0.379575;;2025-01-01 00:00
+8250;Poil de Renarbo;1.0866;;2025-01-01 00:00
+8252;Plume de Corbac Apprivoisé;1.0671;;2025-01-01 00:00
+8307;Clef de la salle du Minotot;12.78225;;2025-01-01 00:00
+8308;Carapace de Scaratos;1.100175;1.0;2025-01-01 00:00
+8309;Plume du Serpiplume;1.4883;0.333333333;2025-01-01 00:00
+8311;Poil de Gamino;1.322925;0.5;2025-01-01 00:00
+8312;Peau de Minoskito;1.248075;0.333333333;2025-01-01 00:00
+8314;Peau de Kraméléhon;0.790725;0.5;2025-01-01 00:00
+8315;Peau de Mandrine;1.248075;0.333333333;2025-01-01 00:00
+8320;Clef de l'antre du Dragon Cochon;24.286125;;2025-01-01 00:00
+8321;Poil de Capsaaloocke;1.0053;;2025-01-01 00:00
+8322;Poil de Troolléolé;1.688175;;2025-01-01 00:00
+8323;Cuir de Déminoboule;1.11225;0.5;2025-01-01 00:00
+8324;Cuir de Capsaaloocke;6.04215;;2025-01-01 00:00
+8326;Bandelette du Mominotor;1.11225;1.0;2025-01-01 00:00
+8327;Corne de Déminoboule;6.6417;8.0;2025-01-01 00:00
+8328;Corne de Mominotor;6.6417;12.0;2025-01-01 00:00
+8329;Clef de la mine de Sakaï;61.958775;;2025-01-01 00:00
+8342;Clef de l'Antre de Crocabulia;11.1126;;2025-01-01 00:00
+8343;Clef de l'Épreuve de Draegnerys;5.188575;;2025-01-01 00:00
+8344;Akaslip d'Akakwa;2.25;;2025-01-01 00:00
+8345;Corne de Dragoss Protéiforme;6.03225;;2025-01-01 00:00
+8346;Corne de Dragoss Calcaire;6.03225;;2025-01-01 00:00
+8347;Lame brisée de Lichangoro;2.79165;;2025-01-01 00:00
+8348;Coquille de Dragoss Charbon;6.03225;;2025-01-01 00:00
+8349;Coquille de Dragoss Ardoise;6.03225;;2025-01-01 00:00
+8350;Coquille de Dragoss Protéiforme;1.01205;;2025-01-01 00:00
+8351;Coquille de Dragoss Argile;6.03225;;2025-01-01 00:00
+8352;Écaille de Dragoss Charbon;1.01205;;2025-01-01 00:00
+8353;Écaille de Dragoss Ardoise;1.01205;;2025-01-01 00:00
+8354;Écaille de Dragoss Calcaire;1.01205;;2025-01-01 00:00
+8355;Écaille de Dragoss Argile;1.01205;;2025-01-01 00:00
+8356;Peau de Dragueuse;1.373925;;2025-01-01 00:00
+8357;Corne de Gliglibido;19.856775;;2025-01-01 00:00
+8358;Croc de Dragoeuf Protecteur;7.953675;;2025-01-01 00:00
+8359;Aile de Draguaindrop;8.18475;;2025-01-01 00:00
+8360;Peau de Draguaindrop;1.373925;;2025-01-01 00:00
+8361;Corne de Dragacé;1.373925;;2025-01-01 00:00
+8362;Peau de Dragnarok;1.373925;;2025-01-01 00:00
+8363;Corne de Dragmatique;1.227975;;2025-01-01 00:00
+8364;Lanière en cuir de Gliglitch;20.249925;;2025-01-01 00:00
+8365;Corne brisée de Crocabulia;36.663375;;2025-01-01 00:00
+8367;Peau de Crocabulia;6.1401;;2025-01-01 00:00
+8381;Queue Magique de Founoroshi;13.958325;;2025-01-01 00:00
+8383;Peau de Moon;4.101525;2.0;2025-01-01 00:00
+8384;Étoffe Magique de Moon;24.54795;29.0;2025-01-01 00:00
+8385;Peau de Shin Larve;1.171875;;2025-01-01 00:00
+8386;Dent de Shin Larve;6.996225;;2025-01-01 00:00
+8387;Plume Vibrante du Tofu Royal;36.663375;;2025-01-01 00:00
+8388;Peau de Bworkette;1.0416;0.5;2025-01-01 00:00
+8389;Poil de Bworkette;6.2361;6.0;2025-01-01 00:00
+8390;Peau de Cochon de Farle;4.722525;1.55;2025-01-01 00:00
+8391;Peau de Don Dorgan;4.959;0.93;2025-01-01 00:00
+8392;Peau de Don Duss Ang;4.644825;0.82;2025-01-01 00:00
+8393;Poil de Dragon Cochon;24.54795;29.0;2025-01-01 00:00
+8394;Méga Pierre du Craqueleur Légendaire;11.7459;12.0;2025-01-01 00:00
+8396;Mojo de Mergranlou;6.03225;8.0;2025-01-01 00:00
+8397;Poil du Wa Wabbit;1.67115;;2025-01-01 00:00
+8398;Étoffe du Wa Wabbit;10.06215;;2025-01-01 00:00
+8400;Piques à cheveux de Shihan;13.958325;;2025-01-01 00:00
+8401;Écharpe de Hanshi;13.958325;;2025-01-01 00:00
+8402;Pierre du Koulosse;24.54795;29.0;2025-01-01 00:00
+8403;Tresse du Koulosse;4.101525;3.0;2025-01-01 00:00
+8404;Peau de Skeunk;53.315775;48.0;2025-01-01 00:00
+8405;Poil de Skeunk;9.012075;5.0;2025-01-01 00:00
+8408;Sabot du Minotot;134.44365;120.0;2025-01-01 00:00
+8436;Clef de la Clairière du Chêne Mou;17.357625;;2025-01-01 00:00
+8437;Clef du Château Ensablé;1.305825;;2025-01-01 00:00
+8438;Clef de la Sousouricière du Rat Noir;12.0657;;2025-01-01 00:00
+8439;Clef du Garde-manger du Rat Blanc;10.075725;;2025-01-01 00:00
+8476;Première clef du Donjon de Sphincter;4.3125;;2025-01-01 00:00
+8477;Deuxième clef du Donjon de Sphincter;4.3125;;2025-01-01 00:00
+8481;Poil de Rat d'Égoutant;0.3342;0.166666667;2025-01-01 00:00
+8482;Peau de Rat;1.984125;1.0;2025-01-01 00:00
+8482;Peau de Rat;1.984125;1.0;2025-01-01 00:00
+8483;Peau de Ramane d'Égoutant;0.278475;0.142857143;2025-01-01 00:00
+8484;Duvet de Tofoune;0.797925;;2025-01-01 00:00
+8485;Crinière de Rat Noir;8.008425;;2025-01-01 00:00
+8486;Crinière de Rat Blanc;5.494125;;2025-01-01 00:00
+8487;Étoffe de Sphincter Cell;106.745025;96.0;2025-01-01 00:00
+8490;Fémur de Sphincter Cell;17.968725;10.0;2025-01-01 00:00
+8495;Bourgeon d'Abraknyde Ancestral;25.03875;22.0;2025-01-01 00:00
+8496;Racine d'Abraknyde Ancestral;4.1346;2.0;2025-01-01 00:00
+8545;Clef de la Crypte de Kardorim;0.39405;;2025-01-01 00:00
+8557;Plume de Batofu;0.77205;;2025-01-01 00:00
+8570;Poil de Rat Bontarien;6.721125;;2025-01-01 00:00
+8571;Poil de Rat Brâkmarien;8.286675;2.0;2025-01-01 00:00
+8680;Écaille poisseuse;0.380475;;2025-01-01 00:00
+8681;Peau de Raul Mops;1.2201;;2025-01-01 00:00
+8682;Peau de Mob l'Éponge;0.293475;;2025-01-01 00:00
+8729;Corail usé;1.136175;1.0;2025-01-01 00:00
+8730;Coccyx du Corailleur;0.190275;0.142857143;2025-01-01 00:00
+8731;Corail Magistral;6.996225;6.0;2025-01-01 00:00
+8732;Corail Kouraçao;1.0455;1.0;2025-01-01 00:00
+8733;Corail Malibout;1.0455;1.0;2025-01-01 00:00
+8734;Corail Passaoh;1.0455;1.0;2025-01-01 00:00
+8735;Corail Morito;1.0455;1.0;2025-01-01 00:00
+8737;Boule polie;6.614475;8.0;2025-01-01 00:00
+8738;Sacrum magistral;1.171875;0.5;2025-01-01 00:00
+8739;Humérus du Sparo;2.301975;3.0;2025-01-01 00:00
+8740;Chicot du Flib;0.3702;0.25;2025-01-01 00:00
+8741;Bec du Kido;6.96675;9.0;2025-01-01 00:00
+8744;Pince de Crustorail;0.17325;0.125;2025-01-01 00:00
+8745;Pétale Kouraçao;1.090125;1.0;2025-01-01 00:00
+8746;Pétale Malibout;1.090125;1.0;2025-01-01 00:00
+8747;Pétale Passaoh;1.090125;1.0;2025-01-01 00:00
+8748;Pétale Morito;1.090125;1.0;2025-01-01 00:00
+8749;Bulbe Kouraçao;0.18345;0.142857143;2025-01-01 00:00
+8750;Bulbe Malibout;0.18345;0.142857143;2025-01-01 00:00
+8751;Bulbe Passaoh;0.18345;0.142857143;2025-01-01 00:00
+8752;Bulbe Morito;0.18345;0.142857143;2025-01-01 00:00
+8753;Crinière fleurie;6.788775;9.0;2025-01-01 00:00
+8754;Barbe inexistante du Barbroussa;2.3805;3.0;2025-01-01 00:00
+8755;Touffe rousse du Flib;2.2254;3.0;2025-01-01 00:00
+8756;Duvet du Kilibriss;1.248075;1.0;2025-01-01 00:00
+8757;Maillot de corps de Barbroussa;0.4008;0.25;2025-01-01 00:00
+8758;Morceau de caleçon de Gourlo;2.354625;1.0;2025-01-01 00:00
+8760;Foulard du Sparo;0.38085;0.25;2025-01-01 00:00
+8762;Fragment de cerveau poli;1.202625;0.5;2025-01-01 00:00
+8763;Moustache du Mufafah;1.125;0.5;2025-01-01 00:00
+8765;Bâton du Kilibriss;7.523925;10.0;2025-01-01 00:00
+8766;Plume de fesse du Kido;1.146525;0.5;2025-01-01 00:00
+8767;Aile du Bitouf des Plaines;1.2252;0.5;2025-01-01 00:00
+8769;Coco du Bitouf des Plaines;7.33425;9.0;2025-01-01 00:00
+8771;Écorce de Floribonde;15.9588;21.0;2025-01-01 00:00
+8772;Écorce de Brouture;15.22515;20.0;2025-01-01 00:00
+8773;Écorce de Nerbe;14.87055;20.0;2025-01-01 00:00
+8774;Écorce de Fécorce;15.587775;20.0;2025-01-01 00:00
+8775;Écorce de Chiendent;14.523825;20.0;2025-01-01 00:00
+8776;Coco du Bitouf Sombre;16.3383;;2025-01-01 00:00
+8777;Pistil du Tynril;13.958325;7.0;2025-01-01 00:00
+8778;Étamine de Floribonde;2.700675;2.0;2025-01-01 00:00
+8779;Carpelle de Brouture;2.526225;2.0;2025-01-01 00:00
+8780;Sépale de Nerbe;2.4894;2.0;2025-01-01 00:00
+8781;Calice de Fécorce;2.563275;2.0;2025-01-01 00:00
+8782;Bractée de Chiendent;2.452875;2.0;2025-01-01 00:00
+8783;Amygdales du Bitouf Sombre;2.73975;;2025-01-01 00:00
+8784;Talon d'achille de l'Abrakleur sombre;16.7265;22.0;2025-01-01 00:00
+8785;Graine de l'Abrakleur sombre;2.779125;2.0;2025-01-01 00:00
+8786;Tresse du Poolay;23.185425;15.0;2025-01-01 00:00
+8787;Cloaque du Poolay;3.9204;1.0;2025-01-01 00:00
+8788;Croupion du Bitouf aérien;4.023375;1.0;2025-01-01 00:00
+8789;Chaussette du Kimbo;134.44365;120.0;2025-01-01 00:00
+8790;Rembourrage de Meupette;3.701175;2.0;2025-01-01 00:00
+8791;Étoffe de Meupette;22.168875;29.0;2025-01-01 00:00
+8792;Coco du Bitouf aérien;24.31725;16.0;2025-01-01 00:00
+8793;Coquille du Kaskargo;25.5084;17.0;2025-01-01 00:00
+8797;Souche de l'Abrakleur clair;4.434975;3.0;2025-01-01 00:00
+8798;Queue emplumée du Rasboul Majeur;41.88825;37.0;2025-01-01 00:00
+8800;Étoffe Zoth;9.9264;1.0;2025-01-01 00:00
+8801;Étoffe de Ouassingue;0.183375;0.045454545;2025-01-01 00:00
+8802;Tibia du Guerrier Zoth;11.7384;8.0;2025-01-01 00:00
+8803;Rotule du Disciple Zoth;11.175;7.0;2025-01-01 00:00
+8804;Braguette du Maître Zoth;12.361725;8.0;2025-01-01 00:00
+8805;Mouchoir de la Gamine Zoth;11.449725;;2025-01-01 00:00
+8806;Écusson du Sergent Zoth;12.042;8.0;2025-01-01 00:00
+8807;Jus de Ouassingue;1.0002;;2025-01-01 00:00
+8808;Étoffe du Roissingue;12.16125;4.0;2025-01-01 00:00
+8809;Culotte à l'envers du Roissingue;145.935;48.0;2025-01-01 00:00
+8810;Tourbe séchée de Tourbassingue;7.915425;5.0;2025-01-01 00:00
+8811;Faux menton du Bourbassingue;6.96675;4.0;2025-01-01 00:00
+8812;Encre du Kralamoure géant;208.619475;281.0;2025-01-01 00:00
+8813;Ventouse du Kralamoure géant;34.517025;28.0;2025-01-01 00:00
+8832;Bave du Kaskargo;4.324275;1.0;2025-01-01 00:00
+8916;Ambre du Tynril;84.8817;76.0;2025-01-01 00:00
+8917;Clef de la Grotte Hesque;2.687325;;2025-01-01 00:00
+8971;Clef de l'Arche d'Otomaï;1.0125;;2025-01-01 00:00
+8972;Clef du Goulet du Rasboul;2.3625;;2025-01-01 00:00
+8975;Clef du Laboratoire du Tynril;3.76875;;2025-01-01 00:00
+8977;Clef de la Canopée du Kimbo;4.89375;;2025-01-01 00:00
+8995;Étoffe de Gourlo le Terrible;13.9848;;2025-01-01 00:00
+9247;Clef du Temple du Grand Ougah;49.53435;;2025-01-01 00:00
+9248;Clef du Clos des Blops;2.771325;;2025-01-01 00:00
+9249;Morceau de clef Griotte;1.293675;;2025-01-01 00:00
+9250;Morceau de clef Reinette;1.293675;;2025-01-01 00:00
+9251;Morceau de clef Coco;1.293675;;2025-01-01 00:00
+9252;Morceau de clef Indigo;1.293675;;2025-01-01 00:00
+9254;Clef de l'antre du Blop Multicolore;7.762425;;2025-01-01 00:00
+9263;Écorce de Champaknyde;39.270675;53.0;2025-01-01 00:00
+9267;Trompe de la Tromperelle;41.56155;56.0;2025-01-01 00:00
+9269;Langue de Champodonte;41.56155;;2025-01-01 00:00
+9278;Lamelle de Champbis;41.56155;56.0;2025-01-01 00:00
+9279;Bave de Champ à Gnons;41.56155;28.0;2025-01-01 00:00
+9280;Épine d'Ougah;36.286725;19.0;2025-01-01 00:00
+9281;Fragment d'Ougalurette;217.20945;195.0;2025-01-01 00:00
+9381;Fleur de Gloutoblop;0.319725;;2025-01-01 00:00
+9382;Fleur de Blopignon;0.24165;;2025-01-01 00:00
+9383;Racine de Tronkoblop;0.22665;;2025-01-01 00:00
+9384;Fleur de Blop Griotte Royal;8.715975;;2025-01-01 00:00
+9385;Fleur de Blop Coco Royal;8.715975;;2025-01-01 00:00
+9386;Fleur de Blop Indigo Royal;8.715975;;2025-01-01 00:00
+9387;Fleur de Blop Reinette Royal;8.715975;;2025-01-01 00:00
+9388;Feuille de Blop Royal;1.450425;;2025-01-01 00:00
+9389;Feuille de Blop Multicolore Royal;9.477975;;2025-01-01 00:00
+9391;Fleur de Blop Multicolore Royal;56.594475;;2025-01-01 00:00
+9401;Peau du Bworker;217.20945;195.0;2025-01-01 00:00
+9571;Weischelcreme Torte;13.689675;;2025-01-01 00:00
+9935;Corde d'escalade;16.15485;;2025-01-01 00:00
+9940;Nacre brute;1.22265;0.5;2025-01-01 00:00
+9941;Nacre;6.02775;;2025-01-01 00:00
+9949;Pâte à Tra Khben;9.9072;;2025-01-01 00:00
+9950;Pierre de souillure bleue impure;1.05045;;2025-01-01 00:00
+9951;Pierre de souillure jaune impure;1.08615;;2025-01-01 00:00
+9952;Pierre de souillure verte impure;1.089075;;2025-01-01 00:00
+9969;Salace de poissons empoisonnée;43.094775;;2025-01-01 00:00
+9973;Extrémité du Grattoir;29.479125;;2025-01-01 00:00
+9975;Manche du Grattoir;56.996025;;2025-01-01 00:00
+9976;Grattoir à dos inachevé;87.129975;;2025-01-01 00:00
+9979;Philtre de Longévité;24.119925;;2025-01-01 00:00
+9981;Farine Humée;4.652925;;2025-01-01 00:00
+9999;Copie de la clef du repaire des bandits;4.3068;;2025-01-01 00:00
+10019;Seau de Pinces à Linge;79.81875;;2025-01-01 00:00
+10030;Tissu de Rapiéçage;69.395025;;2025-01-01 00:00
+10031;Teinture Orange Sanguine;30.12915;;2025-01-01 00:00
+10064;Teinture Magique Ténébreuse;5.1039;;2025-01-01 00:00
+10070;Tonneau en Bombu;14.962425;;2025-01-01 00:00
+10204;Potion de Sésanabolisant;114.559725;;2025-01-01 00:00
+10272;Masque à Zag;315.7704;;2025-01-01 00:00
+10284;Viscères de Tanuki;5.039025;;2025-01-01 00:00
+10314;Sang du Kido;0.40125;;2025-01-01 00:00
+10613;Rune Pa Do Pi;8.4375;;2025-01-01 00:00
+10615;Rune Pa Per Pi;1.349925;;2025-01-01 00:00
+10616;Rune Ra Per Pi;4.049925;;2025-01-01 00:00
+10618;Rune Pa Pui;1.349925;;2025-01-01 00:00
+10619;Rune Ra Pui;4.049925;2.0;2025-01-01 00:00
+10662;Rune Pa Prospe;3.0375;1.0;2025-01-01 00:00
+10831;Bananagrume;11.7156;;2025-01-01 00:00
+10835;Cachet du bizut;0.0939;;2025-01-01 00:00
+10970;Sueur de dragodinde;0.148275;0.1;2025-01-01 00:00
+11102;Perce-Neige;0.2025;;2025-01-01 00:00
+11106;Poisskaille;0.2025;;2025-01-01 00:00
+11107;Bois de Tremble;0.2025;;2025-01-01 00:00
+11109;Frostiz;0.2025;;2025-01-01 00:00
+11110;Obsidienne;0.2025;;2025-01-01 00:00
+11117;Laine de Boufmouth;1.30965;1.0;2025-01-01 00:00
+11118;Clavicule de Boufmouth;11.0;11.0;2026-02-03 23:50
+11119;Oreille de Bouftonmouth;1.01205;1.0;2025-01-01 00:00
+11120;Cuir de Bouftonmouth;10.0;8.0;2026-02-03 23:50
+11122;Corne de Boufmouth de guerre;1.57785;1.0;2025-01-01 00:00
+11135;Queue du Boufmouth légendaire;13.0;15.0;2026-02-03 23:50
+11136;Laine de Boufmouth légendaire;1.803;2.0;2025-01-01 00:00
+11174;Clef de la serre du Royalmouth;14.488875;;2025-01-01 00:00
+11175;Clef Mansot;20.8533;;2025-01-01 00:00
+11176;Clef du Grolandais violent;33.4374;;2025-01-01 00:00
+11177;Clef de l'hypogée de l'Obsidiantre;36.104325;;2025-01-01 00:00
+11178;Clef de la Tanière Givrefoux;50.446425;;2025-01-01 00:00
+11179;Clef de l'Antre du Korriandre;51.33885;;2025-01-01 00:00
+11180;Clef des cavernes du Kolosso;85.19895;;2025-01-01 00:00
+11181;Clef de l'Antichambre des Gloursons;84.719025;;2025-01-01 00:00
+11219;Queue du Royalmouth;57.69915;56.0;2025-01-01 00:00
+11221;Laine du Royalmouth;9.753;6.0;2025-01-01 00:00
+11222;Bec du Timansot;16.0;13.0;2026-02-03 23:50
+11223;Plume du Timansot;1.608375;1.0;2025-01-01 00:00
+11224;Aile de Mansobèse;18.0;16.0;2026-02-03 23:50
+11225;Peau de Mansobèse;1.862475;2.0;2025-01-01 00:00
+11226;Huile de Mamansot;19.0;18.0;2026-02-03 23:50
+11227;Duvet de Mamansot;2.15955;2.0;2025-01-01 00:00
+11228;Arête géante du Shamansot;19.0;20.0;2026-02-03 23:50
+11229;Poil de barbe du Shamansot;2.41665;2.0;2025-01-01 00:00
+11230;Queue du Fu Mansot;2.700675;2.0;2025-01-01 00:00
+11231;Oreille du Fu Mansot;20.0;22.0;2026-02-03 23:50
+11232;Plume du Mansot Royal;14.947875;10.0;2025-01-01 00:00
+11238;Queue d'Écumouth;1.608375;1.0;2025-01-01 00:00
+11239;Gland de l'Écumouth;16.0;13.0;2026-02-03 23:50
+11240;Dent de Smilomouth;17.0;12.0;2026-02-03 23:50
+11241;Poils de Smilomouth;1.926675;;2025-01-01 00:00
+11242;Défense du Sanglacier;17.0;17.0;2026-02-03 23:50
+11243;Cuir du Sanglacier;2.085075;2.0;2025-01-01 00:00
+11247;Oreille percée du Fricochère;2.41665;2.0;2025-01-01 00:00
+11248;Oreille de Kaniglou;2.700675;2.0;2025-01-01 00:00
+11249;Étoffe de Kaniglou;20.0;23.0;2026-02-03 23:50
+11250;Poil de Chachachovage;0.782925;0.5;2025-01-01 00:00
+11251;Sternum de Chachachovage;4.67235;3.0;2025-01-01 00:00
+11252;Patte de Rat Bougri;5.913675;3.0;2025-01-01 00:00
+11253;Étoffe de Rat Bougri;0.992175;0.5;2025-01-01 00:00
+11254;Pince de Crabe Hijacob;0.454275;0.333333333;2025-01-01 00:00
+11256;Bec de Gélikan;5.07075;3.0;2025-01-01 00:00
+11257;Plume de Gélikan;0.848625;0.5;2025-01-01 00:00
+11279;Scie à glace;65.81085;;2025-01-01 00:00
+11280;Plaque d'acier;14.868675;;2025-01-01 00:00
+11281;Masque de protection;77.8302;;2025-01-01 00:00
+11282;Gants de protection;163.483125;;2025-01-01 00:00
+11309;Pince du Fancrôme;3.363225;3.0;2025-01-01 00:00
+11310;Corde du Fancrôme;24.0;27.0;2026-02-03 23:50
+11311;Bouée de Fantomalamère;24.0;27.0;2026-02-03 23:50
+11312;Queue de Fantomalamère;3.363225;3.0;2025-01-01 00:00
+11313;Huile de Fantimonier;24.0;29.0;2026-02-03 23:50
+11314;Coquille de Fantimonier;3.5937;3.0;2025-01-01 00:00
+11315;Mât de Fantômat;3.5937;3.0;2025-01-01 00:00
+11316;Dent de Fantômat;33.0;16.0;2026-02-03 23:50
+11317;Coquille de Harpirate;24.0;31.0;2026-02-03 23:50
+11318;Écaille de Harpirate;3.831975;3.0;2025-01-01 00:00
+11319;Étoffe de Vigie Pirate;4.3794;4.0;2025-01-01 00:00
+11321;Poil de Ben le Ripate;21.66015;12.0;2025-01-01 00:00
+11322;Scapula de Ben le Ripate;128.674125;116.0;2025-01-01 00:00
+11323;Pierre d'Atomystique;6.12495;5.0;2025-01-01 00:00
+11324;Téphra d'Atomystique;34.0;46.0;2026-02-03 23:50
+11325;Résidu de Solfataré;4.725825;4.0;2025-01-01 00:00
+11326;Ulna de Solfataré;31.0;39.0;2026-02-03 23:50
+11329;Pierre de Fumrirolle;6.12495;5.0;2025-01-01 00:00
+11330;Artefact de Fumrirolle;34.0;46.0;2026-02-03 23:50
+11331;Pierre de Mofette;6.8658;6.0;2025-01-01 00:00
+11332;Tuf de Mofette;9.0;8.0;2026-02-03 23:50
+11333;Scorie d'Obsidiantre;29.59515;16.0;2025-01-01 00:00
+11334;Vertèbre d'Obsidiantre;178.87185;161.0;2025-01-01 00:00
+11335;Patte de Soryo Givrefoux;40.0;18.0;2026-02-03 23:50
+11336;Oreille de Soryo Givrefoux;6.853575;2.0;2025-01-01 00:00
+11337;Cuir de Maho Givrefoux;40.0;23.0;2026-02-03 23:50
+11338;Laine de Maho Givrefoux;7.223625;2.0;2025-01-01 00:00
+11339;Laine de Yokaï Givrefoux;7.603575;2.0;2025-01-01 00:00
+11340;Crâne de Yokaï Givrefoux;40.0;20.0;2026-02-03 23:50
+11341;Laine de Tengu Givrefoux;29.01315;15.0;2025-01-01 00:00
+11342;Cuir de Tengu Givrefoux;170.13885;153.0;2025-01-01 00:00
+11475;Eau calme;0.34095;0.006666667;2025-01-01 00:00
+11497;Huile de Frostiz;0.91125;;2025-01-01 00:00
+11499;Frostiz soufflé;20.25;;2025-01-01 00:00
+11500;Poisskaille Givré;20.25;;2025-01-01 00:00
+11501;Étoile des Neiges;20.25;;2025-01-01 00:00
+11517;Eclat temporel;281.249925;254.0;2025-01-01 00:00
+11519;Oreille de Gobosteur;8.22495;3.0;2025-01-01 00:00
+11522;Fragment de pépite de Sakaï;56.128725;9.0;2025-01-01 00:00
+11525;Péroné du Marôdeur;9.202425;8.0;2025-01-01 00:00
+11527;Peau d'Ouilleur;9.104175;4.0;2025-01-01 00:00
+11530;Pierre du Courtilieur;10.231425;9.0;2025-01-01 00:00
+11637;Rune Fui;1.875;1.0;2025-01-01 00:00
+11638;Rune Pa Fui;8.4375;4.0;2025-01-01 00:00
+11639;Rune Tac;1.875;1.0;2025-01-01 00:00
+11640;Rune Pa Tac;8.4375;4.0;2025-01-01 00:00
+11641;Rune Ré Pa;3.75;3.0;2025-01-01 00:00
+11642;Rune Pa Ré Pa;16.875;8.0;2025-01-01 00:00
+11643;Rune Ré Pme;3.75;3.0;2025-01-01 00:00
+11644;Rune Pa Ré Pme;16.875;8.0;2025-01-01 00:00
+11645;Rune Ret Pa;3.75;3.0;2025-01-01 00:00
+11646;Rune Pa Ret Pa;16.875;8.0;2025-01-01 00:00
+11647;Rune Ret Pme;3.75;3.0;2025-01-01 00:00
+11648;Rune Pa Ret Pme;16.875;8.0;2025-01-01 00:00
+11649;Rune Do Pou;1.875;1.0;2025-01-01 00:00
+11650;Rune Pa Do Pou;8.4375;4.0;2025-01-01 00:00
+11651;Rune Ré Pou;0.299925;0.333333333;2025-01-01 00:00
+11652;Rune Pa Ré Pou;1.349925;1.0;2025-01-01 00:00
+11653;Rune Do Cri;1.875;1.0;2025-01-01 00:00
+11654;Rune Pa Do Cri;8.4375;4.0;2025-01-01 00:00
+11655;Rune Ré Cri;0.299925;0.333333333;2025-01-01 00:00
+11656;Rune Pa Ré Cri;1.349925;1.0;2025-01-01 00:00
+11657;Rune Do Terre;1.875;1.0;2025-01-01 00:00
+11658;Rune Pa Do Terre;8.4375;4.0;2025-01-01 00:00
+11659;Rune Do Feu;1.875;1.0;2025-01-01 00:00
+11660;Rune Pa Do Feu;8.4375;4.0;2025-01-01 00:00
+11661;Rune Do Eau;1.875;1.0;2025-01-01 00:00
+11662;Rune Pa Do Eau;8.4375;4.0;2025-01-01 00:00
+11663;Rune Do Air;1.875;1.0;2025-01-01 00:00
+11664;Rune Pa Do Air;8.4375;4.0;2025-01-01 00:00
+11665;Rune Do Neutre;1.875;1.0;2025-01-01 00:00
+11666;Rune Pa Do Neutre;8.4375;4.0;2025-01-01 00:00
+11695;Carniflore;1.67115;0.5;2025-01-01 00:00
+11696;Cagoule du Kanniboul Ebil;10.06215;8.0;2025-01-01 00:00
+11701;Jus d'Écumouth pressé;20.910675;;2025-01-01 00:00
+11795;Racine de synthèse;750.0;;2025-01-01 00:00
+11798;Clef du Village Kanniboul;4.255425;;2025-01-01 00:00
+11799;Clef de la Maison Fantôme;1.89135;;2025-01-01 00:00
+11814;Moustache de Boostache;4.665225;;2025-01-01 00:00
+11815;Boostoplasme;0.77205;;2025-01-01 00:00
+11880;Malléole de Yomi Givrefoux;6.49335;2.0;2025-01-01 00:00
+11882;Queue de Yomi Givrefoux;40.0;17.0;2026-02-03 23:50
+11883;Condyle de Fuji Givrefoux;281.249925;254.0;2025-01-01 00:00
+11884;Cuir de Fuji Givrefoux;45.75;25.0;2025-01-01 00:00
+11885;Lamelle de Dramanite;7.2573;6.0;2025-01-01 00:00
+11887;Oreille de Fistulor;51.0;47.0;2026-02-03 23:50
+11888;Volve de Fistulor;7.2573;6.0;2025-01-01 00:00
+11889;Pédoncule de Fongeur;51.0;47.0;2026-02-03 23:50
+11890;Volve de Fongeur;7.2573;6.0;2025-01-01 00:00
+11891;Écorce d'Abrazif;7.2573;6.0;2025-01-01 00:00
+11892;Racine d'Abrazif;51.0;47.0;2026-02-03 23:50
+11893;Lamelle de Mérulette;7.2573;6.0;2025-01-01 00:00
+11894;Pédoncule de Mérulette;51.0;47.0;2026-02-03 23:50
+11895;Patte de Korriandre;48.0;20.0;2026-02-03 23:50
+11920;Oreille de Fleuro;8.812425;7.0;2025-01-01 00:00
+11921;Queue de Wolvero;8.22495;7.0;2025-01-01 00:00
+11922;Manubrium de Wolvero;67.0;69.0;2026-02-03 23:50
+11923;Griffe de Blérauve;9.15;8.0;2025-01-01 00:00
+11924;Poil de Blérauve;67.0;76.0;2026-02-03 23:50
+11925;Étoffe de Croleur;67.0;76.0;2026-02-03 23:50
+11926;Oreille de Croleur;9.15;8.0;2025-01-01 00:00
+11927;Molaire de Blérice;9.15;8.0;2025-01-01 00:00
+11928;Oreille de Blérice;67.0;76.0;2026-02-03 23:50
+11929;Queue de Blérom;67.0;76.0;2026-02-03 23:50
+11930;Omoplate de Blérom;9.15;8.0;2025-01-01 00:00
+11931;Griffe de Kolosso;61.0;25.0;2026-02-03 23:50
+11932;Étoffe de Kolosso;281.249925;254.0;2025-01-01 00:00
+11933;Vomer d'Apériglours;75.0;34.0;2026-02-03 23:50
+11934;Oreille d'Apériglours;8.22495;3.0;2025-01-01 00:00
+11935;Iris de Boulglours;75.0;38.0;2026-02-03 23:50
+11936;Poils de Boulglours;9.15;4.0;2025-01-01 00:00
+11937;Laine de Glouragan;75.0;76.0;2026-02-03 23:50
+11938;Cuir de Glouragan;9.15;8.0;2025-01-01 00:00
+11939;Incisive de Glourmand;9.15;8.0;2025-01-01 00:00
+11940;Étoffe de Glourmand;75.0;76.0;2026-02-03 23:50
+11941;Aile de Gloursaya;75.0;38.0;2026-02-03 23:50
+11942;Antenne de Gloursaya;9.15;4.0;2025-01-01 00:00
+11943;Queue de Glourséleste;45.75;25.0;2025-01-01 00:00
+11944;Hamatum de Glourséleste;281.249925;254.0;2025-01-01 00:00
+11945;Queue de Meliglours;9.15;8.0;2025-01-01 00:00
+11946;Calcanéus de Meliglours;75.0;76.0;2026-02-03 23:50
+11948;Cornée de Kami Givrefoux;40.0;57.0;2026-02-03 23:50
+11949;Incisive de Kami Givrefoux;7.223625;6.0;2025-01-01 00:00
+12001;Larme de Givrefoux;37.803525;2.0;2025-01-01 00:00
+12015;Bec du Kwakwa;9.561525;;2025-01-01 00:00
+12016;Plume du Kwakwa;1.60155;;2025-01-01 00:00
+12017;Clef du Nid du Kwakwa;2.671725;;2025-01-01 00:00
+12073;Clef du Laboratoire de Brumen Tinctorias;5.1675;;2025-01-01 00:00
+12075;Fiole de fumée de Nelween;13.9848;12.0;2025-01-01 00:00
+12076;Duvet de Nelween;2.354625;1.0;2025-01-01 00:00
+12150;Clef du Donjon de Nowel;2.918175;;2025-01-01 00:00
+12151;Clef de la Caverne de Nowel;121.2048;;2025-01-01 00:00
+12152;Clef de la Maison du Papa Nowel;377.59785;;2025-01-01 00:00
+12351;Clef du Repaire de Sphincter Cell;47.158725;;2025-01-01 00:00
+12374;Poignée du Gorgouille;21.85065;43.0;2025-01-01 00:00
+12375;Fragment du Gorgouille;3.645825;4.0;2025-01-01 00:00
+12428;Boue Juvénile;0.100425;0.125;2025-01-01 00:00
+12429;Boue Novice;0.5889;0.5;2025-01-01 00:00
+12430;Boue Mature;2.239575;2.0;2025-01-01 00:00
+12431;Boue Vénérable;8.978325;8.0;2025-01-01 00:00
+12432;Poudre Juvénile;0.08265;0.125;2025-01-01 00:00
+12433;Poudre Novice;0.5889;0.5;2025-01-01 00:00
+12434;Poudre Mature;2.748525;2.0;2025-01-01 00:00
+12435;Poudre Vénérable;8.978325;8.0;2025-01-01 00:00
+12436;Cendres Juvéniles;0.08265;0.125;2025-01-01 00:00
+12437;Cendres Novices;0.71775;0.5;2025-01-01 00:00
+12438;Cendres Matures;2.239575;2.0;2025-01-01 00:00
+12439;Cendres Vénérables;8.978325;8.0;2025-01-01 00:00
+12440;Flaque Juvénile;0.08265;0.125;2025-01-01 00:00
+12441;Flaque Novice;0.5889;0.5;2025-01-01 00:00
+12442;Flaque Mature;2.239575;2.0;2025-01-01 00:00
+12443;Flaque Vénérable;8.978325;8.0;2025-01-01 00:00
+12444;Fumée Juvénile;0.08265;0.125;2025-01-01 00:00
+12445;Fumée Novice;0.5889;0.5;2025-01-01 00:00
+12446;Fumée Mature;2.239575;2.0;2025-01-01 00:00
+12447;Fumée Vénérable;8.978325;8.0;2025-01-01 00:00
+12450;Coquille de Krokille;27.485775;18.0;2025-01-01 00:00
+12451;Croc de Krokille;116.71875;78.0;2025-01-01 00:00
+12467;Épine Dorsale de Grozilla;17.968725;10.0;2025-01-01 00:00
+12468;Bézoard Ardent de Grozilla;106.745025;96.0;2025-01-01 00:00
+12728;Ardonite;12.76875;;2025-01-01 00:00
+12733;Substrat de Forêt;31.6125;;2025-01-01 00:00
+12734;Potion d'altération;4.8477;;2025-01-01 00:00
+12735;Clef de la Bambusaie de Damadrya;12.2757;;2025-01-01 00:00
+12737;Galet cramoisi;18.75;13.0;2025-01-01 00:00
+12738;Galet rutilant;187.5;125.0;2025-01-01 00:00
+12740;Galet brasillant;1875.0;1250.0;2025-01-01 00:00
+12743;Potion minérale;2.696775;;2025-01-01 00:00
+12744;Substrat de Bosquet;12.206175;;2025-01-01 00:00
+12745;Substrat de Bocage;2.925;;2025-01-01 00:00
+12970;Paquet Cadeau du Minotoboule de Nowel;6.141975;;2025-01-01 00:00
+13096;Fémur du Chafer Ronin;0.966225;;2025-01-01 00:00
+13097;Mâchoire du Chafer Draugr;0.22485;;2025-01-01 00:00
+13098;Casque du Chafer Primitif;0.167325;;2025-01-01 00:00
+13140;Serrure du Coffre des Forgerons;1.0416;1.0;2025-01-01 00:00
+13154;Poudre glaciale;45.75;25.0;2025-01-01 00:00
+13157;Ongle du Bworker;36.286725;19.0;2025-01-01 00:00
+13164;Sphénoïde du Kimbo;22.24425;12.0;2025-01-01 00:00
+13165;Duvet du Maître Corbac;5.944125;;2025-01-01 00:00
+13167;Plume du Rasboul Majeur;5.790375;3.0;2025-01-01 00:00
+13168;Ethmoïde du Minotot;22.24425;12.0;2025-01-01 00:00
+13196;Cuir synthétique;750.0;;2025-01-01 00:00
+13333;Clef du Potager d'Halouine;6.7557;;2025-01-01 00:00
+13334;Chicots d'Halouine;32.59515;;2025-01-01 00:00
+13335;Rouflaquettes d'Halouine;5.4687;;2025-01-01 00:00
+13336;Graines de Citwouille Maudites;0.393675;;2025-01-01 00:00
+13338;Enfumoir Zoth;1.686975;0.5;2025-01-01 00:00
+13339;Sceau Royal Contrefait;0.18345;0.25;2025-01-01 00:00
+13340;Pustule de Rat Sio;1.0053;;2025-01-01 00:00
+13341;Patte de la Gardienne des Égouts;4.3794;2.0;2025-01-01 00:00
+13342;Tatouage de Mauvais Garçon;0.204375;0.25;2025-01-01 00:00
+13365;Galet Saisonnier;18.75;13.0;2025-01-01 00:00
+13366;Galet Lunaire;93.75;63.0;2025-01-01 00:00
+13367;Galet Solaire;468.75;313.0;2025-01-01 00:00
+13487;Serviette de Plage;0.0537;;2025-01-01 00:00
+13488;Aile de Dragodinde Dorée;0.493875;0.5;2025-01-01 00:00
+13489;Miroir de Dopeul;0.16035;;2025-01-01 00:00
+13490;Bave de Ouassingue;1.08255;0.333333333;2025-01-01 00:00
+13491;Relique Familiale;0.204375;;2025-01-01 00:00
+13492;Short de Capoei Rat;1.0053;;2025-01-01 00:00
+13494;Nageoire de Compétition;0.072225;;2025-01-01 00:00
+13495;Crâne d'Aventurier;1.632525;1.0;2025-01-01 00:00
+13496;Bandeau de Nakunbra;0.826875;0.5;2025-01-01 00:00
+13497;Ruban d'Uchiwang;2.79165;;2025-01-01 00:00
+13498;Dent de Bourbassingue;1.146525;0.333333333;2025-01-01 00:00
+13499;Jouet de Gamine Zoth;1.8651;0.5;2025-01-01 00:00
+13500;Dent de Larve Émeraude;0.211575;;2025-01-01 00:00
+13502;Fluide Glacial;0.072225;;2025-01-01 00:00
+13503;Calumet Zoth;2.41665;0.5;2025-01-01 00:00
+13504;Corne de Gamino;1.322925;1.0;2025-01-01 00:00
+13505;Bourse Suspecte;0.182025;0.076923077;2025-01-01 00:00
+13528;Bourgeon d'Abraknyde Sombre Irascible;1.4829;1.0;2025-01-01 00:00
+13529;Feuille de Branche Soignante;1.6848;2.0;2025-01-01 00:00
+13593;Peau de Larve Saphir;1.1718;;2025-01-01 00:00
+13594;Peau de Larve Émeraude;1.269825;;2025-01-01 00:00
+13595;Peau de Larve Rubis;1.37355;;2025-01-01 00:00
+13596;Peau de Larve Dorée;1.4832;;2025-01-01 00:00
+13697;Poils de Guerrier Koalak;1.333575;1.0;2025-01-01 00:00
+13698;Houpette de Koalak Sanguin;1.38225;1.0;2025-01-01 00:00
+13699;Foulard de Koalak Farouche;1.476525;1.0;2025-01-01 00:00
+13700;Couche usagée de Warko Violet;1.528575;1.0;2025-01-01 00:00
+13702;Dédicace de Skeunk pour Émeraude;1.728075;1.0;2025-01-01 00:00
+13703;Épingle à Cheveux de Saphira;1.728075;1.0;2025-01-01 00:00
+13704;Touffe de Poils de Rubise;1.728075;1.0;2025-01-01 00:00
+13705;Boomerang Abîmé de Diamantine;1.728075;1.0;2025-01-01 00:00
+13706;Journal Intime d'Émeraude;11.1378;10.0;2025-01-01 00:00
+13707;Shampooing au Kaliptus de Saphira;11.1378;10.0;2025-01-01 00:00
+13709;Place de Concert de Diamantine;11.1378;10.0;2025-01-01 00:00
+13713;Dent de Larve Saphir;0.19725;;2025-01-01 00:00
+13714;Dent de Larve Rubis;0.226575;;2025-01-01 00:00
+13715;Dent de Larve Dorée;0.24735;;2025-01-01 00:00
+13716;Bec de Vilain Petit Tofu;0.9984;;2025-01-01 00:00
+13717;Houpette de Vilain Petit Tofu;6.014025;;2025-01-01 00:00
+13718;Cendres de Tofutoflamme;1.11225;;2025-01-01 00:00
+13719;Plumeau de Tofuzmo;1.100175;;2025-01-01 00:00
+13720;Braise de Tofutoflamme;6.6417;;2025-01-01 00:00
+13721;Croupion de Tofuzmo;6.606975;;2025-01-01 00:00
+13722;Plume de Tofubine;1.13115;;2025-01-01 00:00
+13724;Patte de Tofu Dodu;1.18875;;2025-01-01 00:00
+13725;Aile Atrophiée de Tofu Dodu;7.135875;;2025-01-01 00:00
+13726;Conque Marine;0.072225;;2025-01-01 00:00
+13727;Crème à bronzer;0.072225;;2025-01-01 00:00
+13728;Paupière d'Étoile;0.204375;;2025-01-01 00:00
+13729;Papier Charbon;0.166875;;2025-01-01 00:00
+13730;Graine de la Discorde;0.15525;0.125;2025-01-01 00:00
+13731;Pierre Médicinale;0.53355;0.2;2025-01-01 00:00
+13732;Vieille Ventouse de Kralamoure;1.333575;0.5;2025-01-01 00:00
+13733;Boulier Zoth;2.19315;0.5;2025-01-01 00:00
+13736;Furoncle de la Mama Bwork;6.788775;5.0;2025-01-01 00:00
+13737;String en Cuir de la Mama Bwork;40.63725;54.0;2025-01-01 00:00
+13738;Bandeau troué de Feu;6.8658;5.0;2025-01-01 00:00
+13739;Caleçon Rouge;41.098125;55.0;2025-01-01 00:00
+13740;Bandeau troué de Terre;6.8658;5.0;2025-01-01 00:00
+13741;Caleçon Brun;41.098125;55.0;2025-01-01 00:00
+13742;Bandeau troué d'Eau;6.8658;5.0;2025-01-01 00:00
+13743;Caleçon Bleu;41.098125;55.0;2025-01-01 00:00
+13744;Bandeau troué d'Air;6.8658;5.0;2025-01-01 00:00
+13745;Caleçon Blanc;41.098125;55.0;2025-01-01 00:00
+13746;Boulon de Cybwork;7.1781;5.0;2025-01-01 00:00
+13747;Caleçon de Cybwork;42.9678;58.0;2025-01-01 00:00
+13914;Culotte de Harrogant;101.0;68.0;2026-02-03 23:50
+13915;Cuir de Grodruche;16.8;9.0;2026-02-03 23:50
+13916;Étoffe de Grodruche;101.0;92.0;2026-02-03 23:50
+13917;Cervelle de Peunch;101.0;92.0;2026-02-03 23:50
+13918;Cuir de Peunch;16.8;9.0;2026-02-03 23:50
+13919;Cuir d'Empaillé;16.8;9.0;2026-02-03 23:50
+13921;Cuir de Cuirboule;16.8;9.0;2026-02-03 23:50
+13922;Dent de Cuirboule;101.0;92.0;2026-02-03 23:50
+13923;Moustache de Klime;84.0;34.0;2026-02-03 23:50
+13924;Scalp de Klime;506.0;338.0;2026-02-03 23:50
+13925;Sang de Ventrublion;16.0;9.0;2026-02-03 23:50
+13926;Molaire de Ventrublion;101.0;92.0;2026-02-03 23:50
+13927;Incisive de Stalak;16.0;9.0;2026-02-03 23:50
+13928;Ethmoïde de Stalak;101.0;92.0;2026-02-03 23:50
+13929;Sang de Karkanik;16.0;9.0;2026-02-03 23:50
+13930;Malleus de Karkanik;101.0;92.0;2026-02-03 23:50
+13931;Incus de Verglasseur;16.0;9.0;2026-02-03 23:50
+13932;Cervelle de Verglasseur;101.0;92.0;2026-02-03 23:50
+13933;Stapes de Frimar;16.0;9.0;2026-02-03 23:50
+13934;Moustache de Frimar;101.0;92.0;2026-02-03 23:50
+13935;Poil d'aisselle de Missiz Frizz;84.0;34.0;2026-02-03 23:50
+13936;Culotte de Missiz Frizz;506.0;338.0;2026-02-03 23:50
+13937;Bave de Nessil;16.0;9.0;2026-02-03 23:50
+13938;Molaire de Nessil;101.0;92.0;2026-02-03 23:50
+13939;Canine de Krakal;16.0;9.0;2026-02-03 23:50
+13940;Crinière de Krakal;101.0;92.0;2026-02-03 23:50
+13941;Plume de Dodox;16.0;9.0;2026-02-03 23:50
+13942;Bec de Dodox;101.0;92.0;2026-02-03 23:50
+13943;Patte de Termystique;16.8;9.0;2026-02-03 23:50
+13944;Carapace de Termystique;101.0;92.0;2026-02-03 23:50
+13945;Bractée de Drosérâle;16.0;;2026-02-03 23:50
+13946;Sépale de Drosérâle;101.0;92.0;2026-02-03 23:50
+13947;Broderie de Nileza;84.0;;2026-02-03 23:50
+13948;Braguette de Nileza;506.0;338.0;2026-02-03 23:50
+13949;Canine de Kanimate;16.0;9.0;2026-02-03 23:50
+13950;Griffe de Kanimate;101.0;92.0;2026-02-03 23:50
+13971;Maxillaire de Brikoglours;16.0;9.0;2026-02-03 23:50
+13972;Queue de Brikoglours;101.0;92.0;2026-02-03 23:50
+13973;Bec de Mansordide;16.0;9.0;2026-02-03 23:50
+13974;Sternum de Mansordide;101.0;92.0;2026-02-03 23:50
+13975;Astragale de Mécanofoux;16.0;9.0;2026-02-03 23:50
+13976;Oreille de Mécanofoux;101.0;92.0;2026-02-03 23:50
+13977;Volve de Mérulor;16.0;9.0;2026-02-03 23:50
+13978;Pédoncule de Mérulor;101.0;92.0;2026-02-03 23:50
+13980;Cuir Onique;450.0;300.0;2025-01-01 00:00
+13981;Alliage Ivre;562.5;375.0;2025-01-01 00:00
+13982;Laine de Sylargh;84.0;34.0;2026-02-03 23:50
+13983;Incisive de Sylargh;506.0;338.0;2026-02-03 23:50
+13984;Plume de Granduk;12.65625;9.0;2025-01-01 00:00
+13985;Bec de Granduk;75.9375;92.0;2025-01-01 00:00
+13986;Griffe de Strigide;12.65625;9.0;2025-01-01 00:00
+13987;Bec de Strigide;75.9375;92.0;2025-01-01 00:00
+13989;Plume de Cycloïde;75.9375;92.0;2025-01-01 00:00
+13990;Aile de Sinistrofu;12.65625;9.0;2025-01-01 00:00
+13991;Queue de Sinistrofu;75.9375;92.0;2025-01-01 00:00
+13992;Aile de Nocturlabe;12.65625;9.0;2025-01-01 00:00
+13993;Pic du Nocturlabe;75.9375;92.0;2025-01-01 00:00
+13994;Scapula du Comte Harebourg;63.28125;34.0;2025-01-01 00:00
+13995;Bandelette du Comte Harebourg;379.6875;338.0;2025-01-01 00:00
+14043;Clef de la Forgefroide de Missiz Frizz;80.7975;;2025-01-01 00:00
+14044;Clef du Transporteur de Sylargh;80.7975;;2025-01-01 00:00
+14045;Clef des Salons privés de Klime;80.7975;;2025-01-01 00:00
+14046;Clef du Laboratoire de Nileza;80.7975;;2025-01-01 00:00
+14047;Clef du Donjon du Comte Harebourg;80.7975;;2025-01-01 00:00
+14141;Racine cristalline;300.0;200.0;2025-01-01 00:00
+14142;Boulon neuf;300.0;200.0;2025-01-01 00:00
+14143;Fermeture éclair;300.0;200.0;2025-01-01 00:00
+14144;Mycoses gelées;300.0;200.0;2025-01-01 00:00
+14263;Écaille de Grozilla;4.6875;2.0;2025-01-01 00:00
+14264;Fausse dent de Grozilla;27.573525;25.0;2025-01-01 00:00
+14265;Écaille de Grasmera;5.4687;2.0;2025-01-01 00:00
+14266;Poche de charbon de Grasmera;32.59515;22.0;2025-01-01 00:00
+14267;Pointe osseuse de Grasmera;63.28125;34.0;2025-01-01 00:00
+14268;Poche de magma de Grasmera;372.242625;338.0;2025-01-01 00:00
+14278;Chaînes Brisées;0.1953;0.166666667;2025-01-01 00:00
+14279;Pierre Précieuse Zoth;1.9893;0.5;2025-01-01 00:00
+14280;Pic de Dragodinde Dorée;0.493875;0.5;2025-01-01 00:00
+14282;Boules de Kanniboul;2.0124;1.0;2025-01-01 00:00
+14284;Flamme Spectrale;0.369075;;2025-01-01 00:00
+14457;Patte de Black Wabbit;0.239325;;2025-01-01 00:00
+14458;Queue de Black Wabbit;1.524675;;2025-01-01 00:00
+14459;Moustaches de Tiwabbit;0.19725;;2025-01-01 00:00
+14460;Branche de Tiwabbit Kiafin;0.186375;;2025-01-01 00:00
+14462;Os de Wabbit Squelette;0.2556;;2025-01-01 00:00
+14463;Crâne de Wabbit Squelette;1.54035;;2025-01-01 00:00
+14464;Clef du Château du Wa Wabbit;59.906175;;2025-01-01 00:00
+14465;Clef du Terrier du Wa Wabbit;8.74875;;2025-01-01 00:00
+14466;Bandeau de Black Wabbit Squelette;0.278475;;2025-01-01 00:00
+14467;Osselet de Black Wabbit Squelette;1.6593;;2025-01-01 00:00
+14468;Barbe du Wa Wobot;18.9144;;2025-01-01 00:00
+14469;Estomac de Black Wo Wabbit;3.78285;;2025-01-01 00:00
+14470;Poil de Wobot Kiafin;3.78285;;2025-01-01 00:00
+14471;Casque de Wobot;3.78285;;2025-01-01 00:00
+14472;Bâton de Blanc Pa Wabbit;3.78285;;2025-01-01 00:00
+14473;Boulon Wabbit;0.63105;;2025-01-01 00:00
+14474;Sang de Wabbit Garou;10.663125;;2025-01-01 00:00
+14475;Feuille de Cawotman;10.663125;;2025-01-01 00:00
+14476;Oreilles de Wabbit Fluo;10.663125;;2025-01-01 00:00
+14477;Dents de Wabbit Vampire;10.663125;;2025-01-01 00:00
+14479;Cawotte Transgénique;1.8024;;2025-01-01 00:00
+14490;Lunettes de Tiwobot;3.78285;;2025-01-01 00:00
+14509;Oreille de Bouledogre;5.569575;8.0;2025-01-01 00:00
+14510;Patte de Bouledogre;0.927225;1.0;2025-01-01 00:00
+14511;Élastique de Gobvious;5.72055;8.0;2025-01-01 00:00
+14512;Plume de Gobvious;0.9462;1.0;2025-01-01 00:00
+14513;Échasse de Molette;5.87475;;2025-01-01 00:00
+14514;Dent de Molette;0.992175;1.0;2025-01-01 00:00
+14515;Corne de Rhinoféroce;6.03225;8.0;2025-01-01 00:00
+14516;Oreille de Rhinoféroce;1.01205;1.0;2025-01-01 00:00
+14517;Slip troué de Dramak;32.59515;29.0;2025-01-01 00:00
+14518;Chaussette trouée de Dramak;5.4687;3.0;2025-01-01 00:00
+14560;Clef du Théâtre de Dramak;9.191625;;2025-01-01 00:00
+14635;Pépite;0.75;1.25;2025-01-01 00:00
+14645;Essence du Tournesol Affamé;10.5249;;2025-01-01 00:00
+14646;Essence de Mob l'Éponge;1.76085;;2025-01-01 00:00
+14647;Essence du Bouftou Royal;6.9675;;2025-01-01 00:00
+14648;Essence du Scarabosse Doré;19.17615;;2025-01-01 00:00
+14649;Essence de Batofu;4.6323;;2025-01-01 00:00
+14650;Essence de Boostache;11.63025;;2025-01-01 00:00
+14652;Essence de la Bworkette;15.6042;;2025-01-01 00:00
+14653;Essence des Forgerons;6.249975;;2025-01-01 00:00
+14654;Essence de la Shin Larve;24.556875;;2025-01-01 00:00
+14655;Essence du Corailleur Magistral;28.02;;2025-01-01 00:00
+14656;Essence de Damadrya;41.69115;;2025-01-01 00:00
+14657;Essence du Wa Wabbit;25.120425;;2025-01-01 00:00
+14658;Essence du Blop Royal;60.9987;;2025-01-01 00:00
+14659;Essence de la Gelée Royale;10.027125;;2025-01-01 00:00
+14660;Essence de Nelween;35.1051;;2025-01-01 00:00
+14661;Essence de Gourlo le Terrible;56.0823;;2025-01-01 00:00
+14662;Essence du Craqueleur Légendaire;29.415;;2025-01-01 00:00
+14663;Essence de Nagate;64.889475;;2025-01-01 00:00
+14664;Essence du Wa Wobot;113.486775;;2025-01-01 00:00
+14665;Essence de l'Abraknyde Ancestral;114.777975;;2025-01-01 00:00
+14666;Essence du Dragon Cochon;208.719375;;2025-01-01 00:00
+14667;Essence du Koulosse;61.431375;;2025-01-01 00:00
+14668;Essence du Meulou;208.719375;;2025-01-01 00:00
+14669;Essence de Moon;86.04075;;2025-01-01 00:00
+14670;Essence de Dramak;81.705225;;2025-01-01 00:00
+14671;Essence du Rasboul Majeur;202.098675;;2025-01-01 00:00
+14672;Essence du Maître Corbac;156.457425;;2025-01-01 00:00
+14673;Essence du Rat Blanc;32.96505;;2025-01-01 00:00
+14674;Essence du Rat Noir;48.050775;;2025-01-01 00:00
+14675;Essence du Blop Multicolore Royal;141.759825;;2025-01-01 00:00
+14676;Essence du Minotoror;293.6616;;2025-01-01 00:00
+14677;Essence du Royalmouth;145.066875;;2025-01-01 00:00
+14678;Essence de Shihan et Hanshi;167.499975;;2025-01-01 00:00
+14679;Essence du Tofu Royal;248.72325;;2025-01-01 00:00
+14680;Essence de Crocabulia;146.8308;;2025-01-01 00:00
+14681;Essence de Skeunk;134.0463;;2025-01-01 00:00
+14682;Essence de Tanukouï San;67.5;;2025-01-01 00:00
+14683;Essence de Founoroshi;83.74995;;2025-01-01 00:00
+14684;Essence du Chêne Mou;260.5617;;2025-01-01 00:00
+14685;Essence du Tynril;549.46785;;2025-01-01 00:00
+14686;Essence du Mansot Royal;208.3002;;2025-01-01 00:00
+14687;Essence de Ben le Ripate;322.9722;;2025-01-01 00:00
+14688;Essence de Sphincter Cell;483.555075;;2025-01-01 00:00
+14689;Essence du Kimbo;670.262775;;2025-01-01 00:00
+14690;Essence du Minotot;1141.793475;;2025-01-01 00:00
+14691;Essence de l'Obsidiantre;445.878825;;2025-01-01 00:00
+14692;Essence du Tengu Givrefoux;429.28725;;2025-01-01 00:00
+14693;Essence du Korriandre;543.53475;;2025-01-01 00:00
+14694;Essence du Kralamoure Géant;520.031475;;2025-01-01 00:00
+14695;Essence du Bworker;543.53475;;2025-01-01 00:00
+14696;Essence d'Ougah;761.255325;;2025-01-01 00:00
+14697;Essence du Kolosso;696.374925;;2025-01-01 00:00
+14698;Essence de Fuji Givrefoux;923.19615;;2025-01-01 00:00
+14699;Essence de Grolloum;696.374925;;2025-01-01 00:00
+14700;Essence du Glourséleste;696.374925;;2025-01-01 00:00
+14701;Essence de Missiz Frizz;949.21875;;2025-01-01 00:00
+14702;Essence de Sylargh;949.21875;;2025-01-01 00:00
+14703;Essence de Klime;949.21875;;2025-01-01 00:00
+14704;Essence de Nileza;949.21875;;2025-01-01 00:00
+14705;Essence du Comte Harebourg;949.21875;;2025-01-01 00:00
+14706;Essence de Merkator;949.21875;;2025-01-01 00:00
+14720;Essence du Kwakwa;23.9517;;2025-01-01 00:00
+14774;Essence du Kanniboul Ebil;25.120425;;2025-01-01 00:00
+14795;Pile Steamer;12.65625;;2025-01-01 00:00
+14817;Pince de Krabouilleur;101.0;51.0;2026-02-03 23:50
+14819;Carapace de Krabouilleur;16.0;5.0;2026-02-03 23:50
+14822;Pic de Pikoleur;16.0;5.0;2026-02-03 23:50
+14823;Huile de Pikoleur;101.0;51.0;2026-02-03 23:50
+14859;Sang de Harpo;16.0;10.0;2026-02-03 23:50
+14860;Cuir d'Eskoglyphe;16.0;3.0;2026-02-03 23:50
+14861;Broderie d'Eskoglyphe;101.0;34.0;2026-02-03 23:50
+14862;Barbe du Cyclophandre;16.0;5.0;2026-02-03 23:50
+14863;Chaussette du Cyclophandre;101.0;51.0;2026-02-03 23:50
+14864;Barbe de Merkator;84.0;34.0;2026-02-03 23:50
+14868;Vieille Tête de Marteau;750.0;;2025-01-01 00:00
+14870;Clef de l'Aquadôme de Merkator;80.7975;;2025-01-01 00:00
+14921;Étoffe Mystérieuse;75.0;;2025-01-01 00:00
+14922;Masque du Vide;10.557675;9.0;2025-01-01 00:00
+14923;Masque de la Vengeance;10.557675;9.0;2025-01-01 00:00
+14924;Masque de la Violence;10.557675;9.0;2025-01-01 00:00
+14925;Masque de la Vivacité;10.557675;9.0;2025-01-01 00:00
+14926;Masque du Vice;10.557675;9.0;2025-01-01 00:00
+14927;Symbole des Obscuranti;62.197875;44.0;2025-01-01 00:00
+14928;Corne d'Ombre;45.75;38.0;2025-01-01 00:00
+14935;Clef de la Pyramide d'Ombre;72.143625;;2025-01-01 00:00
+14936;Insigne des Justiciers;750.0;;2025-01-01 00:00
+14944;Sueur Froide de Fantôme;0.204375;;2025-01-01 00:00
+14945;Vieille Partition;0.204375;;2025-01-01 00:00
+14946;Cuir de Porsalu;0.8112;0.96;2025-01-01 00:00
+14950;Langue de Kraméléhon;9.51315;;2025-01-01 00:00
+14951;Corne de Scaratos;6.606975;12.0;2025-01-01 00:00
+14952;Pierre de Serpiplume;9.00225;8.0;2025-01-01 00:00
+14975;Essence d'Ombre;274.5;;2025-01-01 00:00
+14977;Bitte d'amarrage;750.0;;2025-01-01 00:00
+15039;Poils de Kanigroula;29.0;;2026-02-03 23:50
+15040;Queue de Kanigroula;134.44365;;2025-01-01 00:00
+15041;Tignasse de Kanihilan;5.0;;2026-02-03 23:50
+15042;Peau de Kanihilan;33.0;;2026-02-03 23:50
+15043;Cheveux d'Alhyène;5.0;;2026-02-03 23:50
+15044;Frimousse d'Alhyène;34.0;;2026-02-03 23:50
+15045;Griffe de Félygiène;5.0;;2026-02-03 23:50
+15046;Canine de Félygiène;33.0;;2026-02-03 23:50
+15047;Chaîne de Panthègros;5.0;;2026-02-03 23:50
+15048;Boule de Panthègros;33.0;;2026-02-03 23:50
+15049;Oreille de Kaniblou;5.0;;2026-02-03 23:50
+15050;Étoffe de Kaniblou;33.0;;2026-02-03 23:50
+15051;Crinière d'Orfélin;5.0;;2026-02-03 23:50
+15052;Boucle d'Orfélin;33.0;;2026-02-03 23:50
+15065;Paire de boules de Haute Truche;11.25;;2025-01-01 00:00
+15067;Patte de Gruche;1.9893;;2025-01-01 00:00
+15068;Aile de Gruche;11.919375;;2025-01-01 00:00
+15069;Croupion de Truchmuche;1.957875;;2025-01-01 00:00
+15070;Langue de Truchmuche;11.634975;;2025-01-01 00:00
+15071;Plume de Truchideur;1.862475;;2025-01-01 00:00
+15072;Morpion de Truchideur;11.35665;;2025-01-01 00:00
+15074;Glandes de Truchtine;11.0844;;2025-01-01 00:00
+15075;Duvet de Truchon;1.803;;2025-01-01 00:00
+15076;Bec de Truchon;10.817925;;2025-01-01 00:00
+15093;Clef de la Grotte de Kanigroula;30.8643;;2025-01-01 00:00
+15095;Essence de Kanigroula;335.13135;;2025-01-01 00:00
+15162;Clef de la Volière de la Haute Truche;18.467925;;2025-01-01 00:00
+15164;Broderie de Malléfisk;5.4687;4.0;2025-01-01 00:00
+15165;Corde de Boursoin;1.093725;1.0;2025-01-01 00:00
+15166;Langue de Mimikado;1.093725;1.0;2025-01-01 00:00
+15167;Antenne de Trésantène;1.093725;1.0;2025-01-01 00:00
+15168;Corne de Berserkoffre;1.093725;1.0;2025-01-01 00:00
+15169;Moustache précieuse;1.093725;1.0;2025-01-01 00:00
+15170;Défense du Phossile;17.968725;14.0;2025-01-01 00:00
+15171;Griffe de Phorrêveur;3.5937;3.0;2025-01-01 00:00
+15172;Peau de Métaphorreur;3.5937;3.0;2025-01-01 00:00
+15173;Corne de Père Phorreur;3.5937;3.0;2025-01-01 00:00
+15175;Queue de Mère Veilleuse;3.5937;3.0;2025-01-01 00:00
+15176;Joyau de la couronne du roi Nidas;84.0;51.0;2026-02-03 23:50
+15177;Corne de Kamasterisk;17.8;;2026-02-03 23:50
+15178;Sourcil de Barbétoal;16.8;5.0;2026-02-03 23:50
+15179;Dent de Lévitrof;16.8;5.0;2026-02-03 23:50
+15180;Morceau de clef de Paspartou;16.8;5.0;2026-02-03 23:50
+15181;Boule en or de Piloztère;16.8;10.0;2026-02-03 23:50
+15182;Kamatrix;24.0;2.0;2026-02-03 23:50
+15219;Trame Dimensionnelle;56.25;;2025-01-01 00:00
+15263;Rose des sables;;1.25;2025-01-01 00:00
+15272;Essence du Roi Nidas;379.6875;;2025-01-01 00:00
+15273;Essence de Malléfisk;32.812425;;2025-01-01 00:00
+15274;Essence du Phossile;107.8125;;2025-01-01 00:00
+15278;Clef de la Fabrique de Malléfisk;9.599925;;2025-01-01 00:00
+15279;Clef de la Galerie du Phossile;28.425;;2025-01-01 00:00
+15280;Clef du Palais du roi Nidas;79.484175;;2025-01-01 00:00
+15362;Essence de la Haute Truche;168.6105;;2025-01-01 00:00
+15444;Tête de mort;21.0;2.0;2026-02-03 23:50
+15445;Broderie de la Reine des Voleurs;63.28125;51.0;2025-01-01 00:00
+15446;Piège désamorcé de Mâchassin;12.65625;5.0;2025-01-01 00:00
+15447;Mèche de bombe de Terristocrate;13.4007;5.0;2025-01-01 00:00
+15448;Chouchou de Doublure;13.4007;5.0;2025-01-01 00:00
+15449;Épaulière de Bourôliste;12.65625;;2025-01-01 00:00
+15450;Crâne magique de Magouille;12.65625;10.0;2025-01-01 00:00
+15451;Sang du Toxoliath;36.286725;29.0;2025-01-01 00:00
+15452;Patte de Scoliopode;7.2573;6.0;2025-01-01 00:00
+15453;Aile de Puceronde;7.2573;6.0;2025-01-01 00:00
+15454;Pince de Lucrane;7.959675;6.0;2025-01-01 00:00
+15455;Venin d'Éperfide;7.959675;6.0;2025-01-01 00:00
+15456;Dard de Morfrelon;7.2573;6.0;2025-01-01 00:00
+15458;Foulard de Milimaître;2.25;2.0;2025-01-01 00:00
+15459;Sacoche de Kartouche;2.46225;2.0;2025-01-01 00:00
+15460;Os de Sramouraï;2.25;2.0;2025-01-01 00:00
+15461;Bandelette de Tromblion;2.25;2.0;2025-01-01 00:00
+15462;Slip d'Elsoummo;2.25;2.0;2025-01-01 00:00
+15475;Clef du Trône de la Cour Sombre;82.727175;;2025-01-01 00:00
+15476;Clef de la Cave du Toxoliath;54.088575;;2025-01-01 00:00
+15477;Clef du Ring du Capitaine Ekarlatte;19.780875;;2025-01-01 00:00
+15478;Culotte de Frakacia;22.5;;2025-01-01 00:00
+15485;Sporme de Dremoan;562.5;;2025-01-01 00:00
+15531;Crochet rouillé;72.0;;2026-02-03 23:50
+15533;Rossignol;83.536575;;2025-01-01 00:00
+15551;Bouteille de Gein;750.0;;2025-01-01 00:00
+15685;Patte de Tabacille;12.65625;7.0;2025-01-01 00:00
+15686;Antenne de Bacterrib;12.65625;7.0;2025-01-01 00:00
+15687;Coquille de Virustine;12.65625;7.0;2025-01-01 00:00
+15688;Peau de Pataugerme;2.712;2.0;2025-01-01 00:00
+15689;Noyau de Protozorreur;63.28125;34.0;2025-01-01 00:00
+15690;Clef du Ventre de la Baleine;80.7975;;2025-01-01 00:00
+15691;Sel de Baleine;75.9375;34.0;2025-01-01 00:00
+15702;Essence du Capitaine Ekarlatte;67.5;;2025-01-01 00:00
+15703;Essence du Toxoliath;217.720575;;2025-01-01 00:00
+15704;Essence de la Reine des Voleurs;379.6875;;2025-01-01 00:00
+15705;Essence du Protozorreur;379.6875;;2025-01-01 00:00
+15715;Aile de Vortex;63.28125;51.0;2025-01-01 00:00
+15716;Serre d'Ikargn;15.1875;12.0;2025-01-01 00:00
+15717;Corne de Méjaire;15.1875;12.0;2025-01-01 00:00
+15719;Griffe de Buboxor;15.1875;12.0;2025-01-01 00:00
+15720;Plume de Brabuzar;12.65625;10.0;2025-01-01 00:00
+15721;Corne de XLII;29.01315;23.0;2025-01-01 00:00
+15722;Dent de Trezz;6.96315;6.0;2025-01-01 00:00
+15723;Peau de Vindeux;6.96315;6.0;2025-01-01 00:00
+15724;Pagne de Trantroa;6.96315;6.0;2025-01-01 00:00
+15725;Barbe de Seith;6.96315;6.0;2025-01-01 00:00
+15726;Touffe de cheveux de Soissanth;5.8026;5.0;2025-01-01 00:00
+15727;Pixel de Fraktale;9.012075;7.0;2025-01-01 00:00
+15728;Pixel de Gromorso;2.16285;2.0;2025-01-01 00:00
+15729;Pixel de Farfacette;2.16285;2.0;2025-01-01 00:00
+15730;Pixel de Brikablak;2.16285;2.0;2025-01-01 00:00
+15731;Pixel d'Éklatleth;2.16285;2.0;2025-01-01 00:00
+15732;Pixel de Segmantid;1.8024;1.0;2025-01-01 00:00
+15733;Sablier miniature;20.764125;3.0;2025-01-01 00:00
+15734;Essence de Vortex;379.6875;;2025-01-01 00:00
+15735;Essence de XLII;174.0789;;2025-01-01 00:00
+15736;Essence de Fraktale;54.072525;;2025-01-01 00:00
+15793;Gland de Fouduglen;11.25;;2025-01-01 00:00
+15806;Clef du Mégalithe de Fraktale;18.7149;;2025-01-01 00:00
+15807;Clef de l'Horologium de XLII;49.2039;;2025-01-01 00:00
+15991;Clef de la Cache de Kankreblath;2.0523;;2025-01-01 00:00
+16001;Antennes de Vilinsekt;0.132;;2025-01-01 00:00
+16002;Patte de Kankreblath;0.77205;;2025-01-01 00:00
+16008;Batterie rechargeable de l'Hyperscampe;750.0;;2025-01-01 00:00
+16009;Élixir de Brumen;75.0;;2025-01-01 00:00
+16148;Poil d'Abrakne;0.204375;0.083333333;2025-01-01 00:00
+16150;Racine d'Abraknyde Vénérable;0.6468;0.5;2025-01-01 00:00
+16151;Écorce d'Abraknyde Vénérable;3.9204;;2025-01-01 00:00
+16152;Masque Brisé d'Araknotron;0.694575;0.5;2025-01-01 00:00
+16153;Arakne Écrabouillée;4.15485;;2025-01-01 00:00
+16154;Écorce d'Abrakne Sombre;0.779175;0.5;2025-01-01 00:00
+16155;Toile d'Abrakne Sombre;4.655625;6.0;2025-01-01 00:00
+16156;Ambre d'Abraknyde Sombre Irascible;8.93835;18.0;2025-01-01 00:00
+16157;Masque Cassé d'Araknotron Irascible;1.5;1.0;2025-01-01 00:00
+16158;Arakne Irascible Écrasée;8.98755;19.0;2025-01-01 00:00
+16159;Patte d'Abrakne Irascible;1.590975;2.0;2025-01-01 00:00
+16160;Mandibule d'Abrakne Irascible;9.585825;20.0;2025-01-01 00:00
+16161;Doigt de Branche Invocatrice;1.6848;2.0;2025-01-01 00:00
+16165;Lamelle de Champa Bleu;0.1515;;2025-01-01 00:00
+16166;Lamelle de Champa Marron;0.1515;;2025-01-01 00:00
+16167;Lamelle de Champa Rouge;0.1515;;2025-01-01 00:00
+16168;Lamelle de Champa Vert;0.1515;;2025-01-01 00:00
+16179;Clef de l'Antre de la Reine Nyée;7.77285;;2025-01-01 00:00
+16180;Soie Baveuse;4.1346;;2025-01-01 00:00
+16181;Globule de Nyée;25.03875;;2025-01-01 00:00
+16207;Sceau Sylvestre;322.5;;2025-01-01 00:00
+16208;Fragment de Rubis Fertile;375.0;;2025-01-01 00:00
+16211;Bourgeon explosif de Damadrya;6.948525;;2025-01-01 00:00
+16212;Substrat de Fourré;23.9625;;2025-01-01 00:00
+16215;Glande d'Arak-haï;0.759225;;2025-01-01 00:00
+16216;Chélicères d'Arapex;4.5978;;2025-01-01 00:00
+16217;Laine de Dardalaine;4.5978;;2025-01-01 00:00
+16218;Dent de Gargantûl;4.5978;;2025-01-01 00:00
+16219;Fil de Néfileuse;4.5978;;2025-01-01 00:00
+16285;Essence de Kankreblath;4.6323;;2025-01-01 00:00
+16286;Essence de la Reine Nyée;62.365875;;2025-01-01 00:00
+16378;Ortie Roïde;2.25;;2025-01-01 00:00
+16379;Sauge Divine au Rhum;3.75;;2025-01-01 00:00
+16380;Trèfle Agare;5.249925;;2025-01-01 00:00
+16381;Menthe Religieuse;7.5;;2025-01-01 00:00
+16382;Orchidée de Génie;9.0;;2025-01-01 00:00
+16383;Edelweiss Marguerite;11.25;;2025-01-01 00:00
+16384;Pandouille de Trois;12.75;;2025-01-01 00:00
+16385;Ginseng;0.149925;;2025-01-01 00:00
+16386;Ginsengoku;15.0;;2025-01-01 00:00
+16387;Belladone;0.164925;;2025-01-01 00:00
+16388;Belladonzelle;16.5;;2025-01-01 00:00
+16389;Mandragore;0.1875;;2025-01-01 00:00
+16390;Mandragorgonzola;18.75;;2025-01-01 00:00
+16419;Potion des Ancêtres;5.2875;;2025-01-01 00:00
+16420;Potion de Glandage;7.7625;;2025-01-01 00:00
+16440;Ferrite;0.54;;2025-01-01 00:00
+16452;Riz Cola;11.25;;2025-01-01 00:00
+16453;Malt Husse;12.75;;2025-01-01 00:00
+16454;Maïs;0.164925;;2025-01-01 00:00
+16455;Maïssého;16.5;;2025-01-01 00:00
+16456;Millet;0.1875;;2025-01-01 00:00
+16457;Millet Zime;18.75;;2025-01-01 00:00
+16458;Substrat de Forêt primaire;38.924925;;2025-01-01 00:00
+16459;Substrat de Forêt vierge;49.95;;2025-01-01 00:00
+16460;Substrat de Sylve;54.45;;2025-01-01 00:00
+16461;Anguille;0.112425;;2025-01-01 00:00
+16462;Anguille Souroche;11.25;;2025-01-01 00:00
+16463;Dorade Grise;0.12;;2025-01-01 00:00
+16464;Daurade Royale;12.0;;2025-01-01 00:00
+16465;Lotte;0.149925;;2025-01-01 00:00
+16466;Glotte;15.0;;2025-01-01 00:00
+16467;Morue;0.18;;2025-01-01 00:00
+16468;Morue Barbue;18.0;;2025-01-01 00:00
+16469;Tanche;0.1875;;2025-01-01 00:00
+16470;Tanche Hantée;18.75;;2025-01-01 00:00
+16471;Espadon;0.195;;2025-01-01 00:00
+16472;Espadon Quichotte;228.75;;2025-01-01 00:00
+16487;Bois Vermoulu;0.6717;;2025-01-01 00:00
+16488;Bois de Noisetier;0.142425;;2025-01-01 00:00
+16489;Planche Agglomérée;0.3375;;2025-01-01 00:00
+16490;Planche Contreplaquée;0.899925;;2025-01-01 00:00
+16491;Planche à Griller;1.6875;;2025-01-01 00:00
+16492;Planche de Surf;2.812425;;2025-01-01 00:00
+16493;Planche à Repasser;4.5;;2025-01-01 00:00
+16494;Planche de Toilette;6.581175;;2025-01-01 00:00
+16495;Planche à Pâtisserie;9.16875;;2025-01-01 00:00
+16496;Planche de Gravure;10.96875;;2025-01-01 00:00
+16497;Planche à Pain;14.624925;;2025-01-01 00:00
+16498;Planche à Dessin;18.45;;2025-01-01 00:00
+16499;Planche de Salut;20.7;;2025-01-01 00:00
+16511;Laine Céleste;0.032625;;2025-01-01 00:00
+16512;Plume Chimérique;0.0318;;2025-01-01 00:00
+16513;Pétale Diaphane;0.032025;;2025-01-01 00:00
+16515;Queue de Chapardam;0.0333;;2025-01-01 00:00
+16518;Feu Intérieur;0.0318;;2025-01-01 00:00
+16522;Peau de Gloot;0.032175;;2025-01-01 00:00
+16524;Relique d'Incarnam;0.033975;;2025-01-01 00:00
+16525;Crâne de Kardorim;0.197325;;2025-01-01 00:00
+16526;Tête de Marteau en Jade;11.25;;2025-01-01 00:00
+16663;Viande Intangible;0.0321;;2025-01-01 00:00
+16909;Sève de Frêne;2.25;;2025-01-01 00:00
+16910;Sève de Châtaignier;3.75;;2025-01-01 00:00
+16911;Sève de Noyer;5.249925;;2025-01-01 00:00
+16912;Sève de Chêne;7.5;;2025-01-01 00:00
+16913;Sève de Bombu;8.25;;2025-01-01 00:00
+16914;Sève d'Érable;9.0;;2025-01-01 00:00
+16915;Sève d'Oliviolet;10.499925;;2025-01-01 00:00
+16916;Sève d'If;11.25;;2025-01-01 00:00
+16917;Sève de Bambou;12.0;;2025-01-01 00:00
+16918;Sève de Merisier;12.75;;2025-01-01 00:00
+16919;Sève de Noisetier;14.249925;;2025-01-01 00:00
+16920;Sève d'Ébène;15.0;;2025-01-01 00:00
+16921;Sève de Kaliptus;15.749925;;2025-01-01 00:00
+16922;Sève de Charme;16.5;;2025-01-01 00:00
+16923;Sève de Bambou Sombre;18.0;;2025-01-01 00:00
+16924;Sève d'Orme;18.75;;2025-01-01 00:00
+16925;Sève de Bambou Sacré;19.499925;;2025-01-01 00:00
+16926;Sève de Tremble;20.25;;2025-01-01 00:00
+17037;Essence de Kardorim;1.184175;;2025-01-01 00:00
+17060;Potion de Vieillesse;4.387425;;2025-01-01 00:00
+17065;Poupée Vaudou Tam;0.3342;0.25;2025-01-01 00:00
+17075;Canif Rouillé;0.826875;0.5;2025-01-01 00:00
+17112;Clef de l'Arbre de Moon;8.2968;;2025-01-01 00:00
+17113;Clef du Bateau du Chouque;8.156475;;2025-01-01 00:00
+17114;Poils de Zatoïshwan;412.5;;2025-01-01 00:00
+17115;Scalp d'Anatak;465.0;;2025-01-01 00:00
+17116;Épaulière Massive du K.O.;600.0;;2025-01-01 00:00
+17117;Pied de Voldelor;750.0;;2025-01-01 00:00
+17118;Peau du Grand Kongoku;750.0;;2025-01-01 00:00
+17123;Viande Hachée;0.03945;;2025-01-01 00:00
+17124;Viande Faisandée;0.062025;;2025-01-01 00:00
+17125;Bidoche Faisandée;6.092025;;2025-01-01 00:00
+17126;Viande Frelatée;0.09945;;2025-01-01 00:00
+17127;Bidoche Frelatée;9.905625;;2025-01-01 00:00
+17128;Viande Minérale;0.156975;;2025-01-01 00:00
+17129;Bidoche Minérale;3.6234;;2025-01-01 00:00
+17130;Viande Tendre;0.232425;;2025-01-01 00:00
+17131;Bidoche Tendre;23.340225;;2025-01-01 00:00
+17132;Viande Ladre;0.334425;;2025-01-01 00:00
+17133;Bidoche Ladre;33.56985;;2025-01-01 00:00
+17134;Viande Avariée;0.479925;;2025-01-01 00:00
+17135;Bidoche Avariée;46.658925;;2025-01-01 00:00
+17136;Viande Sanguinolente;0.62565;;2025-01-01 00:00
+17137;Bidoche Sanguinolente;63.109725;;2025-01-01 00:00
+17138;Viande Rassie;0.826875;;2025-01-01 00:00
+17139;Bidoche Rassie;83.549175;;2025-01-01 00:00
+17140;Viande Exsudative;1.07895;;2025-01-01 00:00
+17141;Bidoche Exsudative;21.754125;;2025-01-01 00:00
+17142;Viande Séchée;1.3842;;2025-01-01 00:00
+17143;Bidoche Séchée;39.755925;;2025-01-01 00:00
+17144;Viande Saignante;1.787625;;2025-01-01 00:00
+17145;Bidoche Saignante;177.945825;;2025-01-01 00:00
+17146;Viande Persillée;2.25345;;2025-01-01 00:00
+17147;Bidoche Persillée;226.0827;;2025-01-01 00:00
+17148;Viande Macérée;2.839725;;2025-01-01 00:00
+17149;Bidoche Macérée;283.364625;;2025-01-01 00:00
+17150;Viande de Brousse;3.696375;;2025-01-01 00:00
+17151;Bidoche de Brousse;356.40495;;2025-01-01 00:00
+17152;Viande Fraîche;4.56345;;2025-01-01 00:00
+17153;Bidoche Fraîche;89.793525;;2025-01-01 00:00
+17154;Viande Maigre;6.279075;;2025-01-01 00:00
+17155;Bidoche Maigre;597.884925;;2025-01-01 00:00
+17156;Viande Gâtée;7.2573;;2025-01-01 00:00
+17157;Bidoche Gâtée;725.735175;;2025-01-01 00:00
+17158;Viande Noire;9.580725;;2025-01-01 00:00
+17159;Bidoche Noire;940.06845;;2025-01-01 00:00
+17160;Viande Goûtue;12.75225;;2025-01-01 00:00
+17161;Bidoche Goûtue;1181.15985;;2025-01-01 00:00
+17272;Orbe régénérant mineur;11.25;;2025-01-01 00:00
+17273;Orbe régénérant;112.5;;2025-01-01 00:00
+17274;Orbe régénérant majeur;337.5;;2025-01-01 00:00
+17275;Orbe régénérant magistral;562.5;;2025-01-01 00:00
+17414;Essence du Chouque;62.365875;;2025-01-01 00:00
+17421;Bidoche Intangible;19.736775;;2025-01-01 00:00
+17442;Pointes de Knout;114.286425;;2025-01-01 00:00
+17443;Manche de Knout;73.124925;;2025-01-01 00:00
+17444;Lanières de knout;115.76535;;2025-01-01 00:00
+17563;Clef du Miausolée du Pounicheur;13.5132;;2025-01-01 00:00
+17564;Clef du Plateau de Ush;34.118175;;2025-01-01 00:00
+17567;Biscuit de chance;19.8291;3.0;2025-01-01 00:00
+17609;Patte de Pupuce;1.389675;1.0;2025-01-01 00:00
+17611;Palpe de Pikbul;1.389675;1.0;2025-01-01 00:00
+17612;Peau de Gériatique;1.389675;1.0;2025-01-01 00:00
+17613;Épine de Grath;1.389675;1.0;2025-01-01 00:00
+17614;Glande du Pounicheur;6.948525;6.0;2025-01-01 00:00
+17615;Queue de Chasquatch;4.44885;4.0;2025-01-01 00:00
+17616;Poil de Chacrebleu;4.44885;4.0;2025-01-01 00:00
+17617;Collier de Chakichan;4.44885;4.0;2025-01-01 00:00
+17618;Oreille de Chargus;4.44885;4.0;2025-01-01 00:00
+17619;Dent de Chakaroze;4.44885;2.0;2025-01-01 00:00
+17620;Moustache de Ush;22.24425;18.0;2025-01-01 00:00
+17621;Pique du Soldat;12.65625;10.0;2025-01-01 00:00
+17622;Plume du Cavalier;12.65625;10.0;2025-01-01 00:00
+17623;Gilet du Valet;12.65625;10.0;2025-01-01 00:00
+17624;Ceinture de la Dame;12.65625;5.0;2025-01-01 00:00
+17625;Sceau du Roi Joueur;12.65625;10.0;2025-01-01 00:00
+17736;Essence de Ush;133.465875;;2025-01-01 00:00
+17737;Essence du Pounicheur;41.69115;;2025-01-01 00:00
+17772;Clef du caveau du Roi Léorictus;94.35075;;2025-01-01 00:00
+17777;Clef du caveau du Prince Djamal;31.05705;;2025-01-01 00:00
+17780;Fleur de Korriandre;6.168675;;2025-01-01 00:00
+17781;Dissolvant Phosphorescent;78.5895;;2025-01-01 00:00
+17785;Clef du Temple Maudit;24.948525;;2025-01-01 00:00
+17850;Jus de poisson abominable;49.75875;;2025-01-01 00:00
+17851;Jus de poisson asphyxiant;118.04865;;2025-01-01 00:00
+17852;Jus de poisson pestilentiel;503.193825;;2025-01-01 00:00
+17853;Jus de poisson méphitique;671.001225;;2025-01-01 00:00
+17864;Ambre gris;120.0;;2025-01-01 00:00
+17865;Marque des grands fonds;640.0;;2026-02-03 23:50
+17866;Steamopompe;640.0;;2026-02-03 23:50
+17867;Hélice en laiton;640.0;;2026-02-03 23:50
+17868;Plombs de plongée;640.0;;2026-02-03 23:50
+17869;Filtre à frousse;640.0;;2026-02-03 23:50
+17870;Socle en coquillage;640.0;;2026-02-03 23:50
+17963;Sceau des fondateurs;4310.1564;720.0;2025-01-01 00:00
+17964;Volant hydraulique;3730.781475;576.0;2025-01-01 00:00
+17965;Accélérateur de propulsion;4419.227925;720.0;2025-01-01 00:00
+17966;Lest anti-tourbillon;3848.615475;584.0;2025-01-01 00:00
+17967;Attrape-peur;4310.1564;720.0;2025-01-01 00:00
+17968;Statuette de Snedon;3730.781475;579.0;2025-01-01 00:00
+17970;Bave de Mol Usk;12.65625;3.0;2025-01-01 00:00
+17971;Pince de Crabe Yoloniste;12.65625;3.0;2025-01-01 00:00
+17972;Écaille de Gambaf;12.65625;3.0;2025-01-01 00:00
+17973;Queue de Mantaze;12.65625;5.0;2025-01-01 00:00
+17974;Parasite Aquatique;101.0;23.0;2026-02-03 23:50
+17975;Lanterne de Tourthon;13.20645;3.0;2025-01-01 00:00
+17976;Poil de Meno;63.28125;34.0;2025-01-01 00:00
+17977;Encre de Poulpée;12.65625;3.0;2025-01-01 00:00
+17978;Trident de Tryde;13.560225;3.0;2025-01-01 00:00
+17979;Moustache de Rilur;12.65625;5.0;2025-01-01 00:00
+17980;Épine de Diondin;12.65625;10.0;2025-01-01 00:00
+17981;Peau de Trithon;111.0;24.0;2026-02-03 23:50
+17982;Dentier de Dantinéa;63.28125;34.0;2025-01-01 00:00
+17983;Tentacule de Grofond;12.65625;3.0;2025-01-01 00:00
+17984;Tentacule de N'Yalg;12.65625;3.0;2025-01-01 00:00
+17985;Patte de Li-Fo;12.65625;5.0;2025-01-01 00:00
+17987;Flûte de Klûtiste;12.65625;10.0;2025-01-01 00:00
+17988;Pierre Angulaire;101.0;24.0;2026-02-03 23:50
+17989;Aile de Larve de Koutoulou;63.28125;34.0;2025-01-01 00:00
+17990;Dent de Tilamproie;12.65625;10.0;2025-01-01 00:00
+17991;Bois d'Aquajou;10.0;;2026-02-03 23:50
+17992;Salikrone;10.0;;2026-02-03 23:50
+17993;Quisnoa;10.0;;2026-02-03 23:50
+17994;Patelle;10.0;;2026-02-03 23:50
+17995;Écume de mer;10.0;;2026-02-03 23:50
+18066;Clef du Vaisseau du Capitaine Meno;281.953125;;2025-01-01 00:00
+18067;Clef du Palais de Dantinéa;284.1345;;2025-01-01 00:00
+18068;Clef du Temple de Koutoulou;281.953125;;2025-01-01 00:00
+18198;Gâtrool;1.688175;;2025-01-01 00:00
+18209;Gratrooll;1.688175;;2025-01-01 00:00
+18318;Soie chatoyante;;0.0;2025-01-01 00:00
+18348;Flûte de Mastodonte;1.35;;2025-01-01 00:00
+18357;Jus de Cacterre;13.4814;9.0;2025-01-01 00:00
+18358;Maraca de Lévito;2.25;2.0;2025-01-01 00:00
+18359;Parchemin de Cactana;2.25;2.0;2025-01-01 00:00
+18361;Fleur de Cactiflore;2.25;2.0;2025-01-01 00:00
+18362;Moustaches de Cactoblongo;2.25;2.0;2025-01-01 00:00
+18363;String de Pampactus;2.25;2.0;2025-01-01 00:00
+18364;Étoile d'Or d'El Piko;67.407;60.0;2025-01-01 00:00
+18366;Sable Fin;3.855;3.0;2025-01-01 00:00
+18367;Boule de Boulépique;0.6468;1.0;2025-01-01 00:00
+18368;Écailles d'Ouroboulos;0.6468;1.0;2025-01-01 00:00
+18369;Queue de Scordion Bleu;0.6468;1.0;2025-01-01 00:00
+18370;Queue de Fennex;0.6468;1.0;2025-01-01 00:00
+18371;Carapace du Mantiscore;3.155475;2.0;2025-01-01 00:00
+18383;Picot d'El Piko;11.25;6.0;2025-01-01 00:00
+18421;Clef du Cimetière des mastodontes;6.55755;;2025-01-01 00:00
+18422;Clef de la Caverne d'El Piko;20.840175;;2025-01-01 00:00
+18537;Fragment de Chakanoubis;12.65625;10.0;2025-01-01 00:00
+18538;Dent de Bandleth;12.65625;10.0;2025-01-01 00:00
+18539;Grenat de Momistik;12.65625;10.0;2025-01-01 00:00
+18540;Paupière Dorée de Rykaon;12.65625;10.0;2025-01-01 00:00
+18541;Oreille de Griffotep;12.65625;10.0;2025-01-01 00:00
+18542;Cheveux de Tal Kasha;63.28125;34.0;2025-01-01 00:00
+18543;Scarabée Chrysonéfritin;75.9375;47.0;2025-01-01 00:00
+18544;Clef de la Chambre de Tal Kasha;80.7975;;2025-01-01 00:00
+18552;Clef du Boyau du Père Ver;42.116775;;2025-01-01 00:00
+18562;Dent de Cycloporth;5.8026;2.0;2025-01-01 00:00
+18563;Langue de Morsquale;6.12495;2.0;2025-01-01 00:00
+18564;Patte de Masticroc;5.8026;2.0;2025-01-01 00:00
+18565;Peau de Trémorse;5.8026;2.0;2025-01-01 00:00
+18566;Pic de Pikténia;5.8026;5.0;2025-01-01 00:00
+18567;Carapace de Ver des Sables;35.6691;14.0;2025-01-01 00:00
+18719;Rune Do Per Mé;1.875;1.0;2025-01-01 00:00
+18720;Rune Do Per Di;1.875;1.0;2025-01-01 00:00
+18721;Rune Do Per Ar;1.875;1.0;2025-01-01 00:00
+18722;Rune Do Per So;1.875;1.0;2025-01-01 00:00
+18723;Rune Ré Per Mé;1.875;1.0;2025-01-01 00:00
+18724;Rune Ré Per Di;1.875;1.0;2025-01-01 00:00
+18729;Sang de Viandargh;9.15;8.0;2025-01-01 00:00
+18730;Queue de Chevrotine;9.15;8.0;2025-01-01 00:00
+18731;Bave de Brokouillon;9.15;8.0;2025-01-01 00:00
+18732;Os de Nemroz;9.15;8.0;2025-01-01 00:00
+18733;Flèche de Crâmbo;9.15;8.0;2025-01-01 00:00
+18734;Poils du Comte Razof;45.75;25.0;2025-01-01 00:00
+18735;Bouteille de Bouchonnois;75.0;35.0;2026-02-03 23:50
+18736;Clef du Camp du Comte Razof;63.6975;;2025-01-01 00:00
+18741;Coffre de Pièges à Chasseur;2.39355;;2025-01-01 00:00
+18742;Breuvage Musculaire;3.80265;;2025-01-01 00:00
+18743;Implants Rustiques;25.227375;;2025-01-01 00:00
+19041;Clef du Chapiteau des Magik Riktus;7.36785;;2025-01-01 00:00
+19049;Clef du Manoir des Katrepat;80.7975;;2025-01-01 00:00
+19068;Pic d'Anerice;63.28125;33.0;2025-01-01 00:00
+19069;Ongle de Goulafre;12.65625;10.0;2025-01-01 00:00
+19070;Aile de Kérigoule;12.65625;10.0;2025-01-01 00:00
+19072;Poils de Goultime;12.65625;10.0;2025-01-01 00:00
+19073;Nez de Pipisteuse;12.65625;10.0;2025-01-01 00:00
+19074;Goulobule rouge;75.9375;46.0;2025-01-01 00:00
+19216;Clef du Belvédère d'Ilyzaelle;80.7975;;2025-01-01 00:00
+19232;Pince de Crâme;12.65625;9.0;2025-01-01 00:00
+19233;Brûlâme encapsulé;75.9375;43.0;2025-01-01 00:00
+19234;Cendres de Chause;12.65625;9.0;2025-01-01 00:00
+19235;Fragment d'Ectorche;12.65625;9.0;2025-01-01 00:00
+19236;Restes d'Esprigné;12.65625;9.0;2025-01-01 00:00
+19237;Plume d'Ilyzaelle;63.28125;34.0;2025-01-01 00:00
+19337;Rune Pa So;33.75;5.0;2025-01-01 00:00
+19338;Rune Pa Ré Air;1.349925;0.333333333;2025-01-01 00:00
+19339;Rune Pa Ré Eau;1.349925;0.333333333;2025-01-01 00:00
+19340;Rune Pa Ré Feu;1.349925;0.333333333;2025-01-01 00:00
+19341;Rune Pa Ré Neutre;1.349925;0.333333333;2025-01-01 00:00
+19342;Rune Pa Ré Terre;1.349925;0.333333333;2025-01-01 00:00
+19399;Dent de Klémort;12.65625;10.0;2025-01-01 00:00
+19400;Vertèbre de Trépavois;12.65625;10.0;2025-01-01 00:00
+19401;Langue de Hacharné;13.80675;10.0;2025-01-01 00:00
+19402;Grenade de Moribombe;12.65625;10.0;2025-01-01 00:00
+19404;Cervelle de Solar;47.214975;33.0;2025-01-01 00:00
+19405;Sang de Calciné;55.413825;46.0;2025-01-01 00:00
+19406;Chair de Zombruth;12.65625;10.0;2025-01-01 00:00
+19407;Pointe de Lance de Tournoyé;12.65625;10.0;2025-01-01 00:00
+19408;Protection de Funespadon;12.65625;10.0;2025-01-01 00:00
+19409;Aquarakne de Crânonier;12.65625;10.0;2025-01-01 00:00
+19410;Bout d'Armure de Macrab;12.65625;10.0;2025-01-01 00:00
+19411;Queue de Bethel Akarna;63.28125;34.0;2025-01-01 00:00
+19412;Coquille de Submergé;75.9375;47.0;2025-01-01 00:00
+19514;Clef de la Tour de Solar;82.523325;;2025-01-01 00:00
+19515;Clef de la Tour de Bethel;345.9375;;2025-01-01 00:00
+19905;Essence du Mantiscore;47.3046;;2025-01-01 00:00
+19906;Essence de Bethel Akarna;379.6875;;2025-01-01 00:00
+19907;Essence de Solar;283.290075;;2025-01-01 00:00
+19908;Essence de Meno;379.6875;;2025-01-01 00:00
+19909;Essence d'Ilyzaelle;379.6875;;2025-01-01 00:00
+19910;Essence de Dantinéa;379.6875;;2025-01-01 00:00
+19911;Essence de la Larve de Koutoulou;379.6875;;2025-01-01 00:00
+19912;Essence d'Anerice la Shushess;379.6875;;2025-01-01 00:00
+19913;Essence du Comte Razof;274.5;;2025-01-01 00:00
+19914;Essence de Dazak Martegel;379.6875;;2025-01-01 00:00
+19915;Essence d'El Piko;168.6105;;2025-01-01 00:00
+19916;Essence de Tal Kasha;379.6875;;2025-01-01 00:00
+19921;Essence de Choudini;24.807675;;2025-01-01 00:00
+19938;Essence du Père Ver;174.0789;;2025-01-01 00:00
+19963;Clef de la Brasserie du roi Dazak;80.7975;;2025-01-01 00:00
+19968;Chope de Bière;75.9375;43.0;2025-01-01 00:00
+19969;Épaulière de Dazak Martegel;63.28125;;2025-01-01 00:00
+19970;Armure de Tanklume;12.65625;9.0;2025-01-01 00:00
+19971;Fronde de Boufbos;12.65625;9.0;2025-01-01 00:00
+19972;Poils de barbe de Barbélier;12.65625;9.0;2025-01-01 00:00
+19973;Jambière de Kasrok;12.65625;9.0;2025-01-01 00:00
+19974;Dent de Vatenbière;12.65625;9.0;2025-01-01 00:00
+20452;Andésite;3.0;;2025-01-01 00:00
+20492;Rune Ta Ine;1.012425;;2025-01-01 00:00
+20556;Rune Pata Ine;1.012425;;2025-01-01 00:00
+20557;Rune Rata Ine;1.012425;;2025-01-01 00:00
+20558;Rune Ta Fo;1.012425;;2025-01-01 00:00
+20559;Rune Pata Fo;1.012425;;2025-01-01 00:00
+20560;Rune Rata Fo;1.012425;;2025-01-01 00:00
+20561;Rune Ta Age;1.012425;;2025-01-01 00:00
+20562;Rune Pata Age;1.012425;;2025-01-01 00:00
+20563;Rune Rata Age;1.012425;;2025-01-01 00:00
+20564;Rune Ta Cha;1.012425;;2025-01-01 00:00
+20565;Rune Pata Cha;1.012425;;2025-01-01 00:00
+20566;Rune Rata Cha;1.012425;;2025-01-01 00:00
+20567;Rune Ta Vi;1.012425;;2025-01-01 00:00
+20568;Rune Pata Vi;1.012425;;2025-01-01 00:00
+20569;Rune Rata Vi;1.012425;;2025-01-01 00:00
+20570;Rune Ta Ini;1.012425;;2025-01-01 00:00
+20571;Rune Pata Ini;1.012425;;2025-01-01 00:00
+20572;Rune Rata Ini;1.012425;;2025-01-01 00:00
+20573;Rune Ta Pod;1.012425;;2025-01-01 00:00
+20574;Rune Pata Pod;1.012425;;2025-01-01 00:00
+20575;Rune Rata Pod;1.012425;;2025-01-01 00:00
+20576;Rune Ta Pui;4.049925;;2025-01-01 00:00
+20577;Rune Pata Pui;4.049925;;2025-01-01 00:00
+20578;Rune Rata Pui;4.049925;;2025-01-01 00:00
+20579;Rune Ta Ré Pou;1.349925;;2025-01-01 00:00
+20580;Rune Pata Ré Pou;1.349925;;2025-01-01 00:00
+20581;Rune Ta Ré Cri;1.349925;;2025-01-01 00:00
+20582;Rune Pata Ré Cri;1.349925;;2025-01-01 00:00
+20583;Rune Ta Do Pou;8.4375;;2025-01-01 00:00
+20584;Rune Pata Do Pou;8.4375;;2025-01-01 00:00
+20585;Rune Ta Do Cri;8.4375;;2025-01-01 00:00
+20586;Rune Pata Do Cri;8.4375;;2025-01-01 00:00
+20596;Rune Ta Do Terre;8.4375;;2025-01-01 00:00
+20597;Rune Pata Do Terre;8.4375;;2025-01-01 00:00
+20598;Rune Rata Do Terre;8.4375;;2025-01-01 00:00
+20599;Rune Ta Do Feu;8.4375;;2025-01-01 00:00
+20600;Rune Pata Do Feu;8.4375;;2025-01-01 00:00
+20601;Rune Rata Do Feu;8.4375;;2025-01-01 00:00
+20602;Rune Ta Do Eau;8.4375;;2025-01-01 00:00
+20603;Rune Pata Do Eau;8.4375;;2025-01-01 00:00
+20604;Rune Rata Do Eau;8.4375;;2025-01-01 00:00
+20605;Rune Ta Do Air;8.4375;;2025-01-01 00:00
+20606;Rune Pata Do Air;8.4375;;2025-01-01 00:00
+20607;Rune Rata Do Air;8.4375;;2025-01-01 00:00
+20608;Rune Ta Do Neutre;8.4375;;2025-01-01 00:00
+20609;Rune Pata Do Neutre;8.4375;;2025-01-01 00:00
+20610;Rune Rata Do Neutre;8.4375;;2025-01-01 00:00
+20611;Rune Ta Ré Per Di;2.8125;;2025-01-01 00:00
+20612;Rune Ta Ré Per Mé;2.8125;;2025-01-01 00:00
+20613;Rune Ta Do Per So;2.8125;;2025-01-01 00:00
+20614;Rune Ta Do Per Ar;2.8125;;2025-01-01 00:00
+20615;Rune Ta Do Per Di;2.8125;;2025-01-01 00:00
+20616;Rune Ta Do Per Mé;2.8125;;2025-01-01 00:00
+20617;Rune Ta Fui;8.4375;;2025-01-01 00:00
+20618;Rune Pata Fui;8.4375;;2025-01-01 00:00
+20619;Rune Rata Fui;8.4375;;2025-01-01 00:00
+20620;Rune Ta Tac;8.4375;;2025-01-01 00:00
+20621;Rune Pata Tac;8.4375;;2025-01-01 00:00
+20622;Rune Rata Tac;8.4375;;2025-01-01 00:00
+20623;Rune Ta Ré Pa;16.875;;2025-01-01 00:00
+20624;Rune Pata Ré Pa;16.875;;2025-01-01 00:00
+20625;Rune Rata Ré Pa;16.875;;2025-01-01 00:00
+20626;Rune Ta Ré Pme;16.875;;2025-01-01 00:00
+20627;Rune Pata Ré Pme;16.875;;2025-01-01 00:00
+20628;Rune Rata Ré Pme;16.875;;2025-01-01 00:00
+20629;Rune Ta Ret Pa;16.875;;2025-01-01 00:00
+20630;Rune Pata Ret Pa;16.875;;2025-01-01 00:00
+20631;Rune Rata Ret Pa;16.875;;2025-01-01 00:00
+20632;Rune Ta Ret Pme;16.875;;2025-01-01 00:00
+20633;Rune Pata Ret Pme;16.875;;2025-01-01 00:00
+20634;Rune Rata Ret Pme;16.875;;2025-01-01 00:00
+20635;Rune Ta Ré Per Terre;5.625;;2025-01-01 00:00
+20636;Rune Ta Ré Per Feu;5.625;;2025-01-01 00:00
+20637;Rune Ta Ré Per Eau;5.625;;2025-01-01 00:00
+20638;Rune Ta Ré Per Air;5.625;;2025-01-01 00:00
+20639;Rune Ta Ré Per Neutre;5.625;;2025-01-01 00:00
+20640;Rune Ta Cri;11.25;;2025-01-01 00:00
+20641;Rune Pata Cri;11.25;;2025-01-01 00:00
+20642;Rune Ta So;33.75;;2025-01-01 00:00
+20643;Rune Pata So;33.75;;2025-01-01 00:00
+20644;Rune Rata So;33.75;;2025-01-01 00:00
+20648;Légende de Brumaire;675.0;;2025-01-01 00:00
+20649;Légende de Brâm Barbe-Monde;1065.0;;2025-01-01 00:00
+20650;Légende de Crocobur;1462.5;;2025-01-01 00:00
+20651;Légende du Trompe-la-Mort;1860.0;;2025-01-01 00:00
+20652;Légende de Dame Jhessica;2250.0;;2025-01-01 00:00
+20653;Légende de Mille Lieues;2647.5;;2025-01-01 00:00
+20654;Légende de Dodge;3045.0;;2025-01-01 00:00
+20655;Légende de Fallanster;3435.0;;2025-01-01 00:00
+20656;Légende du Cul Botté;3832.5;;2025-01-01 00:00
+20657;Légende du Destin;4230.0;;2025-01-01 00:00
+20658;Légende de Rykke Errel;4620.0;;2025-01-01 00:00
+20659;Légende de Buhorado;5017.5;;2025-01-01 00:00
+20660;Légende de Jahash Jurgen;5415.0;;2025-01-01 00:00
+20661;Légende de Ganymède;5812.5;;2025-01-01 00:00
+20680;Cire de Gligli Améliorée;0.45675;;2025-01-01 00:00
+20814;Patte de Twakeuf;0.2445;;2025-01-01 00:00
+20815;Éclat du Mawabouaino;1.67115;;2025-01-01 00:00
+20817;Tendon de Waccro;0.287325;;2025-01-01 00:00
+20818;Emballage Suspect;0.26115;;2025-01-01 00:00
+20819;Dent de Waddict;0.2697;;2025-01-01 00:00
+20820;Pompon Brunâtre;1.6767;;2025-01-01 00:00
+20908;Mèche de Pralicienne;12.65625;;2025-01-01 00:00
+20909;Peau de Torréfactueur;12.65625;;2025-01-01 00:00
+20910;Chaudron de Températurge;12.65625;;2025-01-01 00:00
+20911;Toque de Cabosseur;12.65625;;2025-01-01 00:00
+20912;Diadème de Chocoligarque;12.65625;;2025-01-01 00:00
+20913;Broderie de la Prêtresse de Kao;63.28125;;2025-01-01 00:00
+20914;Éclat Kao brisé;75.9375;;2025-01-01 00:00
+20918;Clef de la Fonderie des Waddicts;3.85665;;2025-01-01 00:00
+20919;Clef de la Croquanterie;20.840175;;2025-01-01 00:00
+20920;Clef du Temple du dieu Kao;214.5825;;2025-01-01 00:00
+20940;Oreille de Kakoalak;2.25;;2025-01-01 00:00
+20941;Pépite croquée;13.4814;;2025-01-01 00:00
+20942;Estomac de Mansocolat;2.25;;2025-01-01 00:00
+20943;Pelage chocolaté;2.25;;2025-01-01 00:00
+20944;Enrobage de Chocoskargo;2.25;;2025-01-01 00:00
+20945;Bec de Kwakao;2.25;;2025-01-01 00:00
+20961;Relique de Bébémoth;2761.363725;;2025-01-01 00:00
+20968;Reflet de Bébémoth;5431.5768;;2025-01-01 00:00
+20969;Cristal temporel;5550.468975;;2025-01-01 00:00
+20970;Cristal intemporel;5550.468825;;2025-01-01 00:00
+20972;Nanogrine;1575.70305;;2025-01-01 00:00
+21012;Boucle temporelle;253.125;;2025-01-01 00:00
+21013;Boucle intemporelle;253.125;;2025-01-01 00:00
+21205;Binocles du Grand Chronomaître;12862.17315;;2025-01-01 00:00
+21207;Écaille de Torkélonia;63.28125;;2025-01-01 00:00
+21208;Langue de Kashkaille;12.65625;;2025-01-01 00:00
+21209;Bandeau de Voapah;12.65625;;2025-01-01 00:00
+21210;Poupée de Caïguille;12.65625;;2025-01-01 00:00
+21211;Pagne d'Alashasss;12.65625;;2025-01-01 00:00
+21212;Canine de Cronnibal;12.65625;;2025-01-01 00:00
+21216;Clef du Sanctuaire de Torkélonia;345.9375;;2025-01-01 00:00
+21217;Essence de Torkélonia;379.6875;;2025-01-01 00:00
+21249;Clef du Repaire du Kharnozor;38.7249;;2025-01-01 00:00
+21256;Griffe de Dragoeuf Albâtre;2.7969;;2025-01-01 00:00
+21263;Peau de Dragoeuf Albâtre;0.470925;;2025-01-01 00:00
+21264;Étoffe de Draegnerys;2.354625;;2025-01-01 00:00
+21268;Dent du Kharnozor;5.4687;;2025-01-01 00:00
+21271;Cheveux de Draegnerys;13.9848;;2025-01-01 00:00
+21513;Essence de Draegnerys;35.1051;;2025-01-01 00:00
+21514;Essence du Kharnozor;81.705225;;2025-01-01 00:00
+21515;Essence de Corruption;368.52015;;2025-01-01 00:00
+21682;Peinture Jaune;4.281975;;2025-01-01 00:00
+21683;Peinture Rouge;4.281975;;2025-01-01 00:00
+21684;Peinture Bleue;4.281975;;2025-01-01 00:00
+21685;Peinture Orange;4.281975;;2025-01-01 00:00
+21686;Peinture Verte;4.281975;;2025-01-01 00:00
+21687;Peinture Violette;4.281975;;2025-01-01 00:00
+21689;Peinture Noire;4.281975;;2025-01-01 00:00
+22028;Clef des Fers de la Tyrannie;80.7975;;2025-01-01 00:00
+22046;Plume de Misère;56.25;;2025-01-01 00:00
+22047;Épaulière de Ferrailleur;12.65625;;2025-01-01 00:00
+22048;Langue de Krèvladal;12.65625;;2025-01-01 00:00
+22049;Côtes de Désosseur;12.65625;;2025-01-01 00:00
+22050;Capuche de Skentu;12.65625;;2025-01-01 00:00
+22052;Terre Stérile;77.55315;;2025-01-01 00:00
+22128;Essence de Guerre;337.5;;2025-01-01 00:00
+22129;Essence de Misère;337.5;;2025-01-01 00:00
+22130;Essence de Servitude;337.5;;2025-01-01 00:00
+22147;Clef du Trône de Sang;80.7975;;2025-01-01 00:00
+22148;Clef de l'Arbre de Mort;80.7975;;2025-01-01 00:00
+22149;Clef de la Sentence de la Balance;80.7975;;2025-01-01 00:00
+22203;Germes corrompus;78.005775;;2025-01-01 00:00
+22204;Corne de Corruption;61.419975;;2025-01-01 00:00
+22207;Langue de Pistilangue;12.65625;;2025-01-01 00:00
+22208;Peau pourrie de Dolid;12.65625;;2025-01-01 00:00
+22210;Patte de Nheur'Gueule;12.65625;;2025-01-01 00:00
+22211;Tentacule de Tentaclaque;12.65625;;2025-01-01 00:00
+22212;Pétale de Gangredogue;12.65625;;2025-01-01 00:00
+22216;Bois de pagaie usée;12.65625;;2025-01-01 00:00
+22217;Capuche d'Armécréante;12.65625;;2025-01-01 00:00
+22218;Baguette Rythmique;12.65625;;2025-01-01 00:00
+22219;Verrou de Servitude;56.25;;2025-01-01 00:00
+22222;Collier d'esclave;77.55315;;2025-01-01 00:00
+22223;Boulet lesté;12.65625;;2025-01-01 00:00
+22224;Manche de Fouet;12.65625;;2025-01-01 00:00
+22246;Bonnet de Guerre;56.25;;2025-01-01 00:00
+22247;Étoffe sanglante;12.65625;;2025-01-01 00:00
+22248;Sang coagulé;12.65625;;2025-01-01 00:00
+22249;Canine tranchante;12.65625;;2025-01-01 00:00
+22250;Fragment d'armure;12.65625;;2025-01-01 00:00
+22251;Linothorax;12.65625;;2025-01-01 00:00
+22253;Lame tranchante;77.55315;;2025-01-01 00:00
+22401;Clef de la Tempête de l'Eliocalypse;80.7975;;2025-01-01 00:00
+22415;Légende de Misère;5017.5;;2025-01-01 00:00
+22416;Légende de Guerre;5017.5;;2025-01-01 00:00
+22417;Légende de Servitude;5017.5;;2025-01-01 00:00
+22418;Légende de Corruption;5017.5;;2025-01-01 00:00
+23311;Artefact Pandawushu Bois;0.516225;;2025-01-01 00:00
+23480;Huile de Riz;1.687425;;2025-01-01 00:00
+23591;Clef de la Demeure des Esprits;41.63325;;2025-01-01 00:00
+23592;Pierre de Sélénite;3.45;;2025-01-01 00:00
+23630;Clef de la Tombe du Shogun Tofugawa;32.633175;;2025-01-01 00:00
+23693;Huile de Pichon;1.856175;;2025-01-01 00:00
+23694;Concassé de brume;26.693175;;2025-01-01 00:00
+23824;Tulipe en papier;7.5;;2025-01-01 00:00
+23825;Pichon d'encre;7.5;;2025-01-01 00:00
+23950;Clef de la Mémoire d'Orukam;161.7942;;2025-01-01 00:00
+23951;Clef du Souvenir d'Imagiro;157.800225;;2025-01-01 00:00
+23957;Pétale de Papier;154.3059;;2025-01-01 00:00
+23958;Poing-virgule d'Imushin;25.362825;;2025-01-01 00:00
+23959;Carapace circonflexe d'Imorok;22.5;;2025-01-01 00:00
+23960;Guillemets d'Imiyama;22.5;;2025-01-01 00:00
+23961;Cédille d'Imetsu;22.5;;2025-01-01 00:00
+23962;Apostrophe d'Imafugo;22.5;;2025-01-01 00:00
+23963;Diacritique du Roi Imagami;108.4821;;2025-01-01 00:00
+23965;Pétale d'encre;153.7542;;2025-01-01 00:00
+23966;Poing-virgule de Shinlam;22.700175;;2025-01-01 00:00
+23967;Carapace circonflexe de Rokoram;22.5;;2025-01-01 00:00
+23968;Guillemets de Mabram;22.5;;2025-01-01 00:00
+23969;Cédille de Tsunam;22.5;;2025-01-01 00:00
+23970;Apostrophe de Fugokam;22.5;;2025-01-01 00:00
+23971;Diacritique de la Reine Amirukam;108.4821;;2025-01-01 00:00
+24133;Essence du Shogun Tofugawa;133.465875;;2025-01-01 00:00
+24134;Essence de Koumiho;174.0789;;2025-01-01 00:00
+24135;Essence du Roi Imagami;650.892825;;2025-01-01 00:00
+24136;Essence de la Reine Amirukam;650.892825;;2025-01-01 00:00
+24144;Substrat Astral;225.0;;2025-01-01 00:00
+25176;Spalière de Krâradia;15.1875;;2025-01-01 00:00
+25177;Diadème de Belilith;15.1875;;2025-01-01 00:00
+25178;Scalp de Bwariok;15.1875;;2025-01-01 00:00
+25179;Groin de Porkzebuth;15.1875;;2025-01-01 00:00
+25180;Aile d'Eninferno;15.1875;;2025-01-01 00:00
+25181;Sceptre brisé de Kabahal;63.28125;;2025-01-01 00:00
+25182;Appendice Démoniaque;89.3382;;2025-01-01 00:00
+25252;Clef du Rituel de Kabahal;164.0925;;2025-01-01 00:00
+25318;Essence de Kabahal;379.6875;;2025-01-01 00:00
+25756;Crâne magique de Rate Atinée;1.439025;;2025-01-01 00:00
+25757;Tuyau Rouillé de Rate Iboisée;1.439025;;2025-01-01 00:00
+25758;Lance-Pierre de Scélée Rate;1.107375;;2025-01-01 00:00
+25759;Lance de Chika Rat;1.107375;;2025-01-01 00:00
+25760;Vieux Bouquin de Rat Li;1.439025;;2025-01-01 00:00
+25761;Ouvrage magique d'Aloevée Rate;1.107375;;2025-01-01 00:00
+25762;Oreille de Rat Plapla;1.439025;;2025-01-01 00:00
+25767;Collier de Chak Rat;1.107375;;2025-01-01 00:00
+26031;Mâchoire de Brutasmodan;12.65625;;2025-01-01 00:00
+26032;Langue de Diabélial;12.65625;;2025-01-01 00:00
+26033;Corne de Typhomet;12.65625;;2025-01-01 00:00
+26034;Tentacule de Démoloch;12.65625;;2025-01-01 00:00
+26035;Épaule de Maléphisto;12.65625;;2025-01-01 00:00
+26036;Pic de Ravageur;75.9375;;2025-01-01 00:00
+26037;Masque cauchemardesque de l'Éternel Conflit;63.28125;;2025-01-01 00:00
+26039;Clef de la Bataille de l'Aurore Pourpre;148.905;;2025-01-01 00:00
+26041;Essence de l'Éternel Conflit;379.6875;;2025-01-01 00:00
+26316;Pétale de Malter;21.348975;;2025-01-01 00:00
+26317;Pousse de Malzerb;3.5937;;2025-01-01 00:00
+26318;Bolas de Maltrio;3.5937;;2025-01-01 00:00
+26319;Pic de Malépik;3.5937;;2025-01-01 00:00
+26320;Porte-bonheur de Malalfa;3.5937;;2025-01-01 00:00
+26321;Corne de Malbois;3.5937;;2025-01-01 00:00
+26333;Clef du Tertre du long sommeil;27.03;;2025-01-01 00:00
+26345;Gravure de Tsunami;41.84265;;2025-01-01 00:00
+26347;Gravure de Séisme;46.091325;;2025-01-01 00:00
+26348;Gravure d'Incendie;41.84265;;2025-01-01 00:00
+26349;Gravure d'Ouragan;41.84265;;2025-01-01 00:00
+26351;Gravure d'Averse;7.695675;;2025-01-01 00:00
+26352;Gravure d'Éboulement;7.695675;;2025-01-01 00:00
+26353;Gravure d'Étincelle;8.0367;;2025-01-01 00:00
+26354;Gravure de Courant d'Air;8.0367;;2025-01-01 00:00
+26355;Gravure de Crachin;8.0367;;2025-01-01 00:00
+26356;Gravure de Flambée;7.695675;;2025-01-01 00:00
+26357;Gravure de Rafale;7.695675;;2025-01-01 00:00
+26358;Gravure de Secousse;8.0367;;2025-01-01 00:00
+26680;Clef de l'Akadémie des Gobs;2.8164;;2025-01-01 00:00
+26803;Essence d'Hell Mina;107.8125;;2025-01-01 00:00
+26804;Essence du Directeur Grunob;4.921875;;2025-01-01 00:00
+26870;Fragment d'anomalie;3.7968;;2025-01-01 00:00
+27362;Pom de Pin;1.441275;;2025-01-01 00:00
+27363;Fourrure de Timongouste;0.28005;;2025-01-01 00:00
+27364;Plume de Thomondor;0.234375;;2025-01-01 00:00
+27365;Corne de Buffalourd;0.234375;;2025-01-01 00:00
+27366;Griffe de Grolours;0.234375;;2025-01-01 00:00
+27367;Croc de Trankilou;0.234375;;2025-01-01 00:00
+27368;La cambriole pour les Nuls;1.171875;;2025-01-01 00:00
+27372;Essence de Rakoopeur;7.03125;;2025-01-01 00:00
+27374;Clef du Refuge sylvestre;5.580225;;2025-01-01 00:00
+27375;Bois de Pin;0.0525;;2025-01-01 00:00
+27397;Liane de Soldalia;12.65625;;2025-01-01 00:00
+27398;Mousse de Caméliache;12.65625;;2025-01-01 00:00
+27399;Épine d'Armuguet;12.65625;;2025-01-01 00:00
+27400;Poing de Coquelicogne;12.65625;;2025-01-01 00:00
+27401;Casque de Statulipe;12.65625;;2025-01-01 00:00
+27402;Rouge à lèvres de Belladone;63.28125;;2025-01-01 00:00
+27403;Fleur des protecteurs;75.9375;;2025-01-01 00:00
+27404;Clef de la Chambre des maléfices;148.905;;2025-01-01 00:00
+27405;Essence de Belladone;379.6875;;2025-01-01 00:00
+27413;Eau Ferrugineuse;0.86325;;2025-01-01 00:00
+27433;Poils de barbe de Marteau-Aigri;56.249925;;2025-01-01 00:00
+27434;Armure de Blindur;9.15;;2025-01-01 00:00
+27435;Bave de Marthos;9.15;;2025-01-01 00:00
+27436;Mèche de Serpyn;9.15;;2025-01-01 00:00
+27437;Fronde de Boufronde;9.15;;2025-01-01 00:00
+27438;Élastique de barbe de Sanglirok;9.15;;2025-01-01 00:00
+27439;Cloche de Barbéryl Clochecuivre;45.75;;2025-01-01 00:00
+27440;Clef du Bastion des Marteaux-Aigris;60.37875;;2025-01-01 00:00
+27451;Essence de Barbéryl Clochecuivre;274.5;;2025-01-01 00:00
+27517;Cire de Cire Momore;75.9375;;2025-01-01 00:00
+27714;Fleur de Cendrepierre;210.560625;;2025-01-01 00:00
+27748;Ronce ephedryenne;0.1878;;2025-01-01 00:00
+28268;Farine de contrebande;27.562425;;2025-01-01 00:00
+28269;Coffre-forge;19.124925;;2025-01-01 00:00
+28270;Brochette de Laikteur;12.898425;;2025-01-01 00:00
+28277;Grizite;32.067375;;2025-01-01 00:00
+28432;Nékinéko;;393.0;2025-01-01 00:00
+29444;Galet rayonnant;937.5;;2025-01-01 00:00
+29683;Rune Ra Ré Pou;4.049925;;2025-01-01 00:00
+29684;Rune Ra Do Pou;25.3125;;2025-01-01 00:00
+11121;Œil de Boufmouth de guerre;11.0;;2026-02-03 23:50
+11246;Œil torve de Fricochère;19.0;;2026-02-03 23:50
+11320;Œil de Vigie Pirate;28.0;;2026-02-03 23:50
+11328;Œuf de Crapeur;36.0;;2026-02-03 23:50
+11886;Œil de Dramanite;51.0;;2026-02-03 23:50
+11919;Œil de Fleuro;69.0;;2026-02-03 23:50
+13920;Cœur d'Empaillé;101.0;;2026-02-03 23:50
+13913;Œil de Harrogant;16.8;;2026-02-03 23:50
+14853;Œil de Harpo;101.0;;2026-02-03 23:50

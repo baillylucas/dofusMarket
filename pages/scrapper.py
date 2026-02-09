@@ -79,6 +79,9 @@ scrapper_ingredients = load_scrapper_ingredients()
 if 'show_scraping_summary' not in st.session_state:
     st.session_state.show_scraping_summary = False
 
+# --- Option Debug ---
+debug_mode = st.checkbox("🔧 Mode Debug (screenshots élargis)", key="debug_mode", help="Génère un deuxième screenshot plus large (+/- 50px) pour chaque capture, utile pour le débogage")
+
 # --- Boutons d'action ---
 if scrapper_items or scrapper_ingredients:
     col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
@@ -103,25 +106,27 @@ if scrapper_items or scrapper_ingredients:
             from utils import launch_scrapper
 
             with st.spinner("Lancement du script de scraping..."):
-                success, message, process = launch_scrapper()
+                success, message, process = launch_scrapper(debug=debug_mode)
 
                 if success:
                     st.success(f"✅ {message}")
-                    st.info("""
+                    debug_info = "\n- **Mode DEBUG activé** : des screenshots élargis seront générés" if debug_mode else ""
+                    st.info(f"""
                     **Le scraping est en cours !**
                     - Une nouvelle console s'est ouverte avec le script de scraping
                     - Suivez la progression dans cette console
                     - Ne fermez pas la console avant la fin du scraping
-                    - Les données seront automatiquement sauvegardées sur Google Drive
+                    - Les données seront automatiquement sauvegardées sur Google Drive{debug_info}
                     """)
                 else:
                     st.error(f"❌ {message}")
-                    st.warning("""
+                    debug_arg = " --debug" if debug_mode else ""
+                    st.warning(f"""
                     **Alternative manuelle :**
                     Ouvrez un terminal et exécutez :
                     ```
                     cd scrapper
-                    python 4_dofus_scrapper.py
+                    python 5_dofus_scrapper.py{debug_arg}
                     ```
                     """)
 

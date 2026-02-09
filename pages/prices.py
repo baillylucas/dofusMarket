@@ -131,15 +131,18 @@ def load_xp_data():
         df_xp = pd.read_csv('data/items_xp.csv', delimiter=';')
         # Créer un dictionnaire id -> (xp_1, xp_2)
         xp_dict = {}
+        xp_last_update = {}
         for _, row in df_xp.iterrows():
             item_id = int(row['id'])
             xp_1 = row['xp_1'] if pd.notna(row['xp_1']) else None
             xp_2 = row['xp_2'] if pd.notna(row['xp_2']) else None
             xp_dict[item_id] = (xp_1, xp_2)
-        return xp_dict
+            if 'last_update' in df_xp.columns and pd.notna(row.get('last_update')):
+                xp_last_update[item_id] = str(row['last_update'])
+        return xp_dict, xp_last_update
     except Exception as e:
         st.error(f"Erreur lors du chargement des XP : {e}")
-        return {}
+        return {}, {}
 
 # --- Session State defaults ---
 if 'selected_items' not in st.session_state:
@@ -166,6 +169,8 @@ if 'selected_group_action' not in st.session_state:
     st.session_state.selected_group_action = None
 if 'selected_group_filters' not in st.session_state:
     st.session_state.selected_group_filters = []
+if 'allowed_hdv_qtys' not in st.session_state:
+    st.session_state.allowed_hdv_qtys = [1, 10, 100, 1000]
 
 # --- Chargement des données ---
 @st.cache_data(ttl=600)
@@ -273,28 +278,31 @@ def calculate_optimal_price_cached(prices_tuple, target_quantity):
 
     return int(round(min_flat_price))
 
-def calculate_optimal_price(prices_dict, target_quantity):
+def calculate_optimal_price(prices_dict, target_quantity, allowed_quantities=None):
     """
     Wrapper qui convertit le dict en tuple pour le cache.
+    allowed_quantities: set de quantités autorisées (ex: {1, 100}). None = toutes.
     """
     if not prices_dict:
         return None
-    
+
     # Filtrer et convertir en tuple hashable
     valid_prices = []
     for qty_str, price in prices_dict.items():
         if price is not None and price != -1:
             try:
                 qty_int = int(qty_str)
+                if allowed_quantities is not None and qty_int not in allowed_quantities:
+                    continue
                 price_float = float(price)
                 if price_float > 0:
                     valid_prices.append((qty_int, price_float))
             except (ValueError, TypeError):
                 continue
-    
+
     if not valid_prices:
         return None
-    
+
     prices_tuple = tuple(sorted(valid_prices))
     return calculate_optimal_price_cached(prices_tuple, target_quantity)
 
@@ -302,60 +310,60 @@ def calculate_craft_cost_recursive(data, item_id, quantity, memo=None, is_root=T
     """
     Calcule récursivement le coût de craft d'un item pour une quantité donnée.
     Version optimisée avec cache global.
-    
+
     Args:
         data: Dictionnaire complet des items
         item_id: ID de l'item (int ou str)
         quantity: Quantité désirée (int)
         memo: Dictionnaire de mémoïsation
         is_root: True si c'est l'item principal, False si c'est un ingrédient
-    
+
     Returns:
         (coût_total, méthode) ou (None, None) si impossible
     """
     if memo is None:
         memo = st.session_state.craft_cache
-    
-    # Vérifier le cache - ajouter is_root à la clé de cache
+
+    # Vérifier le cache
     cache_key = (str(item_id), quantity, is_root)
     if cache_key in memo:
         return memo[cache_key]
-    
+
     item_id_str = str(item_id)
     if item_id_str not in data:
         memo[cache_key] = (None, None)
         return (None, None)
-    
+
     item = data[item_id_str]
-    
+
     # Calculer le prix HDV
     prix_hdv_dict = get_latest_entry(item.get("prix_hdv", {})) or {}
     prix_hdv = calculate_optimal_price(prix_hdv_dict, quantity)
-    
+
     # Si l'item n'est pas craftable, on retourne le prix HDV
     if not item.get('is_craft') or not item.get('ingredients'):
         result = (prix_hdv, 'HDV') if prix_hdv is not None else (None, None)
         memo[cache_key] = result
         return result
-    
+
     # Calculer le coût de craft en fonction des ingrédients
     craft_cost = 0
     for ingredient in item['ingredients']:
         ing_id = ingredient['id']
         ing_qty_per_craft = ingredient['quantity']
-        
+
         # Quantité totale d'ingrédient nécessaire
         total_ing_qty = ing_qty_per_craft * quantity
-        
+
         # Calculer récursivement le meilleur prix pour cet ingrédient (is_root=False)
         ing_cost, _ = calculate_craft_cost_recursive(data, ing_id, total_ing_qty, memo, is_root=False)
-        
+
         if ing_cost is None:
             craft_cost = None
             break
-        
+
         craft_cost += ing_cost
-    
+
     # Déterminer la meilleure méthode
     if craft_cost is None:
         result = (prix_hdv, 'HDV') if prix_hdv is not None else (None, None)
@@ -371,7 +379,7 @@ def calculate_craft_cost_recursive(data, item_id, quantity, memo=None, is_root=T
                 result = (craft_cost, 'Craft')
             else:
                 result = (prix_hdv, 'HDV')
-    
+
     memo[cache_key] = result
     return result
 
@@ -381,7 +389,7 @@ def precalculate_all_crafts(data, quantity):
     Cela remplit le cache en une seule passe.
     """
     memo = st.session_state.craft_cache
-    
+
     # Parcourir tous les items
     for item_id in data.keys():
         # Calculer avec is_root=True pour l'item principal
@@ -395,7 +403,7 @@ def get_ingredient_details(data, item_id, quantity, memo=None):
     """
     if memo is None:
         memo = st.session_state.craft_cache
-    
+
     item_id_str = str(item_id)
     if item_id_str not in data:
         return {
@@ -405,11 +413,11 @@ def get_ingredient_details(data, item_id, quantity, memo=None):
             'cost': None,
             'method': None
         }
-    
+
     item = data[item_id_str]
     # Pour les ingrédients, is_root=False
     cost, method = calculate_craft_cost_recursive(data, item_id, quantity, memo, is_root=False)
-    
+
     return {
         'id': item_id,
         'name': item.get('name', f"Item #{item_id}"),
@@ -424,17 +432,17 @@ def get_recipe_html(data, item, quantity):
     """
     if not item.get('ingredients'):
         return "<p style='color: #aaa;'><em>Cet item n'a pas de recette</em></p>"
-    
+
     html = f"<div class='section-title'>🧪 Recette de fabrication (x{quantity})</div>"
     html += "<table class='recipe-table'><tr><th>Ingrédient</th><th>ID</th><th>Quantité</th><th>Coût unitaire</th><th>Coût total</th><th>Méthode</th></tr>"
-    
+
     memo = st.session_state.craft_cache
     total_craft_cost = 0
-    
+
     for ing in item['ingredients']:
         ing_qty_per_craft = ing['quantity']
         total_ing_qty = ing_qty_per_craft * quantity
-        
+
         ing_details = get_ingredient_details(data, ing['id'], total_ing_qty, memo)
         
         # Coût unitaire
@@ -506,9 +514,9 @@ def get_price_history_html(prix_dict, quantity, title):
         return f"<div><div class='section-title'>{title}</div><p style='color: #aaa;'><em>Aucune donnée disponible</em></p></div>"
     return html
 
-def create_item_html(item, data, quantity, xp_data):
+def create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=None):
     prix = get_latest_entry(item.get("prix_hdv", {})) or {}
-    prix_val = calculate_optimal_price(prix, quantity)
+    prix_val = calculate_optimal_price(prix, quantity, allowed_hdv_qtys)
 
     # Calculer le coût de craft dynamiquement (avec cache)
     is_craftable = item.get('is_craft') and item.get('ingredients')
@@ -625,7 +633,7 @@ if not data:
 st.session_state.user_groups = get_user_groups()
 
 # Charger les données XP
-xp_data = load_xp_data()
+xp_data, xp_last_update = load_xp_data()
 
 if not st.session_state.notification_shown:
     st.toast(f"✅ {len(data)} items chargés avec succès", icon="✅")
@@ -649,6 +657,18 @@ with st.sidebar:
         # Vider le cache si la quantité change
         st.session_state.craft_cache = {}
 
+    # Quantités autorisées pour le calcul du prix HDV
+    allowed_hdv_qtys = st.multiselect(
+        "Quantités HDV",
+        options=[1, 10, 100, 1000],
+        default=st.session_state.allowed_hdv_qtys,
+        format_func=lambda x: f"x{x}",
+        key="allowed_hdv_qtys_input"
+    )
+    if sorted(allowed_hdv_qtys) != sorted(st.session_state.allowed_hdv_qtys):
+        st.session_state.allowed_hdv_qtys = allowed_hdv_qtys
+    allowed_hdv_qtys_set = set(allowed_hdv_qtys) if allowed_hdv_qtys else None
+
     # Filtre par groupes
     group_options = {group_id: f"{group_data['name']} ({group_data['owner']})"
                      for group_id, group_data in st.session_state.user_groups.items()}
@@ -668,6 +688,8 @@ with st.sidebar:
     job_filter = st.multiselect("Métier", options=all_jobs)
     craft_filter = st.radio("Type d'item", ["Tous", "Craftables uniquement", "Non craftables"])
     xp_filter = st.checkbox("📚 XP connu uniquement")
+    xp_dates = sorted(set(xp_last_update.values()))
+    xp_date_filter = st.selectbox("📅 Dernière MAJ XP", options=["TOUS"] + xp_dates)
     max_level = max((item.get('level', 0) for item in data.values()), default=200)
     level_range = st.slider("Niveau", 1, max_level, (1, max_level))
 
@@ -681,8 +703,8 @@ rows = []
 for item_id, item in data.items():
     # Extraire les prix pour la quantité sélectionnée
     prix_dict = get_latest_entry(item.get("prix_hdv", {})) or {}
-    prix_val = calculate_optimal_price(prix_dict, quantity)
-    
+    prix_val = calculate_optimal_price(prix_dict, quantity, allowed_hdv_qtys_set)
+
     # Calculer dynamiquement le coût de craft (depuis le cache)
     is_craftable = item.get('is_craft') and item.get('ingredients')
     if is_craftable:
@@ -764,6 +786,9 @@ elif craft_filter == "Non craftables":
     df = df[~df["is_craft"]]
 if xp_filter:
     df = df[df["xp"] != float('-inf')]
+if xp_date_filter != "TOUS":
+    matching_ids = {item_id for item_id, date in xp_last_update.items() if date == xp_date_filter}
+    df = df[df["id"].isin(matching_ids)]
 # Filtre par groupe(s)
 if selected_group_filters:
     group_items = get_items_in_groups(selected_group_filters)
@@ -966,7 +991,7 @@ if len(df_page) > 0:
             st.checkbox("option technique", key=widget_key, on_change=make_child_changed(widget_key, item_real_id), label_visibility="collapsed")
 
         with col_content:
-            st.markdown(create_item_html(item, data, quantity, xp_data), unsafe_allow_html=True)
+            st.markdown(create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=allowed_hdv_qtys_set), unsafe_allow_html=True)
 else:
     st.info("Aucun résultat ne correspond à vos critères de recherche.")
 

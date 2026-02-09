@@ -598,9 +598,12 @@ def get_scrapper_items_by_hdv(data):
 
     return items_by_hdv
 
-def launch_scrapper():
+def launch_scrapper(debug: bool = False):
     """
     Lance le script de scrapping en tant que processus séparé.
+
+    Args:
+        debug: Si True, active le mode debug avec screenshots élargis
 
     Returns:
         tuple: (success: bool, message: str, process: subprocess.Popen | None)
@@ -611,7 +614,7 @@ def launch_scrapper():
     # Chemin vers le fichier batch de lancement
     project_root = os.path.dirname(__file__)
     batch_file = os.path.join(project_root, "launch_scrapper.bat")
-    scrapper_script = os.path.join(project_root, "scrapper", "4_dofus_scrapper.py")
+    scrapper_script = os.path.join(project_root, "scrapper", "5_dofus_scrapper.py")
 
     if not os.path.exists(scrapper_script):
         return False, f"Script de scrapping non trouvé : {scrapper_script}", None
@@ -619,22 +622,28 @@ def launch_scrapper():
     if not os.path.exists(batch_file):
         return False, f"Fichier batch non trouvé : {batch_file}", None
 
+    # Construire les arguments
+    extra_args = ["--debug"] if debug else []
+
     try:
         # Lancer le script en subprocess (sans bloquer Streamlit)
         if os.name == 'nt':  # Windows
             # Utiliser le fichier batch pour lancer une nouvelle console
+            cmd = ["cmd.exe", "/c", "start", "cmd.exe", "/k", batch_file] + extra_args
             process = subprocess.Popen(
-                ["cmd.exe", "/c", "start", "cmd.exe", "/k", batch_file],
+                cmd,
                 cwd=project_root,
                 shell=False
             )
         else:  # Linux/Mac
+            cmd = ["uv", "run", "python", scrapper_script] + extra_args
             process = subprocess.Popen(
-                ["uv", "run", "python", scrapper_script],
+                cmd,
                 cwd=project_root
             )
 
-        return True, "Script de scrapping lancé avec succès ! Une nouvelle console s'est ouverte.", process
+        debug_msg = " (mode DEBUG activé)" if debug else ""
+        return True, f"Script de scrapping lancé avec succès{debug_msg} ! Une nouvelle console s'est ouverte.", process
 
     except Exception as e:
         return False, f"Erreur lors du lancement du script : {e}", None
