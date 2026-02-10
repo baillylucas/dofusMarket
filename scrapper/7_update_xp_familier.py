@@ -16,7 +16,7 @@ from pathlib import Path
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_DIR / "data"
 ITEMS_XP_PATH = DATA_DIR / "items_xp.csv"
-EXCEL_PATH = DATA_DIR / "Excel Familier Discord.xlsx"
+EXCEL_PATH = DATA_DIR / "xp_familier_dofous.xlsx"
 DOFUSDB_API = "https://api.dofusdb.fr/items"
 
 
@@ -88,6 +88,10 @@ def main():
     df_csv = pd.read_csv(ITEMS_XP_PATH, delimiter=";")
     print(f"CSV   : {len(df_csv)} items existants")
 
+    # Convertir xp_1 et xp_2 en numérique (corrige les strings existantes)
+    df_csv["xp_1"] = pd.to_numeric(df_csv["xp_1"], errors="coerce")
+    df_csv["xp_2"] = pd.to_numeric(df_csv["xp_2"], errors="coerce")
+
     # Ajouter la colonne last_update si absente, avec la date par défaut
     if "last_update" not in df_csv.columns:
         df_csv["last_update"] = default_date
@@ -103,18 +107,34 @@ def main():
 
     for _, row in df_excel.iterrows():
         name = str(row["Ressources"])
-        xp = row["XP"]
+        xp_raw = row["XP"]
         norm_name = normalize(name)
+
+        # Convertir XP en float, gérer les valeurs invalides
+        try:
+            xp = float(xp_raw) if pd.notna(xp_raw) else None
+        except (ValueError, TypeError):
+            print(f"  WARN '{name}': XP invalide '{xp_raw}', ignoré")
+            continue
+
+        if xp is None:
+            continue
 
         if norm_name in csv_norm_to_idx:
             # Item existe : mettre à jour xp_1
             csv_idx = csv_norm_to_idx[norm_name]
             old_xp = df_csv.at[csv_idx, "xp_1"]
+            # Convertir old_xp en float pour comparaison
+            try:
+                old_xp_float = float(old_xp) if pd.notna(old_xp) else None
+            except (ValueError, TypeError):
+                old_xp_float = None
+
             df_csv.at[csv_idx, "xp_1"] = xp
             df_csv.at[csv_idx, "last_update"] = today
             updated += 1
-            if pd.notna(old_xp) and old_xp != xp:
-                print(f"  MAJ  '{name}': xp_1 {old_xp} -> {xp}")
+            if old_xp_float is not None and old_xp_float != xp:
+                print(f"  MAJ  '{name}': xp_1 {old_xp_float} -> {xp}")
         else:
             # Item absent : chercher l'ID via l'API
             print(f"  NEW  '{name}' -> recherche API...", end=" ")
