@@ -126,20 +126,42 @@ SERVICE_ACCOUNT_FILE = "credentials/service_account.json"
 # --- Chargement des XP ---
 @st.cache_data
 def load_xp_data():
-    """Charge les données XP depuis le fichier CSV"""
+    """Charge les données XP depuis le fichier CSV
+
+    Structure attendue : id, libelle, xp, source
+    Retourne : (xp_dict, xp_sources)
+    - xp_dict: {item_id: {source: xp_value}}
+    - xp_sources: {item_id: [list_of_sources]}
+    """
     try:
         df_xp = pd.read_csv('data/items_xp.csv', delimiter=';')
-        # Créer un dictionnaire id -> (xp_1, xp_2)
+
+        # Convertir XP en numérique
+        df_xp['xp'] = pd.to_numeric(df_xp['xp'], errors='coerce')
+
+        # Créer un dictionnaire id -> {source: xp}
         xp_dict = {}
-        xp_last_update = {}
+        xp_sources = {}
+
         for _, row in df_xp.iterrows():
             item_id = int(row['id'])
-            xp_1 = row['xp_1'] if pd.notna(row['xp_1']) else None
-            xp_2 = row['xp_2'] if pd.notna(row['xp_2']) else None
-            xp_dict[item_id] = (xp_1, xp_2)
-            if 'last_update' in df_xp.columns and pd.notna(row.get('last_update')):
-                xp_last_update[item_id] = str(row['last_update'])
-        return xp_dict, xp_last_update
+            xp_value = row['xp'] if pd.notna(row['xp']) else None
+            source = str(row['source']) if pd.notna(row.get('source')) else 'unknown'
+
+            if xp_value is None:
+                continue
+
+            # Initialiser si nécessaire
+            if item_id not in xp_dict:
+                xp_dict[item_id] = {}
+                xp_sources[item_id] = []
+
+            # Ajouter la source et la valeur XP
+            xp_dict[item_id][source] = xp_value
+            if source not in xp_sources[item_id]:
+                xp_sources[item_id].append(source)
+
+        return xp_dict, xp_sources
     except Exception as e:
         st.error(f"Erreur lors du chargement des XP : {e}")
         return {}, {}
@@ -549,8 +571,9 @@ def create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=None):
     xp_per_10kk_display = '-'
 
     if item_int_id in xp_data:
-        xp_1, xp_2 = xp_data[item_int_id]
-        xp_value = xp_1 if xp_1 is not None else xp_2
+        # Prendre la première valeur XP disponible (peu importe la source)
+        xp_sources_dict = xp_data[item_int_id]
+        xp_value = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
 
         if xp_value is not None:
             # Multiplier l'XP par la quantité
@@ -633,7 +656,7 @@ if not data:
 st.session_state.user_groups = get_user_groups()
 
 # Charger les données XP
-xp_data, xp_last_update = load_xp_data()
+xp_data, xp_sources = load_xp_data()
 
 if not st.session_state.notification_shown:
     st.toast(f"✅ {len(data)} items chargés avec succès", icon="✅")
@@ -688,8 +711,9 @@ with st.sidebar:
     job_filter = st.multiselect("Métier", options=all_jobs)
     craft_filter = st.radio("Type d'item", ["Tous", "Craftables uniquement", "Non craftables"])
     xp_filter = st.checkbox("📚 XP connu uniquement")
-    xp_dates = sorted(set(xp_last_update.values()))
-    xp_date_filter = st.selectbox("📅 Dernière MAJ XP", options=["TOUS"] + xp_dates)
+    # Récupérer toutes les sources disponibles
+    all_sources = sorted(set(source for sources_list in xp_sources.values() for source in sources_list))
+    xp_source_filter = st.multiselect("📊 Source XP", options=all_sources)
     max_level = max((item.get('level', 0) for item in data.values()), default=200)
     level_range = st.slider("Niveau", 1, max_level, (1, max_level))
 
@@ -726,8 +750,9 @@ for item_id, item in data.items():
     xp_per_10kk = None
 
     if item_int_id in xp_data:
-        xp_1, xp_2 = xp_data[item_int_id]
-        xp_value_single = xp_1 if xp_1 is not None else xp_2
+        # Prendre la première valeur XP disponible (peu importe la source)
+        xp_sources_dict = xp_data[item_int_id]
+        xp_value_single = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
 
         if xp_value_single is not None:
             # Multiplier l'XP par la quantité
@@ -786,8 +811,9 @@ elif craft_filter == "Non craftables":
     df = df[~df["is_craft"]]
 if xp_filter:
     df = df[df["xp"] != float('-inf')]
-if xp_date_filter != "TOUS":
-    matching_ids = {item_id for item_id, date in xp_last_update.items() if date == xp_date_filter}
+if xp_source_filter:
+    # Filtrer les items qui ont au moins une des sources sélectionnées
+    matching_ids = {item_id for item_id, sources_list in xp_sources.items() if any(source in xp_source_filter for source in sources_list)}
     df = df[df["id"].isin(matching_ids)]
 # Filtre par groupe(s)
 if selected_group_filters:
