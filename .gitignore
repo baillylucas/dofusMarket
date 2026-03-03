@@ -205,6 +205,7 @@ logs/
 # Temporary & Test Files
 # ===========================
 screenshoots_tmp/
+screenshoots_xp/
 tmp/
 temp/
 *.tmp

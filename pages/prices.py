@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+from pathlib import Path
 from googleDriveJSON import GoogleDriveJSON
 from functools import lru_cache
 from utils import (
@@ -126,40 +127,58 @@ SERVICE_ACCOUNT_FILE = "credentials/service_account.json"
 # --- Chargement des XP ---
 @st.cache_data
 def load_xp_data():
-    """Charge les données XP depuis le fichier CSV
+    """Charge les données XP depuis tous les fichiers du dossier data/xp_familiers/.
 
-    Structure attendue : id, libelle, xp, source
+    Seuls les fichiers ayant les colonnes 'ID' et 'XP' sont lus (format valide).
     Retourne : (xp_dict, xp_sources)
     - xp_dict: {item_id: {source: xp_value}}
     - xp_sources: {item_id: [list_of_sources]}
     """
     try:
-        df_xp = pd.read_csv('data/items_xp.csv', delimiter=';')
+        xp_dir = Path('data/xp_familiers')
+        if not xp_dir.exists():
+            return {}, {}
 
-        # Convertir XP en numérique
-        df_xp['xp'] = pd.to_numeric(df_xp['xp'], errors='coerce')
+        source_files = list(xp_dir.glob("*.csv")) + list(xp_dir.glob("*.xlsx")) + list(xp_dir.glob("*.xls"))
 
-        # Créer un dictionnaire id -> {source: xp}
         xp_dict = {}
         xp_sources = {}
 
-        for _, row in df_xp.iterrows():
-            item_id = int(row['id'])
-            xp_value = row['xp'] if pd.notna(row['xp']) else None
-            source = str(row['source']) if pd.notna(row.get('source')) else 'unknown'
+        for source_file in source_files:
+            source = source_file.stem
+            try:
+                if source_file.suffix.lower() == ".csv":
+                    df = pd.read_csv(source_file, delimiter=';')
+                else:
+                    df = pd.read_excel(source_file, sheet_name=0)
 
-            if xp_value is None:
+                if 'ID' not in df.columns or 'XP' not in df.columns:
+                    continue
+
+                df['XP'] = pd.to_numeric(df['XP'], errors='coerce')
+
+                for _, row in df.iterrows():
+                    id_val = row.get('ID')
+                    xp_value = row['XP']
+
+                    if pd.isna(id_val) or pd.isna(xp_value):
+                        continue
+
+                    try:
+                        item_id = int(id_val)
+                    except (ValueError, TypeError):
+                        continue
+
+                    if item_id not in xp_dict:
+                        xp_dict[item_id] = {}
+                        xp_sources[item_id] = []
+
+                    xp_dict[item_id][source] = float(xp_value)
+                    if source not in xp_sources[item_id]:
+                        xp_sources[item_id].append(source)
+
+            except Exception:
                 continue
-
-            # Initialiser si nécessaire
-            if item_id not in xp_dict:
-                xp_dict[item_id] = {}
-                xp_sources[item_id] = []
-
-            # Ajouter la source et la valeur XP
-            xp_dict[item_id][source] = xp_value
-            if source not in xp_sources[item_id]:
-                xp_sources[item_id].append(source)
 
         return xp_dict, xp_sources
     except Exception as e:
@@ -536,7 +555,7 @@ def get_price_history_html(prix_dict, quantity, title):
         return f"<div><div class='section-title'>{title}</div><p style='color: #aaa;'><em>Aucune donnée disponible</em></p></div>"
     return html
 
-def create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=None):
+def create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=None, xp_source_filter=None):
     prix = get_latest_entry(item.get("prix_hdv", {})) or {}
     prix_val = calculate_optimal_price(prix, quantity, allowed_hdv_qtys)
 
@@ -571,9 +590,11 @@ def create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=None):
     xp_per_10kk_display = '-'
 
     if item_int_id in xp_data:
-        # Prendre la première valeur XP disponible (peu importe la source)
         xp_sources_dict = xp_data[item_int_id]
-        xp_value = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
+        if xp_source_filter:
+            xp_value = next((v for s, v in xp_sources_dict.items() if s in xp_source_filter), None)
+        else:
+            xp_value = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
 
         if xp_value is not None:
             # Multiplier l'XP par la quantité
@@ -703,6 +724,29 @@ with st.sidebar:
     )
 
     search_term = st.text_input("🔍 Rechercher par nom ou ID", "")
+    hdv_mapping = {
+        "Hôtel de vente de ressources": "Ressources",
+        "Hôtel de vente d'équipements": "Équipements",
+        "Hôtel de vente de consommables": "Consommables",
+        "Hôtel de vente des forgemagies": "Forgemagies",
+        "Hôtel de vente de créatures": "Créatures",
+        "Hôtel de vente des cosmétiques": "Cosmétiques",
+        "Hôtel de vente des âmes": "Âmes",
+        "Ressources": "Ressources",
+        "Equipements": "Équipements",
+        "Consommables": "Consommables",
+        "Forgemagie": "Forgemagies",
+        "Forgemagies": "Forgemagies",
+        "Creatures": "Créatures",
+        "Cosmetiques": "Cosmétiques",
+        "Âmes": "Âmes",
+    }
+    all_hdvs = sorted(set(
+        hdv_mapping.get(item.get('hdv', ''), item.get('hdv', ''))
+        for item in data.values()
+        if item.get('hdv') and item.get('hdv') in hdv_mapping
+    ))
+    hdv_filter = st.multiselect("HDV", options=all_hdvs)
     all_supertypes = sorted(set(item.get('supertype', 'N/A') for item in data.values()))
     supertype_filter = st.multiselect("Supertype", options=all_supertypes)
     all_types = sorted(set(item.get('type', 'N/A') for item in data.values()))
@@ -710,10 +754,10 @@ with st.sidebar:
     all_jobs = sorted(set(item.get('job') for item in data.values() if item.get('job')))
     job_filter = st.multiselect("Métier", options=all_jobs)
     craft_filter = st.radio("Type d'item", ["Tous", "Craftables uniquement", "Non craftables"])
-    xp_filter = st.checkbox("📚 XP connu uniquement")
     # Récupérer toutes les sources disponibles
     all_sources = sorted(set(source for sources_list in xp_sources.values() for source in sources_list))
     xp_source_filter = st.multiselect("📊 Source XP", options=all_sources)
+    xp_filter = st.radio("📚 XP", ["Tous", "XP connu uniquement", "XP inconnu uniquement"])
     max_level = max((item.get('level', 0) for item in data.values()), default=200)
     level_range = st.slider("Niveau", 1, max_level, (1, max_level))
 
@@ -750,9 +794,11 @@ for item_id, item in data.items():
     xp_per_10kk = None
 
     if item_int_id in xp_data:
-        # Prendre la première valeur XP disponible (peu importe la source)
         xp_sources_dict = xp_data[item_int_id]
-        xp_value_single = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
+        if xp_source_filter:
+            xp_value_single = next((v for s, v in xp_sources_dict.items() if s in xp_source_filter), None)
+        else:
+            xp_value_single = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
 
         if xp_value_single is not None:
             # Multiplier l'XP par la quantité
@@ -784,6 +830,7 @@ for item_id, item in data.items():
         "level": item.get("level"),
         "supertype": item.get("supertype"),
         "type": item.get("type"),
+        "hdv": hdv_mapping.get(item.get("hdv", ""), item.get("hdv", "")),
         "job": item.get("job"),
         "is_craft": item.get("is_craft"),
         "prix_hdv": prix_numeric,
@@ -799,6 +846,8 @@ df = pd.DataFrame(rows)
 
 if search_term:
     df = df[df["name"].str.contains(search_term, case=False, na=False) | df["id"].astype(str).str.contains(search_term)]
+if hdv_filter:
+    df = df[df["hdv"].isin(hdv_filter)]
 if supertype_filter:
     df = df[df["supertype"].isin(supertype_filter)]
 if type_filter:
@@ -809,12 +858,10 @@ if craft_filter == "Craftables uniquement":
     df = df[df["is_craft"]]
 elif craft_filter == "Non craftables":
     df = df[~df["is_craft"]]
-if xp_filter:
+if xp_filter == "XP connu uniquement":
     df = df[df["xp"] != float('-inf')]
-if xp_source_filter:
-    # Filtrer les items qui ont au moins une des sources sélectionnées
-    matching_ids = {item_id for item_id, sources_list in xp_sources.items() if any(source in xp_source_filter for source in sources_list)}
-    df = df[df["id"].isin(matching_ids)]
+elif xp_filter == "XP inconnu uniquement":
+    df = df[df["xp"] == float('-inf')]
 # Filtre par groupe(s)
 if selected_group_filters:
     group_items = get_items_in_groups(selected_group_filters)
@@ -1017,7 +1064,7 @@ if len(df_page) > 0:
             st.checkbox("option technique", key=widget_key, on_change=make_child_changed(widget_key, item_real_id), label_visibility="collapsed")
 
         with col_content:
-            st.markdown(create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=allowed_hdv_qtys_set), unsafe_allow_html=True)
+            st.markdown(create_item_html(item, data, quantity, xp_data, allowed_hdv_qtys=allowed_hdv_qtys_set, xp_source_filter=xp_source_filter or None), unsafe_allow_html=True)
 else:
     st.info("Aucun résultat ne correspond à vos critères de recherche.")
 

@@ -1129,6 +1129,26 @@ class Automator:
             print("\n💾 Sauvegarde finale...")
             self.save_json_data("fin du programme")
 
+class _Tee:
+    """Redirige les écritures vers stdout ET un fichier simultanément."""
+
+    def __init__(self, filepath):
+        self._stdout = sys.stdout
+        self._file = open(filepath, "w", encoding="utf-8")
+
+    def write(self, data):
+        self._stdout.write(data)
+        self._file.write(data)
+
+    def flush(self):
+        self._stdout.flush()
+        self._file.flush()
+
+    def close(self):
+        sys.stdout = self._stdout
+        self._file.close()
+
+
 def main():
     import argparse
 
@@ -1137,8 +1157,15 @@ def main():
     parser.add_argument("--debug", action="store_true", help="Active le mode debug avec screenshots élargis")
     args = parser.parse_args()
 
+    tee = None
     if args.debug:
-        print("🔧 Mode DEBUG activé - Screenshots élargis seront générés")
+        if not os.path.exists(FOLDER_IMAGE_PATH):
+            os.makedirs(FOLDER_IMAGE_PATH)
+        debug_log_path = os.path.join(FOLDER_IMAGE_PATH, "debug.txt")
+        tee = _Tee(debug_log_path)
+        sys.stdout = tee
+        print(f"🔧 Mode DEBUG activé - Screenshots élargis seront générés")
+        print(f"📄 Log debug : {os.path.abspath(debug_log_path)}")
 
     if not os.path.exists(FOLDER_IMAGE_PATH):
         os.makedirs(FOLDER_IMAGE_PATH)
@@ -1162,14 +1189,18 @@ def main():
             
     except pyautogui.FailSafeException:
         print("\n👋 Programme arrêté via failsafe")
-    
+
     except KeyboardInterrupt:
         print("\n👋 Programme arrêté par l'utilisateur")
-    
+
     except Exception as e:
         print(f"\n❌ Une erreur est survenue : {e}")
         import traceback
         traceback.print_exc()
+
+    finally:
+        if tee:
+            tee.close()
 
 if __name__ == "__main__":
     main()

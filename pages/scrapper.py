@@ -79,6 +79,19 @@ scrapper_ingredients = load_scrapper_ingredients()
 if 'show_scraping_summary' not in st.session_state:
     st.session_state.show_scraping_summary = False
 
+# --- Sélection du type de scraper ---
+scraper_type = st.radio(
+    "Type de scraper",
+    options=["💰 Prix des ressources (HDV)", "🐾 XP Familier"],
+    horizontal=True,
+    key="scraper_type",
+    help=(
+        "**Prix HDV** : relève les prix de vente de chaque ressource dans les HDVs.\n\n"
+        "**XP Familier** : achète ou récupère les ressources et mesure l'XP donné au familier par chacune."
+    ),
+)
+is_familier_mode = scraper_type.startswith("🐾")
+
 # --- Option Debug ---
 debug_mode = st.checkbox("🔧 Mode Debug (screenshots élargis)", key="debug_mode", help="Génère un deuxième screenshot plus large (+/- 50px) pour chaque capture, utile pour le débogage")
 
@@ -96,39 +109,49 @@ if scrapper_items or scrapper_ingredients:
             st.info(f"**Ingrédients ({len(scrapper_ingredients)}):** {', '.join(map(str, scrapper_ingredients))}")
 
     with col_btn2:
-        # Bouton Voir le résumé
-        if st.button("📊 Voir le résumé du scraping", key="btn_show_summary"):
-            st.session_state.show_scraping_summary = True
+        # Bouton Voir le résumé (uniquement en mode Prix)
+        if not is_familier_mode:
+            if st.button("📊 Voir le résumé du scraping", key="btn_show_summary"):
+                st.session_state.show_scraping_summary = True
+        else:
+            st.info("ℹ️ Le résumé n'est pas disponible en mode XP Familier.")
 
     with col_btn3:
-        # Bouton Lancer le scraping directement
-        if st.button("🚀 Lancer le scraping", key="btn_launch_scraping_direct", type="primary"):
-            from utils import launch_scrapper
+        # Bouton Lancer le scraping
+        btn_label = "🚀 Lancer le scraping XP Familier" if is_familier_mode else "🚀 Lancer le scraping"
+        if st.button(btn_label, key="btn_launch_scraping_direct", type="primary"):
+            if is_familier_mode:
+                from utils import launch_familier_scrapper
+                with st.spinner("Lancement du scraper XP Familier..."):
+                    success, message, process = launch_familier_scrapper(debug=debug_mode)
+                    script_name = "8_familier_xp_scrapper.py"
+            else:
+                from utils import launch_scrapper
+                with st.spinner("Lancement du script de scraping..."):
+                    success, message, process = launch_scrapper(debug=debug_mode)
+                    script_name = "5_dofus_scrapper.py"
 
-            with st.spinner("Lancement du script de scraping..."):
-                success, message, process = launch_scrapper(debug=debug_mode)
-
-                if success:
-                    st.success(f"✅ {message}")
-                    debug_info = "\n- **Mode DEBUG activé** : des screenshots élargis seront générés" if debug_mode else ""
-                    st.info(f"""
-                    **Le scraping est en cours !**
-                    - Une nouvelle console s'est ouverte avec le script de scraping
-                    - Suivez la progression dans cette console
-                    - Ne fermez pas la console avant la fin du scraping
-                    - Les données seront automatiquement sauvegardées sur Google Drive{debug_info}
-                    """)
-                else:
-                    st.error(f"❌ {message}")
-                    debug_arg = " --debug" if debug_mode else ""
-                    st.warning(f"""
-                    **Alternative manuelle :**
-                    Ouvrez un terminal et exécutez :
-                    ```
-                    cd scrapper
-                    python 5_dofus_scrapper.py{debug_arg}
-                    ```
-                    """)
+            if success:
+                st.success(f"✅ {message}")
+                debug_info = "\n- **Mode DEBUG activé** : des screenshots élargis seront générés" if debug_mode else ""
+                xp_info = "\n- Les résultats XP seront sauvegardés dans `data/xp_familiers/`" if is_familier_mode else "\n- Les données seront automatiquement sauvegardées sur Google Drive"
+                st.info(f"""
+                **Le scraping est en cours !**
+                - Une nouvelle console s'est ouverte avec le script de scraping
+                - Suivez la progression dans cette console
+                - Ne fermez pas la console avant la fin du scraping{xp_info}{debug_info}
+                """)
+            else:
+                st.error(f"❌ {message}")
+                debug_arg = " --debug" if debug_mode else ""
+                st.warning(f"""
+                **Alternative manuelle :**
+                Ouvrez un terminal et exécutez :
+                ```
+                cd scrapper
+                python {script_name}{debug_arg}
+                ```
+                """)
 
 # Afficher le résumé si demandé
 if st.session_state.show_scraping_summary:

@@ -598,52 +598,79 @@ def get_scrapper_items_by_hdv(data):
 
     return items_by_hdv
 
-def launch_scrapper(debug: bool = False):
+def _launch_script(batch_file: str, script_path: str, debug: bool, label: str):
     """
-    Lance le script de scrapping en tant que processus séparé.
+    Lance un script de scraping en tant que processus séparé (nouvelle console Windows).
 
     Args:
-        debug: Si True, active le mode debug avec screenshots élargis
+        batch_file: Chemin absolu vers le fichier .bat à utiliser sous Windows.
+        script_path: Chemin absolu vers le script Python (utilisé sous Linux/Mac).
+        debug: Si True, passe le flag --debug au script.
+        label: Nom court du scraper pour les messages utilisateur.
 
     Returns:
         tuple: (success: bool, message: str, process: subprocess.Popen | None)
     """
     import subprocess
-    import os
 
-    # Chemin vers le fichier batch de lancement
     project_root = os.path.dirname(__file__)
-    batch_file = os.path.join(project_root, "launch_scrapper.bat")
-    scrapper_script = os.path.join(project_root, "scrapper", "5_dofus_scrapper.py")
 
-    if not os.path.exists(scrapper_script):
-        return False, f"Script de scrapping non trouvé : {scrapper_script}", None
+    if not os.path.exists(script_path):
+        return False, f"Script non trouvé : {script_path}", None
 
     if not os.path.exists(batch_file):
         return False, f"Fichier batch non trouvé : {batch_file}", None
 
-    # Construire les arguments
     extra_args = ["--debug"] if debug else []
 
     try:
-        # Lancer le script en subprocess (sans bloquer Streamlit)
         if os.name == 'nt':  # Windows
-            # Utiliser le fichier batch pour lancer une nouvelle console
             cmd = ["cmd.exe", "/c", "start", "cmd.exe", "/k", batch_file] + extra_args
-            process = subprocess.Popen(
-                cmd,
-                cwd=project_root,
-                shell=False
-            )
+            process = subprocess.Popen(cmd, cwd=project_root, shell=False)
         else:  # Linux/Mac
-            cmd = ["uv", "run", "python", scrapper_script] + extra_args
-            process = subprocess.Popen(
-                cmd,
-                cwd=project_root
-            )
+            cmd = ["uv", "run", "python", script_path] + extra_args
+            process = subprocess.Popen(cmd, cwd=project_root)
 
         debug_msg = " (mode DEBUG activé)" if debug else ""
-        return True, f"Script de scrapping lancé avec succès{debug_msg} ! Une nouvelle console s'est ouverte.", process
+        return True, f"{label} lancé avec succès{debug_msg} ! Une nouvelle console s'est ouverte.", process
 
     except Exception as e:
-        return False, f"Erreur lors du lancement du script : {e}", None
+        return False, f"Erreur lors du lancement : {e}", None
+
+
+def launch_scrapper(debug: bool = False):
+    """
+    Lance le scraper de prix HDV (5_dofus_scrapper.py) dans un processus séparé.
+
+    Args:
+        debug: Si True, active le mode debug avec screenshots élargis.
+
+    Returns:
+        tuple: (success: bool, message: str, process: subprocess.Popen | None)
+    """
+    project_root = os.path.dirname(__file__)
+    return _launch_script(
+        batch_file=os.path.join(project_root, "launch_scrapper.bat"),
+        script_path=os.path.join(project_root, "scrapper", "5_dofus_scrapper.py"),
+        debug=debug,
+        label="Scraper de prix HDV",
+    )
+
+
+def launch_familier_scrapper(debug: bool = False):
+    """
+    Lance le scraper XP familier (8_familier_xp_scrapper.py) dans un processus séparé.
+
+    Args:
+        debug: Si True, active le mode debug avec screenshots élargis.
+
+    Returns:
+        tuple: (success: bool, message: str, process: subprocess.Popen | None)
+    """
+    project_root = os.path.dirname(__file__)
+    return _launch_script(
+        batch_file=os.path.join(project_root, "launch_familier_scrapper.bat"),
+        script_path=os.path.join(project_root, "scrapper", "8_familier_xp_scrapper.py"),
+        debug=debug,
+        label="Scraper XP familier",
+    )
