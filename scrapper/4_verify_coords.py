@@ -10,6 +10,7 @@ Commandes :
 - Clic gauche : afficher les coordonnées du clic dans la console
 """
 
+import argparse
 import pygame
 import sys
 import os
@@ -40,6 +41,8 @@ from user_config import (
     COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT,
     COORDINATES_PRICE_ONLY_TOP_LEFT,
     COORDINATES_PRICE_ONLY_BOTTOM_RIGHT,
+    COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT,
+    COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT,
     COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT,
     COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT,
     COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT,
@@ -80,52 +83,62 @@ COLOR_PRICE = (255, 80, 80, 180)        # Rouge clair - prix
 COLOR_CANCEL = (200, 200, 200, 180)     # Gris - boutons annuler
 COLOR_NAVIGATION = (100, 200, 100, 180) # Vert clair - navigation (chat, travel, coords, quit)
 
-# Liste des rectangles a afficher : (label, top_left, bottom_right, color)
-RECTANGLES = [
+# Liste des rectangles : (label, top_left, bottom_right, color, mode)
+# mode : "ressources" | "equipements" | "commun" (affiché dans les deux cas)
+ALL_RECTANGLES = [
     # --- Barres de recherche ---
-    ("Recherche HDV", COORDINATES_SEARCH_BOX_TOP_LEFT, COORDINATES_SEARCH_BOX_BOTTOM_RIGHT, COLOR_SEARCH),
-    ("Recherche Equip", COORDINATES_SEARCH_BOX_EQUIPEMENT_TOP_LEFT, COORDINATES_SEARCH_BOX_EQUIPEMENT_BOTTOM_RIGHT, COLOR_SEARCH),
+    ("Recherche HDV",    COORDINATES_SEARCH_BOX_TOP_LEFT,            COORDINATES_SEARCH_BOX_BOTTOM_RIGHT,            COLOR_SEARCH,      "ressources"),
+    ("Recherche Equip",  COORDINATES_SEARCH_BOX_EQUIPEMENT_TOP_LEFT, COORDINATES_SEARCH_BOX_EQUIPEMENT_BOTTOM_RIGHT, COLOR_SEARCH,      "equipements"),
 
-    # --- Filtres niveau ---
-    ("Niveau min", COORDINATES_INPUT_MIN_LVL_TOP_LEFT, COORDINATES_INPUT_MIN_LVL_BOTTOM_RIGHT, COLOR_LEVEL),
-    ("Niveau max", COORDINATES_INPUT_MAX_LVL_TOP_LEFT, COORDINATES_INPUT_MAX_LVL_BOTTOM_RIGHT, COLOR_LEVEL),
+    # --- Filtres niveau (communs) ---
+    ("Niveau min",       COORDINATES_INPUT_MIN_LVL_TOP_LEFT,         COORDINATES_INPUT_MIN_LVL_BOTTOM_RIGHT,         COLOR_LEVEL,       "commun"),
+    ("Niveau max",       COORDINATES_INPUT_MAX_LVL_TOP_LEFT,         COORDINATES_INPUT_MAX_LVL_BOTTOM_RIGHT,         COLOR_LEVEL,       "commun"),
 
-    # --- Zone nom / item ---
-    ("Nom ressource", COORDINATES_RESSOURCE_NAME_TOP_LEFT, COORDINATES_RESSOURCE_NAME_BOTTOM_RIGHT, COLOR_ITEM),
-    ("Zone item", COORDINATES_RESOURCE_ITEM_TOP_LEFT, COORDINATES_RESOURCE_ITEM_BOTTOM_RIGHT, COLOR_ITEM),
+    # --- Zone nom / item (communs) ---
+    ("Nom ressource",    COORDINATES_RESSOURCE_NAME_TOP_LEFT,        COORDINATES_RESSOURCE_NAME_BOTTOM_RIGHT,        COLOR_ITEM,        "commun"),
+    ("Zone item",        COORDINATES_RESOURCE_ITEM_TOP_LEFT,         COORDINATES_RESOURCE_ITEM_BOTTOM_RIGHT,         COLOR_ITEM,        "commun"),
 
     # --- Cas 1 : Ressources (Prix present) ---
-    ("Label Prix", COORDINATES_LABEL_PRIX_TOP_LEFT, COORDINATES_LABEL_PRIX_BOTTOM_RIGHT, COLOR_PRIX_LABEL),
-    ("Qte Ress (prix)", COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT, COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT, COLOR_QUANTITY),
-    ("Prix (prix)", COORDINATES_PRICE_ONLY_TOP_LEFT, COORDINATES_PRICE_ONLY_BOTTOM_RIGHT, COLOR_PRICE),
+    ("Label Prix",       COORDINATES_LABEL_PRIX_TOP_LEFT,            COORDINATES_LABEL_PRIX_BOTTOM_RIGHT,            COLOR_PRIX_LABEL,  "ressources"),
+    ("Qte Ress (prix)",  COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT,   COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT,   COLOR_QUANTITY,    "ressources"),
+    ("Prix (prix)",      COORDINATES_PRICE_ONLY_TOP_LEFT,            COORDINATES_PRICE_ONLY_BOTTOM_RIGHT,            COLOR_PRICE,       "ressources"),
 
     # --- Cas 2 : Ressources (Prix absent) ---
-    ("Qte Ress (no prix)", COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT, COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT, COLOR_QUANTITY),
-    ("Prix (no prix)", COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT, COORDINATES_PRICE_ONLY_NO_PRIX_BOTTOM_RIGHT, COLOR_PRICE),
+    ("Qte Ress (no px)", COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT, COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT, COLOR_QUANTITY, "ressources"),
+    ("Prix (no prix)",   COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT,   COORDINATES_PRICE_ONLY_NO_PRIX_BOTTOM_RIGHT,    COLOR_PRICE,       "ressources"),
 
     # --- Cas 3 : Equipement (hors panoplie) ---
-    ("Label Panoplie", COORDINATES_LABEL_PANOPLIE_TOP_LEFT, COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT, COLOR_PRIX_LABEL),
-    ("Qte Equip", COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT, COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT, COLOR_QUANTITY),
+    ("Label Panoplie",   COORDINATES_LABEL_PANOPLIE_TOP_LEFT,           COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT,           COLOR_PRIX_LABEL,  "equipements"),
+    ("Qte Equip",        COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT,      COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT,      COLOR_QUANTITY,    "equipements"),
+    ("Prix Equip",       COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT,    COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT,    COLOR_PRICE,       "equipements"),
 
     # --- Cas 4 : Equipement (panoplie) ---
-    ("Qte Panoplie", COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT, COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT, COLOR_QUANTITY),
-    ("Prix Panoplie", COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT, COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT, COLOR_PRICE),
+    ("Qte Panoplie",     COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT,     COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT,     COLOR_QUANTITY,    "equipements"),
+    ("Prix Panoplie",    COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT, COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT, COLOR_PRICE,   "equipements"),
 
     # --- Boutons annuler ---
-    ("Annuler recherche", COORDINATES_CANCEL_SEARCH_TOP_LEFT, COORDINATES_CANCEL_SEARCH_BOTTOM_RIGHT, COLOR_CANCEL),
-    ("Annuler rech. equip", COORDINATES_CANCEL_SEARCH_EQUIPEMENT_TOP_LEFT, COORDINATES_CANCEL_SEARCH_EQUIPEMENT_BOTTOM_RIGHT, COLOR_CANCEL),
+    ("Annuler recherche",    COORDINATES_CANCEL_SEARCH_TOP_LEFT,           COORDINATES_CANCEL_SEARCH_BOTTOM_RIGHT,           COLOR_CANCEL,      "ressources"),
+    ("Annuler rech. equip",  COORDINATES_CANCEL_SEARCH_EQUIPEMENT_TOP_LEFT, COORDINATES_CANCEL_SEARCH_EQUIPEMENT_BOTTOM_RIGHT, COLOR_CANCEL,     "equipements"),
 
-    # --- Navigation ---
-    ("Chat", COORDINATES_CHAT_TOP_LEFT, COORDINATES_CHAT_BOTTOM_RIGHT, COLOR_NAVIGATION),
-    ("Msg post travel", COORDINATES_MSG_POST_TRAVEL_TOP_LEFT, COORDINATES_MSG_POST_TRAVEL_BOTTOM_RIGHT, COLOR_NAVIGATION),
-    ("Confirm travel", COORDINATES_CONFIRM_POST_TRAVEL_TOP_LEFT, COORDINATES_CONFIRM_POST_TRAVEL_BOTTOM_RIGHT, COLOR_NAVIGATION),
-    ("Coords in-game", COORDINATES_COORDS_TOP_LEFT, COORDINATES_COORDS_BOTTOM_RIGHT, COLOR_NAVIGATION),
-    ("Quitter HDV", COORDINATES_QUIT_HDV_TOP_LEFT, COORDINATES_QUIT_HDV_BOTTOM_RIGHT, COLOR_NAVIGATION),
+    # --- Navigation (communs) ---
+    ("Chat",             COORDINATES_CHAT_TOP_LEFT,                  COORDINATES_CHAT_BOTTOM_RIGHT,                  COLOR_NAVIGATION,  "commun"),
+    ("Msg post travel",  COORDINATES_MSG_POST_TRAVEL_TOP_LEFT,       COORDINATES_MSG_POST_TRAVEL_BOTTOM_RIGHT,       COLOR_NAVIGATION,  "commun"),
+    ("Confirm travel",   COORDINATES_CONFIRM_POST_TRAVEL_TOP_LEFT,   COORDINATES_CONFIRM_POST_TRAVEL_BOTTOM_RIGHT,   COLOR_NAVIGATION,  "commun"),
+    ("Coords in-game",   COORDINATES_COORDS_TOP_LEFT,                COORDINATES_COORDS_BOTTOM_RIGHT,               COLOR_NAVIGATION,  "commun"),
+    ("Quitter HDV",      COORDINATES_QUIT_HDV_TOP_LEFT,              COORDINATES_QUIT_HDV_BOTTOM_RIGHT,             COLOR_NAVIGATION,  "commun"),
 ]
 
 
+def get_rectangles(mode):
+    """Filtre les rectangles selon le mode choisi."""
+    if mode is None:
+        return [(label, tl, br, color) for label, tl, br, color, _ in ALL_RECTANGLES]
+    return [(label, tl, br, color) for label, tl, br, color, m in ALL_RECTANGLES if m in (mode, "commun")]
+
+
 class CoordsVerifier:
-    def __init__(self):
+    def __init__(self, rectangles):
+        self.rectangles = rectangles
         pygame.init()
 
         self.screen_width, self.screen_height = pyautogui.size()
@@ -200,7 +213,7 @@ class CoordsVerifier:
         self.screen.fill((0, 0, 0))
         self.surface.fill((0, 0, 0, 0))
 
-        for label, top_left, bottom_right, color in RECTANGLES:
+        for label, top_left, bottom_right, color in self.rectangles:
             self.draw_rect(label, top_left, bottom_right, color)
 
         self.screen.blit(self.surface, (0, 0))
@@ -210,7 +223,7 @@ class CoordsVerifier:
         self.keyboard_listener.start()
 
         print("=== Verification des coordonnees ===")
-        print(f"{len(RECTANGLES)} rectangles affiches")
+        print(f"{len(self.rectangles)} rectangles affiches")
         print("Appuyez sur Echap pour quitter.")
         print()
 
@@ -244,5 +257,17 @@ class CoordsVerifier:
 
 
 if __name__ == "__main__":
-    verifier = CoordsVerifier()
+    parser = argparse.ArgumentParser(description="Vérification visuelle des coordonnées")
+    parser.add_argument(
+        "mode",
+        nargs="?",
+        choices=["ressources", "equipements"],
+        help="Afficher uniquement les coordonnées HDV ressources ou équipements (défaut : tout afficher)",
+    )
+    args = parser.parse_args()
+
+    rectangles = get_rectangles(args.mode)
+    if args.mode:
+        print(f"Mode : {args.mode}")
+    verifier = CoordsVerifier(rectangles)
     verifier.run()

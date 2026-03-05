@@ -283,10 +283,8 @@ class ImageProcessor:
         return filename
     
     @staticmethod
-    def detect_single_price(image_path: str) -> Optional[int]:
+    def detect_single_price(image_path: str, debug: bool = False) -> Optional[int]:
         """Détecte un prix unique dans une image sans quantité."""
-        # print(f"image_path : {image_path}")
-
         # Vérifier que l'image existe et est lisible
         if not os.path.exists(image_path):
             print(f"ERREUR: Image non trouvée : {image_path}")
@@ -299,9 +297,15 @@ class ImageProcessor:
         )
 
         # Nettoyer et extraire le nombre
+        raw_text = text
         text = re.sub(r'\s+', '', text)
         if text and text.isdigit():
-            return int(text)
+            result = int(text)
+            if debug:
+                print(f"    [DEBUG prix] OCR brut: {repr(raw_text.strip())} → {result}")
+            return result
+        if debug:
+            print(f"    [DEBUG prix] OCR brut: {repr(raw_text.strip())} → None (non numérique)")
         return None
     
     @staticmethod
@@ -345,7 +349,8 @@ class ImageProcessor:
         )
 
         # Nettoyer le texte détecté
-        text = text.strip().replace(" ", "").lower()
+        raw_text = text.strip()
+        text = raw_text.replace(" ", "").lower()
 
         # Extraire la quantité (format attendu: "x1", "x10", "x100", "x1000")
         quantity = self.clean_quantity(text)
@@ -354,8 +359,12 @@ class ImageProcessor:
         VALID_QUANTITIES = {1, 10, 100, 1000}
 
         if quantity in VALID_QUANTITIES:
+            if self.debug:
+                print(f"    [DEBUG qté pos{position}] OCR brut: {repr(raw_text)} → x{quantity}")
             return quantity
         else:
+            if self.debug:
+                print(f"    [DEBUG qté pos{position}] OCR brut: {repr(raw_text)} → None (invalide: {quantity})")
             return None
 
     @staticmethod
@@ -901,8 +910,8 @@ class Automator:
             else:
                 quantity_coords_top_left = COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT
                 quantity_coords_bottom_right = COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT
-                price_coords_top_left = COORDINATES_PRICE_ONLY_TOP_LEFT
-                price_coords_bottom_right = COORDINATES_PRICE_ONLY_BOTTOM_RIGHT
+                price_coords_top_left = COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT
+                price_coords_bottom_right = COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT
 
             # 1. Valider la quantité (doit être x1 pour les équipements)
             quantity_zone = Rectangle(
@@ -933,7 +942,7 @@ class Automator:
             # Nom du screenshot avec ID et quantité détectée
             screenshot_name = f"{item_id}_x{detected_quantity}" if item_id else None
             screenshot_path = self.processor.take_screenshot(screenshot_zone, custom_name=screenshot_name)
-            price = self.processor.detect_single_price(screenshot_path)
+            price = self.processor.detect_single_price(screenshot_path, debug=self.processor.debug)
 
             # Réinitialiser les filtres avant de retourner le résultat
             if len(item_name) <= 3 and item_level is not None:
@@ -999,7 +1008,7 @@ class Automator:
                 # Nom du screenshot avec ID et quantité détectée
                 screenshot_name = f"{item_id}_x{detected_quantity}" if item_id else None
                 screenshot_path = self.processor.take_screenshot(price_zone, custom_name=screenshot_name)
-                price = self.processor.detect_single_price(screenshot_path)
+                price = self.processor.detect_single_price(screenshot_path, debug=self.processor.debug)
 
                 # Stocker la quantité détectée et le prix associé
                 detected_data.append((detected_quantity, price))
@@ -1051,8 +1060,9 @@ class Automator:
             return
 
         hdv_count = 0
-        total_hdvs = len([f for f in self.config.resources_by_type.keys() 
+        total_hdvs = len([f for f in self.config.resources_by_type.keys()
                          if f in self.config.hdv_manager.hdvs])
+        no_price_items = []  # (item_name, item_id, raison)
 
         try:
             for filename, resources in self.config.resources_by_type.items():
@@ -1090,19 +1100,25 @@ class Automator:
                             break
 
                     result = self.process_item(resource, item_id=item_id, is_equipment=is_equipment, item_level=item_level, use_equipment_coords=use_equipment_coords)
-                    
+
                     if result and result.prices:
+                        # Vérifier si tous les prix sont None
+                        all_none = all(p.price is None for p in result.prices)
+                        if all_none:
+                            no_price_items.append((resource, item_id, "trouvé mais tous les prix sont None"))
                         # Mettre à jour les données en mémoire
                         for item_id, item_data in self.items_data.items():
                             if item_data['name'] == result.name:
                                 prices_dict = {}
                                 for price_info in result.prices:
                                     prices_dict[str(price_info.quantity)] = price_info.price
-                                
+
                                 now = datetime.now().strftime("%Y-%m-%dT%H:%M")
                                 item_data['prix_hdv'][now] = prices_dict
                                 item_data['last_maj'] = now
                                 break
+                    else:
+                        no_price_items.append((resource, item_id, "non trouvé dans l'HDV"))
 
                 # Quitter l'HDV
                 quit_zone = Rectangle(COORDINATES_QUIT_HDV_TOP_LEFT, COORDINATES_QUIT_HDV_BOTTOM_RIGHT)
@@ -1128,6 +1144,18 @@ class Automator:
             # Sauvegarde finale
             print("\n💾 Sauvegarde finale...")
             self.save_json_data("fin du programme")
+
+            # Résumé des items sans prix
+            if no_price_items:
+                print(f"\n{'='*60}")
+                print(f"⚠️  RÉSUMÉ — {len(no_price_items)} item(s) sans prix détecté :")
+                print(f"{'='*60}")
+                for name, iid, reason in no_price_items:
+                    id_str = f" (ID: {iid})" if iid else ""
+                    print(f"  • {name}{id_str} → {reason}")
+                print(f"{'='*60}")
+            else:
+                print("\n✅ Tous les items ont au moins un prix détecté.")
 
 class _Tee:
     """Redirige les écritures vers stdout ET un fichier simultanément."""

@@ -125,9 +125,8 @@ COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT = (234, 355)
 
 # Prix - Zone du prix pour équipement hors panoplie
 # Note : Position 0 uniquement (pas de décalage)
-# ⚠️ PARTAGE avec le Cas 1 (même coordonnées que COORDINATES_PRICE_ONLY_TOP_LEFT)
-# COORDINATES_PRICE_ONLY_TOP_LEFT = (263, 326)
-# COORDINATES_PRICE_ONLY_BOTTOM_RIGHT = (401, 361)
+COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT = (239, 326)   # À CALIBRER
+COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT = (401, 361)  # À CALIBRER
 
 
 # ────────────────────────────────────────────────────────────────────────────
