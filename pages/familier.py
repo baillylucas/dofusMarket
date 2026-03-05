@@ -566,112 +566,176 @@ if len(selected_rows) == 1:
     selected_item_id = str(selected_row["_item_id"])
     item = data.get(selected_item_id, {})
 
-    st.divider()
-    st.markdown(f"### {item.get('name', '')} — Détails")
+    st.markdown(f"### {item.get('id', '')} {item.get('name', '')} — Détails")
 
-    # Infos générales
-    col_i1, col_i2, col_i3, col_i4 = st.columns(4)
-    with col_i1:
-        st.metric("ID", item.get("id", "-"))
-    with col_i2:
-        st.metric("Niveau", item.get("level", "-"))
-    with col_i3:
-        st.metric("Craftable", "Oui" if item.get("is_craft") else "Non")
-    with col_i4:
-        last_maj = item.get("last_maj", "N/A")
-        if last_maj != "N/A":
-            try:
-                last_maj = datetime.fromisoformat(last_maj).strftime("%d/%m/%Y %H:%M")
-            except Exception:
-                pass
-        st.metric("Dernière MAJ", last_maj)
+    tab_resume, tab_ingredients, tab_historique, tab_graph = st.tabs(["📋 Résumé", "🧪 Ingrédients", "📊 Historique des prix", "📈 Évolution des prix"])
 
-    # Recette
-    if item.get("is_craft") and item.get("ingredients"):
-        st.markdown("**🧪 Recette de fabrication**")
-        memo = st.session_state.fam_craft_cache
-        recipe_rows = []
-        for ing in item["ingredients"]:
-            ing_id = ing["id"]
-            ing_qty_total = ing["quantity"] * quantity
-            ing_id_str = str(ing_id)
-            ing_name = data[ing_id_str].get("name", f"Item #{ing_id}") if ing_id_str in data else f"Item #{ing_id}"
-            cost, method = calculate_craft_cost_recursive(data, ing_id, ing_qty_total, memo, is_root=False)
-            unit_cost = int(round(cost / ing_qty_total)) if cost is not None and ing_qty_total > 0 else None
-            recipe_rows.append({
-                "Ingrédient": ing_name,
-                "ID": ing_id,
-                "Quantité": ing_qty_total,
-                "Prix/u (K)": unit_cost,
-                "Total (K)": cost,
-                "Méthode": method or "-",
-            })
-        st.dataframe(
-            pd.DataFrame(recipe_rows),
-            hide_index=True,
-            use_container_width=True,
-            column_config={
-                "Prix/u (K)": st.column_config.NumberColumn(format="%d K"),
-                "Total (K)": st.column_config.NumberColumn(format="%d K"),
-            }
-        )
+    with tab_resume:
+        col_i1, col_i2, col_i3, col_i4 = st.columns(4)
+        with col_i1:
+            st.metric("ID", item.get("id", "-"))
+        with col_i2:
+            st.metric("Niveau", item.get("level", "-"))
+        with col_i3:
+            st.metric("Craftable", "Oui" if item.get("is_craft") else "Non")
+        with col_i4:
+            last_maj = item.get("last_maj", "N/A")
+            if last_maj != "N/A":
+                try:
+                    last_maj = datetime.fromisoformat(last_maj).strftime("%d/%m/%Y %H:%M")
+                except Exception:
+                    pass
+            st.metric("Dernière MAJ", last_maj)
 
-    # Historique des prix HDV
-    prix_dict = item.get("prix_hdv", {})
-    if prix_dict:
-        st.markdown("**📊 Historique des prix HDV**")
-
-        def extract_price(prices, qty_str):
-            """Retourne un entier positif ou None."""
-            try:
-                v = prices.get(qty_str)
-                if v is None:
-                    return None
-                fv = float(v)
-                return int(fv) if fv > 0 else None
-            except (TypeError, ValueError):
-                return None
-
-        def has_any_price(prices):
-            return any(extract_price(prices, q) is not None for q in ["1", "10", "100", "1000"])
-
-        try:
-            all_dates = sorted(prix_dict.keys(), key=lambda k: datetime.fromisoformat(k), reverse=True)
-        except Exception:
-            all_dates = sorted(prix_dict.keys(), reverse=True)
-
-        sorted_dates = [d for d in all_dates if has_any_price(prix_dict[d])][:5]
-
-        hist_rows = []
-        for date in sorted_dates:
-            prices_for_date = prix_dict[date]
-            try:
-                date_fmt = datetime.fromisoformat(date).strftime("%d/%m/%Y %H:%M")
-            except Exception:
-                date_fmt = date
-            p1    = extract_price(prices_for_date, "1")
-            p10   = extract_price(prices_for_date, "10")
-            p100  = extract_price(prices_for_date, "100")
-            p1000 = extract_price(prices_for_date, "1000")
-            hist_rows.append({
-                "Date": date_fmt,
-                "x1 (K)": p1,
-                "x10 (K)": p10,
-                "x100 (K)": p100,
-                "x1000 (K)": p1000,
-            })
-        if hist_rows:
+    with tab_ingredients:
+        if item.get("is_craft") and item.get("ingredients"):
+            memo = st.session_state.fam_craft_cache
+            recipe_rows = []
+            for ing in item["ingredients"]:
+                ing_id = ing["id"]
+                ing_qty_total = ing["quantity"] * quantity
+                ing_id_str = str(ing_id)
+                ing_name = data[ing_id_str].get("name", f"Item #{ing_id}") if ing_id_str in data else f"Item #{ing_id}"
+                cost, method = calculate_craft_cost_recursive(data, ing_id, ing_qty_total, memo, is_root=False)
+                unit_cost = int(round(cost / ing_qty_total)) if cost is not None and ing_qty_total > 0 else None
+                recipe_rows.append({
+                    "Ingrédient": ing_name,
+                    "ID": ing_id,
+                    "Quantité": ing_qty_total,
+                    "Prix/u (K)": unit_cost,
+                    "Total (K)": cost,
+                    "Méthode": method or "-",
+                })
             st.dataframe(
-                pd.DataFrame(hist_rows),
+                pd.DataFrame(recipe_rows),
                 hide_index=True,
                 use_container_width=True,
                 column_config={
-                    "x1 (K)": st.column_config.NumberColumn(format="%d K"),
-                    "x10 (K)": st.column_config.NumberColumn(format="%d K"),
-                    "x100 (K)": st.column_config.NumberColumn(format="%d K"),
-                    "x1000 (K)": st.column_config.NumberColumn(format="%d K"),
+                    "Prix/u (K)": st.column_config.NumberColumn(format="%d K"),
+                    "Total (K)": st.column_config.NumberColumn(format="%d K"),
                 }
             )
+        else:
+            st.info("Cet item n'est pas craftable.")
+
+    with tab_historique:
+        prix_dict = item.get("prix_hdv", {})
+        if prix_dict:
+            def extract_price(prices, qty_str):
+                try:
+                    v = prices.get(qty_str)
+                    if v is None:
+                        return None
+                    fv = float(v)
+                    return int(fv) if fv > 0 else None
+                except (TypeError, ValueError):
+                    return None
+
+            def has_any_price(prices):
+                return any(extract_price(prices, q) is not None for q in ["1", "10", "100", "1000"])
+
+            try:
+                all_dates = sorted(prix_dict.keys(), key=lambda k: datetime.fromisoformat(k), reverse=True)
+            except Exception:
+                all_dates = sorted(prix_dict.keys(), reverse=True)
+
+            sorted_dates = [d for d in all_dates if has_any_price(prix_dict[d])][:5]
+
+            hist_rows = []
+            for date in sorted_dates:
+                prices_for_date = prix_dict[date]
+                try:
+                    date_fmt = datetime.fromisoformat(date).strftime("%d/%m/%Y %H:%M")
+                except Exception:
+                    date_fmt = date
+                p1    = extract_price(prices_for_date, "1")
+                p10   = extract_price(prices_for_date, "10")
+                p100  = extract_price(prices_for_date, "100")
+                p1000 = extract_price(prices_for_date, "1000")
+                hist_rows.append({
+                    "Date": date_fmt,
+                    "x1 (K)": p1,
+                    "x10 (K)": p10,
+                    "x100 (K)": p100,
+                    "x1000 (K)": p1000,
+                })
+            if hist_rows:
+                st.dataframe(
+                    pd.DataFrame(hist_rows),
+                    hide_index=True,
+                    use_container_width=True,
+                    column_config={
+                        "x1 (K)": st.column_config.NumberColumn(format="%d K"),
+                        "x10 (K)": st.column_config.NumberColumn(format="%d K"),
+                        "x100 (K)": st.column_config.NumberColumn(format="%d K"),
+                        "x1000 (K)": st.column_config.NumberColumn(format="%d K"),
+                    }
+                )
+        else:
+            st.info("Aucun historique de prix disponible.")
+
+    with tab_graph:
+        import altair as alt
+        prix_dict_graph = item.get("prix_hdv", {})
+        if prix_dict_graph:
+            graph_rows = []
+            for date_str, prices in prix_dict_graph.items():
+                try:
+                    date_parsed = datetime.fromisoformat(date_str)
+                except Exception:
+                    continue
+                for qty_label, qty_key, divisor in [("x1", "1", 1), ("x10", "10", 10), ("x100", "100", 100), ("x1000", "1000", 1000)]:
+                    try:
+                        v = prices.get(qty_key)
+                        if v is not None and float(v) > 0:
+                            graph_rows.append({
+                                "Date": date_parsed,
+                                "Quantité": qty_label,
+                                "Prix bundle (K)": float(v),
+                                "Prix unitaire (K)": float(v) / divisor,
+                            })
+                    except (TypeError, ValueError):
+                        pass
+
+            if graph_rows:
+                df_graph = pd.DataFrame(graph_rows).sort_values("Date")
+                all_qty_labels = ["x1", "x10", "x100", "x1000"]
+
+                zoom_choice = st.radio(
+                    "Axe du zoom (molette)",
+                    ["Les deux", "Temps (X)", "Prix (Y)"],
+                    horizontal=True,
+                    key=f"fam_graph_zoom_{selected_item_id}",
+                )
+                zoom_encodings = {"Les deux": ["x", "y"], "Temps (X)": ["x"], "Prix (Y)": ["y"]}[zoom_choice]
+
+                legend_selection = alt.selection_point(fields=["Quantité"], bind="legend", empty=True)
+                zoom_selection = alt.selection_interval(bind="scales", encodings=zoom_encodings)
+
+                chart = (
+                    alt.Chart(df_graph)
+                    .mark_line(point=alt.OverlayMarkDef(filled=True, size=80))
+                    .encode(
+                        x=alt.X("Date:T", title="Date"),
+                        y=alt.Y("Prix unitaire (K):Q", title="Prix unitaire (K)"),
+                        color=alt.Color("Quantité:N", scale=alt.Scale(
+                            domain=all_qty_labels,
+                            range=["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"],
+                        )),
+                        opacity=alt.condition(legend_selection, alt.value(1), alt.value(0.1)),
+                        tooltip=[
+                            alt.Tooltip("Date:T", title="Date", format="%d/%m/%Y %H:%M"),
+                            alt.Tooltip("Prix bundle (K):Q", title="Prix bundle (K)", format=".0f"),
+                            alt.Tooltip("Prix unitaire (K):Q", title="Prix unitaire (K)", format=".0f"),
+                        ],
+                    )
+                    .add_params(legend_selection, zoom_selection)
+                )
+                st.altair_chart(chart, use_container_width=True)
+            else:
+                st.info("Aucune donnée de prix valide pour le graphique.")
+        else:
+            st.info("Aucun historique de prix disponible.")
 
 
 # --- Statistiques ---
