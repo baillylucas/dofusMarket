@@ -1,7 +1,11 @@
 import streamlit as st
 import pandas as pd
 from googleDriveJSON import GoogleDriveJSON
-from utils import load_scrapper_items, load_scrapper_ingredients, remove_items_from_scrapper, remove_ingredients_from_scrapper
+from utils import (
+    load_scrapper_items, load_scrapper_ingredients,
+    remove_items_from_scrapper, remove_ingredients_from_scrapper,
+    get_user_groups, add_items_to_group, remove_items_from_group,
+)
 
 # Configuration
 st.set_page_config(layout="wide")
@@ -74,10 +78,21 @@ if not data:
 # Charger les items et ingrédients du scrapper depuis le fichier JSON
 scrapper_items = load_scrapper_items()
 scrapper_ingredients = load_scrapper_ingredients()
+st.session_state.scrapper_user_groups = get_user_groups()
 
-# Session state pour gérer l'affichage du résumé
+
+def _get_selected_ids(event, df):
+    if event and event.selection and event.selection.rows:
+        return df.iloc[event.selection.rows]['id'].tolist()
+    return []
+
+# Session state
 if 'show_scraping_summary' not in st.session_state:
     st.session_state.show_scraping_summary = False
+if 'scrapper_user_groups' not in st.session_state:
+    st.session_state.scrapper_user_groups = {}
+if 'scrapper_selected_group_for_action' not in st.session_state:
+    st.session_state.scrapper_selected_group_for_action = None
 
 # --- Sélection du type de scraper ---
 scraper_type = st.radio(
@@ -282,17 +297,63 @@ if scrapper_items or scrapper_ingredients:
             key="dataframe_scrapper_items"
         )
 
-        # Supprimer les items sélectionnés
-        if st.button("🗑️ Supprimer la sélection", key="btn_delete_items"):
-            if event_items.selection and event_items.selection.rows:
-                selected_indices = event_items.selection.rows
-                selected_ids = df_filtered.iloc[selected_indices]['id'].tolist()
-                removed_count = remove_items_from_scrapper(selected_ids, data=data)
-                if removed_count > 0:
-                    st.toast(f"✓ {removed_count} item(s) supprimé(s) du scrapper", icon="✅")
-                    st.rerun()
+        # Boutons d'action sous le tableau items
+        group_options_action = {gid: gdata['name'] for gid, gdata in st.session_state.scrapper_user_groups.items()}
+        if group_options_action and st.session_state.scrapper_selected_group_for_action not in group_options_action:
+            st.session_state.scrapper_selected_group_for_action = list(group_options_action.keys())[0]
+
+        col_group_select, col_group_add, col_group_remove, col_delete = st.columns([1.5, 0.6, 0.6, 0.8])
+
+        with col_group_select:
+            if group_options_action:
+                selected_group_action = st.selectbox(
+                    "Groupe",
+                    options=list(group_options_action.keys()),
+                    format_func=lambda x: group_options_action[x],
+                    index=list(group_options_action.keys()).index(st.session_state.scrapper_selected_group_for_action)
+                          if st.session_state.scrapper_selected_group_for_action in group_options_action else 0,
+                    key="scrapper_group_action_select_widget",
+                    label_visibility="collapsed",
+                    on_change=lambda: st.session_state.update(
+                        {'scrapper_selected_group_for_action': st.session_state.scrapper_group_action_select_widget}
+                    )
+                )
             else:
-                st.toast("⚠️ Sélectionnez des items à supprimer", icon="⚠️")
+                selected_group_action = None
+                st.info("Aucun groupe")
+
+        with col_group_add:
+            if st.button("➕ Groupe", help="Ajouter la sélection au groupe", key="scrapper_group_add"):
+                selected_ids = _get_selected_ids(event_items, df_filtered)
+                if selected_ids and selected_group_action:
+                    added = add_items_to_group(selected_group_action, selected_ids)
+                    st.toast(f"✓ {added} item(s) ajouté(s) au groupe" if added > 0 else "⚠️ Item(s) déjà dans le groupe", icon="✅" if added > 0 else "ℹ️")
+                elif not selected_ids:
+                    st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+                else:
+                    st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
+
+        with col_group_remove:
+            if st.button("➖ Groupe", help="Retirer la sélection du groupe", key="scrapper_group_remove"):
+                selected_ids = _get_selected_ids(event_items, df_filtered)
+                if selected_ids and selected_group_action:
+                    removed = remove_items_from_group(selected_group_action, selected_ids)
+                    st.toast(f"✓ {removed} item(s) retiré(s)" if removed > 0 else "⚠️ Aucun item à retirer", icon="✅" if removed > 0 else "ℹ️")
+                elif not selected_ids:
+                    st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+                else:
+                    st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
+
+        with col_delete:
+            if st.button("🗑️ Supprimer", key="btn_delete_items"):
+                selected_ids = _get_selected_ids(event_items, df_filtered)
+                if selected_ids:
+                    removed_count = remove_items_from_scrapper(selected_ids, data=data)
+                    if removed_count > 0:
+                        st.toast(f"✓ {removed_count} item(s) supprimé(s) du scrapper", icon="✅")
+                        st.rerun()
+                else:
+                    st.toast("⚠️ Sélectionnez des items à supprimer", icon="⚠️")
     else:
         st.info("📭 Aucun item sélectionné pour le scrapper")
 

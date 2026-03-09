@@ -60,86 +60,67 @@ COORDINATES_RESOURCE_ITEM_TOP_LEFT = (993, 358)
 COORDINATES_RESOURCE_ITEM_BOTTOM_RIGHT = (1527, 435)
 
 # ============================================================================
-# COORDONNÉES DES QUANTITÉS ET PRIX (4 CAS SELON LE TYPE D'HDV)
+# COORDONNÉES DES QUANTITÉS ET PRIX (3 CAS SELON LE TYPE D'HDV)
 # ============================================================================
-# Il existe 4 cas différents selon le type d'HDV et le contexte :
-# - Cas 1 : HDV Ressources avec libellé "Prix" présent
-# - Cas 2 : HDV Ressources avec libellé "Prix" absent
-# - Cas 3 : HDV Équipement hors panoplie
-# - Cas 4 : HDV Équipement panoplie
-
+# La logique est unifiée : coordonnées de base (libellé "Prix" absent) +
+# décalage Y de PRIX_Y_OFFSET si le libellé "Prix" est détecté à l'écran.
+# - Cas 1 : HDV Ressources (coords NO_PRIX + offset si Prix présent)
+# - Cas 2 : HDV Équipement hors panoplie (+ offset si Prix présent)
+# - Cas 3 : HDV Équipement panoplie (+ offset si Prix présent)
 
 # ────────────────────────────────────────────────────────────────────────────
-# CAS 1 : HDV RESSOURCES / CONSOMMABLES / ETC. (LIBELLÉ "PRIX" PRÉSENT)
+# DÉTECTION DU LIBELLÉ "PRIX"
 # ────────────────────────────────────────────────────────────────────────────
 
-# Libellé "Prix" - Zone pour détecter la présence du libellé "Prix"
+# Zone de détection du libellé "Prix" (commun à tous les HDV)
 COORDINATES_LABEL_PRIX_TOP_LEFT = (364, 339)
 COORDINATES_LABEL_PRIX_BOTTOM_RIGHT = (404, 361)
 
-# Quantité - Zone de la quantité (x1, x10, x100, x1000)
-# Note : +40 pixels verticalement pour chaque position (0, 1, 2, 3)
-COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT = (322, 476)
-COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT = (387, 498)
-
-# Prix - Zone du prix (utilisée quand "Prix" est présent)
-# Note : +40 pixels verticalement pour chaque position (0, 1, 2, 3)
-COORDINATES_PRICE_ONLY_TOP_LEFT = (409, 472)
-COORDINATES_PRICE_ONLY_BOTTOM_RIGHT = (597, 503)
-
-
 # ────────────────────────────────────────────────────────────────────────────
-# CAS 2 : HDV RESSOURCES / CONSOMMABLES / ETC. (LIBELLÉ "PRIX" ABSENT)
+# CAS 1 : HDV RESSOURCES / CONSOMMABLES / ETC.
 # ────────────────────────────────────────────────────────────────────────────
 
-# Quantité - Zone de la quantité quand "Prix" n'est pas présent
-# Note : +40 pixels verticalement pour chaque position (0, 1, 2, 3)
+# Zone de la quantité (x1, x10, x100, x1000) — coordonnées de base
+# Si libellé "Prix" présent : ajouter PRIX_Y_OFFSET aux coordonnées Y
+# Décalage vertical : + PRICE_LINE_HEIGHT px par position (0, 1, 2, 3)
 COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT = (322, 476)
 COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT = (387, 498)
 
-# Prix - Zone du prix quand "Prix" n'est pas présent
-# Note : +40 pixels verticalement pour chaque position (0, 1, 2, 3)
+# Zone du prix — coordonnées de base
+# Si libellé "Prix" présent : ajouter PRIX_Y_OFFSET aux coordonnées Y
+# Décalage vertical : + PRICE_LINE_HEIGHT px par position (0, 1, 2, 3)
 COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT = (409, 472)
 COORDINATES_PRICE_ONLY_NO_PRIX_BOTTOM_RIGHT = (597, 503)
 
 
-
 # ────────────────────────────────────────────────────────────────────────────
-# CAS 3 : HDV ÉQUIPEMENT (HORS PANOPLIE)
+# CAS 2 : HDV ÉQUIPEMENT (HORS PANOPLIE)
+# Si libellé "Prix" présent : ajouter PRIX_Y_OFFSET aux coordonnées Y
 # ────────────────────────────────────────────────────────────────────────────
 
-# Libellé "Panoplie" - Zone pour détecter si l'équipement est une panoplie
+# Zone de détection du libellé "Panoplie"
 COORDINATES_LABEL_PANOPLIE_TOP_LEFT = (316, 395)
 COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT = (717, 420)
 
-
-# Quantité - Zone de la quantité pour équipement hors panoplie (doit être x1)
-# Note : Position 0 uniquement (pas de décalage)
+# Zone de la quantité pour équipement hors panoplie (toujours x1, position 0)
 COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT = (275, 465)
 COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT = (342, 490)
 
-# Prix - Zone du prix pour équipement hors panoplie
-# Note : Position 0 uniquement (pas de décalage)
+# Zone du prix pour équipement hors panoplie (position 0 uniquement)
 COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT = (409, 472)   # À CALIBRER
 COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT = (597, 503)  # À CALIBRER
 
 
-
-# Pourquoi pas de coordonnées pour l'affichage du prix ici ?
-
-
-
 # ────────────────────────────────────────────────────────────────────────────
-# CAS 4 : HDV ÉQUIPEMENT (PANOPLIE)
+# CAS 3 : HDV ÉQUIPEMENT (PANOPLIE)
+# Si libellé "Prix" présent : ajouter PRIX_Y_OFFSET aux coordonnées Y
 # ────────────────────────────────────────────────────────────────────────────
 
-# Quantité - Zone de la quantité pour équipement panoplie (doit être x1)
-# Note : Position 0 uniquement (pas de décalage)
+# Zone de la quantité pour équipement panoplie (toujours x1, position 0)
 COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT = (274, 486)
 COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT = (342, 510)
 
-# Prix - Zone du prix pour équipement panoplie
-# Note : Position 0 uniquement (pas de décalage)
+# Zone du prix pour équipement panoplie (position 0 uniquement)
 COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT = (377, 476)
 COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT = (552, 519)
 
@@ -199,6 +180,9 @@ ITEM_HEIGHT = 73
 
 # Hauteur entre deux lignes de prix/quantité (x1 → x10 → x100 → x1000)
 PRICE_LINE_HEIGHT = 40
+
+# Décalage vertical appliqué quand le libellé "Prix" est présent dans l'interface HDV
+PRIX_Y_OFFSET = 10  # À CALIBRER
 
 
 # # Coordonnées sur la map dofus des HDVs (Pandala)

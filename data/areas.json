@@ -1,0 +1,337 @@
+{
+  "0": {
+    "id": 0,
+    "name": "Amakna",
+    "superAreaId": 0
+  },
+  "1": {
+    "id": 1,
+    "name": "Île des Wabbits",
+    "superAreaId": 0
+  },
+  "2": {
+    "id": 2,
+    "name": "Île de Moon",
+    "superAreaId": 0
+  },
+  "3": {
+    "id": 3,
+    "name": "Prison de Madrestam",
+    "superAreaId": 0
+  },
+  "5": {
+    "id": 5,
+    "name": "Baie de Sufokia",
+    "superAreaId": 0
+  },
+  "6": {
+    "id": 6,
+    "name": "Forêt des Abraknydes",
+    "superAreaId": 0
+  },
+  "7": {
+    "id": 7,
+    "name": "Bonta",
+    "superAreaId": 0
+  },
+  "8": {
+    "id": 8,
+    "name": "Plaines de Cania",
+    "superAreaId": 0
+  },
+  "11": {
+    "id": 11,
+    "name": "Brâkmar",
+    "superAreaId": 0
+  },
+  "12": {
+    "id": 12,
+    "name": "Landes de Sidimote",
+    "superAreaId": 0
+  },
+  "15": {
+    "id": 15,
+    "name": "Foire du Trool",
+    "superAreaId": 0
+  },
+  "18": {
+    "id": 18,
+    "name": "Astrub",
+    "superAreaId": 0
+  },
+  "26": {
+    "id": 26,
+    "name": "Labyrinthe du Dragon Cochon",
+    "superAreaId": 0
+  },
+  "28": {
+    "id": 28,
+    "name": "Montagne des Koalaks",
+    "superAreaId": 0
+  },
+  "30": {
+    "id": 30,
+    "name": "Île du Minotoror",
+    "superAreaId": 0
+  },
+  "42": {
+    "id": 42,
+    "name": "Île de Nowel",
+    "superAreaId": 0
+  },
+  "45": {
+    "id": 45,
+    "name": "Incarnam",
+    "superAreaId": 3
+  },
+  "46": {
+    "id": 46,
+    "name": "Île d'Otomaï",
+    "superAreaId": 0
+  },
+  "48": {
+    "id": 48,
+    "name": "Île de Frigost",
+    "superAreaId": 0
+  },
+  "49": {
+    "id": 49,
+    "name": "Île de Sakaï",
+    "superAreaId": 0
+  },
+  "50": {
+    "id": 50,
+    "name": "Archipel de Vulkania",
+    "superAreaId": 0
+  },
+  "51": {
+    "id": 51,
+    "name": "Îlots de la mer d'Asse",
+    "superAreaId": 0
+  },
+  "52": {
+    "id": 52,
+    "name": "Convention",
+    "superAreaId": 4
+  },
+  "53": {
+    "id": 53,
+    "name": "Enutrosor",
+    "superAreaId": 5
+  },
+  "54": {
+    "id": 54,
+    "name": "Srambad",
+    "superAreaId": 5
+  },
+  "55": {
+    "id": 55,
+    "name": "Xélorium",
+    "superAreaId": 5
+  },
+  "56": {
+    "id": 56,
+    "name": "Zone privée",
+    "superAreaId": 0
+  },
+  "57": {
+    "id": 57,
+    "name": "Île de Rok",
+    "superAreaId": 0
+  },
+  "58": {
+    "id": 58,
+    "name": "Havres-Sacs",
+    "superAreaId": 0
+  },
+  "59": {
+    "id": 59,
+    "name": "Ecaflipus",
+    "superAreaId": 5
+  },
+  "60": {
+    "id": 60,
+    "name": "Domaine des fils d'Ecaflip",
+    "superAreaId": 5
+  },
+  "61": {
+    "id": 61,
+    "name": "Saharach",
+    "superAreaId": 0
+  },
+  "62": {
+    "id": 62,
+    "name": "Nimotopia",
+    "superAreaId": 0
+  },
+  "63": {
+    "id": 63,
+    "name": "Profondeurs de Sufokia",
+    "superAreaId": 0
+  },
+  "64": {
+    "id": 64,
+    "name": "Externam",
+    "superAreaId": 8
+  },
+  "65": {
+    "id": 65,
+    "name": "Dimension Obscure",
+    "superAreaId": 9
+  },
+  "66": {
+    "id": 66,
+    "name": "Mode tactique",
+    "superAreaId": 0
+  },
+  "67": {
+    "id": 67,
+    "name": "Ingloriom",
+    "superAreaId": 5
+  },
+  "68": {
+    "id": 68,
+    "name": "Rêve du Monde des Douze",
+    "superAreaId": 6
+  },
+  "69": {
+    "id": 69,
+    "name": "Archipel des Écailles",
+    "superAreaId": 0
+  },
+  "70": {
+    "id": 70,
+    "name": "Destin du Monde",
+    "superAreaId": 0
+  },
+  "71": {
+    "id": 71,
+    "name": "Île de Pwâk",
+    "superAreaId": 0
+  },
+  "72": {
+    "id": 72,
+    "name": "Anomalies temporelles",
+    "superAreaId": 0
+  },
+  "73": {
+    "id": 73,
+    "name": "Horloge de Xélor",
+    "superAreaId": 5
+  },
+  "74": {
+    "id": 74,
+    "name": "Eliocalypse",
+    "superAreaId": 0
+  },
+  "75": {
+    "id": 75,
+    "name": "Profondeurs d'Astrub",
+    "superAreaId": 0
+  },
+  "76": {
+    "id": 76,
+    "name": "Éther",
+    "superAreaId": 7
+  },
+  "77": {
+    "id": 77,
+    "name": "Centre du Monde",
+    "superAreaId": 0
+  },
+  "78": {
+    "id": 78,
+    "name": "Île de Pandala",
+    "superAreaId": 0
+  },
+  "79": {
+    "id": 79,
+    "name": "Île de Grobe",
+    "superAreaId": 0
+  },
+  "80": {
+    "id": 80,
+    "name": "Plan Astral",
+    "superAreaId": 6
+  },
+  "81": {
+    "id": 81,
+    "name": "Fleuve vers Externam",
+    "superAreaId": 6
+  },
+  "82": {
+    "id": 82,
+    "name": "Wukin et Wukang",
+    "superAreaId": 6
+  },
+  "83": {
+    "id": 83,
+    "name": "Gelaxième dimension",
+    "superAreaId": 9
+  },
+  "84": {
+    "id": 84,
+    "name": "Dimensions des Cavaliers",
+    "superAreaId": 9
+  },
+  "85": {
+    "id": 85,
+    "name": "Dimension Abyssale",
+    "superAreaId": 9
+  },
+  "86": {
+    "id": 86,
+    "name": "Atoll des Possédés",
+    "superAreaId": 0
+  },
+  "87": {
+    "id": 87,
+    "name": "Dimension Éphémère",
+    "superAreaId": 10
+  },
+  "88": {
+    "id": 88,
+    "name": "Cauchemar des Ravageurs",
+    "superAreaId": 6
+  },
+  "91": {
+    "id": 91,
+    "name": "Tour des enclos",
+    "superAreaId": 0
+  },
+  "92": {
+    "id": 92,
+    "name": "Forêt Maléfique",
+    "superAreaId": 0
+  },
+  "93": {
+    "id": 93,
+    "name": "Archipel de Valonia",
+    "superAreaId": 0
+  },
+  "95": {
+    "id": 95,
+    "name": "Îlots de la mer Kantil",
+    "superAreaId": 0
+  },
+  "96": {
+    "id": 96,
+    "name": "Osavora",
+    "superAreaId": 5
+  },
+  "97": {
+    "id": 97,
+    "name": "Expéditions",
+    "superAreaId": 0
+  },
+  "99": {
+    "id": 99,
+    "name": "Hormonde",
+    "superAreaId": 6
+  },
+  "100": {
+    "id": 100,
+    "name": "Arènes de Goultard",
+    "superAreaId": 6
+  }
+}

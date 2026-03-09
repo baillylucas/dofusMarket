@@ -19,8 +19,6 @@ from user_config import (
     COORDINATES_RESSOURCE_NAME_BOTTOM_RIGHT,
     COORDINATES_RESOURCE_ITEM_TOP_LEFT,
     COORDINATES_RESOURCE_ITEM_BOTTOM_RIGHT,
-    COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT,
-    COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT,
     COORDINATES_LABEL_PRIX_TOP_LEFT,
     COORDINATES_LABEL_PRIX_BOTTOM_RIGHT,
     COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT,
@@ -31,8 +29,6 @@ from user_config import (
     COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT,
     COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT,
     COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT,
-    COORDINATES_PRICE_ONLY_TOP_LEFT,
-    COORDINATES_PRICE_ONLY_BOTTOM_RIGHT,
     COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT,
     COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT,
     COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT,
@@ -78,6 +74,7 @@ from user_config import (
     COORDINATES_MAP_HDV_AMES,
     ITEM_HEIGHT,
     PRICE_LINE_HEIGHT,
+    PRIX_Y_OFFSET,
     # --- Scraper XP Familier : vérification de possession (vue HDV) ---
     COORDINATES_HDV_OWNED_INVENTORY_TOP_LEFT,
     COORDINATES_HDV_OWNED_INVENTORY_BOTTOM_RIGHT,
@@ -253,7 +250,11 @@ L_TYPES_CORDONNIER = [
     "Ceinture"
 ]
 
-
+L_TYPES_ELEVEUR = [
+    "Carburant d'enclos",
+    "Makina",
+    "Filet de capture",
+] 
 
 # --- Créatures --- #
 L_SUPERTYPES_CREATURES = [
@@ -263,7 +264,8 @@ L_SUPERTYPES_CREATURES = [
 ]
 L_TYPES_CREATURES = [
     "Familier", "Certificat de Dragodinde", "Objet d'élevage", "Caution",
-    "Nourriture pour familier", "Harnachements de Muldo"
+    "Nourriture pour familier", "Harnachements de Muldo", "Carburant d'enclos",
+    "Filet de capture", "Makina"
 ]
 
 # --- Forgemagie --- #

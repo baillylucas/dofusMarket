@@ -536,12 +536,6 @@ class Automator:
 
         # Envoyer enter
         keyboard.press_and_release('enter')
-        time.sleep(1)  # Attendre que le dialogue apparaisse
-
-        # Cliquer sur le bouton de confirmation
-        print("Clic sur le bouton de confirmation du travel...")
-        confirm_zone = Rectangle(COORDINATES_CONFIRM_POST_TRAVEL_TOP_LEFT, COORDINATES_CONFIRM_POST_TRAVEL_BOTTOM_RIGHT)
-        self.smooth_move_and_click(confirm_zone)
         time.sleep(20)  # Attendre la téléportation
 
         # Si un point d'entrée est défini (pour cosmétiques et âmes), cliquer dessus d'abord
@@ -593,8 +587,20 @@ class Automator:
 
     def smooth_move_and_click(self, rect: Rectangle, nb_click: int = 1) -> None:
         start_x, start_y = pyautogui.position()
-        end_x = random.randint(rect.top_left[0], rect.bottom_right[0])
-        end_y = random.randint(rect.top_left[1], rect.bottom_right[1])
+
+        # Réduire la zone cliquable de 10px de chaque côté pour éviter les clics en bordure
+        MARGIN = 10
+        tl_x = rect.top_left[0] + MARGIN
+        tl_y = rect.top_left[1] + MARGIN
+        br_x = rect.bottom_right[0] - MARGIN
+        br_y = rect.bottom_right[1] - MARGIN
+        # Si la marge rend la zone invalide, utiliser la zone d'origine
+        if tl_x >= br_x or tl_y >= br_y:
+            tl_x, tl_y = rect.top_left
+            br_x, br_y = rect.bottom_right
+
+        end_x = random.randint(tl_x, br_x)
+        end_y = random.randint(tl_y, br_y)
         
         control_x = start_x + (end_x - start_x) * random.uniform(0.4, 0.6)
         control_y = start_y + (end_y - start_y) * random.uniform(0.2, 0.8)
@@ -787,16 +793,17 @@ class Automator:
         # print(f"Aucune correspondance suffisante trouvée (meilleur: {best_similarity*100:.1f}%)")
         return None
 
-    def is_panoplie(self, item_position: int) -> bool:
+    def is_panoplie(self, item_position: int, y_offset: int = 0) -> bool:
         """
         Détecte si l'item sélectionné est une panoplie en analysant le label.
         Retourne True si du texte (peu importe lequel) est détecté, False si vide.
+        y_offset : décalage vertical appliqué quand le libellé "Prix" est présent.
         """
         label_zone = Rectangle(
             (COORDINATES_LABEL_PANOPLIE_TOP_LEFT[0],
-            COORDINATES_LABEL_PANOPLIE_TOP_LEFT[1]),
+            COORDINATES_LABEL_PANOPLIE_TOP_LEFT[1] + y_offset),
             (COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT[0],
-            COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT[1])
+            COORDINATES_LABEL_PANOPLIE_BOTTOM_RIGHT[1] + y_offset)
         )
 
         screenshot_path = self.processor.take_screenshot(label_zone)
@@ -895,23 +902,29 @@ class Automator:
             self.smooth_move_and_click(self.config.resource_item, nb_click=1)
         
         time.sleep(0.6)
-        
+
+        # Détecter si le libellé "Prix" est présent (commun équipements et ressources)
+        prix_label_present = self.is_prix_label_present()
+        y_offset = PRIX_Y_OFFSET if prix_label_present else 0
+        if self.processor.debug:
+            print(f"    [DEBUG prix label] {'présent' if prix_label_present else 'absent'} → y_offset={y_offset}px")
+
         # Traitement pour les équipements
         if is_equipment:
-            # Détecter si c'est une panoplie
-            panoplie = self.is_panoplie(item_position)
+            # Détecter si c'est une panoplie (avec offset si Prix présent)
+            panoplie = self.is_panoplie(item_position, y_offset=y_offset)
 
-            # Choisir les bonnes coordonnées selon panoplie ou non
+            # Choisir les bonnes coordonnées selon panoplie ou non, avec offset Y
             if panoplie:
-                quantity_coords_top_left = COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT
-                quantity_coords_bottom_right = COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT
-                price_coords_top_left = COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT
-                price_coords_bottom_right = COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT
+                quantity_coords_top_left = (COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT[0], COORDINATES_QUANTITY_PANOPLIE_TOP_LEFT[1] + y_offset)
+                quantity_coords_bottom_right = (COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT[0], COORDINATES_QUANTITY_PANOPLIE_BOTTOM_RIGHT[1] + y_offset)
+                price_coords_top_left = (COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT[0], COORDINATES_PRICE_ONLY_FOR_PANOPLIE_TOP_LEFT[1] + y_offset)
+                price_coords_bottom_right = (COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT[0], COORDINATES_PRICE_ONLY_FOR_PANOPLIE_BOTTOM_RIGHT[1] + y_offset)
             else:
-                quantity_coords_top_left = COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT
-                quantity_coords_bottom_right = COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT
-                price_coords_top_left = COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT
-                price_coords_bottom_right = COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT
+                quantity_coords_top_left = (COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT[0], COORDINATES_QUANTITY_EQUIPEMENT_TOP_LEFT[1] + y_offset)
+                quantity_coords_bottom_right = (COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT[0], COORDINATES_QUANTITY_EQUIPEMENT_BOTTOM_RIGHT[1] + y_offset)
+                price_coords_top_left = (COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT[0], COORDINATES_PRICE_ONLY_EQUIPEMENT_TOP_LEFT[1] + y_offset)
+                price_coords_bottom_right = (COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT[0], COORDINATES_PRICE_ONLY_EQUIPEMENT_BOTTOM_RIGHT[1] + y_offset)
 
             # 1. Valider la quantité (doit être x1 pour les équipements)
             quantity_zone = Rectangle(
@@ -965,20 +978,11 @@ class Automator:
         else:
             detected_data = []  # Liste de tuples (quantity, price)
 
-            # Détecter si le libellé "Prix" est présent pour choisir les bonnes coordonnées
-            prix_label_present = self.is_prix_label_present()
-
-            # Choisir les coordonnées selon la présence du libellé "Prix"
-            if prix_label_present:
-                quantity_coords_top_left = COORDINATES_QUANTITY_RESSOURCES_TOP_LEFT
-                quantity_coords_bottom_right = COORDINATES_QUANTITY_RESSOURCES_BOTTOM_RIGHT
-                price_coords_top_left = COORDINATES_PRICE_ONLY_TOP_LEFT
-                price_coords_bottom_right = COORDINATES_PRICE_ONLY_BOTTOM_RIGHT
-            else:
-                quantity_coords_top_left = COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT
-                quantity_coords_bottom_right = COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT
-                price_coords_top_left = COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT
-                price_coords_bottom_right = COORDINATES_PRICE_ONLY_NO_PRIX_BOTTOM_RIGHT
+            # Coordonnées de base (libellé "Prix" absent) + offset Y si "Prix" présent
+            quantity_coords_top_left = (COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT[0], COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_TOP_LEFT[1] + y_offset)
+            quantity_coords_bottom_right = (COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT[0], COORDINATES_QUANTITY_RESSOURCES_NO_PRIX_BOTTOM_RIGHT[1] + y_offset)
+            price_coords_top_left = (COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT[0], COORDINATES_PRICE_ONLY_NO_PRIX_TOP_LEFT[1] + y_offset)
+            price_coords_bottom_right = (COORDINATES_PRICE_ONLY_NO_PRIX_BOTTOM_RIGHT[0], COORDINATES_PRICE_ONLY_NO_PRIX_BOTTOM_RIGHT[1] + y_offset)
 
             # Récupérer les prix aux positions 0, 1, 2, 3 en validant d'abord les quantités
             for position in range(4):
