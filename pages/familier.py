@@ -126,6 +126,10 @@ if 'fam_notification_shown' not in st.session_state:
     st.session_state.fam_notification_shown = False
 if 'fam_user_groups' not in st.session_state:
     st.session_state.fam_user_groups = {}
+if 'fam_quantity_mode' not in st.session_state:
+    st.session_state.fam_quantity_mode = "Adaptée au niveau cible"
+if 'fam_last_levels' not in st.session_state:
+    st.session_state.fam_last_levels = (1, 100)
 
 
 # --- Calcul des prix ---
@@ -140,62 +144,33 @@ def get_latest_entry(dico):
 
 @lru_cache(maxsize=10000)
 def calculate_optimal_price_cached(prices_tuple, target_quantity):
-    MAX_PURCHASES = 25
-
+    """Greedy par prix unitaire : prend le lot le moins cher par unité en premier (max 25 par lot).
+    Fallback sur le plus grand lot sans limite si un résidu persiste.
+    Retourne (prix, fallback_used)."""
     if not prices_tuple:
-        return None
-
-    available_quantities = dict(prices_tuple)
-
-    if not available_quantities:
-        return None
-
-    min_flat_price = float('inf')
-
-    for qty, price in available_quantities.items():
-        if qty >= target_quantity:
-            min_flat_price = min(min_flat_price, price)
-
-    for qty, price in available_quantities.items():
-        if qty > 0:
-            times_needed = (target_quantity + qty - 1) // qty
-            if times_needed <= MAX_PURCHASES:
-                total_price = times_needed * price
-                min_flat_price = min(min_flat_price, total_price)
-
-    sorted_qtys = sorted([(qty, price) for qty, price in available_quantities.items()], reverse=True)
-
-    def generate_combinations(remaining, index):
-        if remaining == 0:
-            yield []
-            return
-        if index >= len(sorted_qtys):
-            return
-        qty, price = sorted_qtys[index]
-        max_buy = min(MAX_PURCHASES, remaining // qty) if qty > 0 else 0
-        for count in range(max_buy + 1):
-            for sub_combo in generate_combinations(remaining - count * qty, index + 1):
-                yield [(qty, price, count)] + sub_combo
-
-    for combo in generate_combinations(target_quantity, 0):
-        total_cost = sum(count * price for qty, price, count in combo)
-        min_flat_price = min(min_flat_price, total_cost)
-
-    if min_flat_price == float('inf'):
-        max_qty = max(available_quantities.keys())
-        max_qty_price = available_quantities[max_qty]
-        times_needed = (target_quantity + max_qty - 1) // max_qty
-        min_flat_price = times_needed * max_qty_price
-
-    if min_flat_price == float('inf'):
-        return None
-
-    return int(round(min_flat_price))
+        return None, False
+    sorted_by_unit = sorted(prices_tuple, key=lambda x: x[1] / x[0])
+    remaining = target_quantity
+    total_cost = 0
+    for qty, price in sorted_by_unit:
+        if remaining <= 0:
+            break
+        count = min(25, remaining // qty)
+        total_cost += count * price
+        remaining -= count * qty
+    fallback_used = False
+    if remaining > 0:
+        fallback_used = True
+        max_lot = max(prices_tuple, key=lambda x: x[0])
+        times = (remaining + max_lot[0] - 1) // max_lot[0]
+        total_cost += times * max_lot[1]
+    return int(round(total_cost)), fallback_used
 
 
 def calculate_optimal_price(prices_dict, target_quantity, allowed_quantities=None):
+    """Retourne (prix, fallback_used) ou (None, False)."""
     if not prices_dict:
-        return None
+        return None, False
 
     valid_prices = []
     for qty_str, price in prices_dict.items():
@@ -211,7 +186,7 @@ def calculate_optimal_price(prices_dict, target_quantity, allowed_quantities=Non
                 continue
 
     if not valid_prices:
-        return None
+        return None, False
 
     prices_tuple = tuple(sorted(valid_prices))
     return calculate_optimal_price_cached(prices_tuple, target_quantity)
@@ -233,7 +208,7 @@ def calculate_craft_cost_recursive(data, item_id, quantity, memo=None, is_root=T
     item = data[item_id_str]
 
     prix_hdv_dict = get_latest_entry(item.get("prix_hdv", {})) or {}
-    prix_hdv = calculate_optimal_price(prix_hdv_dict, quantity)
+    prix_hdv, _ = calculate_optimal_price(prix_hdv_dict, quantity)
 
     if not item.get('is_craft') or not item.get('ingredients'):
         result = (prix_hdv, 'HDV') if prix_hdv is not None else (None, None)
@@ -303,19 +278,33 @@ with st.sidebar:
     if pet_level_target <= pet_level_current:
         st.warning("Le niveau souhaité doit être supérieur au niveau actuel.")
 
-    # Quantité Achat/Craft
-    quantity = st.number_input(
-        "Quantité Achat/Craft",
-        min_value=1,
-        max_value=999999,
-        value=st.session_state.fam_last_quantity,
-        step=1,
-        key="fam_quantity"
+    # Mode de quantité
+    quantity_mode = st.radio(
+        "Mode quantité",
+        ["Fixe", "Adaptée au niveau cible"],
+        index=0 if st.session_state.fam_quantity_mode == "Fixe" else 1,
+        horizontal=True,
+        key="fam_quantity_mode_radio"
     )
-
-    if st.session_state.fam_last_quantity != quantity:
+    if quantity_mode != st.session_state.fam_quantity_mode:
+        st.session_state.fam_quantity_mode = quantity_mode
         st.session_state.fam_craft_cache = {}
-        st.session_state.fam_last_quantity = quantity
+
+    # Quantité Achat/Craft (uniquement en mode Fixe)
+    if quantity_mode == "Fixe":
+        quantity = st.number_input(
+            "Quantité Achat/Craft",
+            min_value=1,
+            max_value=999999,
+            value=st.session_state.fam_last_quantity,
+            step=1,
+            key="fam_quantity"
+        )
+        if st.session_state.fam_last_quantity != quantity:
+            st.session_state.fam_craft_cache = {}
+            st.session_state.fam_last_quantity = quantity
+    else:
+        quantity = st.session_state.fam_last_quantity  # valeur de repli non utilisée
 
     # Quantités HDV autorisées
     allowed_hdv_qtys = st.multiselect(
@@ -346,28 +335,64 @@ with st.sidebar:
     craft_filter = st.radio("Type d'item", ["Tous", "Craftables uniquement", "Non craftables uniquement"], key="fam_craft_filter")
 
     all_sources = sorted(set(source for sources_list in xp_sources.values() for source in sources_list))
-    xp_source_filter = st.multiselect("📊 Source XP", options=all_sources, key="fam_xp_source")
+    default_xp_sources = ["pet_xp_dofusDB"] if "pet_xp_dofusDB" in all_sources else []
+    xp_source_filter = st.multiselect("📊 Source XP", options=all_sources, default=default_xp_sources, key="fam_xp_source")
 
     xp_filter = st.radio("📚 XP", ["Tous", "XP connu uniquement", "XP inconnu uniquement"], index=1, key="fam_xp_filter")
+
+    cout_familier = st.number_input("🐾 Coût familier", min_value=0, value=500000, step=100000, help="Valeur (K)", key="fam_cout_familier")
+    revente = st.number_input("💰 Revente", min_value=0, value=5500000, step=100000, help="Valeur (K)", key="fam_revente")
+    benefice_min = st.number_input("📈 Bénéfice min (%)", value=15, step=1, key="fam_benefice_min")
 
     max_item_level = max((item.get('level', 0) for item in data.values()), default=200)
     level_range = st.slider("Niveau item", 1, max_item_level, (1, max_item_level), key="fam_level_range")
 
 
-# Pré-calculer tous les crafts
-if not st.session_state.fam_craft_cache:
+# Invalider le cache si les niveaux ont changé en mode adaptatif
+current_levels = (pet_level_current, pet_level_target)
+if quantity_mode == "Adaptée au niveau cible" and st.session_state.fam_last_levels != current_levels:
+    st.session_state.fam_craft_cache = {}
+    st.session_state.fam_last_levels = current_levels
+
+# Pré-calculer tous les crafts (uniquement en mode Fixe, car en mode adaptatif la quantité est différente par item)
+if quantity_mode == "Fixe" and not st.session_state.fam_craft_cache:
     with st.spinner(f"Calcul des coûts de craft pour la quantité {quantity}..."):
         precalculate_all_crafts(data, quantity)
 
 # --- Construction du DataFrame ---
 rows = []
 for item_id, item in data.items():
+    # XP et unités nécessaires (calculés en premier pour déterminer effective_qty)
+    item_int_id = item.get('id')
+    xp_per_unit = None
+    units_needed = None
+
+    if item_int_id in xp_data:
+        xp_sources_dict = xp_data[item_int_id]
+        if xp_source_filter:
+            xp_per_unit = next((v for s, v in xp_sources_dict.items() if s in xp_source_filter), None)
+        else:
+            xp_per_unit = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
+
+        if xp_per_unit is not None and xp_per_unit > 0:
+            if (level_xp and pet_level_current in level_xp and pet_level_target in level_xp
+                    and pet_level_target > pet_level_current):
+                xp_needed_val = level_xp[pet_level_target] - level_xp[pet_level_current]
+                if xp_needed_val > 0:
+                    units_needed = ceil(xp_needed_val / xp_per_unit)
+
+    # Quantité effective selon le mode
+    if quantity_mode == "Adaptée au niveau cible" and units_needed is not None:
+        effective_qty = units_needed
+    else:
+        effective_qty = quantity
+
     prix_hdv_dict = get_latest_entry(item.get("prix_hdv", {})) or {}
-    prix_val = calculate_optimal_price(prix_hdv_dict, quantity, allowed_hdv_qtys_set)
+    prix_val, prix_fallback = calculate_optimal_price(prix_hdv_dict, effective_qty, allowed_hdv_qtys_set)
 
     is_craftable = bool(item.get('is_craft') and item.get('ingredients'))
     if is_craftable:
-        craft_val, _ = calculate_craft_cost_recursive(data, item.get('id'), quantity, is_root=True)
+        craft_val, _ = calculate_craft_cost_recursive(data, item.get('id'), effective_qty, is_root=True)
     else:
         craft_val = None
 
@@ -381,31 +406,19 @@ for item_id, item in data.items():
     else:
         best_price = None
 
-    best_price_per_u = (best_price // quantity) if best_price is not None else None
+    best_price_per_u = (best_price // effective_qty) if best_price is not None else None
 
-    # XP
-    item_int_id = item.get('id')
-    xp_per_unit = None
+    # XP avec la quantité effective
     xp_value = None
     xp_per_10kk = None
-    units_needed = None
-
-    if item_int_id in xp_data:
-        xp_sources_dict = xp_data[item_int_id]
-        if xp_source_filter:
-            xp_per_unit = next((v for s, v in xp_sources_dict.items() if s in xp_source_filter), None)
+    if xp_per_unit is not None:
+        if quantity_mode == "Adaptée au niveau cible":
+            xp_value = xp_per_unit
         else:
-            xp_per_unit = next(iter(xp_sources_dict.values())) if xp_sources_dict else None
-
-        if xp_per_unit is not None:
-            xp_value = xp_per_unit * quantity
-            if best_price is not None and best_price > 0:
-                xp_per_10kk = (xp_value / best_price) * 10000
-            if (level_xp and pet_level_current in level_xp and pet_level_target in level_xp
-                    and xp_per_unit > 0 and pet_level_target > pet_level_current):
-                xp_needed_val = level_xp[pet_level_target] - level_xp[pet_level_current]
-                if xp_needed_val > 0:
-                    units_needed = ceil(xp_needed_val / xp_per_unit)
+            xp_value = xp_per_unit * effective_qty
+        if best_price is not None and best_price > 0:
+            xp_total = xp_per_unit * effective_qty
+            xp_per_10kk = (xp_total / best_price) * 10000
 
     rows.append({
         "id": item.get("id"),
@@ -414,12 +427,16 @@ for item_id, item in data.items():
         "level": item.get("level"),
         "is_craft": is_craftable,
         "prix_hdv": prix_val,
+        "fallback": "⚠️" if prix_fallback and prix_val == best_price else None,
         "cout_craft": craft_val,
         "meilleur_prix": best_price,
         "meilleur_prix_u": best_price_per_u,
+        "benefice": round((revente - (best_price + cout_familier)) / (best_price + cout_familier) * 100, 1) if best_price and best_price > 0 else None,
+        "prix_u_max": int((revente / (1 + benefice_min / 100) - cout_familier) / effective_qty) if effective_qty and benefice_min is not None else None,
         "xp": round(xp_value, 2) if xp_value is not None else None,
         "xp_per_10kk": round(xp_per_10kk, 1) if xp_per_10kk is not None else None,
         "units": units_needed,
+        "effective_qty": effective_qty,
         "_has_xp": xp_per_unit is not None,
         "_item_id": item_id
     })
@@ -448,6 +465,8 @@ if selected_group_filters:
     group_items = get_items_in_groups(selected_group_filters)
     df = df[df["id"].isin(group_items)]
 df = df[(df["level"] >= level_range[0]) & (df["level"] <= level_range[1])]
+if benefice_min is not None:
+    df = df[df["benefice"].notna() & (df["benefice"] >= benefice_min)]
 
 df_display = df.reset_index(drop=True)
 
@@ -458,105 +477,204 @@ def _get_selected_ids(event, df):
     return []
 
 
-# --- Boutons d'action ---
-if st.session_state.fam_user_groups:
-    group_options_action = {gid: gdata['name'] for gid, gdata in st.session_state.fam_user_groups.items()}
-    if 'fam_selected_group_for_action' not in st.session_state:
-        st.session_state.fam_selected_group_for_action = list(group_options_action.keys())[0] if group_options_action else None
-else:
-    group_options_action = {}
+tab_nourritures, tab_definitions = st.tabs(["🥩 Nourritures", "📖 Définition des indicateurs"])
 
-col_refresh, col_group_select, col_group_add, col_group_remove, col_scrapper, col_display_count = st.columns(
-    [0.4, 1.2, 0.6, 0.6, 0.8, 2.0]
-)
+with tab_definitions:
+    st.markdown("""
+### Prix HDV
+Le prix HDV affiché est le **coût greedy** pour acquérir la quantité demandée en achetant sur l'Hôtel des Ventes.
 
-with col_refresh:
-    if st.button("🔄", help="Rafraîchir", key="fam_refresh"):
-        st.cache_data.clear()
-        st.session_state.fam_craft_cache = {}
-        calculate_optimal_price_cached.cache_clear()
-        st.rerun()
+Le HDV propose 4 tailles de lot : x1, x10, x100, x1000. L'algorithme trie les lots par **prix unitaire croissant** (moins cher par unité en premier), puis achète autant que possible de chaque lot (max 25 achats par taille de lot) :
 
-with col_group_select:
-    if group_options_action:
-        selected_group_action = st.selectbox(
-            "Groupe",
-            options=list(group_options_action.keys()),
-            format_func=lambda x: group_options_action[x],
-            index=list(group_options_action.keys()).index(st.session_state.fam_selected_group_for_action)
-                  if st.session_state.fam_selected_group_for_action in group_options_action else 0,
-            key="fam_group_action_select_widget",
-            label_visibility="collapsed",
-            on_change=lambda: st.session_state.update(
-                {'fam_selected_group_for_action': st.session_state.fam_group_action_select_widget}
-            )
-        )
+1. Pour chaque taille de lot (du moins cher au plus cher par unité) : achète `min(25, restant // taille_lot)` fois
+2. Si un résidu subsiste après tous les lots : **fallback** sur le plus grand lot disponible, sans limite d'achats
+
+> Exemple pour 158 unités avec x1=1 096K, x10=10 994K, x100=325 000K :
+> - Prix unitaires : x1=1 096, x10=1 099, x100=3 250 → ordre : x1 → x10 → x100
+> - 25 × x1 = 25 unités, restant = 133
+> - 13 × x10 = 130 unités, restant = 3
+> - 3 × x1... déjà épuisé → fallback x100 × 1 = 325 000K
+>
+> *Note : l'algorithme greedy peut laisser un résidu si x1 est épuisé avant x10.*
+
+---
+
+### Coût Craft
+Le coût craft est calculé **récursivement** sur l'arbre d'ingrédients.
+
+Pour chaque ingrédient, la quantité totale nécessaire est `quantité_recette × quantité_demandée`. Son coût est ensuite résolu de deux façons :
+- S'il est **non craftable** : prix HDV optimal (même algorithme que ci-dessus)
+- S'il est **craftable** : comparaison craft vs HDV, on prend le **moins cher**
+
+La quantité d'ingrédient est passée en bloc au calcul HDV — le greedy cherche donc le meilleur achat pour l'ensemble, ce qui favorise naturellement les gros lots (x1000 pour 20 000 unités = 20 achats).
+
+> Exemple : crafter 5 000× A qui nécessite 4× B
+> → `calculate_optimal_price(B, 20 000)` → 20 × x1000
+
+---
+
+### XP / 10kk
+Ratio d'efficacité : **combien d'XP familier on obtient par 10 000 000 kamas dépensés**.
+
+```
+XP/10kk = (XP_par_unité × quantité) / meilleur_prix × 10 000
+```
+
+Plus ce chiffre est élevé, plus la nourriture est rentable en termes d'XP par kama investi.
+
+---
+
+### Unités nécessaires
+Nombre d'unités à nourrir pour passer du **niveau actuel** au **niveau souhaité** (configurables dans la sidebar).
+
+```
+unités = ceil((XP_cumulatif_niveau_cible - XP_cumulatif_niveau_actuel) / XP_par_unité)
+```
+
+---
+
+### Meill. Prix / Meill. Prix/u
+**Meill. Prix** = `min(Prix HDV, Coût Craft)` — le moins cher des deux options pour acquérir la quantité demandée.
+
+**Meill. Prix/u** = `Meill. Prix / quantité` — coût par unité individuelle (divisé par la quantité fixe saisie, indépendamment du mode adaptatif).
+
+---
+
+### ⚠️ Fallback HDV
+Indique que le calcul du Prix HDV a dû recourir au **fallback** (achat d'un lot en excès) parce qu'un résidu non divisible par les tailles de lots disponibles subsistait après l'étape greedy.
+
+Le ⚠️ n'est affiché que si c'est le **Prix HDV** (et non le Coût Craft) qui est retenu comme Meill. Prix — car dans le cas contraire le fallback n'impacte pas le prix affiché.
+
+---
+
+### Bénéfice
+Marge bénéficiaire en % entre le prix de revente et le coût total d'acquisition (Meill. Prix + Coût familier).
+
+```
+Bénéfice (%) = (Revente - (Meill. Prix + Coût familier)) / (Meill. Prix + Coût familier) × 100
+```
+
+---
+
+### Prix/u Max
+Prix unitaire maximum qu'une ressource ne doit pas dépasser pour satisfaire le **Bénéfice min** configuré.
+
+```
+Prix/u Max = (Revente / (1 + Bénéfice_min / 100) - Coût familier) / quantité_effective
+```
+
+Si **Meill. Prix/u ≤ Prix/u Max**, la ressource satisfait le seuil de rentabilité.
+
+---
+
+### Revente & Coût familier
+- **Revente** : prix de vente HDV du familier une fois nourri (en K). Paramétrable dans la sidebar.
+- **Coût familier** : coût fixe additionnel à intégrer dans le calcul (achat du familier nu, taxes, etc.). S'ajoute à Meill. Prix dans le calcul du Bénéfice et du Prix/u Max.
+""")
+
+with tab_nourritures:
+    # --- Boutons d'action ---
+    if st.session_state.fam_user_groups:
+        group_options_action = {gid: gdata['name'] for gid, gdata in st.session_state.fam_user_groups.items()}
+        if 'fam_selected_group_for_action' not in st.session_state:
+            st.session_state.fam_selected_group_for_action = list(group_options_action.keys())[0] if group_options_action else None
     else:
-        selected_group_action = None
-        st.info("Aucun groupe")
+        group_options_action = {}
 
-with col_group_add:
-    if st.button("➕ Groupe", help="Ajouter la sélection au groupe", key="fam_group_add"):
-        event = st.session_state.get("fam_dataframe")
-        selected_ids = _get_selected_ids(event, df_display)
-        if selected_ids and selected_group_action:
-            added = add_items_to_group(selected_group_action, selected_ids)
-            st.toast(f"✓ {added} item(s) ajouté(s) au groupe" if added > 0 else "⚠️ Item(s) déjà dans le groupe", icon="✅" if added > 0 else "ℹ️")
-        elif not selected_ids:
-            st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+    col_refresh, col_group_select, col_group_add, col_group_remove, col_scrapper, col_display_count = st.columns(
+        [0.4, 1.2, 0.6, 0.6, 0.8, 2.0]
+    )
+
+    with col_refresh:
+        if st.button("🔄", help="Rafraîchir", key="fam_refresh"):
+            st.cache_data.clear()
+            st.session_state.fam_craft_cache = {}
+            calculate_optimal_price_cached.cache_clear()
+            st.rerun()
+
+    with col_group_select:
+        if group_options_action:
+            selected_group_action = st.selectbox(
+                "Groupe",
+                options=list(group_options_action.keys()),
+                format_func=lambda x: group_options_action[x],
+                index=list(group_options_action.keys()).index(st.session_state.fam_selected_group_for_action)
+                      if st.session_state.fam_selected_group_for_action in group_options_action else 0,
+                key="fam_group_action_select_widget",
+                label_visibility="collapsed",
+                on_change=lambda: st.session_state.update(
+                    {'fam_selected_group_for_action': st.session_state.fam_group_action_select_widget}
+                )
+            )
         else:
-            st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
+            selected_group_action = None
+            st.info("Aucun groupe")
 
-with col_group_remove:
-    if st.button("➖ Groupe", help="Retirer la sélection du groupe", key="fam_group_remove"):
-        event = st.session_state.get("fam_dataframe")
-        selected_ids = _get_selected_ids(event, df_display)
-        if selected_ids and selected_group_action:
-            removed = remove_items_from_group(selected_group_action, selected_ids)
-            st.toast(f"✓ {removed} item(s) retiré(s)" if removed > 0 else "⚠️ Aucun item à retirer", icon="✅" if removed > 0 else "ℹ️")
-        elif not selected_ids:
-            st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
-        else:
-            st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
+    with col_group_add:
+        if st.button("➕ Groupe", help="Ajouter la sélection au groupe", key="fam_group_add"):
+            event = st.session_state.get("fam_dataframe")
+            selected_ids = _get_selected_ids(event, df_display)
+            if selected_ids and selected_group_action:
+                added = add_items_to_group(selected_group_action, selected_ids)
+                st.toast(f"✓ {added} item(s) ajouté(s) au groupe" if added > 0 else "⚠️ Item(s) déjà dans le groupe", icon="✅" if added > 0 else "ℹ️")
+            elif not selected_ids:
+                st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+            else:
+                st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
 
-with col_scrapper:
-    if st.button("➕ Scrapper", help="Ajouter la sélection au scrapper", key="fam_scrapper_add"):
-        event = st.session_state.get("fam_dataframe")
-        selected_ids = _get_selected_ids(event, df_display)
-        if selected_ids:
-            added = add_items_to_scrapper(selected_ids, data=data)
-            st.toast(f"✓ {added} item(s) ajouté(s) au scrapper" if added > 0 else "⚠️ Item(s) déjà dans le scrapper", icon="✅" if added > 0 else "ℹ️")
-        else:
-            st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+    with col_group_remove:
+        if st.button("➖ Groupe", help="Retirer la sélection du groupe", key="fam_group_remove"):
+            event = st.session_state.get("fam_dataframe")
+            selected_ids = _get_selected_ids(event, df_display)
+            if selected_ids and selected_group_action:
+                removed = remove_items_from_group(selected_group_action, selected_ids)
+                st.toast(f"✓ {removed} item(s) retiré(s)" if removed > 0 else "⚠️ Aucun item à retirer", icon="✅" if removed > 0 else "ℹ️")
+            elif not selected_ids:
+                st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
+            else:
+                st.toast("⚠️ Sélectionnez un groupe", icon="⚠️")
 
-with col_display_count:
-    st.markdown(f"<div style='padding-top: 10px;'><b>Affichage : {len(df_display)} / {len(data)} items</b></div>", unsafe_allow_html=True)
+    with col_scrapper:
+        if st.button("➕ Scrapper", help="Ajouter la sélection au scrapper", key="fam_scrapper_add"):
+            event = st.session_state.get("fam_dataframe")
+            selected_ids = _get_selected_ids(event, df_display)
+            if selected_ids:
+                added = add_items_to_scrapper(selected_ids, data=data)
+                st.toast(f"✓ {added} item(s) ajouté(s) au scrapper" if added > 0 else "⚠️ Item(s) déjà dans le scrapper", icon="✅" if added > 0 else "ℹ️")
+            else:
+                st.toast("⚠️ Sélectionnez des items d'abord", icon="⚠️")
 
-# --- Tableau ---
-cols_to_show = ["id", "image", "name", "level", "prix_hdv", "cout_craft", "meilleur_prix", "meilleur_prix_u", "xp", "xp_per_10kk", "units"]
-df_table = df_display[cols_to_show].copy()
+    with col_display_count:
+        st.markdown(f"<div style='padding-top: 10px;'><b>Affichage : {len(df_display)} / {len(data)} items</b></div>", unsafe_allow_html=True)
 
-event = st.dataframe(
-    df_table,
-    column_config={
-        "id": st.column_config.NumberColumn("ID", width="small"),
-        "image": st.column_config.ImageColumn("Image", width="small"),
-        "name": st.column_config.TextColumn("Ressource", width="large"),
-        "level": st.column_config.NumberColumn("Niveau", width="small"),
-        "prix_hdv": st.column_config.NumberColumn("Prix HDV", width="small", format="%d K"),
-        "cout_craft": st.column_config.NumberColumn("Coût Craft", width="small", format="%d K"),
-        "meilleur_prix": st.column_config.NumberColumn("Meill. Prix", width="small", format="%d K"),
-        "meilleur_prix_u": st.column_config.NumberColumn("Meill. Prix/u", width="small", format="%d K"),
-        "xp": st.column_config.NumberColumn("XP", width="small", format="%.2f"),
-        "xp_per_10kk": st.column_config.NumberColumn("XP/10kk", width="small", format="%.1f"),
-        "units": st.column_config.NumberColumn("Unités", width="small", format="%d"),
-    },
-    hide_index=True,
-    use_container_width=True,
-    selection_mode="multi-row",
-    on_select="rerun",
-    key="fam_dataframe"
-)
+    # --- Tableau ---
+    cols_to_show = ["id", "image", "name", "level", "prix_hdv", "fallback", "cout_craft", "meilleur_prix", "meilleur_prix_u", "benefice", "prix_u_max", "xp", "xp_per_10kk", "units"]
+    df_table = df_display[cols_to_show].copy()
+
+    event = st.dataframe(
+        df_table,
+        column_config={
+            "id": st.column_config.NumberColumn("ID", width="small"),
+            "image": st.column_config.ImageColumn("Image", width="small"),
+            "name": st.column_config.TextColumn("Ressource", width="large"),
+            "level": st.column_config.NumberColumn("Niveau", width="small"),
+            "prix_hdv": st.column_config.NumberColumn("Prix HDV", width="small", format="%d K"),
+            "fallback": st.column_config.TextColumn("", width="small", help="⚠️ Le prix HDV inclut un lot en excès (résidu non divisible par les tailles disponibles)"),
+            "cout_craft": st.column_config.NumberColumn("Coût Craft", width="small", format="%d K"),
+            "meilleur_prix": st.column_config.NumberColumn("Meill. Prix", width="small", format="%d K"),
+            "meilleur_prix_u": st.column_config.NumberColumn("Meill. Prix/u", width="small", format="%d K"),
+            "benefice": st.column_config.NumberColumn("Bénéfice", width="small", format="%.1f%%"),
+            "prix_u_max": st.column_config.NumberColumn("Prix/u Max", width="small", format="%d K"),
+            "xp": st.column_config.NumberColumn("XP/u" if quantity_mode == "Adaptée au niveau cible" else "XP", width="small", format="%.2f"),
+            "xp_per_10kk": st.column_config.NumberColumn("XP/10kk", width="small", format="%.1f"),
+            "units": st.column_config.NumberColumn("Unités", width="small", format="%d"),
+        },
+        hide_index=True,
+        use_container_width=True,
+        selection_mode="multi-row",
+        on_select="rerun",
+        key="fam_dataframe"
+    )
 
 
 # --- Panneau de détails (1 ligne sélectionnée) ---
@@ -589,14 +707,14 @@ if len(selected_rows) == 1:
 
     with tab_ingredients:
         if item.get("is_craft") and item.get("ingredients"):
-            memo = st.session_state.fam_craft_cache
+            detail_qty = int(selected_row["effective_qty"]) if not pd.isna(selected_row.get("effective_qty", float('nan'))) else quantity
             recipe_rows = []
             for ing in item["ingredients"]:
                 ing_id = ing["id"]
-                ing_qty_total = ing["quantity"] * quantity
+                ing_qty_total = ing["quantity"] * detail_qty
                 ing_id_str = str(ing_id)
                 ing_name = data[ing_id_str].get("name", f"Item #{ing_id}") if ing_id_str in data else f"Item #{ing_id}"
-                cost, method = calculate_craft_cost_recursive(data, ing_id, ing_qty_total, memo, is_root=False)
+                cost, method = calculate_craft_cost_recursive(data, ing_id, ing_qty_total, None, is_root=False)
                 unit_cost = int(round(cost / ing_qty_total)) if cost is not None and ing_qty_total > 0 else None
                 recipe_rows.append({
                     "Ingrédient": ing_name,
